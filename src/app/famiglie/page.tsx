@@ -20,7 +20,7 @@ const howItWorks = [
   {
     Icon: Kids,
     title: "Mentre i grandi ascoltano",
-    text: "I laboratori si svolgono alla Villa dei lettori mentre l'autore parla sul palco: i genitori restano all'incontro, i bambini creano.",
+    text: "I laboratori si svolgono alla Villa dei lettori durante l'incontro sul palco: i genitori ascoltano, i bambini creano.",
   },
   {
     Icon: Ticket,
@@ -48,7 +48,7 @@ export default function FamiliesPage() {
         title="Piccole radici:"
         light="teatro e laboratori."
         crumbs={[{ name: "Famiglie" }]}
-        intro="Ogni pomeriggio c'è un appuntamento per i bambini prima dell'autore, e un laboratorio mentre l'autore parla. Tutto a ingresso libero, senza prenotazione."
+        intro="Ogni pomeriggio c'è un appuntamento per i bambini prima degli incontri, e un laboratorio mentre sul palco c'è l'incontro. Tutto a ingresso libero, senza prenotazione."
       />
 
       <section aria-labelledby="come-funziona" className="container-festival pt-16 sm:pt-20">

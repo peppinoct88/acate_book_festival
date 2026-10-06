@@ -7,7 +7,7 @@ export const formats: Format[] = [
     name: "Il rito della luce",
     when: "Ogni sera alle 18:45 · domenica alle 18:50",
     description:
-      "Al calare del buio un bambino legge una frase scelta dall'autore della serata e si accendono le luci del sentiero e la facciata del Castello.",
+      "Al calare del buio un bambino legge una frase scelta dall'ospite della serata e si accendono le luci del sentiero e la facciata del Castello.",
     icon: "light",
     href: "/programma/rito-della-luce",
   },
@@ -33,7 +33,7 @@ export const formats: Format[] = [
     name: "Laboratori in parallelo",
     when: "Ogni pomeriggio",
     description:
-      "Mentre l'autore parla sul palco, i bambini sono al laboratorio alla Villa dei lettori, con consegna e ritiro tramite braccialetto numerato. Così i genitori restano all'incontro.",
+      "Mentre sul palco c'è l'incontro, i bambini sono al laboratorio alla Villa dei lettori, con consegna e ritiro tramite braccialetto numerato. Così i genitori restano all'incontro.",
     icon: "kids",
     href: "/famiglie",
   },

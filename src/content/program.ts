@@ -102,7 +102,7 @@ export const activities: Activity[] = [
     summary:
       "Mentre i genitori ascoltano Giovanni Impastato, i ragazzi lavorano con gli artisti di Santa Briganti alla Villa dei lettori.",
     body: [
-      "La regola dei grandi festival per famiglie vale anche ad Acate: mentre l'autore parla sul palco, i ragazzi sono al laboratorio. Il venerdì lo conducono gli artisti dell'Associazione Culturale Santa Briganti, alla Villa dei lettori.",
+      "La regola dei grandi festival per famiglie vale anche ad Acate: mentre sul palco c'è l'incontro, i ragazzi sono al laboratorio. Il venerdì lo conducono gli artisti dell'Associazione Culturale Santa Briganti, alla Villa dei lettori.",
       "Il laboratorio comincia alle 18:40, in tempo perché i genitori raggiungano il Palco del Castello per l'incontro delle 19 con Giovanni Impastato.",
     ],
     guests: ["santa-briganti"],
@@ -117,9 +117,9 @@ export const activities: Activity[] = [
     kicker: "Ogni sera, al calare del buio",
     kind: "rito",
     summary:
-      "Quando finisce la luce del giorno, un bambino legge una frase scelta dall'autore della serata e il festival si accende.",
+      "Quando finisce la luce del giorno, un bambino legge una frase scelta dall'ospite della serata e il festival si accende.",
     body: [
-      "In questi giorni ad Acate il sole tramonta poco dopo le 18:20 e verso le 18:50 l'ultima luce se ne va. È lì che il festival si accende: un bambino sale sul palco, legge una frase scelta dall'autore della serata, e si illuminano le luci del sentiero e la facciata del Castello.",
+      "In questi giorni ad Acate il sole tramonta poco dopo le 18:20 e verso le 18:50 l'ultima luce se ne va. È lì che il festival si accende: un bambino sale sul palco, legge una frase scelta dall'ospite della serata, e si illuminano le luci del sentiero e la facciata del Castello.",
       "Il rito si ripete ogni sera e segna il passaggio dal pomeriggio alla sera: subito dopo comincia l'appuntamento principale. Domenica porta con sé anche i riconoscimenti #LaMiaRadice: le storie più belle ricevono le copie autografate dagli autori del festival.",
     ],
     audience: forAll,
@@ -159,7 +159,7 @@ export const activities: Activity[] = [
     slug: "firmacopie",
     title: "Firmacopie",
     kind: "firmacopie",
-    summary: "Al bookshop della Villa dei lettori, con l'autore della serata.",
+    summary: "Al bookshop della Villa dei lettori, con l'ospite della serata.",
     audience: forAll,
     page: false,
     sessions: [

@@ -14,7 +14,7 @@ export const faq: FaqItem[] = [
   },
   {
     q: "Posso lasciare i bambini al laboratorio mentre seguo l'incontro?",
-    a: "Sì, è proprio l'idea: ogni pomeriggio i laboratori si svolgono alla Villa dei lettori mentre l'autore parla sul palco. Le età consigliate sono indicate nel programma, accanto a ogni laboratorio.",
+    a: "Sì, è proprio l'idea: ogni pomeriggio i laboratori si svolgono alla Villa dei lettori mentre sul palco c'è l'incontro. Le età consigliate sono indicate nel programma, accanto a ogni laboratorio.",
   },
   {
     q: "E se piove?",
