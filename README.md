@@ -36,14 +36,33 @@ npm run test:e2e     # test end-to-end + accessibilità (dopo la build)
 
 Requisiti: Node.js 20.9 o superiore.
 
-## Pubblicazione su Vercel
+## Pubblicazione: Vercel, dominio su Cloudflare
 
-1. Su [vercel.com/new](https://vercel.com/new) importa il repository GitHub: Vercel riconosce Next.js da solo.
-2. In **Settings → Environment Variables** imposta `NEXT_PUBLIC_SITE_URL` con il dominio definitivo
-   (es. `https://www.acatebookfestival.it`). Senza, il sito usa l'indirizzo di produzione di Vercel.
-3. In **Settings → Domains** collega il dominio.
-4. Nella scheda **Analytics** attiva Web Analytics e Speed Insights (senza cookie, nessun banner necessario).
-5. Ogni push sul branch di produzione pubblica il sito; i branch e le pull request generano anteprime non indicizzate.
+Il dominio definitivo è **www.acatebookfestival.it** (`src/content/site.ts`): canonical, sitemap e anteprime
+social puntano lì. `acatebookfestival.it` senza www rimanda allo stesso sito. Oggi il dominio usa i DNS di OVH.
+
+1. **Vercel**: su [vercel.com/new](https://vercel.com/new) importa il repository GitHub. Next.js viene
+   riconosciuto da solo. Serve il piano **Pro**: l'Hobby è solo per uso personale non commerciale, e un sito
+   realizzato su incarico è uso commerciale.
+2. **Domini su Vercel**: in **Settings → Domains** aggiungi `www.acatebookfestival.it` e
+   `acatebookfestival.it`, con il secondo che rimanda al primo. Vercel mostra i record DNS da creare.
+3. **Cloudflare**: aggiungi il dominio `acatebookfestival.it` col piano Free. Nella lista dei record DNS:
+   - elimina i record A di OVH (`213.186.33.5`) su `acatebookfestival.it` e `www`, e il TXT `1|www.acatebookfestival.it`;
+   - crea i record indicati da Vercel (A per `acatebookfestival.it`, CNAME per `www`), copiando i valori dalla
+     pagina di Vercel, con **Proxy status: DNS only** (nuvola grigia): con il proxy attivo Vercel non riesce a
+     verificare il dominio e a emettere il certificato HTTPS;
+   - lascia i record MX e il TXT SPF di OVH se usate la posta @acatebookfestival.it.
+4. **OVH**: Web Cloud → Nomi di dominio → `acatebookfestival.it` → **Server DNS** → sostituisci
+   `ns111.ovh.net` e `dns111.ovh.net` con i due nameserver assegnati da Cloudflare. DNSSEC oggi non è attivo,
+   quindi non c'è niente da disattivare prima.
+5. Quando Cloudflare segnala il dominio come attivo, Vercel lo verifica ed emette da solo il certificato HTTPS.
+6. Nella scheda **Analytics** di Vercel attiva Web Analytics e Speed Insights (senza cookie, nessun banner).
+   Con il piano Pro ogni evento personalizzato ha al massimo 2 proprietà: i test lo controllano.
+7. In Google Search Console aggiungi `acatebookfestival.it` come proprietà di dominio e invia
+   `https://www.acatebookfestival.it/sitemap.xml`.
+
+Ogni push sul branch di produzione pubblica il sito; i branch e le pull request generano anteprime non
+indicizzate. Per cambiare dominio senza toccare il codice c'è la variabile `NEXT_PUBLIC_SITE_URL`.
 
 ## Aggiornare i contenuti
 
@@ -60,7 +79,7 @@ Istruzioni passo passo in `.claude/skills/aggiorna-programma/SKILL.md`.
 
 - [ ] Profili social ufficiali (`site.social`) e handle da taggare per #LaMiaRadice
 - [ ] Email di contatto pubblica (`site.contacts.email`)
-- [ ] Dominio definitivo (`NEXT_PUBLIC_SITE_URL`)
+- [ ] Dominio collegato su Vercel, DNS su Cloudflare (vedi sopra)
 - [ ] Moderatori degli incontri, quando confermati
 - [ ] Conferma del titolare del trattamento indicato nella privacy (`site.production`)
 - [ ] Se il sito è pubblicato dal Comune: dichiarazione di accessibilità ufficiale tramite form.agid.gov.it

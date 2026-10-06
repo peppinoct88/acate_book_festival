@@ -27,6 +27,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "L'Acate Book Festival è la nuova festa del libro di Acate (RG): tre pomeriggi sul tema Radici, otto format, una mostra e i laboratori per i bambini.",
   path: "/festival",
+  ownImage: true,
 });
 
 const icons: Record<Format["icon"], typeof Light> = {

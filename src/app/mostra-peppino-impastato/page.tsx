@@ -15,6 +15,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "«Radici libere. Peppino Impastato, una vita per immagini»: la mostra fotografica dell'Acate Book Festival, 16-18 ottobre 2026, dalle 17 alle 22.",
   path: "/mostra-peppino-impastato",
+  ownImage: true,
 });
 
 const timeline = [

@@ -4,12 +4,15 @@
  * I campi vuoti ("") non vengono mostrati sul sito.
  */
 
+/** Dominio definitivo. Su Vercel acatebookfestival.it (senza www) rimanda qui. */
+const productionUrl = "https://www.acatebookfestival.it";
+
 function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
   if (explicit) return explicit.replace(/\/$/, "");
-  // Su Vercel: dominio di produzione del progetto (variabile di sistema disponibile in build)
-  const vercelProduction = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-  if (vercelProduction) return `https://${vercelProduction}`;
+  // Su Vercel canonical, sitemap e anteprime social puntano sempre al dominio definitivo,
+  // anche dagli indirizzi *.vercel.app
+  if (process.env.VERCEL) return productionUrl;
   return "http://localhost:3000";
 }
 

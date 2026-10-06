@@ -14,6 +14,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Teatro, letture musicate e laboratori per bambini e ragazzi all'Acate Book Festival, 16-18 ottobre 2026, mentre i genitori seguono gli incontri.",
   path: "/famiglie",
+  ownImage: true,
 });
 
 const howItWorks = [

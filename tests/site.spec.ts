@@ -41,6 +41,17 @@ test.describe("ogni pagina", () => {
         /^https?:\/\//,
       );
       await expect(page.locator("html")).toHaveAttribute("lang", "it");
+      // Vercel Analytics, piano Pro: al massimo 2 proprietà per evento (attributi data-track-*)
+      const overLimit = await page
+        .locator("[data-track]")
+        .evaluateAll((els) =>
+          els
+            .filter(
+              (el) => Object.keys((el as HTMLElement).dataset).filter((k) => /^track./.test(k)).length > 2,
+            )
+            .map((el) => el.outerHTML.slice(0, 120)),
+        );
+      expect(overLimit).toEqual([]);
       expect(errors).toEqual([]);
     });
 
@@ -138,6 +149,23 @@ test("pagina inesistente: 404 con link al programma", async ({ page }) => {
   const response = await page.goto("/pagina-che-non-esiste");
   expect(response?.status()).toBe(404);
   await expect(page.getByRole("link", { name: /Vai al programma/ })).toBeVisible();
+});
+
+test("anteprime social: le pagine con un'immagine propria la usano", async ({ page, request }) => {
+  for (const path of ["/programma", "/programma/shuma", "/ospiti/giovanni-impastato", "/famiglie"]) {
+    await page.goto(path);
+    const og = await page.locator('meta[property="og:image"]').first().getAttribute("content");
+    expect(og).toContain(`${path}/opengraph-image`);
+    const { pathname, search } = new URL(og!);
+    const image = await request.get(pathname + search);
+    expect(image.status()).toBe(200);
+    expect(image.headers()["content-type"]).toContain("image/png");
+  }
+  await page.goto("/privacy");
+  await expect(page.locator('meta[property="og:image"]').first()).toHaveAttribute(
+    "content",
+    /\/opengraph-image\.jpg$/,
+  );
 });
 
 test("SEO tecnico: sitemap, robots, manifest", async ({ request }) => {

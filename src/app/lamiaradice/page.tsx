@@ -14,6 +14,7 @@ export const metadata: Metadata = pageMetadata({
     "Chi ti ha messo in mano il primo libro? Scrivi il suo nome, crea il cartellino #LaMiaRadice e tagga quella persona. L'idea dell'Acate Book Festival.",
   path: "/lamiaradice",
   socialTitle: "#LaMiaRadice · Chi ti ha messo in mano il primo libro?",
+  ownImage: true,
 });
 
 const classics = [

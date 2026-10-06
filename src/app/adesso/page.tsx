@@ -13,6 +13,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Cosa c'è adesso e cosa comincia tra poco all'Acate Book Festival: il programma in tempo reale, da consultare sul posto.",
   path: "/adesso",
+  ownImage: true,
 });
 
 export default function NowPage() {

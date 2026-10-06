@@ -51,12 +51,14 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
 ## Gotcha
 
 - Next 16: `params` è una Promise (`const { slug } = await params`); `next/image` usa `preload`/`fetchPriority`, non `priority`.
-- Le pagine che impostano `openGraph` perdono l'immagine del layout: `pageMetadata()` mette il manifesto come default,
-  le route con un proprio `opengraph-image.tsx` lo sostituiscono.
+- Le pagine che impostano `openGraph` perdono l'immagine del layout: `pageMetadata()` mette il manifesto come default.
+  Le route con un proprio `opengraph-image.tsx` passano `ownImage: true`, altrimenti il default copre il file.
 - Le anteprime OG (`src/lib/og.tsx`) usano solo flexbox e i TTF in `src/assets/fonts`.
 - `/_vercel/insights` e `/_vercel/speed-insights` danno 404 in locale: esistono solo su Vercel.
 - Per fermare il server locale usa il PID (`kill <pid>`): `pkill -f "next start"` uccide anche la shell corrente.
 - I deploy di anteprima Vercel sono `noindex` (vedi `isProductionDeployment` in `src/lib/seo.ts`).
+- Dominio: `https://www.acatebookfestival.it` (`productionUrl` in `src/content/site.ts`), DNS su Cloudflare
+  in modalità «DNS only». Vercel Analytics (piano Pro): massimo 2 proprietà `data-track-*` per evento.
 
 ## Verifica prima di consegnare
 

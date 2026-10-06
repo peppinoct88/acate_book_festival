@@ -17,6 +17,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Il programma dell'Acate Book Festival, 16-18 ottobre: Giovanni Impastato, Antonella Desirée Giuffrè, Maria Antonietta Ferraloro, teatro e laboratori.",
   path: "/programma",
+  ownImage: true,
 });
 
 export default function ProgramPage() {

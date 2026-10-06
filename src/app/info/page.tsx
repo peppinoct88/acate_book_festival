@@ -28,6 +28,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Orari, luoghi, come arrivare ad Acate, cosa succede se piove e domande frequenti sull'Acate Book Festival, 16-18 ottobre 2026. Ingresso libero.",
   path: "/info",
+  ownImage: true,
 });
 
 const essentials = [

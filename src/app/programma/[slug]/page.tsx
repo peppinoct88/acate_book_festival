@@ -47,6 +47,7 @@ export async function generateMetadata({ params }: PageProps<"/programma/[slug]"
     socialTitle: activity.kicker
       ? `${activity.kicker}: «${activity.title}»`
       : `${activity.title} · Acate Book Festival`,
+    ownImage: true,
   });
 }
 

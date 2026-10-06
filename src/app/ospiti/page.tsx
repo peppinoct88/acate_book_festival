@@ -9,6 +9,7 @@ export const metadata: Metadata = pageMetadata({
   description:
     "Gli ospiti dell'Acate Book Festival 2026: Giovanni Impastato, Antonella Desirée Giuffrè, Maria Antonietta Ferraloro e la compagnia Santa Briganti.",
   path: "/ospiti",
+  ownImage: true,
 });
 
 export default function GuestsPage() {

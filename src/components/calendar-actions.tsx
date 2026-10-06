@@ -14,8 +14,7 @@ export function CalendarActions({ session, compact = false }: { session: Session
         download
         className={pill}
         data-track="calendar_add"
-        data-track-location="scheda"
-        data-track-type="ics"
+        data-track-location="scheda-ics"
         data-track-label={session.id}
       >
         <Calendar size={17} /> Aggiungi al calendario
@@ -27,8 +26,7 @@ export function CalendarActions({ session, compact = false }: { session: Session
         rel="noopener"
         className={pill}
         data-track="calendar_add"
-        data-track-location="scheda"
-        data-track-type="google"
+        data-track-location="scheda-google"
         data-track-label={session.id}
       >
         Google Calendar<span className="visually-hidden"> (nuova scheda)</span>

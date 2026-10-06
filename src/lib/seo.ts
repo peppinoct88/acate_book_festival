@@ -10,13 +10,14 @@ interface PageMeta {
   /** Titolo per i social, se diverso da quello della scheda */
   socialTitle?: string;
   noindex?: boolean;
+  /** La route ha un proprio opengraph-image.tsx (senza questo flag l'anteprima di default lo coprirebbe) */
+  ownImage?: boolean;
 }
 
 /**
- * Metadata coerenti per ogni pagina: title, description, canonical, Open Graph e Twitter.
- * Le immagini di anteprima arrivano dai file opengraph-image della route.
+ * Anteprima di default (il manifesto). Next usa il file opengraph-image di una route solo se i metadata
+ * non dichiarano già openGraph.images: le route che ne hanno uno passano ownImage.
  */
-/** Anteprima di default (il manifesto): le route con un proprio opengraph-image la sostituiscono */
 const defaultImage = {
   url: "/opengraph-image.jpg",
   width: 1200,
@@ -24,6 +25,7 @@ const defaultImage = {
   alt: "Acate Book Festival, I edizione: 16, 17 e 18 ottobre 2026 ad Acate.",
 };
 
+/** Metadata coerenti per ogni pagina: title, description, canonical, Open Graph e Twitter. */
 export function pageMetadata({
   title,
   absoluteTitle,
@@ -31,6 +33,7 @@ export function pageMetadata({
   path,
   socialTitle,
   noindex,
+  ownImage,
 }: PageMeta): Metadata {
   const ogTitle = socialTitle ?? (absoluteTitle ? title : `${title} · ${site.name}`);
   description = truncate(description, 158);
@@ -45,13 +48,14 @@ export function pageMetadata({
       url: path,
       title: ogTitle,
       description,
-      images: [defaultImage],
+      ...(ownImage ? {} : { images: [defaultImage] }),
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle,
       description,
-      images: [defaultImage.url],
+      // senza twitter:image X usa og:image
+      ...(ownImage ? {} : { images: [defaultImage.url] }),
     },
     ...(noindex ? { robots: { index: false, follow: true } } : {}),
   };

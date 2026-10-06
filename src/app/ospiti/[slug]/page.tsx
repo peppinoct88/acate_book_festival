@@ -32,6 +32,7 @@ export async function generateMetadata({ params }: PageProps<"/ospiti/[slug]">):
       158,
     ),
     path: `/ospiti/${slug}`,
+    ownImage: true,
   });
 }
 
