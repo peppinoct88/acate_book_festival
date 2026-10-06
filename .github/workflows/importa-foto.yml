@@ -1,0 +1,44 @@
+name: Importa foto da Wikimedia Commons
+
+# Strumento manuale: elenca o scarica foto con licenza libera, con i dati per i crediti
+on:
+  workflow_dispatch:
+    inputs:
+      modalita:
+        description: elenco oppure scarica
+        default: elenco
+        required: true
+      voci:
+        description: Categoria o titoli «File:...», separati da «|»
+        required: true
+      larghezza:
+        description: Larghezza massima in pixel
+        default: "2400"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  importa:
+    name: Commons
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Elenca o scarica
+        env:
+          MODALITA: ${{ inputs.modalita }}
+          VOCI: ${{ inputs.voci }}
+          LARGHEZZA: ${{ inputs.larghezza }}
+        run: python3 scripts/importa-foto-commons.py
+
+      - name: Salva le foto nel repository
+        if: inputs.modalita == 'scarica'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/foto/commons
+          git diff --cached --quiet || git commit -m "Foto con licenza libera da Wikimedia Commons"
+          git push
