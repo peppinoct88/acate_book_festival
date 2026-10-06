@@ -62,13 +62,18 @@ export const guests: Guest[] = [
     role: "Docente e saggista",
     initials: "MF",
     short:
-      "Studiosa di Tomasi di Lampedusa, ha raccontato «Il Gattopardo» ai ragazzi con un libro scritto per sua figlia.",
+      "Studiosa di Tomasi di Lampedusa, racconta «Il Gattopardo» alle ragazze e ai ragazzi nel suo nuovo libro.",
     bio: [
       "Maria Antonietta Ferraloro è docente e saggista. Laureata in Lettere all'Università di Messina, ha conseguito il dottorato in Storia della cultura all'Università di Catania, dove collabora con il Dipartimento di Scienze Umanistiche, e si occupa di formazione degli insegnanti.",
       "Ai luoghi e alle pagine di Giuseppe Tomasi di Lampedusa ha dedicato «Tomasi di Lampedusa e i luoghi del Gattopardo» (Pacini Editore, 2014), finalista al Premio Brancati, e «L'opera-orologio. Saggi sul Gattopardo» (Pacini Editore).",
-      "Con «Il Gattopardo raccontato a mia figlia» (La Nuova Frontiera Junior, 2017, illustrazioni di Giulia Rossi) ha portato il capolavoro di Tomasi di Lampedusa ai più giovani.",
+      "Con «Il Gattopardo raccontato a mia figlia» (La Nuova Frontiera Junior, 2017, illustrazioni di Giulia Rossi) ha portato il capolavoro di Tomasi di Lampedusa ai più giovani. Nel 2026 è uscito «Il Gattopardo raccontato alle ragazze e ai ragazzi» (Gallucci Bros.), che presenta all'Acate Book Festival.",
     ],
     books: [
+      {
+        title: "Il Gattopardo raccontato alle ragazze e ai ragazzi",
+        publisher: "Gallucci Bros.",
+        year: 2026,
+      },
       {
         title: "Il Gattopardo raccontato a mia figlia",
         publisher: "La Nuova Frontiera Junior",

@@ -151,12 +151,11 @@ export default function FestivalPage() {
           </h2>
           <div className="prose-festival mt-6">
             <p>
-              L&apos;Acate Book Festival è promosso dal <strong>Comune di Acate</strong> ed è realizzato con
-              il contributo della{" "}
+              L&apos;Acate Book Festival è promosso dal <strong>Comune di Acate</strong> ed è finanziato dalla{" "}
               <strong>
-                Regione Siciliana – Assessorato regionale delle Autonomie Locali e della Funzione Pubblica
+                {site.funding.region} – {site.funding.department}
               </strong>{" "}
-              ({site.funding.decree}).
+              (contributo concesso con {site.funding.decree}).
             </p>
             <p>
               L&apos;organizzazione è di <strong>{site.production.name}</strong>, in collaborazione con

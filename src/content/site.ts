@@ -64,8 +64,13 @@ export const site = {
     url: "https://www.comune.acate.rg.it",
     address: "Piazza Libertà 34, 97011 Acate (RG)",
   },
+  /**
+   * Il finanziamento regionale va citato in ogni pagina (footer), con lo stemma della Regione:
+   * obbligo di evidenza del contributo (art. 8 dell'avviso). Dicitura ufficiale da regione.sicilia.it.
+   */
   funding: {
-    text: "Iniziativa realizzata con il contributo della Regione Siciliana – Assessorato regionale delle Autonomie Locali e della Funzione Pubblica",
+    region: "Regione Siciliana",
+    department: "Assessorato delle Autonomie Locali e della Funzione Pubblica",
     decree: "D.D.G. n. 475/S6 del 07.08.2026",
   },
   /** Organizzazione e gestione del sito (titolare del trattamento nella privacy policy) */

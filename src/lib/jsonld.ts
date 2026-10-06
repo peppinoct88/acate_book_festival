@@ -41,7 +41,7 @@ function organizer(): Json {
 function funder(): Json {
   return {
     "@type": "GovernmentOrganization",
-    name: "Regione Siciliana – Assessorato regionale delle Autonomie Locali e della Funzione Pubblica",
+    name: `${site.funding.region} – ${site.funding.department}`,
   };
 }
 

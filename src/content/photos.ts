@@ -3,6 +3,7 @@ import acateDallAlto from "@/assets/foto/acate-dall-alto.jpg";
 import casaMemoria from "@/assets/foto/casa-memoria-cinisi.jpg";
 import castello from "@/assets/foto/castello-dei-principi-di-biscari.jpg";
 import radioAut from "@/assets/foto/radio-aut.png";
+import stemmaRegione from "@/assets/partner/regione-siciliana.png";
 
 export interface Photo {
   src: StaticImageData;
@@ -18,7 +19,7 @@ export interface Photo {
 }
 
 /**
- * Foto con licenza libera da Wikimedia Commons: autore, licenza e fonte vanno sempre mostrati
+ * Immagini con licenza libera da Wikimedia Commons: autore, licenza e fonte vanno sempre mostrati
  * accanto all'immagine (componente Photo) e nella pagina /festival#crediti.
  */
 export const photos = {
@@ -60,5 +61,16 @@ export const photos = {
     license: "CC0",
     licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/deed.it",
     source: "https://commons.wikimedia.org/wiki/File:Radio_Aut.png",
+  },
+  /** Nel footer, accanto alla dicitura del finanziamento regionale */
+  stemmaRegione: {
+    src: stemmaRegione,
+    alt: "Stemma della Regione Siciliana",
+    caption: "Lo stemma della Regione Siciliana",
+    author: "Dmytrosk2024",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/deed.it",
+    source: "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Sicily_(president_website).svg",
+    edited: "colori adattati, contorno aggiunto",
   },
 } satisfies Record<string, Photo>;

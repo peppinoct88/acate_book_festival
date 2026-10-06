@@ -44,6 +44,9 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
   Se un dato non è confermato (moderatori, profili social, email) il campo resta vuoto.
 - Non dedurre il genere dai nomi: formule neutre («l'ospite», «gli appuntamenti»).
 - Dai contratti si pubblicano solo titoli, nomi d'arte e orari: mai dati anagrafici, recapiti o compensi.
+- Il footer di ogni pagina riporta lo stemma della Regione Siciliana e la dicitura del finanziamento
+  (`site.funding`: «Regione Siciliana – Assessorato delle Autonomie Locali e della Funzione Pubblica», D.D.G.):
+  è un obbligo dell'avviso, non va tolto né abbreviato (i test lo controllano).
 - Foto solo con licenza libera e crediti visibili; niente immagini di persone reali in difficoltà (naufragi, migranti).
 - La pagina della mostra su Peppino Impastato ha tono sobrio: niente giochi di parole.
 - Il logo/lettering del manifesto è ricomposto con Outfit (`components/logotype.tsx`): non sostituirlo con immagini.

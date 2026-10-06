@@ -90,10 +90,11 @@ export const days: FestivalDay[] = [
     theme: "Radici in viaggio",
     claim: "Chi parte, chi arriva, chi resta: le radici che attraversano il mare.",
     intro:
-      "La Banda Città di Acate apre l'ultima giornata, poi il Gattopardo raccontato ai ragazzi e il mare di «Shuma», lo spettacolo che chiude il festival.",
+      "La banda apre l'ultima giornata, poi la Sicilia del Gattopardo, che comincia con uno sbarco, e il mare di «Shuma», lo spettacolo che chiude il festival.",
     body: [
       "L'ultima giornata è dedicata all'immigrazione e ai viaggi: le radici che partono, attraversano il mare e arrivano. La Sicilia lo sa da sempre, terra di approdi e di partenze.",
-      "Alle 17 la Banda Città di Acate apre il pomeriggio. Alle 18 Maria Antonietta Ferraloro racconta «Il Gattopardo» ai ragazzi e ai loro genitori. Alle 19:30, quando è già buio, Peppe Macauda porta in scena «Shuma»: un bambino cade in mare e comincia un lungo viaggio verso il «SopraSopra». È lo spettacolo che chiude la prima edizione.",
+      "Lo sa anche «Il Gattopardo», che comincia con uno sbarco: è il maggio del 1860 e Garibaldi è appena arrivato a Marsala. Il suo autore porta nel nome Lampedusa, l'isola che oggi è il primo approdo in Europa per tante persone che attraversano il Mediterraneo, e il principe di Salina descrive la Sicilia come una terra di «magnifiche civiltà eterogenee, tutte venute da fuori». Alle 18 Maria Antonietta Ferraloro lo racconta alle ragazze e ai ragazzi.",
+      "Alle 17 la Banda Città di Acate apre il pomeriggio, e alla Villa dei lettori i bambini scrivono la loro «pagella dei sogni». Alle 19:30, quando è già buio, Peppe Macauda porta in scena «Shuma», ispirato alla storia vera di un ragazzo del Mali che nel naufragio del 18 aprile 2015 portava la pagella cucita nella giacca. È lo spettacolo che chiude la prima edizione.",
     ],
     tone: "teal",
   },

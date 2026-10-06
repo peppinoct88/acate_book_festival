@@ -41,7 +41,7 @@ const nextConfig: NextConfig = {
       { source: "/mafia", destination: "/giornate/mafia", permanent: true },
       { source: "/donne", destination: "/giornate/donne", permanent: true },
       { source: "/immigrazione", destination: "/giornate/immigrazione", permanent: true },
-      // appuntamenti tolti o accorpati il 6 ottobre
+      // appuntamenti tolti, accorpati o rinominati il 6 ottobre
       {
         source: "/programma/laboratorio-santa-briganti",
         destination: "/programma/a-colpi-di-mantice",
@@ -53,6 +53,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       { source: "/programma/rito-della-luce", destination: "/programma", permanent: true },
+      {
+        source: "/programma/il-gattopardo-raccontato-ai-nostri-figli",
+        destination: "/programma/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi",
+        permanent: true,
+      },
+      {
+        source: "/calendario/il-gattopardo-raccontato-ai-nostri-figli-dom-1800.ics",
+        destination: "/calendario/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi-dom-1800.ics",
+        permanent: true,
+      },
     ];
   },
 };

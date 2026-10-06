@@ -5,7 +5,8 @@ import type { Activity, Audience, DayId, Kind, Session } from "./types";
 /**
  * PROGRAMMA DEFINITIVO — fonti: «Acate Book Festival 2026 · Radici — Programma definitivo» (4 ottobre),
  * contratto con Santa Briganti (6 ottobre) e indicazioni dell'organizzazione (6 ottobre: temi delle giornate,
- * banda e tamburi, monologo, moderatore; senza rito della luce, seminatrici di oggi e saluti finali).
+ * banda e tamburi, monologo, moderatore, titolo dell'incontro con Maria Antonietta Ferraloro; senza rito della
+ * luce, seminatrici di oggi e saluti finali).
  * Per modificare un orario o aggiungere un avviso su un singolo appuntamento
  * basta cambiare la sessione qui: pagine, calendari .ics, dati strutturati e anteprime si aggiornano da soli.
  * Per segnalare uno spostamento: status: "spostato", statusNote: "Si sposta in ...".
@@ -248,23 +249,23 @@ export const activities: Activity[] = [
     sessions: [{ day: "dom", start: "17:45", end: "18:40", venue: "villa" }],
   },
   {
-    slug: "il-gattopardo-raccontato-ai-nostri-figli",
-    title: "Il Gattopardo raccontato ai nostri figli",
+    slug: "il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi",
+    title: "Il Gattopardo raccontato alle ragazze e ai ragazzi",
     kicker: "Incontro con Maria Antonietta Ferraloro",
-    seoTitle: "Il Gattopardo ai ragazzi con Maria Antonietta Ferraloro",
+    seoTitle: "Ferraloro ad Acate: il Gattopardo alle ragazze e ai ragazzi",
     kind: "incontro",
     summary:
-      "Come si racconta un capolavoro ai ragazzi di oggi? Maria Antonietta Ferraloro parte dal libro scritto per sua figlia.",
+      "Maria Antonietta Ferraloro presenta il suo nuovo libro: «Il Gattopardo», un romanzo che comincia con uno sbarco, raccontato ai più giovani.",
     body: [
-      "«Il Gattopardo» è il romanzo siciliano più famoso al mondo: ma come lo si racconta a un ragazzo di oggi? Maria Antonietta Ferraloro, docente e studiosa di Tomasi di Lampedusa, lo ha fatto in un libro scritto per sua figlia, «Il Gattopardo raccontato a mia figlia» (La Nuova Frontiera Junior).",
-      "Da quelle pagine nasce un incontro per genitori, figli e insegnanti su come le storie passano da una generazione all'altra: i personaggi, i luoghi, le parole che restano.",
-      "Alle 18:40, firmacopie al bookshop della Villa dei lettori.",
+      "«Il Gattopardo» comincia con uno sbarco: è il maggio del 1860 e Garibaldi è appena arrivato a Marsala con i Mille. Il suo autore, Giuseppe Tomasi di Lampedusa, porta nel nome un'isola che oggi è il primo approdo in Europa per tante persone che attraversano il Mediterraneo. E nel romanzo il principe di Salina descrive la Sicilia come una terra che porta sulle spalle «magnifiche civiltà eterogenee, tutte venute da fuori».",
+      "Maria Antonietta Ferraloro, docente e studiosa di Tomasi di Lampedusa, presenta «Il Gattopardo raccontato alle ragazze e ai ragazzi» (Gallucci Bros., 2026), il libro nato per raccontare il romanzo a sua figlia: la Sicilia che passa dai Borbone al Regno d'Italia, i personaggi, i luoghi, le parole che restano. Un incontro per ragazze e ragazzi, genitori e insegnanti, nella giornata che il festival dedica all'immigrazione.",
+      "Alle 18:40, firmacopie al bookshop della Villa dei lettori. Alle 19:30, sullo stesso palco, «Shuma» chiude il festival.",
     ],
     guests: ["maria-antonietta-ferraloro"],
     book: {
-      title: "Il Gattopardo raccontato a mia figlia",
-      publisher: "La Nuova Frontiera Junior",
-      year: 2017,
+      title: "Il Gattopardo raccontato alle ragazze e ai ragazzi",
+      publisher: "Gallucci Bros.",
+      year: 2026,
     },
     audience: { label: "Per famiglie", kids: true },
     page: true,
@@ -386,7 +387,7 @@ export const highlightIds: Record<DayId, string[]> = {
   ],
   dom: [
     "la-banda-citta-di-acate-dom-1700",
-    "il-gattopardo-raccontato-ai-nostri-figli-dom-1800",
+    "il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi-dom-1800",
     "shuma-dom-1930",
   ],
 };

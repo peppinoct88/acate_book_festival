@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Bookshelf } from "./bookshelf";
 import { Logotype } from "./logotype";
@@ -5,6 +6,7 @@ import { ArrowRight, Calendar, Facebook, Instagram } from "./icons";
 import { buttonClass } from "./button";
 import { PartnerBand } from "./partner-band";
 import { footerNav, legalNav } from "@/content/navigation";
+import { photos } from "@/content/photos";
 import { site } from "@/content/site";
 
 export function SiteFooter() {
@@ -87,7 +89,27 @@ export function SiteFooter() {
         <PartnerBand />
 
         <div className="border-t border-cream/15">
-          <div className="container-festival grid gap-8 py-10 text-sm leading-relaxed text-cream/85 md:grid-cols-3">
+          <div className="container-festival grid gap-10 py-10 text-sm leading-relaxed text-cream/85 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr] lg:gap-12">
+            {/* obbligo di evidenza del finanziamento regionale: stemma e dicitura esatta, in ogni pagina */}
+            <div className="flex items-start gap-5 md:col-span-2 lg:col-span-1" data-funding>
+              <span className="shrink-0 rounded-2xl bg-cream p-2.5">
+                <Image
+                  src={photos.stemmaRegione.src}
+                  alt={photos.stemmaRegione.alt}
+                  sizes="4rem"
+                  className="h-[4.5rem] w-auto"
+                />
+              </span>
+              <div>
+                <p className="eyebrow eyebrow--plain text-teal-soft">Finanziato da</p>
+                <p className="mt-3 text-cream">
+                  <span className="font-display text-base font-bold">{site.funding.region}</span>
+                  <br />
+                  {site.funding.department}
+                </p>
+                <p className="mt-2 text-cream/80">Contributo concesso con {site.funding.decree}</p>
+              </div>
+            </div>
             <div>
               <p className="eyebrow eyebrow--plain text-teal-soft">Promosso da</p>
               <p className="mt-3">
@@ -98,13 +120,6 @@ export function SiteFooter() {
                 >
                   {site.organizer.name}
                 </a>
-              </p>
-            </div>
-            <div>
-              <p className="eyebrow eyebrow--plain text-teal-soft">Con il contributo di</p>
-              <p className="mt-3">
-                <span className="font-semibold text-cream">Regione Siciliana</span> – Assessorato regionale
-                delle Autonomie Locali e della Funzione Pubblica
               </p>
             </div>
             <div>

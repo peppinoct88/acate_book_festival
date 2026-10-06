@@ -116,8 +116,10 @@ export default async function ActivityPage({ params }: PageProps<"/programma/[sl
               </h1>
               {activity.book ? (
                 <p className="mt-4 font-display text-lg font-light text-ink">
-                  dal libro «{activity.book.title}» ({activity.book.publisher}
-                  {activity.book.year ? `, ${activity.book.year}` : ""})
+                  {/* se l'incontro ha il titolo del libro, basta l'editore */}
+                  {activity.book.title === activity.title
+                    ? `Libro edito da ${activity.book.publisher}${activity.book.year ? `, ${activity.book.year}` : ""}`
+                    : `dal libro «${activity.book.title}» (${activity.book.publisher}${activity.book.year ? `, ${activity.book.year}` : ""})`}
                 </p>
               ) : null}
               <p className="mt-6 max-w-[60ch] font-serif text-xl leading-relaxed text-ink/85">

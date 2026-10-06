@@ -8,6 +8,7 @@ const pages = [
   "/programma/a-colpi-di-mantice",
   "/programma/shuma",
   "/programma/monologo-sulle-donne",
+  "/programma/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi",
   "/giornate/mafia",
   "/giornate/donne",
   "/giornate/immigrazione",
@@ -46,6 +47,11 @@ test.describe("ogni pagina", () => {
         /^https?:\/\//,
       );
       await expect(page.locator("html")).toHaveAttribute("lang", "it");
+      // finanziamento regionale: stemma e dicitura esatta in ogni pagina (obbligo di evidenza del contributo)
+      const funding = page.locator("[data-funding]");
+      await expect(funding).toContainText("Regione Siciliana");
+      await expect(funding).toContainText("Assessorato delle Autonomie Locali e della Funzione Pubblica");
+      await expect(funding.getByRole("img", { name: "Stemma della Regione Siciliana" })).toBeVisible();
       // Vercel Analytics, piano Pro: al massimo 2 proprietà per evento (attributi data-track-*)
       const overLimit = await page
         .locator("[data-track]")
@@ -197,6 +203,10 @@ test("le tre giornate: tema, colori e indirizzi brevi", async ({ page, request }
   expect(short.headers()["location"]).toBe("/giornate/mafia");
   const removed = await request.get("/programma/rito-della-luce", { maxRedirects: 0 });
   expect(removed.headers()["location"]).toBe("/programma");
+  const renamed = await request.get("/programma/il-gattopardo-raccontato-ai-nostri-figli", {
+    maxRedirects: 0,
+  });
+  expect(renamed.headers()["location"]).toBe("/programma/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi");
 });
 
 test("SEO tecnico: sitemap, robots, manifest", async ({ request }) => {

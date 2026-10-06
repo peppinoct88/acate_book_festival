@@ -22,7 +22,7 @@ export default function GuestsPage() {
         title="Ogni ospite"
         light="è un libro."
         crumbs={[{ name: "Ospiti" }]}
-        intro="Un autore per ogni giornata: la memoria di Peppino Impastato raccontata da suo fratello, il coraggio delle donne nella Sicilia della Grande Guerra, il Gattopardo spiegato ai ragazzi. E sul palco il teatro, la musica e i tamburi di Acate."
+        intro="Un autore per ogni giornata: la memoria di Peppino Impastato raccontata da suo fratello, il coraggio delle donne nella Sicilia della Grande Guerra, il Gattopardo raccontato alle ragazze e ai ragazzi. E sul palco il teatro, la musica e i tamburi di Acate."
       />
       <section aria-labelledby="autori" className="container-festival">
         <h2 id="autori" className="eyebrow text-ink">

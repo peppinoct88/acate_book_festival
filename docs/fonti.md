@@ -19,6 +19,11 @@ Ogni dato pubblicato sul sito viene da una di queste fonti. Prima di aggiungere 
 - **Contratto con l'Associazione Culturale Santa Briganti** (6 ottobre 2026): «A colpi di mantice» di e con
   Veronica Caggia e Peppe Macauda; «Shuma» domenica alle 19:30. Dal contratto si pubblicano solo titoli, nomi
   d'arte e orari: dati anagrafici, recapiti e compensi restano riservati.
+- **Finanziamento regionale**: contributo concesso con D.D.G. n. 475/S6 del 07.08.2026 (relazione tecnica CIVIKA).
+  Dicitura ufficiale dell'assessorato dal sito della Regione:
+  [Assessorato delle autonomie locali e della funzione pubblica](https://www.regione.sicilia.it/istituzioni/regione/strutture-regionali/assessorato-autonomie-locali-funzione-pubblica).
+  Lo stemma è il file di Wikimedia Commons [Coat of arms of Sicily (president website)](https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Sicily_(president_website).svg)
+  (Dmytrosk2024, CC BY-SA 4.0), con colori e contorno adattati allo stemma inviato dall'organizzazione.
 - **Manifesto definitivo e loghi** (6 ottobre 2026): palette e illustrazione del sito; loghi di Santa Briganti,
   Mondadori Bookstore Vittoria, Banda Città di Acate e I Grifoni di Biscari. Lo stemma del Comune è ritagliato
   dal manifesto.
@@ -36,6 +41,8 @@ Ogni dato pubblicato sul sito viene da una di queste fonti. Prima di aggiungere 
 - Maria Antonietta Ferraloro: docente e saggista, UniME e UniCT — [DISUM UniCT](https://www.disum.unict.it/sites/default/files/SCHEDA%20SEMINARI%20DISUM%20FERRALORO_0.pdf);
   «Il Gattopardo raccontato a mia figlia» (La Nuova Frontiera Junior, 2017, ill. Giulia Rossi) — [Avvenire](https://www.avvenire.it/rubriche/scaffale-basso/cara-figlia-te-lo-racconto-io-il-gattopardo_29940);
   «Tomasi di Lampedusa e i luoghi del Gattopardo» (Pacini, 2014, finalista Premio Brancati) — [Doppiozero](https://doppiozero.com/print/pdf/node/10977).
+  «Il Gattopardo raccontato alle ragazze e ai ragazzi» (Gallucci Bros., 2026), il libro che presenta al festival:
+  titolo indicato dall'organizzazione (6 ottobre), editore e anno da [Liberi di scrivere](https://liberidiscrivere.com/2026/10/05/giuseppe-tomasi-di-lampedusa-il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi-maria-antonietta-ferraloro-gallucci-bros-2026-a-cura-di-viviana-filippini/).
 - Associazione Culturale Santa Briganti e Scenica Festival — [Balarm](https://www.balarm.it/eventi/teatro-circo-danza-musica-a-vittoria-la-diciassettesima-edizione-di-scenica-festival-138241),
   [VisitSicily](https://www.visitsicily.info/en/evento-new/scenica-festival-2026/).
   «Shuma», ispirato al naufragio del 18 aprile 2015 — [Balarm](https://www.balarm.it/eventi/in-fondo-al-mare-insieme-a-shuma-la-fiaba-al-piccolo-teatro-patafisico-di-palermo-144183).
@@ -52,6 +59,17 @@ Ogni dato pubblicato sul sito viene da una di queste fonti. Prima di aggiungere 
   [NuovoSud](https://www.nuovosud.it/articoli/311159-cultura-ragusa/acate-e-il-suo-protettore-san-vincenzo-sacro-e-profano-come-sul-palco).
 - Giorgio Straquadanio: sul sito solo «Modera Giorgio Straquadanio», finché non arriva una biografia dall'organizzazione.
   Attenzione agli omonimi con grafia simile («Stracquadanio») nella politica e nella cronaca: non vanno collegati a lui.
+
+## Il Gattopardo e la giornata sull'immigrazione
+
+- Il romanzo si apre nel maggio 1860, il mese dello sbarco dei Mille a Marsala (11 maggio 1860).
+- Il principe di Salina a Chevalley: «Sono venticinque secoli almeno che portiamo sulle spalle il peso di magnifiche
+  civiltà eterogenee, tutte venute da fuori già complete e perfezionate…» (parte quarta) —
+  [Zanichelli, «Parole in viaggio»](https://online.scuola.zanichelli.it/paroleinviaggio/files/2011/09/parole_in_viaggio_narrativa_la_storia_03.pdf),
+  [Wikiquote](https://it.wikiquote.org/wiki/Il_Gattopardo). Sul sito se ne cita solo un frammento.
+- Giuseppe Tomasi di Lampedusa, ultimo principe di Lampedusa: il titolo di famiglia viene dall'isola —
+  [Wikipedia](https://en.wikipedia.org/wiki/Prince_of_Lampedusa).
+- Lampedusa, principale punto di arrivo della rotta del Mediterraneo centrale — [UNHCR](https://unhcr.org/it/?p=65355).
 
 ## Peppino Impastato (pagina della mostra)
 
