@@ -55,12 +55,24 @@ def da_elenco(pagina, parola):
     return list(dict.fromkeys(isbns)), sorted(links)[:5]
 
 
+def google_books(isbn):
+    """Copertina di Google Books per ISBN, nella misura più grande che concede."""
+    data = fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn)
+    for item in json.loads(data).get("items", []) if data else []:
+        link = (item.get("volumeInfo", {}).get("imageLinks") or {}).get("thumbnail")
+        if link:
+            link = link.replace("http://", "https://").replace("&edge=curl", "")
+            return [link.replace("zoom=1", "zoom=0") + "&fife=w1200", link]
+    return []
+
+
 def immagini_per_isbn(isbn):
     """Per ogni catalogo le misure dalla più grande: si tiene la prima che risponde."""
     for host in ("www.ibs.it", "www.lafeltrinelli.it"):
         sizes = ("0_0_1200_75", "0_1200_0_75", "0_536_0_75")
         yield host.removeprefix("www."), [f"https://{host}/images/{isbn}_{size}.jpg" for size in sizes]
     yield "openlibrary", [f"https://covers.openlibrary.org/b/isbn/{isbn}-L.jpg?default=false"]
+    yield "googlebooks", google_books(isbn)
 
 
 def salva(slug, etichetta, url, report):
@@ -89,8 +101,11 @@ def main():
     libri = json.load(open(LIBRI, encoding="utf-8"))
     report = ["| libro | fonte | misure | url |", "| --- | --- | --- | --- |"]
     note = []
+    solo = {x.strip() for x in os.environ.get("SOLO", "").split(",") if x.strip()}
     for libro in libri:
         slug = libro["slug"]
+        if solo and slug not in solo:
+            continue
         print(f"\n== {slug}")
         isbns = [i for i in map(isbn13, libro.get("isbn", [])) if i]
         pagine = list(libro.get("pagine", []))

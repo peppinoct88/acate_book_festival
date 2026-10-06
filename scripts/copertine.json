@@ -18,7 +18,12 @@
     "titolo": "Resistere a Mafiopoli",
     "autore": "Giovanni Impastato",
     "editore": "Stampa Alternativa",
-    "isbn": ["9788862220866"]
+    "isbn": ["9788862220866"],
+    "pagine": [
+      "https://www.hoepli.it/libro/resistere-a-mafiopoli-la-storia-di-mio-fratello-peppino-impastato/9788862220866.html",
+      "https://www.lafeltrinelli.it/libri/giovanni-impastato/resistere-a-mafiopoli/9788862220866",
+      "https://www.libreriauniversitaria.it/resistere-mafiopoli-storia-fratello-peppino/libro/9788862220866"
+    ]
   },
   {
     "slug": "la-seminatrice-di-coraggio",
@@ -67,7 +72,12 @@
     "titolo": "Tomasi di Lampedusa e i luoghi del Gattopardo",
     "autore": "Maria Antonietta Ferraloro",
     "editore": "Pacini Editore",
-    "isbn": ["9788863157338"]
+    "isbn": ["9788863157338", "9791254863329"],
+    "pagine": [
+      "https://www.pacinieditore.it/prodotto/tomasi-lampedusa-luoghi-gattopardo-seconda-edizione/",
+      "https://www.pacinieditore.it/non-solo-libri/tomasi-di-lampedusa-e-i-luoghi-del-gattopardo-nuova-edizione/",
+      "https://www.lafeltrinelli.it/tomasi-di-lampedusa-luoghi-del-libro-maria-antonietta-ferraloro/e/9788863157338"
+    ]
   },
   {
     "slug": "l-opera-orologio",

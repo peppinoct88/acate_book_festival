@@ -4,6 +4,10 @@ name: Importa copertine dei libri
 # in copertine-candidati/ con un report; la scelta e il ritaglio in src/assets/copertine/ si fanno a mano
 on:
   workflow_dispatch:
+    inputs:
+      solo:
+        description: Solo questi libri (slug separati da virgola); vuoto = tutti
+        required: false
 
 permissions:
   contents: write
@@ -17,6 +21,8 @@ jobs:
       - uses: actions/checkout@v5
 
       - name: Cerca e scarica
+        env:
+          SOLO: ${{ inputs.solo }}
         run: |
           pip install --quiet pillow
           rm -rf copertine-candidati
