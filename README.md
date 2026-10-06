@@ -61,6 +61,9 @@ social puntano lì. `acatebookfestival.it` senza www rimanda allo stesso sito. O
 7. In Google Search Console aggiungi `acatebookfestival.it` come proprietà di dominio e invia
    `https://www.acatebookfestival.it/sitemap.xml`.
 
+8. **Verifica**: su GitHub → Actions → «Verifica sito online» → Run workflow (oppure
+   `bash scripts/verifica-online.sh`). Controlla DNS, HTTPS, redirect, pagine, SEO, anteprime social e statistiche.
+
 Ogni push sul branch di produzione pubblica il sito; i branch e le pull request generano anteprime non
 indicizzate. Per cambiare dominio senza toccare il codice c'è la variabile `NEXT_PUBLIC_SITE_URL`.
 

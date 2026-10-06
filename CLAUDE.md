@@ -14,6 +14,8 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
   - nelle sessioni cloud con Chromium preinstallato: `PW_CHROMIUM_PATH=/opt/pw-browsers/chromium npm run test:e2e`
 - `npm run screenshots` — screenshot mobile/desktop di tutte le pagine (`BASE_URL`, cartella di output come argomento)
 - Simulare il festival «live»: aggiungere `?ora=2026-10-16T19:10` a /programma o /adesso
+- `bash scripts/verifica-online.sh` — verifica il sito pubblicato (DNS, HTTPS, redirect, SEO, statistiche);
+  su GitHub è il workflow «Verifica sito online»
 
 ## Dove stanno le cose
 

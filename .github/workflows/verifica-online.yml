@@ -1,0 +1,23 @@
+name: Verifica sito online
+
+# Da lanciare a mano dopo la pubblicazione o un cambio di DNS: Actions → «Verifica sito online» → Run workflow
+on:
+  workflow_dispatch:
+    inputs:
+      dominio:
+        description: Dominio principale
+        default: www.acatebookfestival.it
+        required: true
+
+jobs:
+  verifica:
+    name: DNS, HTTPS, pagine e SEO
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Controlli sul sito pubblicato
+        env:
+          DOMINIO: ${{ inputs.dominio }}
+        run: bash scripts/verifica-online.sh "$DOMINIO"
