@@ -10,17 +10,6 @@ export function CalendarActions({ session, compact = false }: { session: Session
   return (
     <div className="flex flex-wrap gap-2" data-no-print>
       <a
-        href={`/calendario/${session.id}.ics`}
-        download
-        className={pill}
-        data-track="calendar_add"
-        data-track-location="scheda-ics"
-        data-track-label={session.id}
-      >
-        <Calendar size={17} /> Aggiungi al calendario
-        <span className="visually-hidden"> (file .ics per Apple, Outlook e altri)</span>
-      </a>
-      <a
         href={googleCalendarUrl(session)}
         target="_blank"
         rel="noopener"
@@ -29,7 +18,18 @@ export function CalendarActions({ session, compact = false }: { session: Session
         data-track-location="scheda-google"
         data-track-label={session.id}
       >
-        Google Calendar<span className="visually-hidden"> (nuova scheda)</span>
+        <Calendar size={17} /> Google Calendar<span className="visually-hidden"> (nuova scheda)</span>
+      </a>
+      <a
+        href={`/calendario/${session.id}.ics`}
+        download
+        className={pill}
+        data-track="calendar_add"
+        data-track-location="scheda-ics"
+        data-track-label={session.id}
+      >
+        <Calendar size={17} /> iPhone, Mac, Outlook
+        <span className="visually-hidden"> (file .ics da aprire con il calendario)</span>
       </a>
       {!compact ? (
         <a

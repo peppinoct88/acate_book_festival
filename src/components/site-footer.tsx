@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Bookshelf } from "./bookshelf";
 import { Logotype } from "./logotype";
-import { ArrowRight, Calendar, Facebook, Instagram } from "./icons";
+import { ArrowRight, Facebook, Instagram } from "./icons";
 import { buttonClass } from "./button";
+import { CalendarMenu } from "./calendar-menu";
+import { festivalCalendarOptions } from "@/lib/calendar";
 import { PartnerBand } from "./partner-band";
 import { footerNav, legalNav } from "@/content/navigation";
 import { photos } from "@/content/photos";
@@ -39,9 +41,14 @@ export function SiteFooter() {
               >
                 Vedi il programma <ArrowRight size={18} />
               </Link>
-              <a href="/calendario/acate-book-festival-2026.ics" download className={buttonClass("light")}>
-                <Calendar size={18} /> Salva le date
-              </a>
+              <CalendarMenu
+                label="Salva le date"
+                srContext="le tre giornate del festival"
+                options={festivalCalendarOptions()}
+                trackLocation="footer"
+                trackLabel="festival"
+                summaryClassName={buttonClass("light")}
+              />
             </div>
           </div>
 

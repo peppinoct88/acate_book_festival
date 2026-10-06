@@ -122,6 +122,43 @@ test("programma: la barra dei giorni segue lo scroll e in cima torna al venerdì
   await expect(days.getByRole("link", { name: /Ven 16/ })).toHaveAttribute("aria-current", "true");
 });
 
+test("schede del programma: la freccia apre l'appuntamento, «Calendario» offre Google e iPhone", async ({
+  page,
+  isMobile,
+}) => {
+  await page.goto("/programma");
+  const card = page.locator("[data-session='shuma-dom-1930']");
+  await card.locator("summary").click();
+  const google = card.getByRole("link", { name: /Google Calendar/ });
+  await expect(google).toBeVisible();
+  await expect(google).toHaveAttribute(
+    "href",
+    /^https:\/\/calendar\.google\.com\/calendar\/render\?action=TEMPLATE/,
+  );
+  await expect(card.getByRole("link", { name: /iPhone, Mac, Outlook/ })).toHaveAttribute(
+    "href",
+    "/calendario/shuma-dom-1930.ics",
+  );
+  await page.keyboard.press("Escape");
+  await expect(google).toBeHidden();
+  if (!isMobile) {
+    const box = await card.locator("[data-card-arrow]").boundingBox();
+    await page.mouse.click(box!.x + box!.width / 2, box!.y + box!.height / 2);
+    await expect(page).toHaveURL(/\/programma\/shuma$/);
+  }
+});
+
+test("«Aggiungi al calendario»: le tre date in Google Calendar e il file per iPhone", async ({ page }) => {
+  await page.goto("/");
+  const menu = page.locator("main [data-calendar-menu]").first();
+  await menu.locator("summary").click();
+  await expect(menu.getByRole("link", { name: /Google Calendar/ })).toHaveCount(3);
+  await expect(menu.getByRole("link", { name: /iPhone, Mac, Outlook/ })).toHaveAttribute(
+    "href",
+    "/calendario/acate-book-festival-2026.ics",
+  );
+});
+
 test("programma: con ?ora= durante il festival segna gli appuntamenti in corso", async ({ page }) => {
   // sabato 18:10: la buca delle lettere, il laboratorio e il monologo sono in corso insieme
   await page.goto("/programma?ora=2026-10-17T18:10");

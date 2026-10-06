@@ -3,7 +3,9 @@ import Link from "next/link";
 import heroIllustration from "@/assets/illustrazione-manifesto.png";
 import { Logotype } from "@/components/logotype";
 import { ButtonLink, buttonClass } from "@/components/button";
-import { ArrowRight, Calendar, Kids, Rain, Ticket } from "@/components/icons";
+import { CalendarMenu } from "@/components/calendar-menu";
+import { festivalCalendarOptions } from "@/lib/calendar";
+import { ArrowRight, Kids, Rain, Ticket } from "@/components/icons";
 import { FestivalStatus } from "@/components/festival-status";
 import { SectionHeading } from "@/components/section-heading";
 import { GuestCard } from "@/components/guest-card";
@@ -84,16 +86,14 @@ export default function HomePage() {
                 >
                   Vedi il programma
                 </ButtonLink>
-                <a
-                  href="/calendario/acate-book-festival-2026.ics"
-                  download
-                  className={buttonClass("secondary")}
-                  data-track="calendar_add"
-                  data-track-location="hero"
-                  data-track-label="festival"
-                >
-                  <Calendar size={18} /> Aggiungi al calendario
-                </a>
+                <CalendarMenu
+                  label="Aggiungi al calendario"
+                  srContext="le tre giornate del festival"
+                  options={festivalCalendarOptions()}
+                  trackLocation="hero"
+                  trackLabel="festival"
+                  summaryClassName={buttonClass("secondary")}
+                />
               </div>
             </div>
           </div>

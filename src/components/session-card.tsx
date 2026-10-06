@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { AudienceBadge, KindBadge, StatusBadge, VenueTag } from "./badges";
-import { ArrowRight, Calendar } from "./icons";
+import { CalendarMenu } from "./calendar-menu";
+import { ArrowRight } from "./icons";
 import { getGuest } from "@/content/guests";
 import type { Session } from "@/content/types";
+import { sessionCalendarOptions } from "@/lib/calendar";
 
 /**
  * Una riga del programma. I data-attribute servono ai componenti client
@@ -100,23 +102,22 @@ export function SessionCard({
         </div>
       </div>
 
-      <div className="relative z-10 flex items-start gap-2 sm:col-start-2 lg:col-start-auto lg:flex-col lg:items-end">
-        <a
-          href={`/calendario/${session.id}.ics`}
-          download
-          data-track="calendar_add"
-          data-track-location="programma"
-          data-track-label={session.id}
-          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/20 px-4 font-display text-sm font-semibold text-ink transition-colors hover:border-ink hover:bg-ink hover:text-cream"
-        >
-          <Calendar size={17} />
-          <span>
-            Calendario<span className="visually-hidden">: aggiungi «{session.title}»</span>
-          </span>
-        </a>
+      {/* Sopra il link che copre la scheda, ma trasparente ai clic: la freccia porta alla scheda come il resto */}
+      <div className="pointer-events-none relative z-10 flex items-start gap-2 has-[details[open]]:z-30 sm:col-start-2 lg:col-start-auto lg:flex-col lg:items-end">
+        <CalendarMenu
+          label="Calendario"
+          srContext={`aggiungi «${session.title}»`}
+          options={sessionCalendarOptions(session)}
+          trackLocation="programma"
+          trackLabel={session.id}
+          align="end-lg"
+          className="pointer-events-auto"
+          summaryClassName="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/20 px-4 font-display text-sm font-semibold text-ink transition-colors hover:border-ink hover:bg-ink hover:text-cream group-open/calendar:border-ink group-open/calendar:bg-ink group-open/calendar:text-cream"
+        />
         {session.href ? (
           <span
             aria-hidden="true"
+            data-card-arrow
             className="hidden size-11 items-center justify-center rounded-full bg-ink text-cream transition-transform duration-300 group-hover/session:translate-x-1 group-hover/session:bg-coral group-hover/session:text-ink lg:inline-flex"
           >
             <ArrowRight size={18} />

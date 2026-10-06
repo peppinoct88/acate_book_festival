@@ -145,6 +145,89 @@ export function googleCalendarUrl(session: Session): string {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
+/** Un pomeriggio del festival (17–22) in Google Calendar */
+export function googleDayUrl(day: (typeof days)[number]): string {
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: `${site.name} · ${day.topic}`,
+    dates: `${toICSDate(`${day.date}T17:00:00${site.utcOffset}`)}/${toICSDate(`${day.date}T22:00:00${site.utcOffset}`)}`,
+    details: `${day.label}: ${day.intro}\nIngresso libero.\n${absoluteUrl(`/giornate/${day.slug}`)}`,
+    location: `${site.place.label} · Palco del Castello e Villa dei lettori`,
+    ctz: site.timeZone,
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+/** Iscrizione a un calendario .ics: si aggiorna da solo se cambia un orario (Google lo rilegge entro un giorno) */
+export function webcalUrl(path: string): string {
+  return absoluteUrl(path).replace(/^https?:\/\//, "webcal://");
+}
+
+export function googleSubscribeUrl(path: string): string {
+  return `https://calendar.google.com/calendar/render?cid=${webcalUrl(path)}`;
+}
+
+/** Le voci del menu «Calendario»: Google per chi usa Android, il file .ics per iPhone, Mac e Outlook */
+export type CalendarOption = {
+  kind: "google" | "apple" | "ics";
+  label: string;
+  hint?: string;
+  href: string;
+};
+
+export function sessionCalendarOptions(session: Session): CalendarOption[] {
+  return [
+    {
+      kind: "google",
+      label: "Google Calendar",
+      hint: "Android e computer",
+      href: googleCalendarUrl(session),
+    },
+    {
+      kind: "ics",
+      label: "iPhone, Mac, Outlook",
+      hint: "File .ics da aprire con il calendario",
+      href: `/calendario/${icsFileName(session)}`,
+    },
+  ];
+}
+
+export function festivalCalendarOptions(): CalendarOption[] {
+  return [
+    ...days.map((d) => ({
+      kind: "google" as const,
+      label: `Google Calendar · ${d.weekday.toLowerCase()} ${Number(d.date.slice(-2))}`,
+      hint: d.topic,
+      href: googleDayUrl(d),
+    })),
+    {
+      kind: "ics",
+      label: "iPhone, Mac, Outlook",
+      hint: "Le tre date in un file .ics",
+      href: "/calendario/acate-book-festival-2026.ics",
+    },
+  ];
+}
+
+export function programCalendarOptions(): CalendarOption[] {
+  const path = "/calendario/programma-completo.ics";
+  return [
+    {
+      kind: "google",
+      label: "Google Calendar",
+      hint: "Iscriviti: gli orari si aggiornano da soli",
+      href: googleSubscribeUrl(path),
+    },
+    {
+      kind: "apple",
+      label: "iPhone e Mac",
+      hint: "Iscriviti: gli orari si aggiornano da soli",
+      href: webcalUrl(path),
+    },
+    { kind: "ics", label: "Outlook e altri", hint: "Tutti gli appuntamenti in un file .ics", href: path },
+  ];
+}
+
 export function icsFileName(session: Session): string {
   return `${session.id}.ics`;
 }

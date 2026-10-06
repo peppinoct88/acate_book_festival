@@ -5,8 +5,10 @@ import { ProgramControls } from "@/components/program-controls";
 import { SessionCard } from "@/components/session-card";
 import { LiveStatus } from "@/components/live-status";
 import { PrintButton } from "@/components/print-button";
-import { ArrowRight, Calendar } from "@/components/icons";
+import { ArrowRight } from "@/components/icons";
 import { buttonClass } from "@/components/button";
+import { CalendarMenu } from "@/components/calendar-menu";
+import { programCalendarOptions } from "@/lib/calendar";
 import { alwaysOn, programUpdatedAt, sessions, sessionsForDay } from "@/content/program";
 import { days } from "@/content/venues";
 import { dayTones } from "@/lib/day-tone";
@@ -134,16 +136,13 @@ export default function ProgramPage() {
           data-no-print
         >
           <div className="flex flex-wrap gap-3">
-            <a
-              href="/calendario/programma-completo.ics"
-              download
-              className={buttonClass("ink")}
-              data-track="calendar_add"
-              data-track-location="programma"
-              data-track-label="programma-completo"
-            >
-              <Calendar size={18} /> Tutto il programma nel calendario
-            </a>
+            <CalendarMenu
+              label="Tutto il programma nel calendario"
+              options={programCalendarOptions()}
+              trackLocation="programma-completo"
+              trackLabel="programma-completo"
+              summaryClassName={buttonClass("ink")}
+            />
             <PrintButton className={buttonClass("secondary")} />
             <Link href="/famiglie" className={buttonClass("ghost")}>
               Il programma per le famiglie <ArrowRight size={18} />
