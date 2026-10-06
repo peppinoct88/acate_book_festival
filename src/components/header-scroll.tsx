@@ -2,9 +2,13 @@
 
 import { useEffect } from "react";
 
-/** Aggiunge data-scrolled all'header quando la pagina scorre: lo stile cambia via CSS. */
+/**
+ * Aggiunge data-scrolled all'header quando la pagina scorre: lo stile cambia via CSS.
+ * A pagina caricata accende anche lo scorrimento morbido delle ancore (globals.css).
+ */
 export function HeaderScroll() {
   useEffect(() => {
+    document.documentElement.dataset.smoothScroll = "";
     const header = document.querySelector<HTMLElement>("[data-site-header]");
     if (!header) return;
     let frame = 0;

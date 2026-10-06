@@ -11,8 +11,8 @@ const initialsTone: Record<Guest["tone"], string> = {
 };
 
 /**
- * Ritratto dell'ospite; per i gruppi il logo su fondo blu; se manca la foto, la copertina tipografica
- * (o, in formato avatar, le iniziali).
+ * Ritratto dell'ospite con il suo libro (la copertina nei colori della giornata, «ogni ospite è un libro»);
+ * per i gruppi il logo su fondo blu; se manca la foto, solo la copertina (o, in formato avatar, le iniziali).
  */
 export function GuestVisual({
   guest,
@@ -54,14 +54,24 @@ export function GuestVisual({
   }
   if (guest.photo) {
     return (
-      <div className={`overflow-hidden rounded-[1.25rem] bg-paper ${className}`}>
-        <Image
-          src={guest.photo}
-          alt={`Ritratto di ${guest.name}`}
-          sizes={sizes}
-          placeholder="blur"
-          loading={priority ? "eager" : "lazy"}
-          className="aspect-[3/4] h-auto w-full object-cover"
+      <div className={`relative pb-[12%] ${className}`}>
+        <div className="overflow-hidden rounded-[1.25rem] bg-paper">
+          <Image
+            src={guest.photo}
+            alt={`Ritratto di ${guest.name}`}
+            sizes={sizes}
+            placeholder="blur"
+            loading={priority ? "eager" : "lazy"}
+            className="aspect-[3/4] h-auto w-full object-cover"
+          />
+        </div>
+        {/* il libro dell'ospite, nei colori della sua giornata: entra quando la scheda appare
+            (.book-pop in globals.css) e si apre quando ci passi sopra */}
+        <BookCover
+          title={guestName(guest)}
+          subtitle={guest.role}
+          tone={guest.tone}
+          className="book-pop absolute bottom-0 left-[6%] w-[40%] -rotate-6 transition-[rotate,translate] duration-500 ease-soft group-hover:-translate-y-2 group-hover:-rotate-9"
         />
       </div>
     );

@@ -70,12 +70,44 @@
     color-scheme: light;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    /* L'header sticky non deve mai coprire l'elemento a fuoco (WCAG 2.4.11) */
-    scroll-padding-top: 6rem;
+    /* Ancore e fuoco si fermano subito sotto quello che resta in alto, mai sotto (WCAG 2.4.11).
+       --header-h: l'header di site-header.tsx (4.25rem; 4rem da 640px, quando la pagina scorre);
+       --sticky-h: tutto ciò che resta in alto, qui l'header e il suo bordo. Le sezioni con un id
+       partono dal loro titolo: lo spazio sopra è margine, non padding, e niente scroll-margin. */
+    --header-h: 4.25rem;
+    --sticky-h: calc(var(--header-h) + 1px);
+    --anchor-gap: 1rem;
+    scroll-padding-top: calc(var(--sticky-h) + var(--anchor-gap));
+
+    @variant sm {
+      --header-h: 4rem;
+      --anchor-gap: 1.5rem;
+    }
   }
 
+  /* Senza JavaScript (layout.tsx aggiunge .js) l'header resta alto 5rem anche scorrendo */
+  html:not(.js) {
+    @variant sm {
+      --header-h: 5rem;
+    }
+  }
+
+  /* /programma: resta in alto anche la barra dei giorni (program-controls.tsx), appoggiata sul bordo
+     dell'header: py-3 + righe da 2.75rem e 3rem (una sotto l'altra fino a 768px, gap 0.75rem) + bordi.
+     Il test «i giorni si allineano sotto la barra» misura il risultato. */
+  html:has([data-program-bar]) {
+    --sticky-h: calc(var(--header-h) + 8rem + 2px);
+
+    @variant md {
+      --sticky-h: calc(var(--header-h) + 4.5rem + 2px);
+    }
+  }
+
+  /* Scorrimento morbido per i salti dentro la pagina (i giorni del programma), non per chi arriva
+     da un link con #ancora: atterra subito. data-smooth-scroll lo mette header-scroll.tsx dopo il
+     caricamento; data-scroll-behavior (layout.tsx) chiede a Next di non animare i cambi di pagina. */
   @media (prefers-reduced-motion: no-preference) {
-    html {
+    html[data-smooth-scroll] {
       scroll-behavior: smooth;
     }
   }
@@ -243,6 +275,19 @@
     opacity: 0;
     transform: translateY(1.5rem);
   }
+
+  /* Il libro dell'ospite (components/guest-visual.tsx) scivola fuori da dietro la foto quando la scheda appare.
+     fill-mode «backwards»: finita l'animazione tornano le rotazioni normali, così l'hover funziona */
+  [data-revealed] .book-pop {
+    animation: book-pop 0.9s var(--ease-spring) calc(var(--reveal-delay, 0ms) + 250ms) backwards;
+  }
+  @keyframes book-pop {
+    from {
+      opacity: 0;
+      translate: 18% 14%;
+      rotate: 10deg;
+    }
+  }
 }
 
 @utility container-festival {
@@ -280,6 +325,9 @@
   html.js [data-reveal]:not([data-revealed]) {
     opacity: 1;
     transform: none;
+  }
+  [data-revealed] .book-pop {
+    animation: none;
   }
 }
 

@@ -1,5 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 const pages = [
   "/",
@@ -120,6 +120,93 @@ test("programma: la barra dei giorni segue lo scroll e in cima torna al venerdì
   await expect(days.getByRole("link", { name: /Dom 18/ })).toHaveAttribute("aria-current", "true");
   await page.evaluate(() => window.scrollTo(0, 0));
   await expect(days.getByRole("link", { name: /Ven 16/ })).toHaveAttribute("aria-current", "true");
+});
+
+// Dopo il salto il banner della giornata sta subito sotto la barra: 24px su desktop, 16px su telefono
+const anchorGap = (isMobile: boolean) => (isMobile ? 16 : 24);
+
+/** Aspetta che lo scorrimento (anche smooth) sia finito */
+async function scrollSettled(page: Page) {
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) => {
+        let last = -1;
+        let still = 0;
+        const tick = () => {
+          if (window.scrollY === last) still++;
+          else {
+            still = 0;
+            last = window.scrollY;
+          }
+          if (still > 15) resolve();
+          else requestAnimationFrame(tick);
+        };
+        tick();
+      }),
+  );
+}
+
+test("programma: i giorni si allineano sotto la barra, partendo dall'alto o già in fondo", async ({
+  page,
+  isMobile,
+}) => {
+  await page.goto("/programma");
+  const bar = page.locator("[data-program-bar]");
+  for (const [anchor, label] of [
+    ["domenica-18", /Dom 18/],
+    ["venerdi-16", /Ven 16/],
+    ["sabato-17", /Sab 17/],
+  ] as const) {
+    await bar.getByRole("link", { name: label }).click();
+    await expect(page).toHaveURL(new RegExp(`#${anchor}$`));
+    await scrollSettled(page);
+    // poll: l'header può essere ancora nella transizione da 5 a 4rem
+    await expect
+      .poll(async () => {
+        const barBox = (await bar.boundingBox())!;
+        const banner = (await page.locator(`#${anchor} > header`).boundingBox())!;
+        return Math.round(banner.y - (barBox.y + barBox.height));
+      })
+      .toBe(anchorGap(isMobile));
+    await expect(bar.getByRole("link", { name: label })).toHaveAttribute("aria-current", "true");
+  }
+});
+
+/** Distanza tra il bordo dell'header e l'elemento con quell'id */
+const gapUnderHeader = (page: Page, id: string) =>
+  page.evaluate((id) => {
+    const header = document.querySelector("[data-site-header]")!.getBoundingClientRect();
+    return Math.round(document.getElementById(id)!.getBoundingClientRect().top - header.bottom);
+  }, id);
+
+test("ancore delle altre pagine: il titolo si ferma subito sotto l'header", async ({ context, isMobile }) => {
+  // link aperti da fuori: ogni volta una scheda nuova
+  for (const path of ["/info#come-arrivare", "/info#domande", "/festival#crediti"]) {
+    const tab = await context.newPage();
+    await tab.goto(path);
+    await expect
+      .poll(() => gapUnderHeader(tab, path.split("#")[1]), { message: path })
+      .toBe(anchorGap(isMobile));
+    await tab.close();
+  }
+  // link interno da un'altra pagina, partendo dal fondo
+  const page = await context.newPage();
+  await page.goto("/");
+  await page.evaluate(() => window.scrollTo({ top: document.body.scrollHeight, behavior: "instant" }));
+  await page.locator('footer a[href="/info#come-arrivare"]').first().click();
+  await expect(page).toHaveURL(/\/info#come-arrivare$/);
+  await expect.poll(() => gapUnderHeader(page, "come-arrivare")).toBe(anchorGap(isMobile));
+});
+
+test.describe("senza JavaScript", () => {
+  test.use({ javaScriptEnabled: false });
+
+  test("le pagine si leggono e le ancore si fermano sotto l'header", async ({ page, isMobile }) => {
+    await page.goto("/info#domande");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Chiedi pure" })).toBeVisible();
+    await expect.poll(() => gapUnderHeader(page, "domande")).toBe(anchorGap(isMobile));
+  });
 });
 
 test("schede del programma: la freccia apre l'appuntamento, «Calendario» offre Google e iPhone", async ({

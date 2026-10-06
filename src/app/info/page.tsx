@@ -113,7 +113,7 @@ export default function InfoPage() {
           ))}
         </ul>
 
-        <section id="luoghi" aria-labelledby="luoghi-titolo" className="scroll-mt-28 pt-20">
+        <section id="luoghi" aria-labelledby="luoghi-titolo" className="mt-20">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
             <div>
               <p className="eyebrow text-ink">Dove</p>
@@ -140,7 +140,7 @@ export default function InfoPage() {
           </div>
         </section>
 
-        <section id="come-arrivare" aria-labelledby="arrivare-titolo" className="scroll-mt-28 pt-24">
+        <section id="come-arrivare" aria-labelledby="arrivare-titolo" className="mt-24">
           <p className="eyebrow text-ink">Come arrivare</p>
           <h2 id="arrivare-titolo" className="mt-4 font-display text-title">
             <span className="font-black">Acate,</span> <span className="font-light">provincia di Ragusa</span>
@@ -170,7 +170,7 @@ export default function InfoPage() {
           />
         </section>
 
-        <section id="accessibilita" aria-labelledby="accessibilita-titolo" className="scroll-mt-28 pt-24">
+        <section id="accessibilita" aria-labelledby="accessibilita-titolo" className="mt-24">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
             <div>
               <p className="eyebrow text-ink">Per tutti</p>
@@ -215,7 +215,7 @@ export default function InfoPage() {
           </p>
         </section>
 
-        <section id="bookshop" aria-labelledby="bookshop-titolo" className="scroll-mt-28 pt-24">
+        <section id="bookshop" aria-labelledby="bookshop-titolo" className="mt-24">
           <div className="grid gap-6 rounded-[2rem] border-2 border-ink/85 p-8 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center">
             <div>
               <h2 id="bookshop-titolo" className="font-display text-title">
@@ -235,7 +235,7 @@ export default function InfoPage() {
           </div>
         </section>
 
-        <section id="domande" aria-labelledby="domande-titolo" className="scroll-mt-28 pt-24">
+        <section id="domande" aria-labelledby="domande-titolo" className="mt-24">
           <p className="eyebrow text-ink">Domande frequenti</p>
           <h2 id="domande-titolo" className="mt-4 font-display text-title">
             <span className="font-black">Chiedi</span> <span className="font-light">pure</span>

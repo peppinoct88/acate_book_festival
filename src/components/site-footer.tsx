@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Bookshelf } from "./bookshelf";
 import { Logotype } from "./logotype";
@@ -6,9 +5,8 @@ import { ArrowRight, Facebook, Instagram } from "./icons";
 import { buttonClass } from "./button";
 import { CalendarMenu } from "./calendar-menu";
 import { festivalCalendarOptions } from "@/lib/calendar";
-import { PartnerBand } from "./partner-band";
+import { FooterCredits } from "./footer-credits";
 import { footerNav, legalNav } from "@/content/navigation";
-import { photos } from "@/content/photos";
 import { site } from "@/content/site";
 
 export function SiteFooter() {
@@ -93,50 +91,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <PartnerBand />
-
-        <div className="border-t border-cream/15">
-          <div className="container-festival grid gap-10 py-10 text-sm leading-relaxed text-cream/85 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr] lg:gap-12">
-            {/* obbligo di evidenza del finanziamento regionale: stemma e dicitura esatta, in ogni pagina */}
-            <div className="flex items-start gap-5 md:col-span-2 lg:col-span-1" data-funding>
-              <span className="shrink-0 rounded-2xl bg-cream p-2.5">
-                <Image
-                  src={photos.stemmaRegione.src}
-                  alt={photos.stemmaRegione.alt}
-                  sizes="4rem"
-                  className="h-[4.5rem] w-auto"
-                />
-              </span>
-              <div>
-                <p className="eyebrow eyebrow--plain text-teal-soft">Finanziato da</p>
-                <p className="mt-3 text-cream">
-                  <span className="font-display text-base font-bold">{site.funding.region}</span>
-                  <br />
-                  {site.funding.department}
-                </p>
-                <p className="mt-2 text-cream/80">Contributo concesso con {site.funding.decree}</p>
-              </div>
-            </div>
-            <div>
-              <p className="eyebrow eyebrow--plain text-teal-soft">Promosso da</p>
-              <p className="mt-3">
-                <a
-                  href={site.organizer.url}
-                  className="link-underline font-semibold text-cream"
-                  rel="noopener"
-                >
-                  {site.organizer.name}
-                </a>
-              </p>
-            </div>
-            <div>
-              <p className="eyebrow eyebrow--plain text-teal-soft">Organizzazione</p>
-              <p className="mt-3">
-                <span className="font-semibold text-cream">{site.production.name}</span>
-              </p>
-            </div>
-          </div>
-        </div>
+        <FooterCredits />
 
         <div className="border-t border-cream/15">
           <div className="container-festival flex flex-col gap-4 py-6 text-sm text-cream/75 sm:flex-row sm:items-center sm:justify-between">

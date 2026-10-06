@@ -1,4 +1,3 @@
-import comuneLogo from "@/assets/partner/comune-di-acate.png";
 import bandaLogo from "@/assets/partner/banda-citta-di-acate.png";
 import grifoniLogo from "@/assets/partner/grifoni-di-biscari.png";
 import mondadoriLogo from "@/assets/partner/mondadori-bookstore-vittoria.png";
@@ -6,16 +5,11 @@ import santaBrigantiLogo from "@/assets/partner/santa-briganti.png";
 import type { Partner } from "./types";
 
 /**
- * Chi fa il festival insieme al Comune: i loghi sono nelle versioni per fondo scuro (fascia blu nel footer).
- * Lo stemma è ritagliato dal manifesto ufficiale; gli altri loghi li hanno forniti le associazioni.
+ * Chi fa il festival insieme al Comune, nei crediti del footer (components/footer-credits.tsx).
+ * Loghi forniti dalle associazioni, nelle versioni per fondo scuro. Gli stemmi di Regione e Comune
+ * stanno a parte, con «Finanziato da» e «Promosso da».
  */
 export const partners: Partner[] = [
-  {
-    name: "Comune di Acate",
-    role: "Promuove il festival",
-    logo: comuneLogo,
-    url: "https://www.comune.acate.rg.it",
-  },
   {
     name: "Associazione Culturale Santa Briganti",
     role: "Teatro e letture",

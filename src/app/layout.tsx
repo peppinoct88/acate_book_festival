@@ -69,7 +69,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="it" className={`${outfit.variable} ${literata.variable}`} suppressHydrationWarning>
+    <html
+      lang="it"
+      className={`${outfit.variable} ${literata.variable}`}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <head>
         {/* Abilita le animazioni di comparsa solo se JavaScript è attivo: senza JS tutto resta visibile */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

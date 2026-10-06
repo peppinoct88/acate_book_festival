@@ -117,7 +117,7 @@ export default function FestivalPage() {
                 <li
                   key={f.slug}
                   id={f.slug}
-                  className="relative flex scroll-mt-28 flex-col rounded-[1.5rem] bg-cream/[0.06] p-6 ring-1 ring-cream/15 transition-colors hover:bg-cream/10"
+                  className="relative flex flex-col rounded-[1.5rem] bg-cream/[0.06] p-6 ring-1 ring-cream/15 transition-colors hover:bg-cream/10"
                 >
                   <span className="inline-flex size-11 items-center justify-center rounded-full bg-teal text-ink">
                     <Icon size={21} />
@@ -221,11 +221,7 @@ export default function FestivalPage() {
         </div>
       </section>
 
-      <section
-        id="crediti"
-        aria-labelledby="crediti-titolo"
-        className="container-festival scroll-mt-28 pt-24"
-      >
+      <section id="crediti" aria-labelledby="crediti-titolo" className="container-festival mt-24">
         <p className="eyebrow text-ink">Crediti</p>
         <h2 id="crediti-titolo" className="mt-4 font-display text-title">
           <span className="font-black">Le immagini</span> <span className="font-light">del sito</span>
@@ -236,9 +232,9 @@ export default function FestivalPage() {
             Dal manifesto ufficiale della I edizione.
           </li>
           <li className="rounded-[1.25rem] bg-paper p-5">
-            <span className="block font-display font-bold">Ritratti e loghi</span>I ritratti degli autori sono
-            forniti dall&apos;organizzazione; i loghi dalle associazioni e dai partner. Lo stemma del Comune
-            di Acate è quello del manifesto.
+            <span className="block font-display font-bold">Ritratti e loghi</span>I ritratti degli autori e lo
+            stemma del Comune di Acate sono forniti dall&apos;organizzazione; i loghi dalle associazioni e dai
+            partner.
           </li>
           {Object.values(photos).map((photo) => (
             <li key={photo.source} className="rounded-[1.25rem] bg-paper p-5">

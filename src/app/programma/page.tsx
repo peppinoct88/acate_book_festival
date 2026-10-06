@@ -69,7 +69,7 @@ export default function ProgramPage() {
               key={day.id}
               id={day.anchor}
               aria-labelledby={`${day.anchor}-titolo`}
-              className="scroll-mt-36 pt-14 sm:pt-20"
+              className="mt-14 sm:mt-20"
             >
               <header
                 className={`relative isolate grid gap-6 overflow-hidden rounded-[1.75rem] p-6 sm:p-9 lg:grid-cols-[1fr_1.2fr] lg:items-end ${dayTones[day.tone].surface} ${dayTones[day.tone].text}`}

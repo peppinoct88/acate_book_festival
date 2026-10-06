@@ -73,15 +73,15 @@ export function BookCover({
         <span className={`absolute inset-y-0 left-[5cqw] w-px ${t.line}`} />
         <div className="flex h-full flex-col p-[8cqw] pl-[13cqw]">
           <span className={`h-[2.4cqw] w-[16cqw] rounded-full ${t.accent}`} />
-          <p className="mt-[6cqw] font-display text-[clamp(0.8rem,10.5cqw,3rem)] leading-[0.92] font-black tracking-[-0.02em] text-balance uppercase">
+          <p className="mt-[6cqw] font-display text-[clamp(0.8rem,10.5cqw,3rem)] leading-[0.92] font-black tracking-[-0.02em] text-balance uppercase @max-[5rem]:hidden">
             {title}
           </p>
           {subtitle ? (
-            <p className="mt-[4cqw] font-display text-[clamp(0.6rem,5.2cqw,1.15rem)] leading-snug font-light">
+            <p className="mt-[4cqw] font-display text-[clamp(0.6rem,5.2cqw,1.15rem)] leading-snug font-light @max-[5rem]:hidden">
               {subtitle}
             </p>
           ) : null}
-          <p className="mt-auto max-w-[70%] font-display text-[clamp(0.45rem,3.6cqw,0.75rem)] font-semibold tracking-[0.16em] uppercase">
+          <p className="mt-auto max-w-[70%] font-display text-[clamp(0.45rem,3.6cqw,0.75rem)] font-semibold tracking-[0.16em] uppercase @max-[5rem]:hidden">
             {footer}
           </p>
         </div>

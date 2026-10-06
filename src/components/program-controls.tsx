@@ -1,7 +1,7 @@
 "use client";
 
 import { track } from "@vercel/analytics";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { currentTime, romeDate } from "@/lib/now";
 
 interface DayLink {
@@ -27,6 +27,7 @@ export function ProgramControls({
   const [active, setActive] = useState(days[0]?.anchor);
   const [kidsOnly, setKidsOnly] = useState(false);
   const [announce, setAnnounce] = useState("");
+  const bar = useRef<HTMLDivElement>(null);
 
   const applyFilter = (kids: boolean) => {
     setKidsOnly(kids);
@@ -41,25 +42,30 @@ export function ProgramControls({
     );
   };
 
-  // Giorno visibile
+  // Giorno attivo: l'ultimo il cui banner è arrivato sotto la barra. Sopra il venerdì resta il venerdì.
   useEffect(() => {
     const sections = days
       .map((d) => document.getElementById(d.anchor))
       .filter((el): el is HTMLElement => el !== null);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible[0]) setActive(visible[0].target.id);
-        // tornati in cima, sopra il primo giorno: torna attivo il primo
-        else if (sections[0] && sections[0].getBoundingClientRect().top > window.innerHeight * 0.3)
-          setActive(sections[0].id);
-      },
-      { rootMargin: "-30% 0px -60% 0px" },
-    );
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const line = (bar.current?.getBoundingClientRect().bottom ?? 0) + 48;
+      let current = sections[0];
+      for (const section of sections) if (section.getBoundingClientRect().top <= line) current = section;
+      if (current) setActive(current.id);
+    };
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, [days]);
 
   // Durante il festival il programma si apre sul giorno corrente
@@ -68,13 +74,15 @@ export function ProgramControls({
     const today = romeDate(currentTime());
     const match = days.find((d) => d.date === today);
     if (match && match !== days[0]) {
-      document.getElementById(match.anchor)?.scrollIntoView({ block: "start" });
+      document.getElementById(match.anchor)?.scrollIntoView({ block: "start", behavior: "instant" });
     }
   }, [days]);
 
   return (
     <div
-      className="sticky top-[4.25rem] z-30 -mx-[clamp(1rem,4vw,3rem)] border-y border-ink/10 bg-cream/95 px-[clamp(1rem,4vw,3rem)] backdrop-blur-md sm:top-16"
+      ref={bar}
+      className="sticky top-(--header-h) z-30 -mx-[clamp(1rem,4vw,3rem)] border-y border-ink/10 bg-cream/95 px-[clamp(1rem,4vw,3rem)] backdrop-blur-md"
+      data-program-bar
       data-no-print
     >
       <div className="flex flex-col gap-3 py-3 md:flex-row md:items-center md:justify-between">

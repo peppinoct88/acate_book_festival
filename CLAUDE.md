@@ -28,7 +28,8 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
   - `photos.ts`: foto da Wikimedia Commons con autore, licenza, fonte e modifiche (sempre mostrati: `components/photo.tsx`
     e `/festival#crediti`). Nuove foto: workflow GitHub «Importa foto da Wikimedia Commons» (Commons non è
     raggiungibile dalle sessioni cloud); scarica in `src/assets/foto/commons/`, poi si ritaglia e si sposta in `src/assets/foto/`.
-  - `partners.ts`: loghi nella fascia del footer (file in `src/assets/partner/`, preparati per fondo blu).
+  - `partners.ts`: loghi dei partner nei crediti del footer (`components/footer-credits.tsx`, file in
+    `src/assets/partner/` preparati per fondo blu); stemmi di Regione e Comune a parte, su piastrella chiara.
   - `notices.ts`: avvisi in cima a tutte le pagine (maltempo, spostamenti) con scadenza automatica.
   - `site.ts`: URL, date, contatti, social, enti. I campi vuoti non vengono mostrati.
 - `src/app/` — pagine (server component). Client component solo dove serve interattività.
@@ -83,6 +84,12 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
 - I deploy di anteprima Vercel sono `noindex` (vedi `isProductionDeployment` in `src/lib/seo.ts`).
 - axe ignora il ritaglio `overflow: hidden` dei cerchi decorativi: un cerchio che sborda verso l'header viene
   preso come fondo del bottone «Menu». Per questo l'header ha sempre `bg-cream`, anche in cima alla pagina.
+- Ancore (`#venerdi-16`, `/info#domande`…): lo scarto è solo lo `scroll-padding-top` di html (`--header-h`,
+  `--sticky-h`, `--anchor-gap` in `globals.css`; su /programma conta anche la barra dei giorni). Le sezioni con
+  un id hanno lo spazio sopra come margine, mai padding né `scroll-mt-*`. Se cambia l'altezza dell'header o
+  della barra, vanno aggiornate quelle variabili: i test misurano l'allineamento al pixel.
+- Niente `loading.tsx`: in un sito statico mette ogni pagina in un `<div hidden>` sostituito da uno script,
+  quindi senza JavaScript si vede solo lo scheletro e i link con #ancora a volte non scorrono.
 - Dominio: `https://www.acatebookfestival.it` (`productionUrl` in `src/content/site.ts`), DNS su Cloudflare
   in modalità «DNS only». Vercel Analytics (piano Pro): massimo 2 proprietà `data-track-*` per evento.
 
