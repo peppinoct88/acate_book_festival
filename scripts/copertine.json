@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "mio-fratello-tutta-una-vita-con-peppino",
+    "titolo": "Mio fratello. Tutta una vita con Peppino",
+    "autore": "Giovanni Impastato",
+    "editore": "Libreria Pienogiorno",
+    "isbn": []
+  },
+  {
+    "slug": "oltre-i-cento-passi",
+    "titolo": "Oltre i cento passi",
+    "autore": "Giovanni Impastato",
+    "editore": "Piemme",
+    "isbn": []
+  },
+  {
+    "slug": "resistere-a-mafiopoli",
+    "titolo": "Resistere a Mafiopoli",
+    "autore": "Giovanni Impastato",
+    "editore": "Stampa Alternativa",
+    "isbn": []
+  },
+  {
+    "slug": "la-seminatrice-di-coraggio",
+    "titolo": "La seminatrice di coraggio",
+    "autore": "Antonella Desirée Giuffrè",
+    "editore": "Tre60",
+    "isbn": ["9788867028818", "9788850276547"]
+  },
+  {
+    "slug": "il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi",
+    "titolo": "Il Gattopardo raccontato alle ragazze e ai ragazzi",
+    "autore": "Maria Antonietta Ferraloro",
+    "editore": "Gallucci Bros.",
+    "isbn": []
+  },
+  {
+    "slug": "il-gattopardo-raccontato-a-mia-figlia",
+    "titolo": "Il Gattopardo raccontato a mia figlia",
+    "autore": "Maria Antonietta Ferraloro",
+    "editore": "La Nuova Frontiera Junior",
+    "isbn": []
+  },
+  {
+    "slug": "tomasi-di-lampedusa-e-i-luoghi-del-gattopardo",
+    "titolo": "Tomasi di Lampedusa e i luoghi del Gattopardo",
+    "autore": "Maria Antonietta Ferraloro",
+    "editore": "Pacini Editore",
+    "isbn": ["9788863157338"]
+  },
+  {
+    "slug": "l-opera-orologio",
+    "titolo": "L'opera-orologio. Saggi sul Gattopardo",
+    "autore": "Maria Antonietta Ferraloro",
+    "editore": "Pacini Editore",
+    "isbn": []
+  }
+]
