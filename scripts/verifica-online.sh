@@ -79,7 +79,7 @@ if [[ -z "${SKIP_DNS:-}" ]]; then
     ko "http://$HOST non rimanda a https ($code ${location:-})"
   fi
 fi
-for pair in "/qr /adesso" "/mostra /mostra-peppino-impastato"; do
+for pair in "/qr /adesso" "/mostra /mostra-peppino-impastato" "/mafia /giornate/mafia"; do
   read -r from to <<<"$pair"
   read -r code location <<<"$(probe "$BASE$from")"
   if [[ "$location" == *"$to" ]]; then ok "$from → $to"; else ko "$from non rimanda a $to ($code ${location:-})"; fi
@@ -87,6 +87,7 @@ done
 
 section "Pagine"
 for path in / /programma /programma/le-radici-che-si-scelgono /programma/shuma /ospiti /ospiti/giovanni-impastato \
+  /giornate/mafia /giornate/donne /giornate/immigrazione \
   /famiglie /mostra-peppino-impastato /lamiaradice /festival /info /adesso /privacy /accessibilita; do
   read -r code _ <<<"$(probe "$BASE$path")"
   if [[ "$code" == 200 ]]; then ok "$path"; else ko "$path risponde ${code:-errore}"; fi
