@@ -1,0 +1,144 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { PageHero } from "@/components/page-hero";
+import { ProgramControls } from "@/components/program-controls";
+import { SessionCard } from "@/components/session-card";
+import { LiveStatus } from "@/components/live-status";
+import { PrintButton } from "@/components/print-button";
+import { ArrowRight, Calendar } from "@/components/icons";
+import { buttonClass } from "@/components/button";
+import { alwaysOn, programUpdatedAt, sessions, sessionsForDay } from "@/content/program";
+import { days } from "@/content/venues";
+import { formatItalianDate } from "@/lib/format";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Programma",
+  description:
+    "Il programma dell'Acate Book Festival, 16-18 ottobre: Giovanni Impastato, Antonella Desirée Giuffrè, Maria Antonietta Ferraloro, teatro e laboratori.",
+  path: "/programma",
+});
+
+export default function ProgramPage() {
+  const counts = {
+    all: sessions.length,
+    kids: sessions.filter((s) => s.audience.kids).length,
+  };
+
+  return (
+    <>
+      <PageHero
+        eyebrow="Il programma"
+        title="Tre pomeriggi,"
+        light="due luoghi."
+        crumbs={[{ name: "Programma" }]}
+        intro={
+          <>
+            <p>
+              Dalle 17 alle 20 tra il <strong>Palco del Castello</strong> e la{" "}
+              <strong>Villa dei lettori</strong>, con la mostra aperta fino alle 22. Ogni giorno c&apos;è un
+              appuntamento per i bambini prima dell&apos;autore, e il laboratorio cade mentre l&apos;autore
+              parla.
+            </p>
+          </>
+        }
+      >
+        <ul className="flex flex-wrap gap-2 font-display text-[0.95rem] font-semibold">
+          {["16 / 17 / 18 ottobre 2026", "17:00–20:00", "Mostra fino alle 22", "Ingresso libero"].map((t) => (
+            <li key={t} className="rounded-full border-2 border-ink/80 bg-cream px-4 py-1.5">
+              {t}
+            </li>
+          ))}
+        </ul>
+      </PageHero>
+
+      <div className="container-festival">
+        <ProgramControls
+          days={days.map((d) => ({ anchor: d.anchor, short: d.short, theme: d.theme, date: d.date }))}
+          listId="programma-lista"
+          counts={counts}
+        />
+
+        <div id="programma-lista">
+          {days.map((day) => (
+            <section
+              key={day.id}
+              id={day.anchor}
+              aria-labelledby={`${day.anchor}-titolo`}
+              className="scroll-mt-36 pt-14 sm:pt-20"
+            >
+              <header className="grid gap-4 pb-8 lg:grid-cols-[1fr_1.2fr] lg:items-end">
+                <div>
+                  <p className="eyebrow text-ink">{day.theme}</p>
+                  <h2
+                    id={`${day.anchor}-titolo`}
+                    className="mt-4 font-display text-title font-black uppercase"
+                  >
+                    {day.label}
+                  </h2>
+                </div>
+                <p className="max-w-[52ch] font-serif text-lg leading-relaxed text-ink/80">{day.intro}</p>
+              </header>
+              <ol className="border-b border-ink/12">
+                {sessionsForDay(day.id).map((session) => (
+                  <li key={session.id}>
+                    <SessionCard session={session} />
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ))}
+        </div>
+
+        <section aria-labelledby="sempre-aperti" className="mt-16 rounded-[1.75rem] bg-paper p-6 sm:p-10">
+          <p className="eyebrow text-ink">Tutti i giorni alla Villa dei lettori</p>
+          <h2 id="sempre-aperti" className="mt-4 font-display text-title">
+            <span className="font-black">Sempre</span> <span className="font-light">aperti</span>
+          </h2>
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {alwaysOn.map((item) => (
+              <li key={item.title} className="relative rounded-2xl bg-cream p-5">
+                <p className="font-display text-xs font-semibold tracking-[0.16em] text-teal-deep uppercase">
+                  {item.when}
+                </p>
+                <h3 className="mt-2 font-display text-lg leading-snug font-extrabold">
+                  <Link href={item.href} className="after:absolute after:inset-0 hover:text-coral-deep">
+                    {item.title}
+                  </Link>
+                </h3>
+                <p className="mt-1.5 text-[0.95rem] leading-snug text-ink/80">{item.text}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <div
+          className="mt-12 flex flex-col gap-6 border-t border-ink/12 pt-10 lg:flex-row lg:items-center lg:justify-between"
+          data-no-print
+        >
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="/calendario/programma-completo.ics"
+              download
+              className={buttonClass("ink")}
+              data-track="calendar_add"
+              data-track-location="programma"
+              data-track-label="programma-completo"
+            >
+              <Calendar size={18} /> Tutto il programma nel calendario
+            </a>
+            <PrintButton className={buttonClass("secondary")} />
+            <Link href="/famiglie" className={buttonClass("ghost")}>
+              Il programma per le famiglie <ArrowRight size={18} />
+            </Link>
+          </div>
+          <p className="font-display text-sm text-ink-muted">
+            Programma aggiornato al {formatItalianDate(programUpdatedAt)}. Eventuali variazioni vengono
+            segnalate in questa pagina.
+          </p>
+        </div>
+      </div>
+      <LiveStatus />
+    </>
+  );
+}

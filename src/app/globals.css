@@ -1,0 +1,311 @@
+@import "tailwindcss";
+
+/*
+ * Acate Book Festival — design tokens
+ * Palette campionata dal manifesto ufficiale della I edizione.
+ * Contrasti WCAG verificati (vedi CLAUDE.md → "Colori e contrasti").
+ */
+@theme {
+  /* Superfici */
+  --color-cream: #fefaef; /* fondo del manifesto */
+  --color-paper: #f6eedc; /* pagine dei libri: card e sezioni alternate */
+  --color-ink: #1e154a; /* indaco di «BOOK»: testo e sezioni scure */
+  --color-ink-muted: #5c5684; /* testo secondario (6.4:1 su cream) */
+
+  /* Accenti */
+  --color-coral: #fd644f; /* «ACATE»: riempimenti, bottoni (testo ink), logotipo */
+  --color-coral-strong: #e8503b; /* testo grande su cream (≥ 24px) */
+  --color-coral-deep: #b8392a; /* testo piccolo corallo su cream/paper */
+  --color-teal: #68cbc8; /* il sole */
+  --color-teal-soft: #abded6; /* le nuvole */
+  --color-teal-deep: #1d6e6a; /* testo piccolo turchese su cream/paper */
+
+  /* Tipografia */
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-literata), ui-serif, Georgia, serif;
+
+  --text-display: clamp(3.5rem, 1.2rem + 11vw, 10.5rem);
+  --text-display--line-height: 0.86;
+  --text-display--letter-spacing: -0.035em;
+  --text-headline: clamp(2.25rem, 1.2rem + 4.2vw, 5rem);
+  --text-headline--line-height: 0.98;
+  --text-headline--letter-spacing: -0.03em;
+  --text-title: clamp(1.625rem, 1.15rem + 1.9vw, 2.75rem);
+  --text-title--line-height: 1.05;
+  --text-title--letter-spacing: -0.02em;
+
+  /* Movimento */
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  /* Entrate «above the fold» solo di movimento, senza dissolvenza: il testo è visibile dal primo
+     frame e conta subito come Largest Contentful Paint */
+  --animate-rise: rise 0.9s var(--ease-soft) both;
+  --animate-settle: settle 1.4s var(--ease-soft) both;
+
+  @keyframes rise {
+    from {
+      transform: translateY(0.45em);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes settle {
+    from {
+      transform: translateY(1.5%) scale(1.015);
+    }
+    to {
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* L'header sticky non deve mai coprire l'elemento a fuoco (WCAG 2.4.11) */
+    scroll-padding-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern", "liga";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-coral);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img,
+  svg {
+    max-width: 100%;
+  }
+
+  summary {
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer components {
+  /* «I EDIZIONE ————» */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  .eyebrow::after {
+    content: "";
+    display: block;
+    width: clamp(2.5rem, 6vw, 5rem);
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+  }
+  .eyebrow--plain::after {
+    display: none;
+  }
+
+  /* Testo lungo: serif da lettura */
+  .prose-festival {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    max-width: 65ch;
+  }
+  .prose-festival > * + * {
+    margin-top: 1.1em;
+  }
+  .prose-festival a {
+    color: var(--color-coral-deep);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .prose-festival a:hover {
+    text-decoration-thickness: 2px;
+  }
+  .prose-festival strong {
+    font-weight: 600;
+  }
+  .prose-festival h2,
+  .prose-festival h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-top: 2em;
+  }
+  .prose-festival h2 {
+    font-size: 1.75rem;
+  }
+  .prose-festival h3 {
+    font-size: 1.3rem;
+  }
+  .prose-festival ul {
+    list-style: none;
+    padding: 0;
+  }
+  .prose-festival ul > li {
+    position: relative;
+    padding-left: 1.5em;
+  }
+  .prose-festival ul > li + li {
+    margin-top: 0.5em;
+  }
+  .prose-festival ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0.15em;
+    top: 0.62em;
+    width: 0.55em;
+    height: 0.55em;
+    border-radius: 999px;
+    background: var(--color-teal);
+  }
+
+  /* Link con sottolineatura animata */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s var(--ease-soft);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 2px;
+  }
+
+  /* Filtro «Bambini e ragazzi» del programma (components/program-controls.tsx) */
+  [data-filter="kids"] li:has(> [data-session][data-kids="false"]) {
+    display: none;
+  }
+
+  /* Appuntamento in corso durante il festival (components/live-status.tsx) */
+  [data-session][data-live="now"] {
+    background: linear-gradient(90deg, rgb(104 203 200 / 0.18), transparent 70%);
+  }
+
+  /* Reveal allo scroll (progressive enhancement, vedi components/reveal.tsx) */
+  [data-reveal] {
+    transition:
+      opacity 0.8s var(--ease-soft),
+      transform 0.8s var(--ease-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  html.js [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
+@utility container-festival {
+  width: 100%;
+  max-width: 88rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html.js [data-reveal]:not([data-revealed]) {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Stampa del programma: pulita, in bianco e nero, senza navigazione */
+@media print {
+  @page {
+    margin: 14mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  header[data-site-header],
+  footer[data-site-footer],
+  [data-no-print],
+  .skip-link {
+    display: none !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+  article,
+  li {
+    break-inside: avoid;
+  }
+}

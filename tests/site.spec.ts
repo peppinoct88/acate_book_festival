@@ -1,0 +1,178 @@
+import AxeBuilder from "@axe-core/playwright";
+import { expect, test } from "@playwright/test";
+
+const pages = [
+  "/",
+  "/programma",
+  "/programma/le-radici-che-si-scelgono",
+  "/programma/a-colpi-di-mantice",
+  "/programma/shuma",
+  "/ospiti",
+  "/ospiti/antonella-desiree-giuffre",
+  "/famiglie",
+  "/mostra-peppino-impastato",
+  "/lamiaradice",
+  "/festival",
+  "/info",
+  "/adesso",
+  "/privacy",
+  "/accessibilita",
+];
+
+test.describe("ogni pagina", () => {
+  for (const path of pages) {
+    test(`${path}: SEO di base, un solo H1, nessun errore`, async ({ page }) => {
+      const errors: string[] = [];
+      page.on("pageerror", (e) => errors.push(e.message));
+      const response = await page.goto(path);
+      expect(response?.status()).toBe(200);
+
+      // titoli brevi (≤ 60 caratteri) che nominano sempre Acate
+      await expect(page).toHaveTitle(/Acate/);
+      expect((await page.title()).length).toBeLessThanOrEqual(60);
+      await expect(page.locator("h1")).toHaveCount(1);
+      await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /.{60,}/);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+        "href",
+        new RegExp(path === "/" ? "^https?://[^/]+/?$" : `${path}$`),
+      );
+      await expect(page.locator('meta[property="og:image"]').first()).toHaveAttribute(
+        "content",
+        /^https?:\/\//,
+      );
+      await expect(page.locator("html")).toHaveAttribute("lang", "it");
+      expect(errors).toEqual([]);
+    });
+
+    test(`${path}: accessibilità WCAG 2.2 AA (axe)`, async ({ page }) => {
+      // movimento ridotto: si misura lo stato finale, non le animazioni di comparsa
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.goto(path);
+      await page.evaluate(() =>
+        document.querySelectorAll("[data-reveal]").forEach((el) => el.setAttribute("data-revealed", "")),
+      );
+      await page.waitForTimeout(100);
+      const results = await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+        // WCAG 1.4.3: il testo che fa parte di un logotipo non ha requisiti di contrasto
+        .exclude("[data-logotype]")
+        .analyze();
+      const serious = results.violations.filter((v) => v.impact === "serious" || v.impact === "critical");
+      expect(serious.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(" | ")}`)).toEqual(
+        [],
+      );
+    });
+  }
+});
+
+test("reflow a 320px senza scroll orizzontale", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  for (const path of ["/", "/programma", "/programma/shuma", "/info", "/lamiaradice"]) {
+    await page.goto(path);
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    expect(overflow, path).toBeLessThanOrEqual(1);
+  }
+});
+
+test("programma: il filtro «Bambini e ragazzi» mostra solo gli appuntamenti per loro", async ({ page }) => {
+  await page.goto("/programma");
+  const rows = page.locator("#programma-lista li:has(> [data-session])");
+  const total = await rows.count();
+  expect(total).toBeGreaterThan(15);
+  await page.getByRole("button", { name: /Bambini e ragazzi/ }).click();
+  await expect(page.getByRole("button", { name: /Bambini e ragazzi/ })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  const visible = await rows.evaluateAll(
+    (els) => els.filter((e) => getComputedStyle(e).display !== "none").length,
+  );
+  expect(visible).toBeLessThan(total);
+  expect(visible).toBeGreaterThan(5);
+});
+
+test("programma: con ?ora= durante il festival segna gli appuntamenti in corso", async ({ page }) => {
+  await page.goto("/programma?ora=2026-10-16T19:10");
+  await expect(page.locator("[data-live='now']")).toHaveCount(2);
+});
+
+test("scheda evento: dati strutturati Event validi", async ({ page }) => {
+  await page.goto("/programma/le-radici-che-si-scelgono");
+  const blocks = await page.locator('script[type="application/ld+json"]').allTextContents();
+  const data = blocks.map((b) => JSON.parse(b));
+  const event = data.find((d) => d["@type"] === "LiteraryEvent");
+  expect(event).toBeTruthy();
+  expect(event.startDate).toBe("2026-10-16T19:00:00+02:00");
+  expect(event.location.address.addressLocality).toBe("Acate");
+  expect(event.offers.price).toBe(0);
+  expect(event.isAccessibleForFree).toBe(true);
+  expect(data.some((d) => d["@type"] === "BreadcrumbList")).toBe(true);
+});
+
+test("home: dati strutturati Festival", async ({ page }) => {
+  await page.goto("/");
+  const blocks = await page.locator('script[type="application/ld+json"]').allTextContents();
+  const festival = blocks.map((b) => JSON.parse(b)).find((d) => d["@type"] === "Festival");
+  expect(festival.startDate).toBe("2026-10-16T17:00:00+02:00");
+  expect(festival.endDate).toBe("2026-10-18T22:00:00+02:00");
+  expect(festival.subEvent.length).toBeGreaterThan(10);
+});
+
+test("calendari .ics", async ({ request }) => {
+  const all = await request.get("/calendario/acate-book-festival-2026.ics");
+  expect(all.status()).toBe(200);
+  expect(all.headers()["content-type"]).toContain("text/calendar");
+  const body = await all.text();
+  expect(body.startsWith("BEGIN:VCALENDAR")).toBe(true);
+  expect(body.match(/BEGIN:VEVENT/g)).toHaveLength(3);
+
+  const one = await (await request.get("/calendario/shuma-dom-1900.ics")).text();
+  expect(one).toContain("DTSTART:20261018T170000Z");
+  expect(one).toContain("SUMMARY:Shuma");
+
+  const missing = await request.get("/calendario/inesistente.ics");
+  expect(missing.status()).toBe(404);
+});
+
+test("pagina inesistente: 404 con link al programma", async ({ page }) => {
+  const response = await page.goto("/pagina-che-non-esiste");
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole("link", { name: /Vai al programma/ })).toBeVisible();
+});
+
+test("SEO tecnico: sitemap, robots, manifest", async ({ request }) => {
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(sitemap).toContain("/programma/shuma");
+  expect(sitemap).toContain("/ospiti/giovanni-impastato");
+  const robots = await (await request.get("/robots.txt")).text();
+  expect(robots).toMatch(/Sitemap: .*\/sitemap\.xml/);
+  const manifest = await (await request.get("/manifest.webmanifest")).json();
+  expect(manifest.lang).toBe("it");
+});
+
+test.describe("mobile", () => {
+  test.skip(({ isMobile }) => !isMobile, "solo mobile");
+
+  test("menu: si apre, si chiude con Esc e restituisce il focus", async ({ page }) => {
+    await page.goto("/");
+    const button = page.getByRole("button", { name: "Menu" });
+    await button.click();
+    const dialog = page.getByRole("dialog", { name: "Menu" });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByRole("link", { name: "Programma" })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(button).toBeFocused();
+  });
+});
+
+test("#LaMiaRadice: il cartellino si genera e si scarica", async ({ page }) => {
+  await page.goto("/lamiaradice");
+  await page.getByLabel("Chi ti ha messo in mano il primo libro?").fill("la maestra Lucia");
+  await expect(page.locator("canvas")).toHaveAttribute("aria-label", /la maestra Lucia/);
+  const [download] = await Promise.all([
+    page.waitForEvent("download"),
+    page.getByRole("button", { name: /Scarica l'immagine/ }).click(),
+  ]);
+  expect(download.suggestedFilename()).toMatch(/^lamiaradice-la-maestra-lucia\.png$/);
+});
