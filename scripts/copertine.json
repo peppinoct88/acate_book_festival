@@ -4,21 +4,21 @@
     "titolo": "Mio fratello. Tutta una vita con Peppino",
     "autore": "Giovanni Impastato",
     "editore": "Libreria Pienogiorno",
-    "isbn": []
+    "isbn": ["9791280229052"]
   },
   {
     "slug": "oltre-i-cento-passi",
     "titolo": "Oltre i cento passi",
     "autore": "Giovanni Impastato",
     "editore": "Piemme",
-    "isbn": []
+    "isbn": ["9788856658002", "9788855446037"]
   },
   {
     "slug": "resistere-a-mafiopoli",
     "titolo": "Resistere a Mafiopoli",
     "autore": "Giovanni Impastato",
     "editore": "Stampa Alternativa",
-    "isbn": []
+    "isbn": ["9788862220866"]
   },
   {
     "slug": "la-seminatrice-di-coraggio",
@@ -32,14 +32,35 @@
     "titolo": "Il Gattopardo raccontato alle ragazze e ai ragazzi",
     "autore": "Maria Antonietta Ferraloro",
     "editore": "Gallucci Bros.",
-    "isbn": []
+    "isbn": [],
+    "pagine": [
+      "https://liberidiscrivere.com/2026/10/05/giuseppe-tomasi-di-lampedusa-il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi-maria-antonietta-ferraloro-gallucci-bros-2026-a-cura-di-viviana-filippini/"
+    ],
+    "elenchi": [
+      {
+        "pagina": "https://www.ibs.it/libri/autori/maria-antonietta-ferraloro",
+        "parola": "ragazze"
+      },
+      {
+        "pagina": "https://www.lafeltrinelli.it/libri/autori/maria-antonietta-ferraloro",
+        "parola": "ragazze"
+      },
+      {
+        "pagina": "https://galluccieditore.com/it/catalogo",
+        "parola": "gattopardo"
+      },
+      {
+        "pagina": "https://galluccieditore.com/it/novita",
+        "parola": "gattopardo"
+      }
+    ]
   },
   {
     "slug": "il-gattopardo-raccontato-a-mia-figlia",
     "titolo": "Il Gattopardo raccontato a mia figlia",
     "autore": "Maria Antonietta Ferraloro",
     "editore": "La Nuova Frontiera Junior",
-    "isbn": []
+    "isbn": ["9788898519453"]
   },
   {
     "slug": "tomasi-di-lampedusa-e-i-luoghi-del-gattopardo",
@@ -53,6 +74,7 @@
     "titolo": "L'opera-orologio. Saggi sul Gattopardo",
     "autore": "Maria Antonietta Ferraloro",
     "editore": "Pacini Editore",
-    "isbn": []
+    "isbn": ["9788869951480"],
+    "pagine": ["https://www.pacinieditore.it/prodotto/lopera-orologio-saggi-sul-gattopardo/"]
   }
 ]

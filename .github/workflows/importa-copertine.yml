@@ -19,12 +19,13 @@ jobs:
       - name: Cerca e scarica
         run: |
           pip install --quiet pillow
+          rm -rf copertine-candidati
           python3 scripts/importa-copertine.py
 
       - name: Salva i candidati nel repository
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add copertine-candidati
+          git add -A copertine-candidati
           git diff --cached --quiet || git commit -m "Copertine candidate dei libri degli ospiti"
           git push
