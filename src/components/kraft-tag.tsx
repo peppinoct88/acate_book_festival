@@ -17,11 +17,11 @@ export function KraftTag({
       {/* spago */}
       <span className="absolute -top-16 left-[3.1rem] h-20 w-px origin-bottom rotate-[8deg] bg-ink/60" />
       <div
-        className="relative rounded-[0.6rem] bg-[#d9b98a] px-7 pt-12 pb-7 text-ink shadow-[0_22px_40px_-20px_rgb(30_21_74/0.6)]"
+        className="relative rounded-[0.6rem] bg-[#d9b98a] px-7 pt-12 pb-7 text-ink shadow-[0_22px_40px_-20px_rgb(7_42_95/0.6)]"
         style={{
           clipPath: "polygon(18% 0, 100% 0, 100% 100%, 0 100%, 0 18%)",
           backgroundImage:
-            "radial-gradient(rgb(30 21 74 / 0.06) 1px, transparent 1px), radial-gradient(rgb(255 255 255 / 0.12) 1px, transparent 1px)",
+            "radial-gradient(rgb(7 42 95 / 0.06) 1px, transparent 1px), radial-gradient(rgb(255 255 255 / 0.12) 1px, transparent 1px)",
           backgroundSize: "7px 7px, 11px 11px",
         }}
       >

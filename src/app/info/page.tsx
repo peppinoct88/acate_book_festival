@@ -19,6 +19,8 @@ import {
   Train,
 } from "@/components/icons";
 import { faq } from "@/content/faq";
+import { photos } from "@/content/photos";
+import { Photo } from "@/components/photo";
 import { site } from "@/content/site";
 import { faqJsonLd } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
@@ -36,7 +38,7 @@ const essentials = [
   {
     Icon: Clock,
     title: "Orari",
-    text: "Appuntamenti dalle 17 alle 20. La mostra resta aperta fino alle 22.",
+    text: "Appuntamenti dalle 17 alle 20:30 circa. La mostra resta aperta fino alle 22.",
   },
   { Icon: Ticket, title: "Ingresso", text: "Libero a tutti gli appuntamenti, senza prenotazione." },
   { Icon: Kids, title: "Bambini", text: "Laboratori in parallelo agli incontri, con braccialetto numerato." },
@@ -158,6 +160,12 @@ export default function InfoPage() {
             Distanze e tempi sono indicativi. Per raggiungere i due luoghi del festival usa i pulsanti
             «Portami lì» nella mappa qui sopra.
           </p>
+          <Photo
+            photo={photos.acateDallAlto}
+            sizes="(min-width: 1024px) 60rem, 100vw"
+            className="mt-12 max-w-4xl"
+            imageClassName="aspect-[16/9]"
+          />
         </section>
 
         <section id="se-piove" aria-labelledby="pioggia-titolo" className="scroll-mt-28 pt-24">
@@ -234,8 +242,8 @@ export default function InfoPage() {
                 <span className="font-black">Il bookshop</span>
               </h2>
               <p className="mt-3 max-w-[60ch] font-serif text-lg leading-relaxed text-ink/85">
-                Alla Villa dei lettori trovi i libri degli ospiti del festival. Dopo ogni incontro gli autori
-                firmano le copie.
+                Alla Villa dei lettori trovi i libri degli ospiti del festival, con Mondadori Bookstore
+                Vittoria, la libreria partner. Dopo ogni incontro gli autori firmano le copie.
               </p>
             </div>
             <Link

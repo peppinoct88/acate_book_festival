@@ -20,6 +20,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     ? `${daysById.get(first.day)!.label} · ore ${first.start} · ${venues[first.venue].name}`
     : undefined;
   return renderOg({
+    // nei colori della giornata in cui l'ospite sale sul palco
+    tone: first ? daysById.get(first.day)!.tone : undefined,
     eyebrow: "Ospite · I edizione",
     subtitle: guest.role,
     title: guest.type === "compagnia" ? "Santa Briganti" : guest.name,

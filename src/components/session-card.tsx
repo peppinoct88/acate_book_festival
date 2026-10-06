@@ -86,6 +86,11 @@ export function SessionCard({
             {guestNames.join(", ")}
           </p>
         ) : null}
+        {session.activity.moderator ? (
+          <p className="mt-1 font-display text-[0.95rem] text-ink-muted">
+            Modera <span className="font-semibold">{session.activity.moderator}</span>
+          </p>
+        ) : null}
         <p className="mt-3 max-w-[62ch] font-serif text-[1.02rem] leading-relaxed text-ink/85">
           {session.activity.summary}
         </p>

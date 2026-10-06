@@ -29,24 +29,25 @@ export function PageHero({
         : tone === "teal"
           ? "bg-teal-soft text-ink"
           : "text-ink";
-  const muted = tone === "ink" ? "text-cream/90" : "text-ink/85";
+  // sul corallo il blu pieno: con la trasparenza scende sotto 4.5:1
+  const muted = tone === "ink" ? "text-cream/90" : tone === "coral" ? "text-ink" : "text-ink/85";
   const eyebrowColor = tone === "ink" ? "text-teal-soft" : "text-ink";
   return (
     <section className={`relative overflow-hidden ${bg}`}>
       {tone === "ink" ? (
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute top-10 -right-32 size-[13rem] rounded-full bg-teal/85 sm:-right-28 sm:size-[28rem]"
+          className="pointer-events-none absolute -top-20 -right-20 size-40 rounded-full bg-teal/85 sm:top-10 sm:-right-28 sm:size-[28rem]"
         />
       ) : tone === "cream" ? (
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute top-16 -right-36 size-[12rem] rounded-full bg-teal/80 sm:top-12 sm:-right-32 sm:size-[24rem]"
+          className="pointer-events-none absolute -top-20 -right-20 size-40 rounded-full bg-teal/80 sm:top-12 sm:-right-32 sm:size-[24rem]"
         />
       ) : tone === "teal" ? (
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute top-12 -right-32 size-[13rem] rounded-full bg-teal sm:-right-28 sm:size-[26rem]"
+          className="pointer-events-none absolute -top-20 -right-20 size-40 rounded-full bg-teal sm:top-12 sm:-right-28 sm:size-[26rem]"
         />
       ) : null}
       <div className="relative container-festival pt-8 pb-14 sm:pt-12 sm:pb-20">

@@ -3,6 +3,7 @@
  * Usata per gli ospiti («ogni ospite è un libro») e per i loro titoli:
  * niente foto o copertine prese in prestito, nessun problema di diritti.
  * Tipografia e spaziature in unità cqw: la copertina si adatta a qualunque larghezza.
+ * Il sole passa dietro al testo: ogni coppia fondo/sole regge il contrasto AA con il colore del testo.
  */
 type Tone = "coral" | "teal" | "ink" | "paper";
 
@@ -10,9 +11,30 @@ const tones: Record<
   Tone,
   { bg: string; fg: string; accent: string; line: string; sun: string; ring: string }
 > = {
-  coral: { bg: "bg-coral", fg: "text-ink", accent: "bg-ink", line: "bg-ink/25", sun: "bg-teal", ring: "" },
-  teal: { bg: "bg-teal", fg: "text-ink", accent: "bg-coral", line: "bg-ink/20", sun: "bg-coral", ring: "" },
-  ink: { bg: "bg-ink", fg: "text-cream", accent: "bg-coral", line: "bg-cream/25", sun: "bg-teal", ring: "" },
+  coral: {
+    bg: "bg-coral",
+    fg: "text-ink",
+    accent: "bg-ink",
+    line: "bg-ink/25",
+    sun: "bg-teal-light",
+    ring: "",
+  },
+  teal: {
+    bg: "bg-teal-light",
+    fg: "text-ink",
+    accent: "bg-ink",
+    line: "bg-ink/20",
+    sun: "bg-coral",
+    ring: "",
+  },
+  ink: {
+    bg: "bg-ink",
+    fg: "text-cream",
+    accent: "bg-coral",
+    line: "bg-cream/25",
+    sun: "bg-teal-deep",
+    ring: "",
+  },
   paper: {
     bg: "bg-paper",
     fg: "text-ink",
@@ -40,7 +62,7 @@ export function BookCover({
   return (
     <div aria-hidden="true" className={`@container ${className}`}>
       <div
-        className={`relative isolate aspect-[3/4] overflow-hidden rounded-[0.35rem_1rem_1rem_0.35rem] ${t.bg} ${t.fg} ${t.ring} [transform:perspective(900px)_rotateY(0deg)] shadow-[0_1px_0_rgb(30_21_74/0.2),0_18px_40px_-22px_rgb(30_21_74/0.55)] transition-transform duration-500 ease-soft group-hover:[transform:perspective(900px)_rotateY(-9deg)]`}
+        className={`relative isolate aspect-[3/4] overflow-hidden rounded-[0.35rem_1rem_1rem_0.35rem] ${t.bg} ${t.fg} ${t.ring} [transform:perspective(900px)_rotateY(0deg)] shadow-[0_1px_0_rgb(7_42_95/0.2),0_18px_40px_-22px_rgb(7_42_95/0.55)] transition-transform duration-500 ease-soft group-hover:[transform:perspective(900px)_rotateY(-9deg)]`}
       >
         {/* il sole del manifesto */}
         <span

@@ -4,25 +4,28 @@ Sito della **I edizione dell'Acate Book Festival** — «Radici» — 16, 17 e 1
 Promosso dal Comune di Acate, con il contributo della Regione Siciliana – Assessorato regionale delle Autonomie
 Locali e della Funzione Pubblica.
 
-L'identità visiva riprende il manifesto ufficiale: la torre di libri, il sole turchese, il lettering corallo e indaco.
+Tre giornate, tre temi: **venerdì 16 la mafia**, **sabato 17 le donne**, **domenica 18 l'immigrazione**.
+L'identità visiva riprende il manifesto definitivo: la torre di libri, il sole turchese, il lettering corallo e blu.
+Ogni giornata ha il suo colore (blu, corallo, verde acqua), che torna nelle schede, nelle pagine e nelle anteprime.
 
 ## Cosa c'è
 
 | Pagina | Contenuto |
 | --- | --- |
-| `/` | Hero dal manifesto, i tre pomeriggi, ospiti, Piccole radici, la mostra, #LaMiaRadice, luoghi |
+| `/` | Hero dal manifesto, le tre giornate a tema, ospiti, Piccole radici, la mostra, #LaMiaRadice, la città, luoghi |
+| `/giornate/[slug]` | Le tre giornate (`mafia`, `donne`, `immigrazione`): il tema, il racconto, l'autore e gli orari |
 | `/programma` | Programma completo per giorno, filtro «Bambini e ragazzi», stato «In corso» durante il festival, stampa |
 | `/programma/[slug]` | Scheda di ogni appuntamento: date, luogo, «Portami lì», calendario, condivisione, dati strutturati |
-| `/ospiti`, `/ospiti/[slug]` | Ospiti con biografie verificate e libri |
+| `/ospiti`, `/ospiti/[slug]` | Gli autori e chi sale sul palco (teatro, banda, tamburi), con biografie verificate e libri |
 | `/famiglie` | Piccole radici: teatro e laboratori per bambini e ragazzi |
 | `/mostra-peppino-impastato` | La mostra «Radici libere» |
 | `/lamiaradice` | La campagna #LaMiaRadice con il generatore di cartellini da condividere |
-| `/festival` | Il tema, gli otto format, chi lo organizza, il manifesto da scaricare |
+| `/festival` | Il tema, i format, chi lo organizza, il manifesto da scaricare, i crediti delle foto |
 | `/info` | Luoghi, come arrivare, se piove, accessibilità, domande frequenti |
 | `/adesso` | Cosa c'è adesso e tra poco (per i QR code sul posto) |
 
-Indirizzi brevi per i materiali stampati: `/qr` e `/ora` → `/adesso`, `/mostra`, `/bambini`, `/come-arrivare`,
-`/la-mia-radice`, `/manifesto`.
+Indirizzi brevi per i materiali stampati: `/mafia`, `/donne`, `/immigrazione`, `/qr` e `/ora` → `/adesso`,
+`/mostra`, `/bambini`, `/come-arrivare`, `/la-mia-radice`, `/manifesto`.
 
 ## Sviluppo
 
@@ -39,7 +42,8 @@ Requisiti: Node.js 20.9 o superiore.
 ## Pubblicazione: Vercel, dominio su Cloudflare
 
 Il dominio definitivo è **www.acatebookfestival.it** (`src/content/site.ts`): canonical, sitemap e anteprime
-social puntano lì. `acatebookfestival.it` senza www rimanda allo stesso sito. Oggi il dominio usa i DNS di OVH.
+social puntano lì. `acatebookfestival.it` senza www rimanda allo stesso sito. I DNS sono ora su Cloudflare,
+con i record di Vercel in modalità «DNS only»: i passaggi qui sotto restano come riferimento.
 
 1. **Vercel**: su [vercel.com/new](https://vercel.com/new) importa il repository GitHub. Next.js viene
    riconosciuto da solo. Serve il piano **Pro**: l'Hobby è solo per uso personale non commerciale, e un sito
@@ -73,7 +77,12 @@ Tutti i contenuti sono in `src/content/`:
 
 - `program.ts` — programma (orari, spostamenti con `status: "spostato"`, annullamenti)
 - `notices.ts` — avvisi in cima alle pagine (maltempo), con scadenza automatica
-- `guests.ts`, `venues.ts`, `formats.ts`, `faq.ts`
+- `venues.ts` — luoghi e giornate (tema, racconto, colore)
+- `guests.ts` — ospiti; per aggiungere un ritratto: `src/assets/ospiti/<slug>.jpg` e il campo `photo`
+- `partners.ts` — i loghi nella fascia «Il festival lo fanno insieme» (file in `src/assets/partner/`)
+- `photos.ts` — foto da Wikimedia Commons con autore e licenza; per importarne di nuove c'è il workflow
+  «Importa foto da Wikimedia Commons» (GitHub → Actions)
+- `formats.ts`, `faq.ts`
 - `site.ts` — profili social, email di contatto, dominio
 
 Istruzioni passo passo in `.claude/skills/aggiorna-programma/SKILL.md`.
@@ -83,13 +92,16 @@ Istruzioni passo passo in `.claude/skills/aggiorna-programma/SKILL.md`.
 - [ ] Profili social ufficiali (`site.social`) e handle da taggare per #LaMiaRadice
 - [ ] Email di contatto pubblica (`site.contacts.email`)
 - [ ] Dominio collegato su Vercel, DNS su Cloudflare (vedi sopra)
-- [ ] Moderatori degli incontri, quando confermati
+- [ ] Ritratti degli autori (Giovanni Impastato, Antonella Desirée Giuffrè, Maria Antonietta Ferraloro)
+- [ ] Titolo del monologo di Matilde Masaracchio, moderatori degli incontri di sabato e domenica
 - [ ] Conferma del titolare del trattamento indicato nella privacy (`site.production`)
 - [ ] Se il sito è pubblicato dal Comune: dichiarazione di accessibilità ufficiale tramite form.agid.gov.it
 
 ## Crediti
 
 - Illustrazione e grafica: manifesto ufficiale della I edizione.
+- Foto: Wikimedia Commons, con autore e licenza sotto ogni immagine e in `/festival#crediti`.
+- Loghi: forniti dall'organizzazione e dai partner.
 - Font: [Outfit](https://fonts.google.com/specimen/Outfit) e [Literata](https://fonts.google.com/specimen/Literata),
   SIL Open Font License 1.1 (vedi `src/assets/fonts/OFL.txt`).
 - Fonti dei contenuti: `docs/fonti.md`.

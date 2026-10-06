@@ -126,7 +126,7 @@ export function festivalCalendar(): string {
       start: `${d.date}T17:00:00${site.utcOffset}`,
       end: `${d.date}T22:00:00${site.utcOffset}`,
       title: `${site.name} · ${d.theme}`,
-      description: `${d.label}: ${d.intro}\nIncontri e spettacoli dalle 17 alle 20, mostra aperta fino alle 22. Ingresso libero.\n${absoluteUrl(`/programma#${d.anchor}`)}`,
+      description: `${d.label}: ${d.intro}\nIncontri, spettacoli e musica dalle 17, mostra aperta fino alle 22. Ingresso libero.\n${absoluteUrl(`/programma#${d.anchor}`)}`,
       location: `${site.place.label} · Palco del Castello e Villa dei lettori`,
       url: absoluteUrl(`/programma#${d.anchor}`),
     })),

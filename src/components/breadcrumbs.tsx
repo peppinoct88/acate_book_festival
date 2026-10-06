@@ -10,14 +10,14 @@ export function Breadcrumbs({
   tone = "dark",
 }: {
   items: Crumb[];
-  /** dark: su crema · color: su corallo/turchese · light: su indaco */
+  /** dark: su crema · color: su corallo/turchese · light: su blu (ink, teal-deep) */
   tone?: "dark" | "color" | "light";
 }) {
   const all: Crumb[] = [{ name: "Home", href: "/" }, ...items];
   return (
     <nav aria-label="Percorso" className="pt-2">
       <ol
-        className={`flex flex-wrap items-center gap-x-2 gap-y-1 font-display text-sm font-semibold ${tone === "dark" ? "text-ink-muted" : tone === "color" ? "text-ink" : "text-cream/80"}`}
+        className={`flex flex-wrap items-center gap-x-2 gap-y-1 font-display text-sm font-semibold ${tone === "dark" ? "text-ink-muted" : tone === "color" ? "text-ink" : "text-cream/90"}`}
       >
         {all.map((item, index) => {
           const last = index === all.length - 1;

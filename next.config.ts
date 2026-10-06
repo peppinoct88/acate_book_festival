@@ -37,6 +37,22 @@ const nextConfig: NextConfig = {
       { source: "/qr", destination: "/adesso", permanent: false },
       { source: "/come-arrivare", destination: "/info#come-arrivare", permanent: true },
       { source: "/manifesto", destination: "/festival#il-manifesto", permanent: true },
+      // le tre giornate, per i materiali stampati e i social
+      { source: "/mafia", destination: "/giornate/mafia", permanent: true },
+      { source: "/donne", destination: "/giornate/donne", permanent: true },
+      { source: "/immigrazione", destination: "/giornate/immigrazione", permanent: true },
+      // appuntamenti tolti o accorpati il 6 ottobre
+      {
+        source: "/programma/laboratorio-santa-briganti",
+        destination: "/programma/a-colpi-di-mantice",
+        permanent: true,
+      },
+      {
+        source: "/programma/le-seminatrici-di-oggi",
+        destination: "/programma/monologo-sulle-donne",
+        permanent: true,
+      },
+      { source: "/programma/rito-della-luce", destination: "/programma", permanent: true },
     ];
   },
 };

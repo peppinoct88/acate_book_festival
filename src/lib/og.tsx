@@ -4,7 +4,7 @@ import { join } from "node:path";
 
 /**
  * Anteprime social (1200×630) generate in build con next/og.
- * Tipografia Outfit (TTF in src/assets/fonts) e torre di libri del manifesto.
+ * Tipografia Outfit (TTF in src/assets/fonts) e torre di libri del manifesto definitivo, col suo sole turchese.
  */
 export const ogSize = { width: 1200, height: 630 };
 export const ogContentType = "image/png";
@@ -36,12 +36,13 @@ function load() {
   return cache;
 }
 
-type Tone = "cream" | "ink" | "coral";
+type Tone = "cream" | "ink" | "coral" | "teal";
 
-const palette: Record<Tone, { bg: string; fg: string; muted: string; accent: string }> = {
-  cream: { bg: "#fefaef", fg: "#1e154a", muted: "#5c5684", accent: "#fd644f" },
-  ink: { bg: "#1e154a", fg: "#fefaef", muted: "#abded6", accent: "#fd644f" },
-  coral: { bg: "#fd644f", fg: "#1e154a", muted: "#1e154a", accent: "#1e154a" },
+const palette: Record<Tone, { bg: string; fg: string; acate: string; accent: string }> = {
+  cream: { bg: "#fff9e9", fg: "#093370", acate: "#ff5e3e", accent: "#ff5e3e" },
+  ink: { bg: "#072a5f", fg: "#fff9e9", acate: "#ff5e3e", accent: "#ff5e3e" },
+  coral: { bg: "#ff5e3e", fg: "#072a5f", acate: "#fff9e9", accent: "#072a5f" },
+  teal: { bg: "#176b6e", fg: "#fff9e9", acate: "#fccb89", accent: "#fccb89" },
 };
 
 export async function renderOg({
@@ -73,25 +74,13 @@ export async function renderOg({
         overflow: "hidden",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          right: -60,
-          top: -90,
-          width: 380,
-          height: 380,
-          borderRadius: 9999,
-          background: tone === "coral" ? "#fefaef" : "#68cbc8",
-          opacity: tone === "coral" ? 0.35 : 1,
-        }}
-      />
       {/* eslint-disable-next-line @next/next/no-img-element -- JSX di next/og (Satori), non del DOM */}
       <img
         src={tower}
         alt=""
         width={380}
-        height={389}
-        style={{ position: "absolute", right: -20, bottom: -60, width: 380, height: 389 }}
+        height={751}
+        style={{ position: "absolute", right: 0, bottom: -70, width: 380, height: 751 }}
       />
       <div
         style={{
@@ -109,7 +98,7 @@ export async function renderOg({
               style={{
                 fontSize: 26,
                 fontWeight: 900,
-                color: tone === "coral" ? "#1e154a" : "#fd644f",
+                color: c.acate,
                 letterSpacing: -0.8,
               }}
             >

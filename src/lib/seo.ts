@@ -15,14 +15,14 @@ interface PageMeta {
 }
 
 /**
- * Anteprima di default (il manifesto). Next usa il file opengraph-image di una route solo se i metadata
- * non dichiarano già openGraph.images: le route che ne hanno uno passano ownImage.
+ * Anteprima di default (src/app/opengraph-image.tsx). Next usa il file opengraph-image di una route solo
+ * se i metadata non dichiarano già openGraph.images: le route che ne hanno uno passano ownImage.
  */
 const defaultImage = {
-  url: "/opengraph-image.jpg",
+  url: "/opengraph-image",
   width: 1200,
   height: 630,
-  alt: "Acate Book Festival, I edizione: 16, 17 e 18 ottobre 2026 ad Acate.",
+  alt: "Acate Book Festival, I edizione, 16-18 ottobre 2026: tre giornate su mafia, donne e immigrazione.",
 };
 
 /** Metadata coerenti per ogni pagina: title, description, canonical, Open Graph e Twitter. */

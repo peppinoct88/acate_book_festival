@@ -3,7 +3,9 @@ import { daysById } from "./venues";
 import type { Activity, Audience, DayId, Kind, Session } from "./types";
 
 /**
- * PROGRAMMA DEFINITIVO — fonte: documento «Acate Book Festival 2026 · Radici — Programma definitivo».
+ * PROGRAMMA DEFINITIVO — fonti: «Acate Book Festival 2026 · Radici — Programma definitivo» (4 ottobre),
+ * contratto con Santa Briganti (6 ottobre) e indicazioni dell'organizzazione (6 ottobre: temi delle giornate,
+ * banda e tamburi, monologo, moderatore; senza rito della luce, seminatrici di oggi e saluti finali).
  * Per modificare un orario o aggiungere un avviso su un singolo appuntamento
  * basta cambiare la sessione qui: pagine, calendari .ics, dati strutturati e anteprime si aggiornano da soli.
  * Per segnalare uno spostamento: status: "spostato", statusNote: "Si sposta in ...".
@@ -17,22 +19,24 @@ const braccialetto =
   "Consegna e ritiro dei bambini con braccialetto numerato, all'accoglienza della Villa dei lettori.";
 
 export const activities: Activity[] = [
-  // ───────────────────────── VENERDÌ 16 · Radici della memoria
+  // ───────────────────────── VENERDÌ 16 · Mafia · Radici della memoria
   {
     slug: "apertura-del-festival",
-    title: "Apertura del festival e inaugurazione della mostra",
-    kicker: "Si comincia",
-    seoTitle: "Apertura del festival · Acate Book Festival",
+    title: "Banda e tamburi aprono il festival",
+    kicker: "Inaugurazione",
+    seoTitle: "Inaugurazione con banda e tamburi · Acate Book Festival",
     kind: "cerimonia",
     summary:
-      "Saluti di benvenuto alla Villa dei lettori e inaugurazione di «Radici libere», la mostra su Peppino Impastato aperta per tutto il festival.",
+      "La Banda Città di Acate e I Grifoni di Biscari – Tamburi di Acate sfilano e inaugurano la prima edizione e la mostra su Peppino Impastato.",
     body: [
-      "L'Acate Book Festival comincia alla Villa dei lettori, nella villa comunale: i saluti di benvenuto aprono la prima edizione e inaugurano «Radici libere. Peppino Impastato, una vita per immagini», la mostra fotografica che accompagna tutte e tre le giornate.",
-      "Alle 17:20 parte la prima visita guidata alla mostra. Alle 17:40 si accende l'Albero delle radici: i bambini appendono i primi cartellini con il nome di chi ha messo loro in mano il primo libro, e comincia #LaMiaRadice.",
-      "Poi il sentiero di luci porta al Palco del Castello, dove alle 18 cominciano le letture musicate di Santa Briganti.",
+      "La prima edizione dell'Acate Book Festival si apre con la musica della città: la Banda Città di Acate e I Grifoni di Biscari – Tamburi di Acate sfilano e inaugurano il festival.",
+      "Con il festival si inaugura «Radici libere. Peppino Impastato, una vita per immagini», la mostra fotografica alla Villa dei lettori che accompagna tutte e tre le giornate. Alle 17:20 parte la prima visita guidata; alle 17:40 si accende l'Albero delle radici e comincia #LaMiaRadice.",
+      "È la giornata che il festival dedica alla mafia e alla memoria: alle 18 «A colpi di mantice» per bambini e ragazzi, alle 19 l'incontro con Giovanni Impastato.",
     ],
+    guests: ["banda-citta-di-acate", "grifoni-di-biscari"],
     audience: forAll,
     page: true,
+    featured: true,
     sessions: [{ day: "ven", start: "17:00", end: "17:20", venue: "villa" }],
   },
   {
@@ -59,82 +63,22 @@ export const activities: Activity[] = [
   {
     slug: "a-colpi-di-mantice",
     title: "A colpi di mantice",
-    kicker: "Letture musicate per bambini",
+    kicker: "Letture musicate e laboratorio",
     kind: "spettacolo",
     summary:
-      "Fiabe della tradizione popolare e albi illustrati, letti ad alta voce con la fisarmonica dal vivo. Tre repliche, una per pomeriggio.",
+      "Fiabe e albi illustrati letti ad alta voce con la musica dal vivo, poi un laboratorio per bambini e ragazzi. Di e con Veronica Caggia e Peppe Macauda.",
     body: [
-      "Una voce, una fisarmonica e una pila di libri: «A colpi di mantice» sono letture animate e musicate dal vivo, dedicate ai bambini, con fiabe della tradizione popolare italiana e albi illustrati.",
-      "Le firma l'Associazione Culturale Santa Briganti di Vittoria, che da anni porta la lettura ad alta voce nelle scuole, nelle biblioteche e nelle piazze. Le repliche sono tre, una per ogni pomeriggio, ciascuna pensata per un'età: venerdì per tutti i bambini, sabato per i più piccoli (4–7 anni), domenica per i più grandi (8–11 anni).",
-      "Le prime file della platea, con i cuscini, sono per i bambini.",
+      "Una voce, una fisarmonica e una pila di libri: «A colpi di mantice» è una lettura ad alta voce musicata dal vivo, dedicata a bambini e ragazzi. Subito dopo la lettura, sul posto, comincia il laboratorio: in tutto, circa un'ora.",
+      "È di e con Veronica Caggia e Peppe Macauda, dell'Associazione Culturale Santa Briganti di Vittoria, che da anni porta la lettura ad alta voce nelle scuole, nelle biblioteche e nelle piazze. Quest'anno c'è una sola replica: venerdì alle 18, sul Palco del Castello.",
+      "Le prime file della platea, con i cuscini, sono per i bambini. Alle 19, sullo stesso palco, l'incontro con Giovanni Impastato.",
     ],
     guests: ["santa-briganti"],
-    credits: ["Associazione Culturale Santa Briganti"],
-    duration: "40 minuti",
-    audience: { label: "Per bambini", kids: true },
+    credits: ["di e con Veronica Caggia e Peppe Macauda", "Associazione Culturale Santa Briganti"],
+    duration: "circa un'ora, laboratorio compreso",
+    audience: { label: "Bambini e ragazzi", kids: true },
     page: true,
     featured: true,
-    sessions: [
-      { day: "ven", start: "18:00", end: "18:40", venue: "palco" },
-      {
-        day: "sab",
-        start: "17:00",
-        end: "17:40",
-        venue: "palco",
-        note: "seconda replica, per i più piccoli",
-        audience: { label: "4–7 anni", kids: true, minAge: 4, maxAge: 7 },
-      },
-      {
-        day: "dom",
-        start: "17:00",
-        end: "17:40",
-        venue: "palco",
-        note: "terza replica",
-        audience: { label: "8–11 anni", kids: true, minAge: 8, maxAge: 11 },
-      },
-    ],
-  },
-  {
-    slug: "laboratorio-santa-briganti",
-    title: "Laboratorio con Santa Briganti",
-    kicker: "Laboratorio per ragazzi",
-    kind: "laboratorio",
-    summary:
-      "Mentre i genitori ascoltano Giovanni Impastato, i ragazzi lavorano con gli artisti di Santa Briganti alla Villa dei lettori.",
-    body: [
-      "La regola dei grandi festival per famiglie vale anche ad Acate: mentre sul palco c'è l'incontro, i ragazzi sono al laboratorio. Il venerdì lo conducono gli artisti dell'Associazione Culturale Santa Briganti, alla Villa dei lettori.",
-      "Il laboratorio comincia alle 18:40, in tempo perché i genitori raggiungano il Palco del Castello per l'incontro delle 19 con Giovanni Impastato.",
-    ],
-    guests: ["santa-briganti"],
-    practical: [braccialetto],
-    audience: { label: "Per ragazzi", kids: true },
-    page: true,
-    sessions: [{ day: "ven", start: "18:40", end: "19:30", venue: "villa" }],
-  },
-  {
-    slug: "rito-della-luce",
-    title: "Il rito della luce",
-    kicker: "Ogni sera, al calare del buio",
-    kind: "rito",
-    summary:
-      "Quando finisce la luce del giorno, un bambino legge una frase scelta dall'ospite della serata e il festival si accende.",
-    body: [
-      "In questi giorni ad Acate il sole tramonta poco dopo le 18:20 e verso le 18:50 l'ultima luce se ne va. È lì che il festival si accende: un bambino sale sul palco, legge una frase scelta dall'ospite della serata, e si illuminano le luci del sentiero e la facciata del Castello.",
-      "Il rito si ripete ogni sera e segna il passaggio dal pomeriggio alla sera: subito dopo comincia l'appuntamento principale. Domenica porta con sé anche i riconoscimenti #LaMiaRadice: le storie più belle ricevono le copie autografate dagli autori del festival.",
-    ],
-    audience: forAll,
-    page: true,
-    sessions: [
-      { day: "ven", start: "18:45", end: "18:52", venue: "palco" },
-      { day: "sab", start: "18:45", end: "18:52", venue: "palco" },
-      {
-        day: "dom",
-        start: "18:50",
-        end: "18:57",
-        venue: "palco",
-        title: "Il rito della luce e i riconoscimenti #LaMiaRadice",
-      },
-    ],
+    sessions: [{ day: "ven", start: "18:00", end: "19:00", venue: "palco" }],
   },
   {
     slug: "le-radici-che-si-scelgono",
@@ -146,10 +90,11 @@ export const activities: Activity[] = [
       "Il fratello di Peppino racconta una famiglia, una scelta e una voce libera: quella di chi, nato dentro la mafia, ha scelto altre radici.",
     body: [
       "Peppino Impastato era nato a Cinisi in una famiglia mafiosa. Da ragazzo ruppe con il padre, scelse altre radici e dai microfoni di Radio Aut denunciò a voce alta gli affari dei mafiosi di Cinisi e Terrasini, fino all'assassinio, nella notte tra l'8 e il 9 maggio 1978. Suo fratello Giovanni ne custodisce la memoria da allora.",
-      "Nella giornata che il festival dedica alle radici della memoria, Giovanni Impastato sale sul Palco del Castello per raccontare cosa vuol dire scegliere da che parte stare: la famiglia, la casa di Cinisi diventata Casa Memoria, gli incontri con i ragazzi delle scuole di tutta Italia.",
+      "Nella giornata che il festival dedica alla mafia, Giovanni Impastato sale sul Palco del Castello per raccontare cosa vuol dire scegliere da che parte stare: la famiglia, la casa di Cinisi diventata Casa Memoria, gli incontri con i ragazzi delle scuole di tutta Italia. Modera Giorgio Straquadanio.",
       "L'incontro chiude il percorso cominciato alle 17 con l'inaugurazione della mostra «Radici libere». Alle 20, firmacopie al bookshop della Villa dei lettori.",
     ],
     guests: ["giovanni-impastato"],
+    moderator: "Giorgio Straquadanio",
     audience: forAll,
     page: true,
     featured: true,
@@ -190,7 +135,18 @@ export const activities: Activity[] = [
     ],
   },
 
-  // ───────────────────────── SABATO 17 · Radici di coraggio
+  // ───────────────────────── SABATO 17 · Donne · Radici di coraggio
+  {
+    slug: "i-tamburi-di-biscari",
+    title: "I tamburi aprono il pomeriggio",
+    kicker: "I Grifoni di Biscari – Tamburi di Acate",
+    kind: "musica",
+    summary: "I tamburi imperiali dei Grifoni di Biscari aprono la giornata dedicata alle donne.",
+    guests: ["grifoni-di-biscari"],
+    audience: forAll,
+    page: false,
+    sessions: [{ day: "sab", start: "17:00", end: "17:30", venue: "palco" }],
+  },
   {
     slug: "la-buca-delle-lettere-di-coraggio",
     title: "La buca delle lettere di coraggio",
@@ -215,7 +171,7 @@ export const activities: Activity[] = [
       "Ispirato alle seminatrici di coraggio della Grande Guerra: a chi scriveresti per dargli coraggio?",
     body: [
       "Più di cento anni fa, durante la Grande Guerra, le «seminatrici di coraggio» portavano notizie dal fronte alle famiglie e scrivevano ai soldati lontani. Il laboratorio parte da quella storia, raccontata nel romanzo di Antonella Desirée Giuffrè, per chiedere ai ragazzi: a chi scriveresti per dargli coraggio? E chi ha dato coraggio a te?",
-      "Si scrive, si disegna, si cercano le parole giuste da mettere in una lettera. Il laboratorio si tiene alla Villa dei lettori mentre sul Palco del Castello vanno in scena «Le seminatrici di oggi».",
+      "Si scrive, si disegna, si cercano le parole giuste da mettere in una lettera. Il laboratorio si tiene alla Villa dei lettori mentre sul Palco del Castello va in scena il monologo sulle donne di Matilde Masaracchio.",
     ],
     credits: ["A cura degli educatori del festival"],
     practical: [braccialetto],
@@ -224,19 +180,21 @@ export const activities: Activity[] = [
     sessions: [{ day: "sab", start: "17:45", end: "18:45", venue: "villa" }],
   },
   {
-    slug: "le-seminatrici-di-oggi",
-    title: "Le seminatrici di oggi",
-    kicker: "Storie di coraggio e microfono aperto",
-    kind: "partecipazione",
+    slug: "monologo-sulle-donne",
+    title: "Un monologo sulle donne",
+    kicker: "Teatro · Matilde Masaracchio",
+    seoTitle: "Matilde Masaracchio, un monologo sulle donne · Acate",
+    kind: "spettacolo",
     summary:
-      "Tre donne di Acate raccontano in cinque minuti un loro gesto di coraggio. Poi il microfono passa al pubblico: «Leggi una pagina».",
+      "Nella giornata dedicata alle donne, l'attrice Matilde Masaracchio porta sul palco un monologo sul loro coraggio.",
     body: [
-      "Tre donne di Acate salgono sul palco e raccontano, in cinque minuti ciascuna, un loro gesto di coraggio: sono le seminatrici di oggi.",
-      "Subito dopo comincia «Leggi una pagina»: il microfono è aperto a tutti, tre minuti a testa per leggere la pagina che ti ha cambiato qualcosa. Porta il libro con la tua pagina.",
+      "La giornata che il festival dedica alle donne ha al centro il loro coraggio, quello che la Storia ha spesso lasciato ai margini.",
+      "Alle 18 l'attrice Matilde Masaracchio sale sul Palco del Castello con un monologo sulle donne. Alle 19, sullo stesso palco, Antonella Desirée Giuffrè racconta «La seminatrice di coraggio».",
     ],
-    practical: ["Per leggere ci si iscrive all'accoglienza della Villa dei lettori."],
+    guests: ["matilde-masaracchio"],
     audience: forAll,
     page: true,
+    featured: true,
     sessions: [{ day: "sab", start: "18:00", end: "18:40", venue: "palco" }],
   },
   {
@@ -250,7 +208,7 @@ export const activities: Activity[] = [
     body: [
       "Sicilia, 1914. Maria Roccaforte, giovane maestra di un paese sul mare di Ragusa, sposa un proprietario terriero e si trasferisce in un borgo dei Monti Iblei. Quando il marito parte per la Grande Guerra resta sola a mandare avanti casa e campi, tra la diffidenza delle contadine, le confische dei raccolti e i briganti.",
       "A Palermo incontra Sofia Bisi Albini e le «seminatrici di coraggio», le donne che portavano notizie dal fronte alle famiglie più povere: diventerà una di loro.",
-      "Antonella Desirée Giuffrè racconta il suo romanzo e le donne che la Storia ha spesso lasciato ai margini, nella giornata che il festival dedica alle radici di coraggio. Alle 20, firmacopie al bookshop della Villa dei lettori.",
+      "Antonella Desirée Giuffrè racconta il suo romanzo e le donne che la Storia ha spesso lasciato ai margini, nella giornata che il festival dedica alle donne. Alle 20, firmacopie al bookshop della Villa dei lettori.",
     ],
     guests: ["antonella-desiree-giuffre"],
     book: { title: "La seminatrice di coraggio", publisher: "Tre60", year: 2025 },
@@ -260,17 +218,28 @@ export const activities: Activity[] = [
     sessions: [{ day: "sab", start: "19:00", end: "20:00", venue: "palco" }],
   },
 
-  // ───────────────────────── DOMENICA 18 · Radici in viaggio
+  // ───────────────────────── DOMENICA 18 · Immigrazione · Radici in viaggio
+  {
+    slug: "la-banda-citta-di-acate",
+    title: "La banda apre il pomeriggio",
+    kicker: "Banda Città di Acate",
+    kind: "musica",
+    summary: "La Banda Città di Acate apre l'ultima giornata del festival, dedicata all'immigrazione.",
+    guests: ["banda-citta-di-acate"],
+    audience: forAll,
+    page: false,
+    sessions: [{ day: "dom", start: "17:00", end: "17:30", venue: "palco" }],
+  },
   {
     slug: "la-pagella-dei-sogni",
     title: "La pagella dei sogni",
     kicker: "Laboratorio per bambini",
     kind: "laboratorio",
     summary:
-      "Ogni bambino scrive la sua pagella dei sogni, cosa sa fare e cosa vuole imparare, e la porta allo spettacolo delle 19.",
+      "Ogni bambino scrive la sua pagella dei sogni, cosa sa fare e cosa vuole imparare, e la porta allo spettacolo delle 19:30.",
     body: [
       "Una pagella diversa da tutte le altre: niente voti, solo quello che sai fare e quello che vuoi imparare. Ogni bambino scrive e decora la sua «pagella dei sogni» alla Villa dei lettori.",
-      "Poi la porta con sé allo spettacolo delle 19, «Shuma», ispirato alla storia vera di un ragazzo del Mali che nel naufragio del 18 aprile 2015 portava la pagella cucita nella giacca. Si arriva in platea con qualcosa di prezioso in tasca.",
+      "Poi la porta con sé allo spettacolo delle 19:30, «Shuma», ispirato alla storia vera di un ragazzo del Mali che nel naufragio del 18 aprile 2015 portava la pagella cucita nella giacca. Si arriva in platea con qualcosa di prezioso in tasca.",
     ],
     credits: ["A cura degli educatori del festival"],
     practical: [braccialetto],
@@ -312,7 +281,7 @@ export const activities: Activity[] = [
     body: [
       "Un bambino cade in mare e, tra le bolle, chiede aiuto come in una preghiera. Insieme a un cavalluccio marino comincia un lungo viaggio verso il «SopraSopra»: una fiaba umana ambientata in fondo al mare, allegoria delle rotte dei migranti e della scelta tra andare e restare.",
       "Lo spettacolo è ispirato alla storia vera di un ragazzo del Mali che, nel naufragio del 18 aprile 2015, portava con sé la pagella scolastica cucita nella giacca. Peppe Macauda lo porta in scena in italiano e in dialetto siciliano, con momenti che richiamano la tradizione del cunto, mentre alle sue spalle scorrono le illustrazioni di Bruna Fornaro.",
-      "È lo spettacolo che chiude la prima edizione: comincia alle 19, quando è già buio, perché le immagini proiettate si vedano al meglio.",
+      "È lo spettacolo che chiude la prima edizione, nella giornata dedicata all'immigrazione: comincia alle 19:30, quando è già buio e le illustrazioni proiettate si vedono al meglio.",
     ],
     guests: ["santa-briganti"],
     credits: [
@@ -326,18 +295,7 @@ export const activities: Activity[] = [
     audience: { label: "Dagli 8 anni", kids: true, minAge: 8 },
     page: true,
     featured: true,
-    sessions: [{ day: "dom", start: "19:00", end: "19:50", venue: "palco" }],
-  },
-  {
-    slug: "saluti-e-arrivederci",
-    title: "Saluti e arrivederci al 2027",
-    kind: "cerimonia",
-    summary:
-      "Chiusura della prima edizione e donazione alla Biblioteca comunale di una selezione dei libri presentati. La mostra resta aperta fino alle 22.",
-    audience: forAll,
-    page: false,
-    href: "/festival",
-    sessions: [{ day: "dom", start: "20:00", end: "20:15", venue: "palco" }],
+    sessions: [{ day: "dom", start: "19:30", end: "20:20", venue: "palco" }],
   },
 ];
 
@@ -347,9 +305,9 @@ export const kindLabels: Record<Kind, string> = {
   laboratorio: "Laboratorio",
   partecipazione: "Partecipa",
   mostra: "Mostra",
-  rito: "Rito della luce",
   firmacopie: "Firmacopie",
-  cerimonia: "Cerimonia",
+  cerimonia: "Inaugurazione",
+  musica: "Musica",
 };
 
 export function isoFor(day: DayId, time: string): string {
@@ -422,14 +380,14 @@ export const highlightIds: Record<DayId, string[]> = {
     "le-radici-che-si-scelgono-ven-1900",
   ],
   sab: [
-    "a-colpi-di-mantice-sab-1700",
-    "le-seminatrici-di-oggi-sab-1800",
+    "i-tamburi-di-biscari-sab-1700",
+    "monologo-sulle-donne-sab-1800",
     "la-seminatrice-di-coraggio-sab-1900",
   ],
   dom: [
-    "la-pagella-dei-sogni-dom-1745",
+    "la-banda-citta-di-acate-dom-1700",
     "il-gattopardo-raccontato-ai-nostri-figli-dom-1800",
-    "shuma-dom-1900",
+    "shuma-dom-1930",
   ],
 };
 
@@ -472,7 +430,7 @@ export const alwaysOn = [
   {
     title: "Bookshop",
     when: "Sempre",
-    text: "I libri degli ospiti del festival, con le firmacopie dopo ogni incontro.",
+    text: "I libri degli ospiti, con le firmacopie dopo ogni incontro. Libreria partner: Mondadori Bookstore Vittoria.",
     href: "/info#bookshop",
   },
 ] as const;

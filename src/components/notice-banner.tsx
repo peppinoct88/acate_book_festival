@@ -16,7 +16,7 @@ export function NoticeBanner() {
         const Icon = notice.tone === "alert" ? Alert : Info;
         return (
           <NoticeExpiry key={notice.id} until={notice.until}>
-            <div className={notice.tone === "alert" ? "bg-coral text-ink" : "bg-teal text-ink"}>
+            <div className={notice.tone === "alert" ? "bg-coral text-ink" : "bg-teal-light text-ink"}>
               <div className="container-festival flex flex-wrap items-center gap-x-4 gap-y-1 py-3 font-display text-[0.95rem] font-semibold">
                 <Icon size={20} />
                 <p className="flex-1">{notice.text}</p>

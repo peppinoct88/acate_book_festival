@@ -9,13 +9,14 @@ import { ArrowRight, Calendar } from "@/components/icons";
 import { buttonClass } from "@/components/button";
 import { alwaysOn, programUpdatedAt, sessions, sessionsForDay } from "@/content/program";
 import { days } from "@/content/venues";
+import { dayTones } from "@/lib/day-tone";
 import { formatItalianDate } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Programma",
   description:
-    "Il programma dell'Acate Book Festival, 16-18 ottobre: Giovanni Impastato, Antonella Desirée Giuffrè, Maria Antonietta Ferraloro, teatro e laboratori.",
+    "Il programma dell'Acate Book Festival, 16-18 ottobre: mafia, donne, immigrazione. Giovanni Impastato, Desirée Giuffrè, Maria Antonietta Ferraloro, teatro e musica.",
   path: "/programma",
   ownImage: true,
 });
@@ -30,22 +31,22 @@ export default function ProgramPage() {
     <>
       <PageHero
         eyebrow="Il programma"
-        title="Tre pomeriggi,"
-        light="due luoghi."
+        title="Tre giornate,"
+        light="tre temi."
         crumbs={[{ name: "Programma" }]}
         intro={
           <>
             <p>
-              Dalle 17 alle 20 tra il <strong>Palco del Castello</strong> e la{" "}
-              <strong>Villa dei lettori</strong>, con la mostra aperta fino alle 22. Ogni giorno c&apos;è un
-              appuntamento per i bambini prima dell&apos;autore, e il laboratorio cade mentre l&apos;autore
-              parla.
+              Dalle 17 tra il <strong>Palco del Castello</strong>, in piazza Libertà, e la{" "}
+              <strong>Villa dei lettori</strong>, con la mostra aperta fino alle 22. Ogni giornata ha il suo
+              tema: venerdì la <strong>mafia</strong>, sabato le <strong>donne</strong>, domenica l&apos;
+              <strong>immigrazione</strong>.
             </p>
           </>
         }
       >
         <ul className="flex flex-wrap gap-2 font-display text-[0.95rem] font-semibold">
-          {["16 / 17 / 18 ottobre 2026", "17:00–20:00", "Mostra fino alle 22", "Ingresso libero"].map((t) => (
+          {["16 / 17 / 18 ottobre 2026", "Dalle 17:00", "Mostra fino alle 22", "Ingresso libero"].map((t) => (
             <li key={t} className="rounded-full border-2 border-ink/80 bg-cream px-4 py-1.5">
               {t}
             </li>
@@ -55,7 +56,7 @@ export default function ProgramPage() {
 
       <div className="container-festival">
         <ProgramControls
-          days={days.map((d) => ({ anchor: d.anchor, short: d.short, theme: d.theme, date: d.date }))}
+          days={days.map((d) => ({ anchor: d.anchor, short: d.short, theme: d.topic, date: d.date }))}
           listId="programma-lista"
           counts={counts}
         />
@@ -68,17 +69,32 @@ export default function ProgramPage() {
               aria-labelledby={`${day.anchor}-titolo`}
               className="scroll-mt-36 pt-14 sm:pt-20"
             >
-              <header className="grid gap-4 pb-8 lg:grid-cols-[1fr_1.2fr] lg:items-end">
+              <header
+                className={`relative isolate grid gap-6 overflow-hidden rounded-[1.75rem] p-6 sm:p-9 lg:grid-cols-[1fr_1.2fr] lg:items-end ${dayTones[day.tone].surface} ${dayTones[day.tone].text}`}
+              >
+                <span
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute -top-16 -right-16 -z-10 size-44 rounded-full sm:size-56 ${dayTones[day.tone].sun}`}
+                />
                 <div>
-                  <p className="eyebrow text-ink">{day.theme}</p>
-                  <h2
-                    id={`${day.anchor}-titolo`}
-                    className="mt-4 font-display text-title font-black uppercase"
-                  >
-                    {day.label}
+                  <p className={`eyebrow ${dayTones[day.tone].eyebrow}`}>{day.label}</p>
+                  <h2 id={`${day.anchor}-titolo`} className="mt-4 font-display">
+                    <span className="block text-title font-black uppercase">{day.topic}</span>
+                    <span className="mt-1 block text-xl font-light">{day.theme}</span>
                   </h2>
                 </div>
-                <p className="max-w-[52ch] font-serif text-lg leading-relaxed text-ink/80">{day.intro}</p>
+                <div>
+                  <p className={`max-w-[52ch] font-serif text-lg leading-relaxed ${dayTones[day.tone].soft}`}>
+                    {day.intro}
+                  </p>
+                  <Link
+                    href={`/giornate/${day.slug}`}
+                    className="link-underline mt-4 inline-flex items-center gap-2 font-display font-semibold"
+                    data-no-print
+                  >
+                    La giornata, il tema e gli ospiti <ArrowRight size={18} />
+                  </Link>
+                </div>
               </header>
               <ol className="border-b border-ink/12">
                 {sessionsForDay(day.id).map((session) => (

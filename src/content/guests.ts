@@ -1,9 +1,12 @@
+import bandaLogo from "@/assets/partner/banda-citta-di-acate.png";
+import grifoniLogo from "@/assets/partner/grifoni-di-biscari.png";
+import santaBrigantiLogo from "@/assets/partner/santa-briganti.png";
 import type { Guest } from "./types";
 
 /**
- * Ospiti della I edizione.
+ * Ospiti della I edizione: autori, artisti e i gruppi musicali di Acate.
  * Le biografie usano solo dati verificati su fonti pubbliche (vedi docs/fonti.md).
- * Per aggiungere una foto: mettere il file in public/ospiti/<slug>.jpg e aggiungere il campo `photo`.
+ * Per aggiungere una foto: file in src/assets/ospiti/<slug>.jpg, import qui sopra e campo `photo`.
  */
 export const guests: Guest[] = [
   {
@@ -28,7 +31,7 @@ export const guests: Guest[] = [
         note: "con Franco Vassia",
       },
     ],
-    tone: "coral",
+    tone: "ink",
     type: "persona",
   },
   {
@@ -50,7 +53,7 @@ export const guests: Guest[] = [
         note: "anche in tascabile TEA",
       },
     ],
-    tone: "teal",
+    tone: "coral",
     type: "persona",
   },
   {
@@ -75,7 +78,7 @@ export const guests: Guest[] = [
       { title: "Tomasi di Lampedusa e i luoghi del Gattopardo", publisher: "Pacini Editore", year: 2014 },
       { title: "L'opera-orologio. Saggi sul Gattopardo", publisher: "Pacini Editore" },
     ],
-    tone: "ink",
+    tone: "teal",
     type: "persona",
   },
   {
@@ -88,14 +91,67 @@ export const guests: Guest[] = [
     bio: [
       "L'Associazione Culturale Santa Briganti è una realtà teatrale di Vittoria, in provincia di Ragusa, che da anni porta letture ad alta voce, laboratori e spettacoli nelle scuole, nelle biblioteche, nelle piazze e nei luoghi di comunità della Sicilia e di altre regioni.",
       "Organizza Scenica Festival, vetrina internazionale di teatro, danza, musica e circo contemporaneo nel centro storico di Vittoria, con la direzione artistica di Andrea Burrafato.",
-      "Ad Acate firma le letture musicate «A colpi di mantice», i laboratori per i ragazzi e lo spettacolo che chiude il festival, «Shuma», di e con Peppe Macauda dal testo «Shuma Tragliabissi» di Dario Muratore.",
+      "Ad Acate porta «A colpi di mantice», lettura musicata dal vivo e laboratorio per bambini e ragazzi, di e con Veronica Caggia e Peppe Macauda, e lo spettacolo che chiude il festival, «Shuma», di e con Peppe Macauda dal testo «Shuma Tragliabissi» di Dario Muratore.",
     ],
     books: [],
     links: [{ label: "Scenica Festival", url: "https://www.scenicafestival.it" }],
     tone: "paper",
     type: "compagnia",
+    logo: santaBrigantiLogo,
+  },
+  {
+    slug: "matilde-masaracchio",
+    name: "Matilde Masaracchio",
+    role: "Attrice",
+    initials: "MM",
+    short: "Attrice del teatro ragusano, porta sul palco un monologo sulle donne.",
+    bio: [
+      "Matilde Masaracchio è un'attrice e recita nei teatri del Ragusano.",
+      "All'Acate Book Festival sale sul Palco del Castello sabato 17 ottobre alle 18 con un monologo sulle donne: è il cuore della giornata che il festival dedica al loro coraggio.",
+    ],
+    books: [],
+    tone: "coral",
+    type: "persona",
+  },
+  {
+    slug: "banda-citta-di-acate",
+    name: "Banda Città di Acate",
+    role: "Banda musicale",
+    initials: "BA",
+    short: "La banda della città: accompagna le feste e le processioni di Acate.",
+    bio: [
+      "La Banda Città di Acate accompagna le feste e le processioni della città, a cominciare dal Corteo storico della festa di San Vincenzo, il patrono.",
+      "Al festival suona due volte: venerdì 16 ottobre sfila con I Grifoni di Biscari per l'inaugurazione, domenica 18 apre l'ultima giornata.",
+    ],
+    books: [],
+    tone: "ink",
+    type: "gruppo",
+    logo: bandaLogo,
+  },
+  {
+    slug: "grifoni-di-biscari",
+    name: "I Grifoni di Biscari",
+    role: "Tamburi di Acate",
+    initials: "GB",
+    short: "Tamburi imperiali che accompagnano cortei e rievocazioni storiche.",
+    bio: [
+      "I Grifoni di Biscari – Tamburi di Acate sono un gruppo di tamburi imperiali che accompagna cortei e rievocazioni storiche. Il nome ricorda Biscari, come si chiamava Acate fino al 1938.",
+      "Sfilano ogni anno nel Corteo storico della festa di San Vincenzo. Al festival aprono l'inaugurazione di venerdì 16 ottobre, insieme alla Banda Città di Acate, e il pomeriggio di sabato 17.",
+    ],
+    books: [],
+    tone: "ink",
+    type: "gruppo",
+    logo: grifoniLogo,
   },
 ];
+
+/** Gli autori dei tre incontri, in ordine di giornata */
+export const authorSlugs = ["giovanni-impastato", "antonella-desiree-giuffre", "maria-antonietta-ferraloro"];
+
+/** Nome pubblico (la compagnia si presenta con il nome completo dell'associazione) */
+export function guestName(guest: Guest): string {
+  return guest.type === "compagnia" ? "Associazione Culturale Santa Briganti" : guest.name;
+}
 
 export const guestsBySlug = new Map(guests.map((g) => [g.slug, g]));
 

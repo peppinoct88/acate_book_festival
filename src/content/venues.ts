@@ -5,15 +5,15 @@ export const venues: Record<VenueId, Venue> = {
     id: "palco",
     name: "Palco del Castello",
     short: "Palco",
-    where: "Davanti al Castello dei Principi di Biscari",
+    where: "Piazza Libertà, davanti al Castello dei Principi di Biscari",
     description:
-      "Il palco per ascoltare: incontri con gli autori e spettacoli, nell'area davanti al Castello dei Principi di Biscari.",
+      "Il palco per ascoltare: incontri con gli autori e spettacoli in piazza Libertà, davanti al Castello dei Principi di Biscari.",
     features: [
       "Palco coperto",
       "Platea da 200 posti, prime file con cuscini per i bambini",
       "Ledwall con le foto #LaMiaRadice tra un evento e l'altro",
     ],
-    mapQuery: "Castello dei Principi di Biscari, Acate RG",
+    mapQuery: "Piazza Libertà, 97011 Acate RG",
   },
   villa: {
     id: "villa",
@@ -35,6 +35,10 @@ export const venues: Record<VenueId, Venue> = {
 
 export const venueList: Venue[] = [venues.palco, venues.villa];
 
+/**
+ * Le tre giornate e i loro macro temi: mafia, donne, immigrazione.
+ * Il colore (tone) viene dal manifesto e segue la giornata in home, nel programma e nella sua pagina.
+ */
 export const days: FestivalDay[] = [
   {
     id: "ven",
@@ -43,9 +47,17 @@ export const days: FestivalDay[] = [
     label: "Venerdì 16 ottobre",
     short: "Ven 16",
     anchor: "venerdi-16",
+    topic: "Mafia",
+    slug: "mafia",
     theme: "Radici della memoria",
+    claim: "La memoria di Peppino Impastato e la scelta di stare dalla parte giusta.",
     intro:
-      "Si apre con la mostra su Peppino Impastato e si chiude con suo fratello Giovanni: la memoria come radice che si sceglie.",
+      "Si apre con la Banda e i Tamburi di Acate e con la mostra su Peppino Impastato, si chiude con suo fratello Giovanni: la memoria come radice che si sceglie.",
+    body: [
+      "La prima giornata è dedicata alla mafia e a chi ha scelto di opporsi. Peppino Impastato era nato in una famiglia mafiosa di Cinisi: da ragazzo ruppe con il padre e dai microfoni di Radio Aut denunciò gli affari dei boss, fino all'assassinio, nella notte tra l'8 e il 9 maggio 1978.",
+      "Alle 17 la Banda Città di Acate e I Grifoni di Biscari – Tamburi di Acate sfilano e aprono il festival, che si inaugura insieme a «Radici libere», la mostra sulla vita di Peppino. Alle 18 Santa Briganti porta in scena «A colpi di mantice» per bambini e ragazzi. Alle 19 Giovanni Impastato sale sul Palco del Castello, con Giorgio Straquadanio.",
+    ],
+    tone: "ink",
   },
   {
     id: "sab",
@@ -54,9 +66,17 @@ export const days: FestivalDay[] = [
     label: "Sabato 17 ottobre",
     short: "Sab 17",
     anchor: "sabato-17",
+    topic: "Donne",
+    slug: "donne",
     theme: "Radici di coraggio",
+    claim: "Il coraggio delle donne, ieri e oggi.",
     intro:
-      "Il coraggio delle donne, ieri e oggi: dalle seminatrici della Grande Guerra alle donne di Acate che salgono sul palco.",
+      "I tamburi aprono il pomeriggio, poi un monologo sulle donne e il romanzo delle seminatrici di coraggio della Grande Guerra.",
+    body: [
+      "La seconda giornata è dedicata alle donne e al loro coraggio, che la Storia ha spesso lasciato ai margini.",
+      "Alle 17 I Grifoni di Biscari – Tamburi di Acate aprono il pomeriggio. Alle 18 Matilde Masaracchio porta sul palco un monologo sulle donne. Alle 19 Antonella Desirée Giuffrè racconta «La seminatrice di coraggio», il romanzo delle donne che durante la Grande Guerra portavano notizie dal fronte alle famiglie. Alla Villa dei lettori, per tutto il pomeriggio, la buca delle lettere di coraggio e un laboratorio per i ragazzi.",
+    ],
+    tone: "coral",
   },
   {
     id: "dom",
@@ -65,10 +85,19 @@ export const days: FestivalDay[] = [
     label: "Domenica 18 ottobre",
     short: "Dom 18",
     anchor: "domenica-18",
+    topic: "Immigrazione",
+    slug: "immigrazione",
     theme: "Radici in viaggio",
+    claim: "Chi parte, chi arriva, chi resta: le radici che attraversano il mare.",
     intro:
-      "Dal Gattopardo raccontato ai ragazzi al mare di «Shuma»: le radici che partono, attraversano e arrivano.",
+      "La Banda Città di Acate apre l'ultima giornata, poi il Gattopardo raccontato ai ragazzi e il mare di «Shuma», lo spettacolo che chiude il festival.",
+    body: [
+      "L'ultima giornata è dedicata all'immigrazione e ai viaggi: le radici che partono, attraversano il mare e arrivano. La Sicilia lo sa da sempre, terra di approdi e di partenze.",
+      "Alle 17 la Banda Città di Acate apre il pomeriggio. Alle 18 Maria Antonietta Ferraloro racconta «Il Gattopardo» ai ragazzi e ai loro genitori. Alle 19:30, quando è già buio, Peppe Macauda porta in scena «Shuma»: un bambino cade in mare e comincia un lungo viaggio verso il «SopraSopra». È lo spettacolo che chiude la prima edizione.",
+    ],
+    tone: "teal",
   },
 ];
 
+export const daysBySlug = new Map(days.map((d) => [d.slug, d]));
 export const daysById = new Map(days.map((d) => [d.id, d]));

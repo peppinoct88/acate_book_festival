@@ -96,7 +96,7 @@ export function VenueMap({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
             data-track-label="villa"
             target="_blank"
             rel="noopener"
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-4 font-display text-sm font-semibold text-cream transition-colors hover:bg-teal hover:text-ink"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-4 font-display text-sm font-semibold text-cream transition-colors hover:bg-teal-light hover:text-ink"
           >
             <MapPin size={17} /> Portami lì
             <span className="visually-hidden"> (Google Maps, nuova scheda)</span>

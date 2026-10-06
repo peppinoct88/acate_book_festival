@@ -21,7 +21,7 @@ const howItWorks = [
   {
     Icon: Kids,
     title: "Mentre i grandi ascoltano",
-    text: "I laboratori si svolgono alla Villa dei lettori durante l'incontro sul palco: i genitori ascoltano, i bambini creano.",
+    text: "Sabato e domenica i laboratori si svolgono alla Villa dei lettori mentre sul palco va in scena il programma: i genitori ascoltano, i bambini creano.",
   },
   {
     Icon: Ticket,
@@ -36,7 +36,7 @@ const howItWorks = [
   {
     Icon: Letter,
     title: "Ognuno alla sua età",
-    text: "Accanto a ogni appuntamento trovi l'età consigliata. Le tre repliche di «A colpi di mantice» sono pensate per età diverse.",
+    text: "Accanto a ogni appuntamento trovi l'età consigliata. «A colpi di mantice», venerdì alle 18, è per bambini e ragazzi, con il laboratorio subito dopo la lettura.",
   },
 ];
 
@@ -49,7 +49,7 @@ export default function FamiliesPage() {
         title="Piccole radici:"
         light="teatro e laboratori."
         crumbs={[{ name: "Famiglie" }]}
-        intro="Ogni pomeriggio c'è un appuntamento per i bambini prima degli incontri, e un laboratorio mentre sul palco c'è l'incontro. Tutto a ingresso libero, senza prenotazione."
+        intro="Venerdì letture musicate e laboratorio con «A colpi di mantice»; sabato e domenica i laboratori alla Villa dei lettori, e domenica sera «Shuma». Tutto a ingresso libero, senza prenotazione."
       />
 
       <section aria-labelledby="come-funziona" className="container-festival pt-16 sm:pt-20">
@@ -97,8 +97,8 @@ export default function FamiliesPage() {
               <span className="font-light">una favola in fondo al mare</span>
             </h2>
             <p className="mt-4 max-w-[56ch] font-serif text-lg leading-relaxed text-cream/90">
-              Domenica alle 19 lo spettacolo di Peppe Macauda chiude il festival: un bambino caduto in mare e
-              un lungo viaggio verso il «SopraSopra». Consigliato dagli 8 anni. Prima, alle 17:45, il
+              Domenica alle 19:30 lo spettacolo di Peppe Macauda chiude il festival: un bambino caduto in mare
+              e un lungo viaggio verso il «SopraSopra». Consigliato dagli 8 anni. Prima, alle 17:45, il
               laboratorio «La pagella dei sogni» prepara i più piccoli allo spettacolo.
             </p>
           </div>

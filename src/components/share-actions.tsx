@@ -10,7 +10,18 @@ const subscribe = () => () => {};
  * Condivisione: WhatsApp (il canale principale in un piccolo comune), copia link
  * e, dove disponibile, il pannello di condivisione nativo del telefono.
  */
-export function ShareActions({ title, url, text }: { title: string; url: string; text?: string }) {
+export function ShareActions({
+  title,
+  url,
+  text,
+  tone = "dark",
+}: {
+  title: string;
+  url: string;
+  text?: string;
+  /** dark: su fondo chiaro · light: su fondo scuro */
+  tone?: "dark" | "light";
+}) {
   const [copied, setCopied] = useState(false);
   const canShare = useSyncExternalStore(
     subscribe,
@@ -40,8 +51,11 @@ export function ShareActions({ title, url, text }: { title: string; url: string;
     }
   };
 
-  const pill =
-    "inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/20 px-4 font-display text-sm font-semibold text-ink transition-colors hover:border-ink hover:bg-ink hover:text-cream";
+  const pill = `inline-flex min-h-11 items-center gap-2 rounded-full border px-4 font-display text-sm font-semibold transition-colors ${
+    tone === "dark"
+      ? "border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-cream"
+      : "border-cream/50 text-cream hover:border-cream hover:bg-cream hover:text-ink"
+  }`;
 
   return (
     <div className="flex flex-wrap items-center gap-2" data-no-print>

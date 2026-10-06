@@ -3,11 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import manifesto from "@/assets/manifesto.jpg";
 import { PageHero } from "@/components/page-hero";
+import { PhotoCredit } from "@/components/photo";
+import { photos } from "@/content/photos";
 import { buttonClass } from "@/components/button";
 import {
   ArrowRight,
   Books,
   Download,
+  Drum,
   Kids,
   Letter,
   Light,
@@ -25,10 +28,12 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Il festival e il tema Radici",
   description:
-    "L'Acate Book Festival è la nuova festa del libro di Acate (RG): tre pomeriggi sul tema Radici, otto format, una mostra e i laboratori per i bambini.",
+    "L'Acate Book Festival è la nuova festa del libro di Acate (RG): tre giornate su mafia, donne e immigrazione, una mostra, musica e laboratori per i bambini.",
   path: "/festival",
   ownImage: true,
 });
+
+const formatCount: Record<number, string> = { 6: "Sei", 7: "Sette", 8: "Otto", 9: "Nove" };
 
 const icons: Record<Format["icon"], typeof Light> = {
   light: Light,
@@ -39,6 +44,7 @@ const icons: Record<Format["icon"], typeof Light> = {
   letter: Letter,
   phone: Phone,
   screen: Screen,
+  drum: Drum,
 };
 
 export default function FestivalPage() {
@@ -52,8 +58,9 @@ export default function FestivalPage() {
         intro={
           <p>
             «{site.claim}»: con questa idea il Comune di Acate apre la prima edizione del suo festival del
-            libro. Tre pomeriggi che mettono al centro i bambini e i ragazzi, l&apos;incontro fra generazioni
-            e fra le diverse comunità che oggi vivono ad Acate, e la lettura come modo di stare insieme.
+            libro. Tre giornate e tre temi, la mafia, le donne e l&apos;immigrazione, che mettono al centro i
+            bambini e i ragazzi, l&apos;incontro fra generazioni e fra le diverse comunità che oggi vivono ad
+            Acate, e la lettura come modo di stare insieme.
           </p>
         }
       />
@@ -79,8 +86,13 @@ export default function FestivalPage() {
                 {d.label}
               </p>
               <div>
-                <h3 className="font-display text-xl font-extrabold">{d.theme}</h3>
-                <p className="mt-1 font-serif leading-relaxed text-ink/85">{d.intro}</p>
+                <h3 className="font-display text-xl">
+                  <Link href={`/giornate/${d.slug}`} className="link-underline">
+                    <span className="font-black uppercase">{d.topic}</span>{" "}
+                    <span className="font-light">· {d.theme}</span>
+                  </Link>
+                </h3>
+                <p className="mt-1 font-serif leading-relaxed text-ink/85">{d.claim}</p>
               </div>
             </li>
           ))}
@@ -91,7 +103,7 @@ export default function FestivalPage() {
         <div className="container-festival">
           <p className="eyebrow text-teal-soft">Tra un incontro e l&apos;altro</p>
           <h2 id="i-format" className="mt-4 font-display text-headline">
-            <span className="font-black">Otto format,</span>{" "}
+            <span className="font-black">{formatCount[formats.length] ?? formats.length} format,</span>{" "}
             <span className="font-light">nessun momento vuoto</span>
           </h2>
           <p className="mt-6 max-w-[60ch] font-serif text-lg leading-relaxed text-cream/90">
@@ -149,7 +161,9 @@ export default function FestivalPage() {
             <p>
               L&apos;organizzazione è di <strong>{site.production.name}</strong>, in collaborazione con
               l&apos;<strong>Associazione Culturale Santa Briganti</strong> di Vittoria, che firma letture,
-              laboratori e lo spettacolo di chiusura.
+              laboratori e lo spettacolo di chiusura, con la <strong>Banda Città di Acate</strong> e{" "}
+              <strong>I Grifoni di Biscari – Tamburi di Acate</strong>, che aprono le giornate, e con{" "}
+              <strong>Mondadori Bookstore Vittoria</strong>, la libreria partner.
             </p>
             <p>
               Ad accogliervi ci sono i volontari «Radici», con la maglietta del festival: come le «magliette
@@ -174,20 +188,21 @@ export default function FestivalPage() {
           <div className="mx-auto w-full max-w-sm">
             <Image
               src={manifesto}
-              alt="Il manifesto della I edizione: la scritta Acate Book Festival, 16/17/18 ottobre 2026, e una torre costruita con i libri sotto un sole turchese."
+              alt="Il manifesto della I edizione: la scritta Acate Book Festival, 16/17/18 ottobre 2026, e la chiesa e il castello di Acate costruiti con i libri sotto un sole turchese."
               sizes="(min-width: 1024px) 24rem, 80vw"
               placeholder="blur"
-              className="h-auto w-full rounded-lg shadow-[0_30px_60px_-30px_rgb(30_21_74/0.6)]"
+              className="h-auto w-full rounded-lg shadow-[0_30px_60px_-30px_rgb(7_42_95/0.6)]"
             />
           </div>
           <div>
             <p className="eyebrow text-ink">Il manifesto</p>
             <h2 id="il-manifesto" className="mt-4 font-display text-title">
-              <span className="font-black">Una torre</span> <span className="font-light">fatta di libri</span>
+              <span className="font-black">Una città</span> <span className="font-light">fatta di libri</span>
             </h2>
             <p className="mt-6 max-w-[52ch] font-serif text-lg leading-relaxed text-ink/85">
-              Il manifesto della prima edizione costruisce con i libri una torre ispirata al Castello dei
-              Principi di Biscari, il cuore del centro storico di Acate. Puoi scaricarlo e condividerlo.
+              Il manifesto della prima edizione costruisce con i libri la torre del Castello dei Principi di
+              Biscari e la chiesa accanto, il cuore del centro storico di Acate. In alto, i loghi di chi fa il
+              festival. Puoi scaricarlo e condividerlo.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -205,6 +220,33 @@ export default function FestivalPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section
+        id="crediti"
+        aria-labelledby="crediti-titolo"
+        className="container-festival scroll-mt-28 pt-24"
+      >
+        <p className="eyebrow text-ink">Crediti</p>
+        <h2 id="crediti-titolo" className="mt-4 font-display text-title">
+          <span className="font-black">Le immagini</span> <span className="font-light">del sito</span>
+        </h2>
+        <ul className="mt-8 grid gap-4 text-[0.95rem] leading-relaxed md:grid-cols-2">
+          <li className="rounded-[1.25rem] bg-paper p-5">
+            <span className="block font-display font-bold">Illustrazioni e lettering</span>
+            Dal manifesto ufficiale della I edizione.
+          </li>
+          <li className="rounded-[1.25rem] bg-paper p-5">
+            <span className="block font-display font-bold">Loghi</span>
+            Forniti dalle associazioni e dai partner; lo stemma del Comune di Acate è quello del manifesto.
+          </li>
+          {Object.values(photos).map((photo) => (
+            <li key={photo.source} className="rounded-[1.25rem] bg-paper p-5">
+              <span className="block font-display font-bold">{photo.caption}</span>
+              <PhotoCredit photo={photo} />
+            </li>
+          ))}
+        </ul>
       </section>
     </>
   );

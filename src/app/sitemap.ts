@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { guests } from "@/content/guests";
+import { days } from "@/content/venues";
 import { pagedActivities, programUpdatedAt } from "@/content/program";
 import { absoluteUrl } from "@/content/site";
 
@@ -25,6 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: p.changeFrequency,
       priority: p.priority,
+    })),
+    ...days.map((d) => ({
+      url: absoluteUrl(`/giornate/${d.slug}`),
+      lastModified,
+      changeFrequency: "daily" as const,
+      priority: 0.9,
     })),
     ...pagedActivities.map((a) => ({
       url: absoluteUrl(`/programma/${a.slug}`),

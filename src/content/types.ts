@@ -1,3 +1,5 @@
+import type { StaticImageData } from "next/image";
+
 export type DayId = "ven" | "sab" | "dom";
 export type VenueId = "palco" | "villa";
 
@@ -7,9 +9,9 @@ export type Kind =
   | "laboratorio"
   | "partecipazione"
   | "mostra"
-  | "rito"
   | "firmacopie"
-  | "cerimonia";
+  | "cerimonia"
+  | "musica";
 
 export type SessionStatus = "programmato" | "spostato" | "annullato";
 
@@ -36,8 +38,18 @@ export interface FestivalDay {
   label: string; // "Venerdì 16 ottobre"
   short: string; // "Ven 16"
   anchor: string; // "venerdi-16"
+  /** Il macro tema della giornata, es. "Mafia" */
+  topic: string;
+  /** Pagina della giornata: /giornate/<slug> */
+  slug: string;
   theme: string; // "Radici della memoria"
+  /** Una riga che dice di cosa parla la giornata */
+  claim: string;
   intro: string;
+  /** Testo della pagina della giornata */
+  body: string[];
+  /** Colore della giornata, preso dal manifesto */
+  tone: "ink" | "coral" | "teal";
 }
 
 export interface Venue {
@@ -79,6 +91,8 @@ export interface Activity {
   /** Paragrafi della pagina di dettaglio */
   body?: string[];
   guests?: string[];
+  /** Chi modera l'incontro (solo il nome, finché non c'è una biografia) */
+  moderator?: string;
   audience: Audience;
   credits?: string[];
   duration?: string;
@@ -116,8 +130,24 @@ export interface Guest {
   bio: string[];
   books: Book[];
   links?: { label: string; url: string }[];
+  /** Colore della copertina e delle iniziali: per gli autori quello della loro giornata */
   tone: "coral" | "teal" | "ink" | "paper";
-  type: "persona" | "compagnia";
+  type: "persona" | "compagnia" | "gruppo";
+  /** Ritratto (src/assets/ospiti/<slug>.jpg), fornito dall'organizzazione */
+  photo?: StaticImageData;
+  /** Logo per compagnie e gruppi (src/assets/partner/) */
+  logo?: StaticImageData;
+}
+
+export interface Partner {
+  name: string;
+  role: string;
+  logo: StaticImageData;
+  /** Il logo è chiaro e va su fondo scuro */
+  onDark?: boolean;
+  url?: string;
+  /** Pagina interna dedicata (ospite) */
+  href?: string;
 }
 
 export interface Format {
@@ -125,6 +155,6 @@ export interface Format {
   name: string;
   when: string;
   description: string;
-  icon: "light" | "tree" | "books" | "kids" | "mic" | "letter" | "phone" | "screen";
+  icon: "light" | "tree" | "books" | "kids" | "mic" | "letter" | "phone" | "screen" | "drum";
   href?: string;
 }

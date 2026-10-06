@@ -25,6 +25,7 @@ import { daysById, venues } from "@/content/venues";
 import { durationLabel, formatItalianDate } from "@/lib/format";
 import { breadcrumbJsonLd, sessionEventJsonLd } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
+import { dayTones } from "@/lib/day-tone";
 
 export const dynamicParams = false;
 
@@ -96,6 +97,12 @@ export default async function ActivityPage({ params }: PageProps<"/programma/[sl
             />
             <div className="mt-10 max-w-4xl sm:mt-14">
               <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href={`/giornate/${firstDay.slug}`}
+                  className={`inline-flex min-h-8 items-center rounded-full px-3 font-display text-xs font-semibold tracking-[0.12em] uppercase transition-transform hover:-translate-y-0.5 ${dayTones[firstDay.tone].surface} ${dayTones[firstDay.tone].text}`}
+                >
+                  {firstDay.short} · {firstDay.topic}
+                </Link>
                 <KindBadge kind={activity.kind} />
                 <VenueTag venue={first.venue} />
               </div>
@@ -116,6 +123,12 @@ export default async function ActivityPage({ params }: PageProps<"/programma/[sl
               <p className="mt-6 max-w-[60ch] font-serif text-xl leading-relaxed text-ink/85">
                 {activity.summary}
               </p>
+              {activity.moderator ? (
+                <p className="mt-5 font-display text-lg text-ink">
+                  <span className="font-light">Modera</span>{" "}
+                  <strong className="font-bold">{activity.moderator}</strong>
+                </p>
+              ) : null}
             </div>
           </div>
         </header>

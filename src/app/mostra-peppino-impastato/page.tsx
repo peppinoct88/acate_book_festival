@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { JsonLd } from "@/components/json-ld";
 import { ButtonLink } from "@/components/button";
 import { ArrowRight, MapPin } from "@/components/icons";
+import { Photo, PhotoCredit } from "@/components/photo";
+import { photos } from "@/content/photos";
 import { venues } from "@/content/venues";
 import { breadcrumbJsonLd, exhibitionJsonLd } from "@/lib/jsonld";
 import { mapsUrl } from "@/lib/format";
@@ -88,10 +91,29 @@ export default function ExhibitionPage() {
             </p>
             <p>
               La mostra racconta la sua vita per immagini, ed è il filo che tiene insieme le tre giornate: si
-              inaugura venerdì 16 alle 17, poco prima dell&apos;incontro con suo fratello Giovanni, e resta
-              aperta ogni sera fino alle 22.
+              inaugura venerdì 16 alle 17, nella giornata che il festival dedica alla mafia, poco prima
+              dell&apos;incontro con suo fratello Giovanni, e resta aperta ogni sera fino alle 22.
             </p>
           </div>
+          <Photo
+            photo={photos.casaMemoria}
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            className="mt-10"
+            imageClassName="aspect-[4/3]"
+          />
+
+          <figure className="mt-14 rounded-[1.5rem] bg-cream p-6 ring-1 ring-ink/12">
+            <Image
+              src={photos.radioAut.src}
+              alt={photos.radioAut.alt}
+              sizes="(min-width: 1024px) 26rem, 80vw"
+              className="h-auto w-full max-w-sm"
+            />
+            <figcaption className="mt-3 text-sm leading-snug">
+              <span className="block font-display font-semibold text-ink">{photos.radioAut.caption}</span>
+              <PhotoCredit photo={photos.radioAut} />
+            </figcaption>
+          </figure>
 
           <h2 className="mt-14 font-display text-title">
             <span className="font-black">Lo scaffale</span> <span className="font-light">di Peppino</span>

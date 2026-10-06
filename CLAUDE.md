@@ -2,6 +2,8 @@
 
 # Acate Book Festival — sito ufficiale (I edizione, 16-18 ottobre 2026)
 
+Tre giornate, tre temi: venerdì 16 mafia (blu `ink`), sabato 17 donne (`coral`), domenica 18 immigrazione (`teal-deep`).
+
 Next.js 16 (App Router, Turbopack) · React 19 · Tailwind CSS 4 · TypeScript · deploy su Vercel.
 Tutto il sito è statico (prerender in build): nessun database, nessun form, nessun cookie.
 
@@ -21,11 +23,18 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
 
 - `src/content/` — **unica fonte dei contenuti**. Programma, ospiti, luoghi, format, FAQ, avvisi, configurazione.
   - `program.ts`: attività e sessioni. Da qui derivano lista, schede, calendari .ics, JSON-LD, anteprime OG, sitemap.
+  - `venues.ts`: luoghi e giornate (`topic`, `slug`, `claim`, `body`, `tone`) → pagine `/giornate/[slug]`.
+  - `guests.ts`: ospiti (`authorSlugs` = un autore per giornata, `tone` = colore della sua giornata), `photo`/`logo`.
+  - `photos.ts`: foto da Wikimedia Commons con autore, licenza, fonte e modifiche (sempre mostrati: `components/photo.tsx`
+    e `/festival#crediti`). Nuove foto: workflow GitHub «Importa foto da Wikimedia Commons» (Commons non è
+    raggiungibile dalle sessioni cloud); scarica in `src/assets/foto/commons/`, poi si ritaglia e si sposta in `src/assets/foto/`.
+  - `partners.ts`: loghi nella fascia del footer (file in `src/assets/partner/`, preparati per fondo blu).
   - `notices.ts`: avvisi in cima a tutte le pagine (maltempo, spostamenti) con scadenza automatica.
   - `site.ts`: URL, date, contatti, social, enti. I campi vuoti non vengono mostrati.
 - `src/app/` — pagine (server component). Client component solo dove serve interattività.
-- `src/components/` — UI. `src/lib/` — calendario .ics, JSON-LD, metadata, anteprime OG, tempo.
-- `src/assets/` — illustrazioni ricavate dal manifesto, font TTF per le anteprime OG (OFL).
+- `src/components/` — UI. `src/lib/` — calendario .ics, JSON-LD, metadata, anteprime OG, tempo, colori delle giornate (`day-tone.ts`).
+- `src/assets/` — illustrazione del manifesto, foto, loghi dei partner, font TTF per le anteprime OG (OFL).
+  Ritratti degli ospiti: `src/assets/ospiti/<slug>.jpg` (forniti dall'organizzazione) + campo `photo` in `guests.ts`.
 - `scripts/` — screenshot, rendering icone SVG → PNG. `tests/` — suite e2e.
 
 ## Regole per i contenuti
@@ -34,16 +43,23 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
 - **Non inventare fatti.** Biografie, libri ed editori vengono da fonti verificate (`docs/fonti.md`).
   Se un dato non è confermato (moderatori, profili social, email) il campo resta vuoto.
 - Non dedurre il genere dai nomi: formule neutre («l'ospite», «gli appuntamenti»).
+- Dai contratti si pubblicano solo titoli, nomi d'arte e orari: mai dati anagrafici, recapiti o compensi.
+- Foto solo con licenza libera e crediti visibili; niente immagini di persone reali in difficoltà (naufragi, migranti).
 - La pagina della mostra su Peppino Impastato ha tono sobrio: niente giochi di parole.
 - Il logo/lettering del manifesto è ricomposto con Outfit (`components/logotype.tsx`): non sostituirlo con immagini.
 
 ## Design system (src/app/globals.css)
 
-- Colori dal manifesto: `cream` #fefaef (fondo), `ink` #1e154a, `coral` #fd644f, `teal` #68cbc8, `paper`, `teal-soft`.
+- Colori dal manifesto definitivo: `cream` #fff9e9 (fondo), `ink` #072a5f, `navy` #093370, `coral` #ff5e3e,
+  `teal` #269c9f, `teal-light` #86cfcb, `ochre` #fccb89, `paper`, `teal-soft`; varianti per il testo:
+  `ink-muted`, `coral-strong`, `coral-deep`, `teal-deep` #176b6e.
 - Contrasti verificati (WCAG 2.2 AA):
   - testo piccolo su cream/paper: `ink`, `ink-muted`, `coral-deep`, `teal-deep` — **mai** `coral` o `teal`
   - testo grande (≥ 24px) corallo su cream: `coral-strong`
-  - bottone primario: fondo `coral` + testo `ink` (5.6:1); su fondo `ink`: testo `cream`, `coral`, `teal-soft`
+  - su `coral` solo `ink` pieno (4.6:1): con l'opacità scende sotto 4.5:1
+  - su `teal` niente testo piccolo (ink 4.2:1, cream 3.2:1): per i fondi si usa `teal-light` (ink 7.8:1) o `teal-deep` (cream 5.9:1)
+  - bottone primario: fondo `coral` + testo `ink`; su fondo `ink`: testo `cream`, `coral`, `teal-soft`
+  - i «soli» decorativi dietro al testo: la coppia sole/testo deve reggere 4.5:1 (vedi `book-cover.tsx`, `day-tone.ts`)
   - il lettering «ACATE» in `coral` è un logotipo (esente, WCAG 1.4.3): i test axe lo escludono con `[data-logotype]`
 - Font: Outfit (titoli/UI, precaricato) + Literata (testi lunghi, `display: optional`).
 - Titoli nello stile del poster: parola piena `font-black` + parola leggera `font-light` (`SectionHeading`, `PageHero`).
@@ -59,6 +75,8 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
 - `/_vercel/insights` e `/_vercel/speed-insights` danno 404 in locale: esistono solo su Vercel.
 - Per fermare il server locale usa il PID (`kill <pid>`): `pkill -f "next start"` uccide anche la shell corrente.
 - I deploy di anteprima Vercel sono `noindex` (vedi `isProductionDeployment` in `src/lib/seo.ts`).
+- axe ignora il ritaglio `overflow: hidden` dei cerchi decorativi: un cerchio che sborda verso l'header viene
+  preso come fondo del bottone «Menu». Per questo l'header ha sempre `bg-cream`, anche in cima alla pagina.
 - Dominio: `https://www.acatebookfestival.it` (`productionUrl` in `src/content/site.ts`), DNS su Cloudflare
   in modalità «DNS only». Vercel Analytics (piano Pro): massimo 2 proprietà `data-track-*` per evento.
 

@@ -12,6 +12,9 @@ const pages = process.argv.slice(3).length
       "/",
       "/programma",
       "/programma/le-radici-che-si-scelgono",
+      "/giornate/mafia",
+      "/giornate/donne",
+      "/giornate/immigrazione",
       "/ospiti",
       "/ospiti/giovanni-impastato",
       "/famiglie",
@@ -49,6 +52,15 @@ for (const vp of viewports) {
     await page.evaluate(() =>
       document.querySelectorAll("[data-reveal]").forEach((el) => el.setAttribute("data-revealed", "")),
     );
+    // scorre la pagina perché si carichino le immagini differite (loading="lazy")
+    await page.evaluate(async () => {
+      for (let y = 0; y < document.body.scrollHeight; y += window.innerHeight * 0.8) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 120));
+      }
+      window.scrollTo(0, 0);
+    });
+    await page.waitForLoadState("networkidle");
     await page.waitForTimeout(300);
     const slug = path === "/" ? "home" : path.replace(/^\//, "").replace(/\//g, "_").replace(/[?=&]/g, "-");
     await page.screenshot({ path: `${out}/${vp.name}-${slug}.png`, fullPage: true });

@@ -2,7 +2,7 @@
  * Una mensola di dorsi di libri, generata in modo deterministico (stesso risultato a ogni build).
  * Puramente decorativa: richiama la torre di libri del manifesto.
  */
-const palette = ["#fd644f", "#1e154a", "#68cbc8", "#f6eedc", "#e8503b", "#abded6", "#2c2266"];
+const palette = ["#ff5e3e", "#072a5f", "#269c9f", "#f7edd6", "#f0482a", "#cdeae5", "#093370", "#fccb89"];
 
 function mulberry32(seed: number) {
   let a = seed;
@@ -64,8 +64,8 @@ export function Bookshelf({
     >
       {spines.map((s, i) => {
         const y = height - s.h;
-        const light = s.color === "#f6eedc" || s.color === "#abded6";
-        const band = light ? "#1e154a" : "#fefaef";
+        const light = s.color === "#f7edd6" || s.color === "#cdeae5" || s.color === "#fccb89";
+        const band = light ? "#072a5f" : "#fff9e9";
         return (
           <g key={i} transform={s.tilt ? `rotate(${s.tilt} ${s.x + s.w / 2} ${height})` : undefined}>
             <rect x={s.x} y={y} width={s.w} height={s.h} rx={2} fill={s.color} />

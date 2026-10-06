@@ -7,7 +7,12 @@ const pages = [
   "/programma/le-radici-che-si-scelgono",
   "/programma/a-colpi-di-mantice",
   "/programma/shuma",
+  "/programma/monologo-sulle-donne",
+  "/giornate/mafia",
+  "/giornate/donne",
+  "/giornate/immigrazione",
   "/ospiti",
+  "/ospiti/banda-citta-di-acate",
   "/ospiti/antonella-desiree-giuffre",
   "/famiglie",
   "/mostra-peppino-impastato",
@@ -102,9 +107,19 @@ test("programma: il filtro «Bambini e ragazzi» mostra solo gli appuntamenti pe
   expect(visible).toBeGreaterThan(5);
 });
 
+test("programma: la barra dei giorni segue lo scroll e in cima torna al venerdì", async ({ page }) => {
+  await page.goto("/programma");
+  const days = page.getByRole("navigation", { name: "Giorni del festival" });
+  await page.evaluate(() => document.getElementById("domenica-18")?.scrollIntoView());
+  await expect(days.getByRole("link", { name: /Dom 18/ })).toHaveAttribute("aria-current", "true");
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await expect(days.getByRole("link", { name: /Ven 16/ })).toHaveAttribute("aria-current", "true");
+});
+
 test("programma: con ?ora= durante il festival segna gli appuntamenti in corso", async ({ page }) => {
-  await page.goto("/programma?ora=2026-10-16T19:10");
-  await expect(page.locator("[data-live='now']")).toHaveCount(2);
+  // sabato 18:10: la buca delle lettere, il laboratorio e il monologo sono in corso insieme
+  await page.goto("/programma?ora=2026-10-17T18:10");
+  await expect(page.locator("[data-live='now']")).toHaveCount(3);
 });
 
 test("scheda evento: dati strutturati Event validi", async ({ page }) => {
@@ -126,7 +141,7 @@ test("home: dati strutturati Festival", async ({ page }) => {
   const festival = blocks.map((b) => JSON.parse(b)).find((d) => d["@type"] === "Festival");
   expect(festival.startDate).toBe("2026-10-16T17:00:00+02:00");
   expect(festival.endDate).toBe("2026-10-18T22:00:00+02:00");
-  expect(festival.subEvent.length).toBeGreaterThan(10);
+  expect(festival.subEvent.length).toBeGreaterThanOrEqual(10);
 });
 
 test("calendari .ics", async ({ request }) => {
@@ -137,8 +152,8 @@ test("calendari .ics", async ({ request }) => {
   expect(body.startsWith("BEGIN:VCALENDAR")).toBe(true);
   expect(body.match(/BEGIN:VEVENT/g)).toHaveLength(3);
 
-  const one = await (await request.get("/calendario/shuma-dom-1900.ics")).text();
-  expect(one).toContain("DTSTART:20261018T170000Z");
+  const one = await (await request.get("/calendario/shuma-dom-1930.ics")).text();
+  expect(one).toContain("DTSTART:20261018T173000Z");
   expect(one).toContain("SUMMARY:Shuma");
 
   const missing = await request.get("/calendario/inesistente.ics");
@@ -164,14 +179,31 @@ test("anteprime social: le pagine con un'immagine propria la usano", async ({ pa
   await page.goto("/privacy");
   await expect(page.locator('meta[property="og:image"]').first()).toHaveAttribute(
     "content",
-    /\/opengraph-image\.jpg$/,
+    /\/opengraph-image$/,
   );
+});
+
+test("le tre giornate: tema, colori e indirizzi brevi", async ({ page, request }) => {
+  for (const [path, topic] of [
+    ["/giornate/mafia", "Mafia"],
+    ["/giornate/donne", "Donne"],
+    ["/giornate/immigrazione", "Immigrazione"],
+  ]) {
+    await page.goto(path);
+    await expect(page.locator("h1")).toContainText(topic);
+    await expect(page.locator("[data-session]").first()).toBeVisible();
+  }
+  const short = await request.get("/mafia", { maxRedirects: 0 });
+  expect(short.headers()["location"]).toBe("/giornate/mafia");
+  const removed = await request.get("/programma/rito-della-luce", { maxRedirects: 0 });
+  expect(removed.headers()["location"]).toBe("/programma");
 });
 
 test("SEO tecnico: sitemap, robots, manifest", async ({ request }) => {
   const sitemap = await (await request.get("/sitemap.xml")).text();
   expect(sitemap).toContain("/programma/shuma");
   expect(sitemap).toContain("/ospiti/giovanni-impastato");
+  expect(sitemap).toContain("/giornate/immigrazione");
   const robots = await (await request.get("/robots.txt")).text();
   expect(robots).toMatch(/Sitemap: .*\/sitemap\.xml/);
   const manifest = await (await request.get("/manifest.webmanifest")).json();

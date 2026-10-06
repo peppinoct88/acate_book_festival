@@ -106,6 +106,8 @@ function eventType(activity: Activity): string {
       return "ChildrensEvent";
     case "mostra":
       return "ExhibitionEvent";
+    case "musica":
+      return "MusicEvent";
     default:
       return "Event";
   }
@@ -116,7 +118,7 @@ function performers(session: Session): Json[] {
     .map((slug) => getGuest(slug))
     .filter((g) => g !== undefined)
     .map((g) => ({
-      "@type": g.type === "compagnia" ? "PerformingGroup" : "Person",
+      "@type": g.type === "persona" ? "Person" : g.type === "gruppo" ? "MusicGroup" : "PerformingGroup",
       name: g.type === "compagnia" ? "Associazione Culturale Santa Briganti" : g.name,
       url: absoluteUrl(`/ospiti/${g.slug}`),
     }));

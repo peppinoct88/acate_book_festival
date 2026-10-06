@@ -98,16 +98,15 @@ export default function LaMiaRadicePage() {
               </span>
               <h2 className="mt-5 font-display text-2xl font-black">I riconoscimenti</h2>
               <p className="mt-3 font-serif leading-relaxed text-cream/90">
-                Domenica 18 alle 18:50, durante il rito della luce, le storie {site.hashtag} più belle
-                ricevono le copie autografate dagli autori del festival. Nessuna estrazione a sorte: le storie
-                le sceglie il festival.
+                Le storie {site.hashtag} più belle ricevono le copie autografate dagli autori del festival.
+                Nessuna estrazione a sorte: le storie le sceglie il festival.
               </p>
             </div>
             <Link
-              href="/programma/rito-della-luce"
+              href="/ospiti"
               className="mt-6 inline-flex font-display font-semibold text-teal-soft underline underline-offset-4"
             >
-              Il rito della luce
+              Gli autori del festival
             </Link>
           </div>
         </div>

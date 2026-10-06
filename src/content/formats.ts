@@ -1,15 +1,15 @@
 import type { Format } from "./types";
 
-/** Gli otto format che riempiono il festival tra un appuntamento e l'altro */
+/** I format che riempiono il festival tra un appuntamento e l'altro */
 export const formats: Format[] = [
   {
-    slug: "rito-della-luce",
-    name: "Il rito della luce",
-    when: "Ogni sera alle 18:45 · domenica alle 18:50",
+    slug: "banda-e-tamburi",
+    name: "Banda e tamburi",
+    when: "Ogni pomeriggio alle 17",
     description:
-      "Al calare del buio un bambino legge una frase scelta dall'ospite della serata e si accendono le luci del sentiero e la facciata del Castello.",
-    icon: "light",
-    href: "/programma/rito-della-luce",
+      "Il pomeriggio si apre con la musica di Acate: venerdì la Banda Città di Acate e I Grifoni di Biscari sfilano insieme per l'inaugurazione, sabato suonano i tamburi, domenica la banda.",
+    icon: "drum",
+    href: "/programma",
   },
   {
     slug: "albero-delle-radici",
@@ -31,20 +31,11 @@ export const formats: Format[] = [
   {
     slug: "laboratori-in-parallelo",
     name: "Laboratori in parallelo",
-    when: "Ogni pomeriggio",
+    when: "Sabato e domenica",
     description:
       "Mentre sul palco c'è l'incontro, i bambini sono al laboratorio alla Villa dei lettori, con consegna e ritiro tramite braccialetto numerato. Così i genitori restano all'incontro.",
     icon: "kids",
     href: "/famiglie",
-  },
-  {
-    slug: "seminatrici-di-oggi",
-    name: "Le seminatrici di oggi + Leggi una pagina",
-    when: "Sabato alle 18:00",
-    description:
-      "Tre donne di Acate raccontano in cinque minuti un loro gesto di coraggio; poi il microfono è aperto: tre minuti a testa per leggere la pagina che ti ha cambiato qualcosa.",
-    icon: "mic",
-    href: "/programma/le-seminatrici-di-oggi",
   },
   {
     slug: "buca-delle-lettere",

@@ -27,7 +27,7 @@ const literata = Literata({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#fefaef",
+  themeColor: "#fff9e9",
   colorScheme: "light",
   width: "device-width",
   initialScale: 1,

@@ -29,7 +29,7 @@ export const site = {
   /** Offset UTC valido per le date del festival (ora legale fino al 25 ottobre 2026) */
   utcOffset: "+02:00",
   description:
-    "Acate Book Festival, I edizione, 16-18 ottobre 2026: incontri con gli autori, teatro, laboratori per bambini e una mostra su Peppino Impastato. Ingresso libero.",
+    "Acate Book Festival, I edizione, 16-18 ottobre 2026: tre giornate su mafia, donne e immigrazione, con incontri, teatro, musica e laboratori. Ingresso libero.",
   dates: {
     start: "2026-10-16",
     end: "2026-10-18",
@@ -37,7 +37,7 @@ export const site = {
     short: "16–18 ottobre 2026",
   },
   hours: {
-    program: "17:00–20:00",
+    program: "17:00–20:30",
     exhibition: "17:00–22:00",
   },
   place: {
@@ -75,13 +75,6 @@ export const site = {
     vat: "06209750873",
     pec: "civikasrl@pec.it",
   },
-  partners: [
-    {
-      name: "Associazione Culturale Santa Briganti",
-      role: "Spettacoli, letture e laboratori",
-      url: "https://www.scenicafestival.it",
-    },
-  ],
 } as const;
 
 export type Site = typeof site;

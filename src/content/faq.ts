@@ -14,7 +14,7 @@ export const faq: FaqItem[] = [
   },
   {
     q: "Posso lasciare i bambini al laboratorio mentre seguo l'incontro?",
-    a: "Sì, è proprio l'idea: ogni pomeriggio i laboratori si svolgono alla Villa dei lettori mentre sul palco c'è l'incontro. Le età consigliate sono indicate nel programma, accanto a ogni laboratorio.",
+    a: "Sì: sabato e domenica i laboratori alla Villa dei lettori si tengono mentre sul palco va in scena il programma. Venerdì il laboratorio è dentro «A colpi di mantice», alle 18 sul Palco del Castello. Le età consigliate sono indicate nel programma, accanto a ogni laboratorio.",
   },
   {
     q: "E se piove?",
@@ -34,6 +34,6 @@ export const faq: FaqItem[] = [
   },
   {
     q: "Cosa conviene portare?",
-    a: "Dopo il tramonto, verso le 18:20, l'aria si fa fresca: una felpa è una buona idea. E se vuoi partecipare a «Leggi una pagina», porta il libro con la tua pagina.",
+    a: "Dopo il tramonto, verso le 18:20, l'aria si fa fresca: una felpa è una buona idea. E un libro da lasciare a «Radici di carta», lo scambio libri lungo il sentiero di luci.",
   },
 ];

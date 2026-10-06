@@ -11,7 +11,9 @@ anteprime social e sitemap si rigenerano da lì.
 ## Casi tipici
 
 **Cambio di orario** — modifica `start`/`end` della sessione (formato `HH:MM`). Se cambia l'ordine nella
-giornata non serve fare altro: la lista si ordina da sola.
+giornata non serve fare altro: la lista si ordina da sola. Gli orari compaiono anche nei testi scritti a mano:
+il racconto delle giornate in `src/content/venues.ts` (`intro`, `body`) e alcune pagine (`famiglie`, `lamiaradice`,
+home). Cercali con `grep -rn "19:30" src` e aggiornali insieme.
 
 **Spostamento di luogo (es. pioggia)** — sulla sessione:
 ```ts
@@ -24,8 +26,12 @@ e, se riguarda tutto il pomeriggio, aggiungi un avviso in `src/content/notices.t
 **Annullamento** — `status: "annullato"` con `statusNote` (il calendario .ics esporta STATUS:CANCELLED e il JSON-LD
 EventCancelled). Non cancellare la sessione: Google chiede di mantenere data e luogo originali.
 
-**Moderatori, titoli di libri confermati** — aggiorna `credits`, `book` o il testo `body` dell'attività.
-Solo dati confermati dall'organizzazione.
+**Moderatori, titoli di libri confermati** — `moderator` (compare come «Modera …»), `credits`, `book` o il testo
+`body` dell'attività. Solo dati confermati dall'organizzazione.
+
+**Ritratto di un ospite** — file in `src/assets/ospiti/<slug>.jpg` (ritaglio 3:4, almeno 900 px di larghezza),
+import in `src/content/guests.ts` e campo `photo`: schede, pagine delle giornate e home lo usano al posto della
+copertina disegnata.
 
 **Nuovo appuntamento** — aggiungi un oggetto in `activities` (o una sessione a un'attività esistente).
 `page: true` crea la scheda `/programma/<slug>`; `featured: true` lo evidenzia. Aggiorna `programUpdatedAt`.

@@ -3,6 +3,7 @@ import { Bookshelf } from "./bookshelf";
 import { Logotype } from "./logotype";
 import { ArrowRight, Calendar, Facebook, Instagram } from "./icons";
 import { buttonClass } from "./button";
+import { PartnerBand } from "./partner-band";
 import { footerNav, legalNav } from "@/content/navigation";
 import { site } from "@/content/site";
 
@@ -83,6 +84,8 @@ export function SiteFooter() {
           </div>
         </div>
 
+        <PartnerBand />
+
         <div className="border-t border-cream/15">
           <div className="container-festival grid gap-8 py-10 text-sm leading-relaxed text-cream/85 md:grid-cols-3">
             <div>
@@ -108,8 +111,6 @@ export function SiteFooter() {
               <p className="eyebrow eyebrow--plain text-teal-soft">Organizzazione</p>
               <p className="mt-3">
                 <span className="font-semibold text-cream">{site.production.name}</span>
-                <br />
-                in collaborazione con l&apos;Associazione Culturale Santa Briganti
               </p>
             </div>
           </div>

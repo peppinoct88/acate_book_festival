@@ -2,23 +2,26 @@
 
 /*
  * Acate Book Festival — design tokens
- * Palette campionata dal manifesto ufficiale della I edizione.
- * Contrasti WCAG verificati (vedi CLAUDE.md → "Colori e contrasti").
+ * Palette campionata dal manifesto definitivo della I edizione.
+ * Contrasti WCAG verificati (vedi CLAUDE.md → "Design system").
  */
 @theme {
   /* Superfici */
-  --color-cream: #fefaef; /* fondo del manifesto */
-  --color-paper: #f6eedc; /* pagine dei libri: card e sezioni alternate */
-  --color-ink: #1e154a; /* indaco di «BOOK»: testo e sezioni scure */
-  --color-ink-muted: #5c5684; /* testo secondario (6.4:1 su cream) */
+  --color-cream: #fff9e9; /* fondo del manifesto */
+  --color-paper: #f7edd6; /* pagine dei libri: card e sezioni alternate */
+  --color-ochre: #fccb89; /* le mura della chiesa: accenti caldi, testo su ink (9.3:1) */
+  --color-ink: #072a5f; /* testo e sezioni scure (13.3:1 su cream, 4.6:1 su coral) */
+  --color-ink-muted: #4c5a7c; /* testo secondario (6.5:1 su cream, 5.9:1 su paper) */
+  --color-navy: #093370; /* «BOOK» del manifesto: logotipo */
 
   /* Accenti */
-  --color-coral: #fd644f; /* «ACATE»: riempimenti, bottoni (testo ink), logotipo */
-  --color-coral-strong: #e8503b; /* testo grande su cream (≥ 24px) */
-  --color-coral-deep: #b8392a; /* testo piccolo corallo su cream/paper */
-  --color-teal: #68cbc8; /* il sole */
-  --color-teal-soft: #abded6; /* le nuvole */
-  --color-teal-deep: #1d6e6a; /* testo piccolo turchese su cream/paper */
+  --color-coral: #ff5e3e; /* «ACATE»: riempimenti, bottoni (testo ink), logotipo */
+  --color-coral-strong: #f0482a; /* testo grande su cream (≥ 24px) */
+  --color-coral-deep: #bd3518; /* testo piccolo corallo su cream/paper */
+  --color-teal: #269c9f; /* il sole: forme e illustrazioni, non sotto il testo piccolo */
+  --color-teal-light: #86cfcb; /* superfici turchesi con testo ink (7.8:1) */
+  --color-teal-soft: #cdeae5; /* le nuvole: fondi chiari, testo su ink */
+  --color-teal-deep: #176b6e; /* testo piccolo turchese su cream/paper, fondo con testo cream */
 
   /* Tipografia */
   --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
@@ -226,7 +229,7 @@
 
   /* Appuntamento in corso durante il festival (components/live-status.tsx) */
   [data-session][data-live="now"] {
-    background: linear-gradient(90deg, rgb(104 203 200 / 0.18), transparent 70%);
+    background: linear-gradient(90deg, rgb(38 156 159 / 0.16), transparent 70%);
   }
 
   /* Reveal allo scroll (progressive enhancement, vedi components/reveal.tsx) */

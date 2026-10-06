@@ -52,6 +52,9 @@ export function ProgramControls({
           .filter((e) => e.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
         if (visible[0]) setActive(visible[0].target.id);
+        // tornati in cima, sopra il primo giorno: torna attivo il primo
+        else if (sections[0] && sections[0].getBoundingClientRect().top > window.innerHeight * 0.3)
+          setActive(sections[0].id);
       },
       { rootMargin: "-30% 0px -60% 0px" },
     );
@@ -101,7 +104,7 @@ export function ProgramControls({
               type="button"
               aria-pressed={!kidsOnly}
               onClick={() => applyFilter(false)}
-              className="min-h-10 rounded-full px-4 font-display text-sm font-semibold text-ink transition-colors aria-pressed:bg-cream aria-pressed:shadow-[0_1px_3px_rgb(30_21_74/0.2)]"
+              className="min-h-10 rounded-full px-4 font-display text-sm font-semibold text-ink transition-colors aria-pressed:bg-cream aria-pressed:shadow-[0_1px_3px_rgb(7_42_95/0.2)]"
             >
               Tutto
             </button>
@@ -109,7 +112,7 @@ export function ProgramControls({
               type="button"
               aria-pressed={kidsOnly}
               onClick={() => applyFilter(true)}
-              className="min-h-10 rounded-full px-4 font-display text-sm font-semibold text-ink transition-colors aria-pressed:bg-teal-soft aria-pressed:shadow-[0_1px_3px_rgb(30_21_74/0.2)]"
+              className="min-h-10 rounded-full px-4 font-display text-sm font-semibold text-ink transition-colors aria-pressed:bg-teal-soft aria-pressed:shadow-[0_1px_3px_rgb(7_42_95/0.2)]"
             >
               <span aria-hidden="true">✦ </span>Bambini e ragazzi
             </button>

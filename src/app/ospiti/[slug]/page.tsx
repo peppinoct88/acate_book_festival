@@ -3,12 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { BookCover } from "@/components/book-cover";
+import { GuestVisual } from "@/components/guest-visual";
 import { SessionCard } from "@/components/session-card";
 import { ShareActions } from "@/components/share-actions";
 import { LiveStatus } from "@/components/live-status";
 import { JsonLd } from "@/components/json-ld";
 import { ArrowRight, ArrowUpRight } from "@/components/icons";
-import { getGuest, guests } from "@/content/guests";
+import { getGuest, guestName, guests } from "@/content/guests";
 import { sessionsForGuest } from "@/content/program";
 import { absoluteUrl } from "@/content/site";
 import { breadcrumbJsonLd, personJsonLd } from "@/lib/jsonld";
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: PageProps<"/ospiti/[slug]">):
   const { slug } = await params;
   const guest = getGuest(slug);
   if (!guest) return {};
-  const name = guest.type === "compagnia" ? "Associazione Culturale Santa Briganti" : guest.name;
+  const name = guestName(guest);
   return pageMetadata({
     title: name,
     description: `${name}, ${guest.role.toLowerCase()}, all'Acate Book Festival 2026. ${guest.short}`.slice(
@@ -42,7 +43,7 @@ export default async function GuestPage({ params }: PageProps<"/ospiti/[slug]">)
   if (!guest) notFound();
 
   const appearances = sessionsForGuest(slug);
-  const name = guest.type === "compagnia" ? "Associazione Culturale Santa Briganti" : guest.name;
+  const name = guestName(guest);
   const others = guests.filter((g) => g.slug !== slug);
 
   return (
@@ -66,7 +67,11 @@ export default async function GuestPage({ params }: PageProps<"/ospiti/[slug]">)
               </div>
             </div>
             <div className="group mx-auto w-56 sm:w-64 md:mx-0 md:w-full">
-              <BookCover title={guest.name} subtitle={guest.role} tone={guest.tone} />
+              <GuestVisual
+                guest={guest}
+                sizes="(min-width: 1024px) 21rem, (min-width: 768px) 17rem, 16rem"
+                priority
+              />
             </div>
           </div>
         </header>

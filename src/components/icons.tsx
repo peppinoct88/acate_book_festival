@@ -23,6 +23,14 @@ function Base({ size = 20, children, ...props }: IconProps) {
   );
 }
 
+export const Drum = (p: IconProps) => (
+  <Base {...p}>
+    <ellipse cx="12" cy="11.5" rx="8" ry="3" />
+    <path d="M4 11.5v5.5c0 1.7 3.6 3 8 3s8-1.3 8-3v-5.5M8 14.3l1.6 5.6M16 14.3l-1.6 5.6M12 14.5v5.5" />
+    <path d="m5.5 3.5 5 5M18.5 3.5l-5 5" />
+  </Base>
+);
+
 export const ArrowRight = (p: IconProps) => (
   <Base {...p}>
     <path d="M5 12h14M13 6l6 6-6 6" />

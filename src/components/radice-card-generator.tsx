@@ -7,11 +7,11 @@ import { Download, Share } from "./icons";
 const W = 1080;
 const H = 1350;
 const COLORS = {
-  cream: "#fefaef",
-  ink: "#1e154a",
-  coral: "#fd644f",
-  teal: "#68cbc8",
-  tealSoft: "#abded6",
+  cream: "#fff9e9",
+  ink: "#072a5f",
+  coral: "#ff5e3e",
+  teal: "#269c9f",
+  tealSoft: "#cdeae5",
   kraft: "#d9b98a",
   kraftDark: "#b8935e",
 };
@@ -304,7 +304,7 @@ export function RadiceCardGenerator({ hashtag }: { hashtag: string }) {
           <button
             type="submit"
             disabled={!ready || !name.trim()}
-            className="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-ink px-6 font-display font-semibold text-cream transition-[transform,background-color] hover:-translate-y-0.5 hover:bg-[#2c2266] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+            className="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-ink px-6 font-display font-semibold text-cream transition-[transform,background-color] hover:-translate-y-0.5 hover:bg-navy disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
           >
             <Download size={18} /> Scarica l&apos;immagine
           </button>
@@ -344,7 +344,7 @@ export function RadiceCardGenerator({ hashtag }: { hashtag: string }) {
           height={H}
           role="img"
           aria-label={altText}
-          className="h-auto w-full rounded-[1.5rem] shadow-[0_30px_60px_-30px_rgb(30_21_74/0.55)] ring-1 ring-ink/10"
+          className="h-auto w-full rounded-[1.5rem] shadow-[0_30px_60px_-30px_rgb(7_42_95/0.55)] ring-1 ring-ink/10"
         />
         <p className="mt-3 text-center font-display text-sm text-ink-muted">
           Anteprima · formato 4:5, 1080×1350
