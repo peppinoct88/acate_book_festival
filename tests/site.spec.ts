@@ -355,6 +355,44 @@ test("ritratti degli autori dove se ne parla", async ({ page }) => {
   await expect(page.getByRole("img", { name: "Ritratto di Giovanni Impastato" }).first()).toBeVisible();
 });
 
+test("home: le tre schede degli autori hanno le stesse misure", async ({ page }) => {
+  await page.goto("/");
+  const portraits = page.locator('section[aria-labelledby="gli-ospiti"] img[alt^="Ritratto di"]');
+  await expect(portraits).toHaveCount(3);
+  const sizes = await portraits.evaluateAll((imgs) =>
+    imgs.map((img) => ({
+      width: Math.round(img.getBoundingClientRect().width),
+      height: Math.round(img.getBoundingClientRect().height),
+      column: Math.round(img.closest("article")!.getBoundingClientRect().width),
+    })),
+  );
+  expect(new Set(sizes.map((s) => `${s.width}x${s.height}`)).size, JSON.stringify(sizes)).toBe(1);
+});
+
+test("copertine dei libri: le scritte restano dentro il libro", async ({ page }) => {
+  for (const path of [
+    "/",
+    "/ospiti",
+    "/ospiti/maria-antonietta-ferraloro",
+    "/giornate/immigrazione",
+    "/programma/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi",
+  ]) {
+    await page.goto(path);
+    const problems = await page.locator("[data-book-cover]").evaluateAll((covers) =>
+      covers.flatMap((cover) => {
+        const book = cover.firstElementChild as HTMLElement;
+        return [...book.querySelectorAll("p")]
+          .filter((p) => p.offsetHeight > 0)
+          .filter(
+            (p) => p.scrollWidth > p.clientWidth + 1 || p.offsetTop + p.offsetHeight > book.clientHeight - 2,
+          )
+          .map((p) => `${p.textContent} (${book.clientWidth}px)`);
+      }),
+    );
+    expect(problems, path).toEqual([]);
+  }
+});
+
 test("SEO tecnico: sitemap, robots, manifest", async ({ request }) => {
   const sitemap = await (await request.get("/sitemap.xml")).text();
   expect(sitemap).toContain("/programma/shuma");

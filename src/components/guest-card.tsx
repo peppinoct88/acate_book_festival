@@ -8,6 +8,8 @@ import { dayTones } from "@/lib/day-tone";
 
 /**
  * Card ospite. Su mobile (e con layout="row") è orizzontale: copertina piccola a sinistra.
+ * In colonna il ritratto prende tutta la larghezza (items-stretch): con items-start la sua misura
+ * dipenderebbe dal file e dal browser, e le schede affiancate non sarebbero uguali.
  */
 export function GuestCard({
   guest,
@@ -25,7 +27,7 @@ export function GuestCard({
   const row = layout === "row";
   return (
     <article
-      className={`group relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-5 ${row ? "sm:grid-cols-[8.5rem_minmax(0,1fr)]" : "sm:flex sm:flex-col sm:gap-0"}`}
+      className={`group relative grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-5 ${row ? "sm:grid-cols-[8.5rem_minmax(0,1fr)]" : "sm:flex sm:flex-col sm:items-stretch sm:gap-0"}`}
     >
       <GuestVisual
         guest={guest}

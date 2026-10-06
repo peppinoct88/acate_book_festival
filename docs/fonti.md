@@ -29,6 +29,7 @@ Ogni dato pubblicato sul sito viene da una di queste fonti. Prima di aggiungere 
   è quello di Santa Briganti dentro «A colpi di mantice» (tolti «Lettere di coraggio», «La pagella dei sogni»,
   i laboratori in parallelo e il braccialetto); non esistono il sentiero di luci né le cassette «Radici di carta».
   Ritratti di Giovanni Impastato, Maria Antonietta Ferraloro e Antonella Desirée Giuffrè forniti dall'organizzazione.
+  Ritagliati in 3:4 con la stessa inquadratura, senza altri interventi sull'immagine.
   Stemma ufficiale del Comune di Acate fornito dall'organizzazione (sostituisce quello ritagliato dal manifesto).
 - **Manifesto definitivo e loghi** (6 ottobre 2026): palette e illustrazione del sito; loghi di Santa Briganti,
   Mondadori Bookstore Vittoria, Banda Città di Acate e I Grifoni di Biscari. Lo stemma del Comune è ritagliato

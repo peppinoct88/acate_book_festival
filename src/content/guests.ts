@@ -9,7 +9,8 @@ import type { Guest } from "./types";
 /**
  * Ospiti della I edizione: autori, artisti e i gruppi musicali di Acate.
  * Le biografie usano solo dati verificati su fonti pubbliche (vedi docs/fonti.md).
- * Ritratti degli autori forniti dall'organizzazione (6 ottobre): src/assets/ospiti/<slug>.jpg + campo `photo`.
+ * Ritratti degli autori forniti dall'organizzazione (6 ottobre): src/assets/ospiti/<slug>.jpg + campo `photo`,
+ * ritagliati in 3:4 con la stessa inquadratura (occhi a un terzo dall'alto, volti della stessa grandezza).
  */
 export const guests: Guest[] = [
   {

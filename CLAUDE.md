@@ -29,7 +29,7 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
     e `/festival#crediti`). Nuove foto: workflow GitHub «Importa foto da Wikimedia Commons» (Commons non è
     raggiungibile dalle sessioni cloud); scarica in `src/assets/foto/commons/`, poi si ritaglia e si sposta in `src/assets/foto/`.
   - `partners.ts`: loghi dei partner nei crediti del footer (`components/footer-credits.tsx`, file in
-    `src/assets/partner/` preparati per fondo blu); stemmi di Regione e Comune a parte, su piastrella chiara.
+    `src/assets/partner/` preparati per fondo blu); stemmi di Regione e Comune a parte, senza sfondo.
   - `notices.ts`: avvisi in cima a tutte le pagine (maltempo, spostamenti) con scadenza automatica.
   - `site.ts`: URL, date, contatti, social, enti. I campi vuoti non vengono mostrati.
 - `src/app/` — pagine (server component). Client component solo dove serve interattività.
