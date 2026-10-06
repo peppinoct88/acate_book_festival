@@ -100,7 +100,7 @@ test("programma: il filtro «Bambini e ragazzi» mostra solo gli appuntamenti pe
   await page.goto("/programma");
   const rows = page.locator("#programma-lista li:has(> [data-session])");
   const total = await rows.count();
-  expect(total).toBeGreaterThan(15);
+  expect(total).toBeGreaterThanOrEqual(15);
   await page.getByRole("button", { name: /Bambini e ragazzi/ }).click();
   await expect(page.getByRole("button", { name: /Bambini e ragazzi/ })).toHaveAttribute(
     "aria-pressed",
@@ -110,7 +110,7 @@ test("programma: il filtro «Bambini e ragazzi» mostra solo gli appuntamenti pe
     (els) => els.filter((e) => getComputedStyle(e).display !== "none").length,
   );
   expect(visible).toBeLessThan(total);
-  expect(visible).toBeGreaterThan(5);
+  expect(visible).toBeGreaterThanOrEqual(4);
 });
 
 test("programma: la barra dei giorni segue lo scroll e in cima torna al venerdì", async ({ page }) => {
@@ -160,9 +160,9 @@ test("«Aggiungi al calendario»: le tre date in Google Calendar e il file per i
 });
 
 test("programma: con ?ora= durante il festival segna gli appuntamenti in corso", async ({ page }) => {
-  // sabato 18:10: la buca delle lettere, il laboratorio e il monologo sono in corso insieme
+  // sabato 18:10: la buca delle lettere e il monologo sono in corso insieme
   await page.goto("/programma?ora=2026-10-17T18:10");
-  await expect(page.locator("[data-live='now']")).toHaveCount(3);
+  await expect(page.locator("[data-live='now']")).toHaveCount(2);
 });
 
 test("scheda evento: dati strutturati Event validi", async ({ page }) => {
@@ -184,7 +184,7 @@ test("home: dati strutturati Festival", async ({ page }) => {
   const festival = blocks.map((b) => JSON.parse(b)).find((d) => d["@type"] === "Festival");
   expect(festival.startDate).toBe("2026-10-16T17:00:00+02:00");
   expect(festival.endDate).toBe("2026-10-18T22:00:00+02:00");
-  expect(festival.subEvent.length).toBeGreaterThanOrEqual(10);
+  expect(festival.subEvent.length).toBeGreaterThanOrEqual(8);
 });
 
 test("calendari .ics", async ({ request }) => {
@@ -244,6 +244,28 @@ test("le tre giornate: tema, colori e indirizzi brevi", async ({ page, request }
     maxRedirects: 0,
   });
   expect(renamed.headers()["location"]).toBe("/programma/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi");
+});
+
+test("contenuti corretti dall'organizzazione: niente palco coperto, piano pioggia o laboratori inesistenti", async ({
+  request,
+}) => {
+  for (const path of ["/", "/info", "/famiglie", "/programma", "/festival", "/lamiaradice"]) {
+    const html = await (await request.get(path)).text();
+    expect(html, path).not.toMatch(
+      /palco coperto|200 posti|sentiero di luci|braccialett|radici di carta|gazebo|entro le 15|pagella dei sogni/i,
+    );
+  }
+  const info = await (await request.get("/info")).text();
+  expect(info).toContain("via Archimede");
+});
+
+test("ritratti degli autori dove se ne parla", async ({ page }) => {
+  await page.goto("/ospiti");
+  for (const name of ["Giovanni Impastato", "Antonella Desirée Giuffrè", "Maria Antonietta Ferraloro"]) {
+    await expect(page.getByRole("img", { name: `Ritratto di ${name}` })).toBeVisible();
+  }
+  await page.goto("/giornate/mafia");
+  await expect(page.getByRole("img", { name: "Ritratto di Giovanni Impastato" }).first()).toBeVisible();
 });
 
 test("SEO tecnico: sitemap, robots, manifest", async ({ request }) => {

@@ -8,14 +8,14 @@ export interface NavItem {
 export const mainNav: NavItem[] = [
   { href: "/festival", label: "Il festival", description: "Il tema Radici, i format, chi lo fa" },
   { href: "/ospiti", label: "Ospiti", description: "Autori e compagnie della I edizione" },
-  { href: "/famiglie", label: "Famiglie", description: "Piccole radici: teatro e laboratori" },
+  { href: "/famiglie", label: "Famiglie", description: "Piccole radici: teatro e letture" },
   {
     href: "/mostra-peppino-impastato",
     label: "La mostra",
     description: "«Radici libere», Peppino Impastato",
   },
   { href: "/lamiaradice", label: "#LaMiaRadice", description: "Chi ti ha messo in mano il primo libro?" },
-  { href: "/info", label: "Info", description: "Come arrivare, se piove, domande frequenti" },
+  { href: "/info", label: "Info", description: "Come arrivare, accessibilità, domande frequenti" },
 ];
 
 export const programNav: NavItem = {
@@ -42,7 +42,6 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
       { href: "/adesso", label: "Adesso al festival" },
       { href: "/info#come-arrivare", label: "Come arrivare" },
       { href: "/info#luoghi", label: "I luoghi" },
-      { href: "/info#se-piove", label: "Se piove" },
       { href: "/info#domande", label: "Domande frequenti" },
     ],
   },

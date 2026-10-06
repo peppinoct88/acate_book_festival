@@ -14,7 +14,6 @@ import {
   Clock,
   Kids,
   Plane,
-  Rain,
   Ticket,
   Train,
 } from "@/components/icons";
@@ -28,7 +27,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Info, luoghi e come arrivare",
   description:
-    "Orari, luoghi, come arrivare ad Acate, cosa succede se piove e domande frequenti sull'Acate Book Festival, 16-18 ottobre 2026. Ingresso libero.",
+    "Orari, luoghi, come arrivare ad Acate, accessibilità e domande frequenti sull'Acate Book Festival, 16-18 ottobre 2026. Ingresso libero.",
   path: "/info",
   ownImage: true,
 });
@@ -41,7 +40,11 @@ const essentials = [
     text: "Appuntamenti dalle 17 alle 20:30 circa. La mostra resta aperta fino alle 22.",
   },
   { Icon: Ticket, title: "Ingresso", text: "Libero a tutti gli appuntamenti, senza prenotazione." },
-  { Icon: Kids, title: "Bambini", text: "Laboratori in parallelo agli incontri, con braccialetto numerato." },
+  {
+    Icon: Kids,
+    title: "Bambini",
+    text: "Venerdì alle 18 «A colpi di mantice», letture musicate e laboratorio. Domenica alle 19:30 «Shuma», dagli 8 anni.",
+  },
 ];
 
 const gettingThere = [
@@ -83,7 +86,6 @@ export default function InfoPage() {
             {[
               ["#luoghi", "I luoghi"],
               ["#come-arrivare", "Come arrivare"],
-              ["#se-piove", "Se piove"],
               ["#accessibilita", "Accessibilità"],
               ["#domande", "Domande frequenti"],
             ].map(([href, label]) => (
@@ -117,17 +119,17 @@ export default function InfoPage() {
               <p className="eyebrow text-ink">Dove</p>
               <h2 id="luoghi-titolo" className="mt-4 font-display text-title">
                 <span className="font-black">Due luoghi,</span>{" "}
-                <span className="font-light">a due passi</span>
+                <span className="font-light">nel centro storico</span>
               </h2>
               <div className="prose-festival mt-6">
                 <p>
-                  Il <strong>Palco del Castello</strong> è nell&apos;area davanti al Castello dei Principi di
-                  Biscari: qui si tengono gli incontri con gli autori e gli spettacoli.
+                  Il <strong>Palco del Castello</strong> è all&apos;aperto, in via Archimede, di fronte al
+                  Castello dei Principi di Biscari: qui si tengono gli incontri con gli autori e gli
+                  spettacoli.
                 </p>
                 <p>
-                  La <strong>Villa dei lettori</strong> è nella villa comunale, a circa cinquanta metri lungo
-                  il sentiero di luci: qui trovi l&apos;accoglienza, la mostra, il bookshop, i laboratori e
-                  l&apos;Albero delle radici.
+                  La <strong>Villa dei lettori</strong> è nella villa comunale: qui trovi l&apos;accoglienza,
+                  la mostra, il bookshop e l&apos;Albero delle radici.
                 </p>
                 <p>
                   Il <strong>Comune di Acate</strong> è in {site.organizer.address}.
@@ -168,28 +170,6 @@ export default function InfoPage() {
           />
         </section>
 
-        <section id="se-piove" aria-labelledby="pioggia-titolo" className="scroll-mt-28 pt-24">
-          <div className="grid gap-8 rounded-[2rem] bg-ink p-8 text-cream sm:p-12 lg:grid-cols-[auto_1fr]">
-            <span className="inline-flex size-16 items-center justify-center rounded-full bg-teal text-ink">
-              <Rain size={30} />
-            </span>
-            <div>
-              <h2 id="pioggia-titolo" className="font-display text-title">
-                <span className="font-black">Se piove</span>
-              </h2>
-              <p className="mt-4 max-w-[62ch] font-serif text-lg leading-relaxed text-cream/90">
-                Il palco è coperto, la mostra e i laboratori sono in gazebo chiusi. Se il tempo costringe a
-                spostare gli incontri in una sala al chiuso, lo annunciamo in cima a ogni pagina di questo
-                sito e sui canali social del festival{" "}
-                <strong className="text-cream">entro le 15 del giorno stesso</strong>.
-              </p>
-              <p className="mt-3 font-serif text-lg text-cream/90">
-                In ogni caso, dopo il tramonto l&apos;aria si fa fresca: porta una felpa.
-              </p>
-            </div>
-          </div>
-        </section>
-
         <section id="accessibilita" aria-labelledby="accessibilita-titolo" className="scroll-mt-28 pt-24">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
             <div>
@@ -203,7 +183,7 @@ export default function InfoPage() {
                 {
                   Icon: Accessibility,
                   t: "Spazi all'aperto",
-                  d: "Gli appuntamenti si svolgono all'aperto, tra la piazza del Castello e la villa comunale. Se hai bisogno di un posto riservato o di essere accompagnato, rivolgiti all'accoglienza della Villa dei lettori o ai volontari «Radici»: ti aiutiamo noi.",
+                  d: "Gli appuntamenti si svolgono all'aperto, tra via Archimede, di fronte al Castello, e la villa comunale. Se hai bisogno di un posto riservato o di essere accompagnato, rivolgiti all'accoglienza della Villa dei lettori o ai volontari «Radici»: ti aiutiamo noi.",
                 },
                 {
                   Icon: Books,
@@ -213,7 +193,7 @@ export default function InfoPage() {
                 {
                   Icon: Camera,
                   t: "Foto e riprese",
-                  d: "Gli appuntamenti vengono fotografati e ripresi per raccontare il festival. Per i minori dei laboratori chiediamo il consenso di un genitore.",
+                  d: "Gli appuntamenti vengono fotografati e ripresi per raccontare il festival. Per i minori del laboratorio di «A colpi di mantice» chiediamo il consenso di un genitore.",
                 },
               ].map(({ Icon, t, d }) => (
                 <li key={t} className="flex gap-5 rounded-[1.5rem] bg-paper p-6">

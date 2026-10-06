@@ -6,7 +6,7 @@ import type { Activity, Audience, DayId, Kind, Session } from "./types";
  * PROGRAMMA DEFINITIVO — fonti: «Acate Book Festival 2026 · Radici — Programma definitivo» (4 ottobre),
  * contratto con Santa Briganti (6 ottobre) e indicazioni dell'organizzazione (6 ottobre: temi delle giornate,
  * banda e tamburi, monologo, moderatore, titolo dell'incontro con Maria Antonietta Ferraloro; senza rito della
- * luce, seminatrici di oggi e saluti finali).
+ * luce, seminatrici di oggi e saluti finali; l'unico laboratorio è dentro «A colpi di mantice»).
  * Per modificare un orario o aggiungere un avviso su un singolo appuntamento
  * basta cambiare la sessione qui: pagine, calendari .ics, dati strutturati e anteprime si aggiornano da soli.
  * Per segnalare uno spostamento: status: "spostato", statusNote: "Si sposta in ...".
@@ -15,9 +15,6 @@ export const programUpdatedAt = "2026-10-06";
 
 const forAll: Audience = { label: "Per tutti", kids: false };
 const families: Audience = { label: "Per tutti", kids: true };
-
-const braccialetto =
-  "Consegna e ritiro dei bambini con braccialetto numerato, all'accoglienza della Villa dei lettori.";
 
 export const activities: Activity[] = [
   // ───────────────────────── VENERDÌ 16 · Mafia · Radici della memoria
@@ -71,7 +68,7 @@ export const activities: Activity[] = [
     body: [
       "Una voce, una fisarmonica e una pila di libri: «A colpi di mantice» è una lettura ad alta voce musicata dal vivo, dedicata a bambini e ragazzi. Subito dopo la lettura, sul posto, comincia il laboratorio: in tutto, circa un'ora.",
       "È di e con Veronica Caggia e Peppe Macauda, dell'Associazione Culturale Santa Briganti di Vittoria, che da anni porta la lettura ad alta voce nelle scuole, nelle biblioteche e nelle piazze. Quest'anno c'è una sola replica: venerdì alle 18, sul Palco del Castello.",
-      "Le prime file della platea, con i cuscini, sono per i bambini. Alle 19, sullo stesso palco, l'incontro con Giovanni Impastato.",
+      "Alle 19, sullo stesso palco, l'incontro con Giovanni Impastato.",
     ],
     guests: ["santa-briganti"],
     credits: ["di e con Veronica Caggia e Peppe Macauda", "Associazione Culturale Santa Briganti"],
@@ -164,23 +161,6 @@ export const activities: Activity[] = [
     sessions: [{ day: "sab", start: "17:00", end: "20:00", venue: "villa" }],
   },
   {
-    slug: "lettere-di-coraggio",
-    title: "Lettere di coraggio",
-    kicker: "Laboratorio per ragazzi",
-    kind: "laboratorio",
-    summary:
-      "Ispirato alle seminatrici di coraggio della Grande Guerra: a chi scriveresti per dargli coraggio?",
-    body: [
-      "Più di cento anni fa, durante la Grande Guerra, le «seminatrici di coraggio» portavano notizie dal fronte alle famiglie e scrivevano ai soldati lontani. Il laboratorio parte da quella storia, raccontata nel romanzo di Antonella Desirée Giuffrè, per chiedere ai ragazzi: a chi scriveresti per dargli coraggio? E chi ha dato coraggio a te?",
-      "Si scrive, si disegna, si cercano le parole giuste da mettere in una lettera. Il laboratorio si tiene alla Villa dei lettori mentre sul Palco del Castello va in scena il monologo sulle donne di Matilde Masaracchio.",
-    ],
-    credits: ["A cura degli educatori del festival"],
-    practical: [braccialetto],
-    audience: { label: "8–13 anni", kids: true, minAge: 8, maxAge: 13 },
-    page: true,
-    sessions: [{ day: "sab", start: "17:45", end: "18:45", venue: "villa" }],
-  },
-  {
     slug: "monologo-sulle-donne",
     title: "Un monologo sulle donne",
     kicker: "Teatro · Matilde Masaracchio",
@@ -230,23 +210,6 @@ export const activities: Activity[] = [
     audience: forAll,
     page: false,
     sessions: [{ day: "dom", start: "17:00", end: "17:30", venue: "palco" }],
-  },
-  {
-    slug: "la-pagella-dei-sogni",
-    title: "La pagella dei sogni",
-    kicker: "Laboratorio per bambini",
-    kind: "laboratorio",
-    summary:
-      "Ogni bambino scrive la sua pagella dei sogni, cosa sa fare e cosa vuole imparare, e la porta allo spettacolo delle 19:30.",
-    body: [
-      "Una pagella diversa da tutte le altre: niente voti, solo quello che sai fare e quello che vuoi imparare. Ogni bambino scrive e decora la sua «pagella dei sogni» alla Villa dei lettori.",
-      "Poi la porta con sé allo spettacolo delle 19:30, «Shuma», ispirato alla storia vera di un ragazzo del Mali che nel naufragio del 18 aprile 2015 portava la pagella cucita nella giacca. Si arriva in platea con qualcosa di prezioso in tasca.",
-    ],
-    credits: ["A cura degli educatori del festival"],
-    practical: [braccialetto],
-    audience: { label: "6–11 anni", kids: true, minAge: 6, maxAge: 11 },
-    page: true,
-    sessions: [{ day: "dom", start: "17:45", end: "18:40", venue: "villa" }],
   },
   {
     slug: "il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi",
@@ -415,12 +378,6 @@ export const alwaysOn = [
     when: "Sempre",
     text: "Appendi il nome di chi ti ha messo in mano il primo libro.",
     href: "/lamiaradice",
-  },
-  {
-    title: "Radici di carta",
-    when: "Sempre",
-    text: "Scambio libri lungo il sentiero di luci: prendi un libro, lasciane un altro.",
-    href: "/festival#radici-di-carta",
   },
   {
     title: "Indovina il classico",

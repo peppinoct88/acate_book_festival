@@ -24,6 +24,11 @@ Ogni dato pubblicato sul sito viene da una di queste fonti. Prima di aggiungere 
   [Assessorato delle autonomie locali e della funzione pubblica](https://www.regione.sicilia.it/istituzioni/regione/strutture-regionali/assessorato-autonomie-locali-funzione-pubblica).
   Lo stemma è il file di Wikimedia Commons [Coat of arms of Sicily (president website)](https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Sicily_(president_website).svg)
   (Dmytrosk2024, CC BY-SA 4.0), con colori e contorno adattati allo stemma inviato dall'organizzazione.
+- **Correzioni dell'organizzazione** (6 ottobre 2026, sera): il Palco del Castello è in via Archimede, di fronte
+  al castello, all'aperto e senza i 200 posti; niente piano pioggia (non c'è un palco coperto); l'unico laboratorio
+  è quello di Santa Briganti dentro «A colpi di mantice» (tolti «Lettere di coraggio», «La pagella dei sogni»,
+  i laboratori in parallelo e il braccialetto); non esistono il sentiero di luci né le cassette «Radici di carta».
+  Ritratti di Giovanni Impastato, Maria Antonietta Ferraloro e Antonella Desirée Giuffrè forniti dall'organizzazione.
 - **Manifesto definitivo e loghi** (6 ottobre 2026): palette e illustrazione del sito; loghi di Santa Briganti,
   Mondadori Bookstore Vittoria, Banda Città di Acate e I Grifoni di Biscari. Lo stemma del Comune è ritagliato
   dal manifesto.
@@ -110,7 +115,7 @@ I ritratti degli autori, quando arrivano, sono forniti dall'organizzazione con i
 
 Non pubblicato finché non arriva una conferma:
 
-- indirizzo esatto del castello e nome della villa comunale (sul sito si usano i nomi dei luoghi e i link alle mappe);
+- nome e indirizzo della villa comunale (sul sito si usano il nome del luogo e il link alla mappa);
 - titolo del monologo di Matilde Masaracchio; biografia e ruolo di Giorgio Straquadanio;
 - moderatori degli incontri di sabato e domenica; biografie di Peppe Macauda e Dario Muratore;
 - profili social del festival.

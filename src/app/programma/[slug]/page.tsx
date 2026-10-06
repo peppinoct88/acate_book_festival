@@ -10,7 +10,7 @@ import { GuestCard } from "@/components/guest-card";
 import { SessionCard } from "@/components/session-card";
 import { LiveStatus } from "@/components/live-status";
 import { JsonLd } from "@/components/json-ld";
-import { ArrowLeft, ArrowRight, Clock, Info, Rain, Users } from "@/components/icons";
+import { ArrowLeft, ArrowRight, Clock, Info, Users } from "@/components/icons";
 import { getGuest } from "@/content/guests";
 import {
   getActivity,
@@ -272,15 +272,6 @@ export default async function ActivityPage({ params }: PageProps<"/programma/[sl
                       <span>{p}</span>
                     </li>
                   ))}
-                  <li className="flex gap-3">
-                    <Rain size={19} className="mt-0.5 shrink-0" />
-                    <span>
-                      Se piove, eventuali spostamenti sono annunciati entro le 15.{" "}
-                      <Link href="/info#se-piove" className="underline underline-offset-2">
-                        Cosa succede
-                      </Link>
-                    </span>
-                  </li>
                 </ul>
               </div>
 

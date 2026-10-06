@@ -48,6 +48,9 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
   (`site.funding`: «Regione Siciliana – Assessorato delle Autonomie Locali e della Funzione Pubblica», D.D.G.):
   è un obbligo dell'avviso, non va tolto né abbreviato (i test lo controllano).
 - Foto solo con licenza libera e crediti visibili; niente immagini di persone reali in difficoltà (naufragi, migranti).
+- Correzioni dell'organizzazione (6 ottobre, `docs/fonti.md`): il Palco del Castello è all'aperto in via Archimede,
+  senza numero di posti; niente piano pioggia; l'unico laboratorio è dentro «A colpi di mantice»; non esistono
+  sentiero di luci, «Radici di carta» né braccialetti. Un test blocca queste frasi.
 - La pagina della mostra su Peppino Impastato ha tono sobrio: niente giochi di parole.
 - Il logo/lettering del manifesto è ricomposto con Outfit (`components/logotype.tsx`): non sostituirlo con immagini.
 

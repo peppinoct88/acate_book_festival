@@ -5,6 +5,7 @@ import { join } from "node:path";
 /**
  * Anteprime social (1200×630) generate in build con next/og.
  * Tipografia Outfit (TTF in src/assets/fonts) e torre di libri del manifesto definitivo, col suo sole turchese.
+ * Per gli autori, al posto della torre il ritratto in un cerchio (src/assets/ospiti/<slug>.jpg).
  */
 export const ogSize = { width: 1200, height: 630 };
 export const ogContentType = "image/png";
@@ -38,12 +39,25 @@ function load() {
 
 type Tone = "cream" | "ink" | "coral" | "teal";
 
-const palette: Record<Tone, { bg: string; fg: string; acate: string; accent: string }> = {
-  cream: { bg: "#fff9e9", fg: "#093370", acate: "#ff5e3e", accent: "#ff5e3e" },
-  ink: { bg: "#072a5f", fg: "#fff9e9", acate: "#ff5e3e", accent: "#ff5e3e" },
-  coral: { bg: "#ff5e3e", fg: "#072a5f", acate: "#fff9e9", accent: "#072a5f" },
-  teal: { bg: "#176b6e", fg: "#fff9e9", acate: "#fccb89", accent: "#fccb89" },
+const palette: Record<Tone, { bg: string; fg: string; acate: string; accent: string; sun: string }> = {
+  cream: { bg: "#fff9e9", fg: "#093370", acate: "#ff5e3e", accent: "#ff5e3e", sun: "#269c9f" },
+  ink: { bg: "#072a5f", fg: "#fff9e9", acate: "#ff5e3e", accent: "#ff5e3e", sun: "#269c9f" },
+  coral: { bg: "#ff5e3e", fg: "#072a5f", acate: "#fff9e9", accent: "#072a5f", sun: "#fccb89" },
+  teal: { bg: "#176b6e", fg: "#fff9e9", acate: "#fccb89", accent: "#fccb89", sun: "#ff5e3e" },
 };
+
+const portraits = new Map<string, Promise<string>>();
+
+/** Ritratto come data URL; `file` è relativo a src/assets (es. «ospiti/giovanni-impastato.jpg») */
+function portraitData(file: string) {
+  if (!portraits.has(file)) {
+    portraits.set(
+      file,
+      readFile(join(assets, file)).then((data) => `data:image/jpeg;base64,${data.toString("base64")}`),
+    );
+  }
+  return portraits.get(file)!;
+}
 
 export async function renderOg({
   eyebrow,
@@ -51,14 +65,18 @@ export async function renderOg({
   subtitle,
   meta,
   tone = "cream",
+  portrait,
 }: {
   eyebrow: string;
   title: string;
   subtitle?: string;
   meta?: string;
   tone?: Tone;
+  /** File del ritratto, relativo a src/assets */
+  portrait?: string;
 }) {
   const { fonts, tower } = await load();
+  const portraitSrc = portrait ? await portraitData(portrait) : null;
   const c = palette[tone];
   const titleSize = title.length > 46 ? 58 : title.length > 30 ? 70 : title.length > 18 ? 84 : 100;
 
@@ -74,14 +92,40 @@ export async function renderOg({
         overflow: "hidden",
       }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- JSX di next/og (Satori), non del DOM */}
-      <img
-        src={tower}
-        alt=""
-        width={380}
-        height={751}
-        style={{ position: "absolute", right: 0, bottom: -70, width: 380, height: 751 }}
-      />
+      {portraitSrc ? (
+        <div
+          style={{
+            position: "absolute",
+            right: 52,
+            top: 128,
+            width: 364,
+            height: 364,
+            borderRadius: 9999,
+            background: c.sun,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element -- JSX di next/og (Satori), non del DOM */}
+          <img
+            src={portraitSrc}
+            alt=""
+            width={330}
+            height={330}
+            style={{ width: 330, height: 330, borderRadius: 9999, objectFit: "cover" }}
+          />
+        </div>
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element -- JSX di next/og (Satori), non del DOM
+        <img
+          src={tower}
+          alt=""
+          width={380}
+          height={751}
+          style={{ position: "absolute", right: 0, bottom: -70, width: 380, height: 751 }}
+        />
+      )}
       <div
         style={{
           display: "flex",

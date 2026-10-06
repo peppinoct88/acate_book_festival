@@ -71,7 +71,8 @@ export default function PrivacyPage() {
           <p>
             Gli appuntamenti del festival vengono fotografati e ripresi per raccontarli sul sito e sui canali
             del festival. Se non vuoi essere ripreso puoi dirlo al personale dell&apos;accoglienza. Per i
-            minori che partecipano ai laboratori chiediamo il consenso firmato di un genitore.
+            minori che partecipano al laboratorio di «A colpi di mantice» chiediamo il consenso firmato di un
+            genitore.
           </p>
 
           <h2>I tuoi diritti</h2>

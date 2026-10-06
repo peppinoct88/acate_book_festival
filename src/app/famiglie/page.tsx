@@ -12,7 +12,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Piccole radici: per le famiglie",
   description:
-    "Teatro, letture musicate e laboratori per bambini e ragazzi all'Acate Book Festival, 16-18 ottobre 2026, mentre i genitori seguono gli incontri.",
+    "Teatro e letture musicate per bambini e ragazzi all'Acate Book Festival, 16-18 ottobre 2026: «A colpi di mantice», il Gattopardo raccontato ai ragazzi e «Shuma». Ingresso libero.",
   path: "/famiglie",
   ownImage: true,
 });
@@ -20,23 +20,23 @@ export const metadata: Metadata = pageMetadata({
 const howItWorks = [
   {
     Icon: Kids,
-    title: "Mentre i grandi ascoltano",
-    text: "Sabato e domenica i laboratori si svolgono alla Villa dei lettori mentre sul palco va in scena il programma: i genitori ascoltano, i bambini creano.",
+    title: "Letture e laboratorio",
+    text: "Venerdì alle 18, sul Palco del Castello, «A colpi di mantice»: fiabe e albi illustrati letti con la musica dal vivo, poi il laboratorio di Santa Briganti. In tutto, circa un'ora.",
   },
   {
     Icon: Ticket,
-    title: "Braccialetto numerato",
-    text: "All'accoglienza della Villa dei lettori ogni bambino riceve un braccialetto: si consegna e si ritira con quello.",
+    title: "Ingresso libero",
+    text: "Tutti gli appuntamenti sono gratuiti e senza prenotazione: basta venire.",
   },
   {
     Icon: Tree,
-    title: "In prima fila",
-    text: "Davanti al Palco del Castello le prime file della platea hanno i cuscini: sono per i bambini.",
+    title: "L'Albero delle radici",
+    text: "Alla Villa dei lettori i bambini appendono il nome di chi ha messo loro in mano il primo libro.",
   },
   {
     Icon: Letter,
     title: "Ognuno alla sua età",
-    text: "Accanto a ogni appuntamento trovi l'età consigliata. «A colpi di mantice», venerdì alle 18, è per bambini e ragazzi, con il laboratorio subito dopo la lettura.",
+    text: "Accanto a ogni appuntamento trovi l'età consigliata: «Shuma», domenica alle 19:30, è consigliato dagli 8 anni.",
   },
 ];
 
@@ -47,9 +47,9 @@ export default function FamiliesPage() {
         tone="teal"
         eyebrow="Per le famiglie"
         title="Piccole radici:"
-        light="teatro e laboratori."
+        light="teatro e letture."
         crumbs={[{ name: "Famiglie" }]}
-        intro="Venerdì letture musicate e laboratorio con «A colpi di mantice»; sabato e domenica i laboratori alla Villa dei lettori, e domenica sera «Shuma». Tutto a ingresso libero, senza prenotazione."
+        intro="Venerdì letture musicate e laboratorio con «A colpi di mantice»; domenica il Gattopardo raccontato alle ragazze e ai ragazzi e, la sera, «Shuma». Tutto a ingresso libero, senza prenotazione."
       />
 
       <section aria-labelledby="come-funziona" className="container-festival pt-16 sm:pt-20">
@@ -98,8 +98,7 @@ export default function FamiliesPage() {
             </h2>
             <p className="mt-4 max-w-[56ch] font-serif text-lg leading-relaxed text-cream/90">
               Domenica alle 19:30 lo spettacolo di Peppe Macauda chiude il festival: un bambino caduto in mare
-              e un lungo viaggio verso il «SopraSopra». Consigliato dagli 8 anni. Prima, alle 17:45, il
-              laboratorio «La pagella dei sogni» prepara i più piccoli allo spettacolo.
+              e un lungo viaggio verso il «SopraSopra». Consigliato dagli 8 anni.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 lg:justify-end">
@@ -110,7 +109,7 @@ export default function FamiliesPage() {
         </section>
 
         <p className="mt-12 font-serif text-lg text-ink/85">
-          Per le domande pratiche (pioggia, foto, cosa portare) c&apos;è la pagina{" "}
+          Per le domande pratiche (foto, cosa portare, come arrivare) c&apos;è la pagina{" "}
           <Link href="/info#domande" className="text-coral-deep underline underline-offset-4">
             Info e domande frequenti
           </Link>

@@ -29,7 +29,7 @@ export const site = {
   /** Offset UTC valido per le date del festival (ora legale fino al 25 ottobre 2026) */
   utcOffset: "+02:00",
   description:
-    "Acate Book Festival, I edizione, 16-18 ottobre 2026: tre giornate su mafia, donne e immigrazione, con incontri, teatro, musica e laboratori. Ingresso libero.",
+    "Acate Book Festival, I edizione, 16-18 ottobre 2026: tre giornate su mafia, donne e immigrazione, con incontri, teatro, musica e una mostra. Ingresso libero.",
   dates: {
     start: "2026-10-16",
     end: "2026-10-18",

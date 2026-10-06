@@ -53,6 +53,13 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       { source: "/programma/rito-della-luce", destination: "/programma", permanent: true },
+      // laboratori tolti il 6 ottobre: l'unico laboratorio è dentro «A colpi di mantice»
+      {
+        source: "/programma/lettere-di-coraggio",
+        destination: "/programma/la-buca-delle-lettere-di-coraggio",
+        permanent: true,
+      },
+      { source: "/programma/la-pagella-dei-sogni", destination: "/programma/shuma", permanent: true },
       {
         source: "/programma/il-gattopardo-raccontato-ai-nostri-figli",
         destination: "/programma/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi",

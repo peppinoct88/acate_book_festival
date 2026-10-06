@@ -13,7 +13,7 @@ export function VenueMap({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
   return (
     <div className="relative">
       <div className="rounded-t-[1.5rem] border-2 border-b-0 border-ink/80 bg-paper px-5 py-3 text-center font-display text-sm font-semibold tracking-[0.16em] text-ink uppercase">
-        Facciata del Castello dei Principi di Biscari
+        Via Archimede · di fronte al Castello dei Principi di Biscari
       </div>
 
       <section
@@ -42,10 +42,9 @@ export function VenueMap({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
           </a>
         </div>
         <p className="mt-2 font-serif text-ink/85">{palco.description}</p>
-        <ul className="mt-5 grid gap-2.5 sm:grid-cols-3">
+        <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
           {[
-            ["Palco coperto", "incontri e spettacoli"],
-            ["Platea, 200 posti", "prime file con cuscini per i bambini"],
+            ["All'aperto", "incontri, teatro e musica"],
             ["Ledwall", "le foto #LaMiaRadice"],
           ].map(([t, d]) => (
             <li key={t} className="rounded-xl border border-ink/15 bg-cream px-4 py-3">
@@ -56,30 +55,9 @@ export function VenueMap({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
         </ul>
       </section>
 
-      <div className="relative flex items-center gap-4 py-6 pl-[2.1rem] sm:pl-[2.6rem]">
-        <span
-          aria-hidden="true"
-          className="absolute inset-y-0 left-[2.35rem] w-0 border-l-[3px] border-dotted border-coral sm:left-[2.85rem]"
-        />
-        <span aria-hidden="true" className="relative z-10 flex flex-col gap-1.5">
-          {[0, 1, 2].map((i) => (
-            <span
-              key={i}
-              className="size-2 rounded-full bg-[#ffd27a] shadow-[0_0_10px_2px_rgb(255_210_122/0.7)]"
-            />
-          ))}
-        </span>
-        <p className="font-display text-[0.95rem] font-semibold text-ink">
-          Sentiero di luci · circa 50 metri
-          <span className="block font-light text-ink-muted">
-            con le cassette dello scambio libri «Radici di carta»
-          </span>
-        </p>
-      </div>
-
       <section
         aria-labelledby="mappa-villa"
-        className="rounded-[1.5rem] border-2 border-ink/80 bg-cream p-5 sm:p-7"
+        className="mt-5 rounded-[1.5rem] border-2 border-ink/80 bg-cream p-5 sm:p-7"
       >
         <div className="flex flex-wrap items-center justify-between gap-3">
           <H
@@ -105,11 +83,10 @@ export function VenueMap({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
         <p className="mt-2 font-serif text-ink/85">{villa.description}</p>
         <ul className="mt-5 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            ["Accoglienza", "informazioni e braccialetti per i laboratori"],
-            ["Mostra «Radici libere»", "galleria coperta, aperta fino alle 22"],
+            ["Accoglienza", "informazioni sul festival"],
+            ["Mostra «Radici libere»", "aperta fino alle 22"],
             ["Bookshop", "i libri degli ospiti e le firmacopie"],
             ["Albero delle radici", "#LaMiaRadice"],
-            ["Angolo laboratori", "mentre i genitori ascoltano"],
             ["Indovina il classico", "e la buca delle lettere (sabato)"],
           ].map(([t, d]) => (
             <li key={t} className="rounded-xl border border-ink/15 bg-cream px-4 py-3">

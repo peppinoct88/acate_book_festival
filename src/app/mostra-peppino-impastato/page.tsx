@@ -132,9 +132,6 @@ export default function ExhibitionPage() {
           </h2>
           <ul className="prose-festival mt-6">
             <li>
-              Tre gazebo chiusi formano una galleria coperta di nove metri, al riparo da vento e pioggia.
-            </li>
-            <li>
               Dopo il tramonto la mostra è illuminata: è l&apos;unico spazio del festival aperto fino alle 22.
             </li>
             <li>

@@ -1,3 +1,6 @@
+import giuffrePhoto from "@/assets/ospiti/antonella-desiree-giuffre.jpg";
+import impastatoPhoto from "@/assets/ospiti/giovanni-impastato.jpg";
+import ferraloroPhoto from "@/assets/ospiti/maria-antonietta-ferraloro.jpg";
 import bandaLogo from "@/assets/partner/banda-citta-di-acate.png";
 import grifoniLogo from "@/assets/partner/grifoni-di-biscari.png";
 import santaBrigantiLogo from "@/assets/partner/santa-briganti.png";
@@ -6,7 +9,7 @@ import type { Guest } from "./types";
 /**
  * Ospiti della I edizione: autori, artisti e i gruppi musicali di Acate.
  * Le biografie usano solo dati verificati su fonti pubbliche (vedi docs/fonti.md).
- * Per aggiungere una foto: file in src/assets/ospiti/<slug>.jpg, import qui sopra e campo `photo`.
+ * Ritratti degli autori forniti dall'organizzazione (6 ottobre): src/assets/ospiti/<slug>.jpg + campo `photo`.
  */
 export const guests: Guest[] = [
   {
@@ -32,6 +35,7 @@ export const guests: Guest[] = [
       },
     ],
     tone: "ink",
+    photo: impastatoPhoto,
     type: "persona",
   },
   {
@@ -54,6 +58,7 @@ export const guests: Guest[] = [
       },
     ],
     tone: "coral",
+    photo: giuffrePhoto,
     type: "persona",
   },
   {
@@ -84,6 +89,7 @@ export const guests: Guest[] = [
       { title: "L'opera-orologio. Saggi sul Gattopardo", publisher: "Pacini Editore" },
     ],
     tone: "teal",
+    photo: ferraloroPhoto,
     type: "persona",
   },
   {

@@ -28,12 +28,12 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Il festival e il tema Radici",
   description:
-    "L'Acate Book Festival è la nuova festa del libro di Acate (RG): tre giornate su mafia, donne e immigrazione, una mostra, musica e laboratori per i bambini.",
+    "L'Acate Book Festival è la nuova festa del libro di Acate (RG): tre giornate su mafia, donne e immigrazione, una mostra, musica e teatro per i bambini.",
   path: "/festival",
   ownImage: true,
 });
 
-const formatCount: Record<number, string> = { 6: "Sei", 7: "Sette", 8: "Otto", 9: "Nove" };
+const formatCount: Record<number, string> = { 4: "Quattro", 5: "Cinque", 6: "Sei", 7: "Sette", 8: "Otto" };
 
 const icons: Record<Format["icon"], typeof Light> = {
   light: Light,
@@ -159,10 +159,11 @@ export default function FestivalPage() {
             </p>
             <p>
               L&apos;organizzazione è di <strong>{site.production.name}</strong>, in collaborazione con
-              l&apos;<strong>Associazione Culturale Santa Briganti</strong> di Vittoria, che firma letture,
-              laboratori e lo spettacolo di chiusura, con la <strong>Banda Città di Acate</strong> e{" "}
-              <strong>I Grifoni di Biscari – Tamburi di Acate</strong>, che aprono le giornate, e con{" "}
-              <strong>Mondadori Bookstore Vittoria</strong>, la libreria partner.
+              l&apos;<strong>Associazione Culturale Santa Briganti</strong> di Vittoria, che firma «A colpi di
+              mantice», letture musicate con laboratorio, e lo spettacolo di chiusura, con la{" "}
+              <strong>Banda Città di Acate</strong> e <strong>I Grifoni di Biscari – Tamburi di Acate</strong>
+              , che aprono le giornate, e con <strong>Mondadori Bookstore Vittoria</strong>, la libreria
+              partner.
             </p>
             <p>
               Ad accogliervi ci sono i volontari «Radici», con la maglietta del festival: come le «magliette
@@ -175,7 +176,6 @@ export default function FestivalPage() {
           <h2 className="mt-4 font-display text-2xl font-black">Quello che resta ad Acate</h2>
           <ul className="prose-festival mt-6">
             <li>Una selezione dei libri presentati viene donata alla Biblioteca comunale.</li>
-            <li>Le cassette di «Radici di carta» restano alla villa come piccola biblioteca libera.</li>
             <li>L&apos;audio degli incontri diventa l&apos;archivio del festival.</li>
             <li>E l&apos;appuntamento con la seconda edizione, nel 2027.</li>
           </ul>
@@ -236,8 +236,9 @@ export default function FestivalPage() {
             Dal manifesto ufficiale della I edizione.
           </li>
           <li className="rounded-[1.25rem] bg-paper p-5">
-            <span className="block font-display font-bold">Loghi</span>
-            Forniti dalle associazioni e dai partner; lo stemma del Comune di Acate è quello del manifesto.
+            <span className="block font-display font-bold">Ritratti e loghi</span>I ritratti degli autori sono
+            forniti dall&apos;organizzazione; i loghi dalle associazioni e dai partner. Lo stemma del Comune
+            di Acate è quello del manifesto.
           </li>
           {Object.values(photos).map((photo) => (
             <li key={photo.source} className="rounded-[1.25rem] bg-paper p-5">

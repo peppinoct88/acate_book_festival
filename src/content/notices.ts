@@ -6,7 +6,7 @@
  *   id: "pioggia-sabato",
  *   tone: "alert",
  *   text: "Sabato 17 per la pioggia gli incontri si spostano al chiuso.",
- *   href: "/info#se-piove",
+ *   href: "/programma",
  *   until: "2026-10-17T23:59:00+02:00",
  * }
  *

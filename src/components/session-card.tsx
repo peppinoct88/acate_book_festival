@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { AudienceBadge, KindBadge, StatusBadge, VenueTag } from "./badges";
 import { CalendarMenu } from "./calendar-menu";
@@ -27,6 +28,8 @@ export function SessionCard({
     .filter((g) => g.type === "persona")
     .map((g) => g.name);
   const cancelled = session.status === "annullato";
+  // il ritratto dell'autore accanto a «Incontro con …»
+  const portrait = session.guests.map((slug) => getGuest(slug)).find((g) => g?.photo)?.photo;
 
   return (
     <article
@@ -80,7 +83,15 @@ export function SessionCard({
           {session.note ? <span className="font-light text-ink-muted"> · {session.note}</span> : null}
         </H>
         {session.activity.kicker && session.title === session.activity.title ? (
-          <p className="mt-1.5 font-display text-[1.05rem] font-semibold text-ink-muted">
+          <p className="mt-1.5 flex items-center gap-2.5 font-display text-[1.05rem] font-semibold text-ink-muted">
+            {portrait ? (
+              <Image
+                src={portrait}
+                alt=""
+                sizes="2.25rem"
+                className="size-9 shrink-0 rounded-full object-cover ring-2 ring-cream"
+              />
+            ) : null}
             {session.activity.kicker}
           </p>
         ) : guestNames.length && session.activity.kind !== "firmacopie" ? (

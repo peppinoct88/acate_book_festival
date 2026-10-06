@@ -5,7 +5,7 @@ import { Logotype } from "@/components/logotype";
 import { ButtonLink, buttonClass } from "@/components/button";
 import { CalendarMenu } from "@/components/calendar-menu";
 import { festivalCalendarOptions } from "@/lib/calendar";
-import { ArrowRight, Kids, Rain, Ticket } from "@/components/icons";
+import { ArrowRight, Clock, Kids, Ticket } from "@/components/icons";
 import { FestivalStatus } from "@/components/festival-status";
 import { SectionHeading } from "@/components/section-heading";
 import { GuestCard } from "@/components/guest-card";
@@ -190,14 +190,14 @@ export default function HomePage() {
               id="piccole-radici"
               eyebrow="Per le famiglie"
               title="Piccole radici:"
-              light="teatro e laboratori."
+              light="teatro e letture."
             />
             <div className="mt-10 grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
               <div>
                 <p className="max-w-[46ch] font-serif text-lg leading-relaxed text-ink/85 sm:text-xl">
-                  Venerdì «A colpi di mantice», letture musicate con il loro laboratorio. Sabato e domenica i
-                  laboratori alla Villa dei lettori, con consegna e ritiro tramite braccialetto numerato. E
-                  davanti al palco, le prime file con i cuscini sono per i bambini.
+                  Venerdì «A colpi di mantice»: letture musicate dal vivo e un laboratorio per bambini e
+                  ragazzi, con Santa Briganti. Domenica il Gattopardo raccontato alle ragazze e ai ragazzi e,
+                  per chiudere, la favola in fondo al mare di «Shuma».
                 </p>
                 <div className="mt-8">
                   <ButtonLink href="/famiglie" variant="ink" icon={<ArrowRight size={18} />}>
@@ -349,8 +349,8 @@ export default function HomePage() {
             <div className="mt-8 space-y-5 font-serif text-lg leading-relaxed text-ink/85">
               <p>
                 Fino al 1938 si chiamava Biscari. Il Castello dei Principi di Biscari, la casata dei Paternò
-                Castello, guarda piazza Libertà e il centro disegnato a scacchiera: davanti alla sua facciata
-                c&apos;è il palco del festival.
+                Castello, guarda piazza Libertà e il centro disegnato a scacchiera; di fronte, in via
+                Archimede, c&apos;è il palco del festival.
               </p>
               <p>
                 La città custodisce le reliquie del patrono, San Vincenzo martire, e ne rievoca ogni anno
@@ -370,25 +370,25 @@ export default function HomePage() {
               id="due-luoghi"
               eyebrow="Dove"
               title="Due luoghi,"
-              light="a due passi."
-              intro="Il palco per ascoltare, in piazza Libertà davanti al castello; la villa per fare. Li unisce un sentiero di luci di circa cinquanta metri, nel centro storico di Acate."
+              light="nel centro storico."
+              intro="Il palco per ascoltare, all'aperto in via Archimede, di fronte al castello; la villa comunale per la mostra, i libri e l'Albero delle radici."
             />
             <ul className="mt-10 grid gap-4">
               {[
                 {
                   Icon: Ticket,
                   t: "Ingresso libero",
-                  d: "A tutti gli appuntamenti, alla mostra e ai laboratori. Non serve prenotare.",
+                  d: "A tutti gli appuntamenti e alla mostra. Non serve prenotare.",
                 },
                 {
                   Icon: Kids,
                   t: "Con i bambini",
-                  d: "Laboratori in parallelo agli incontri, con braccialetto numerato.",
+                  d: "Venerdì alle 18 «A colpi di mantice», letture musicate e laboratorio. Domenica alle 19:30 «Shuma», dagli 8 anni.",
                 },
                 {
-                  Icon: Rain,
-                  t: "Se piove",
-                  d: "Palco coperto, mostra e laboratori in gazebo chiusi. Eventuali spostamenti annunciati qui entro le 15.",
+                  Icon: Clock,
+                  t: "La mostra",
+                  d: "«Radici libere», alla Villa dei lettori: aperta tutti e tre i giorni dalle 17 alle 22.",
                 },
               ].map(({ Icon, t, d }) => (
                 <li key={t} className="flex gap-4 rounded-2xl bg-paper p-5">

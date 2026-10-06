@@ -6,19 +6,15 @@ export interface FaqItem {
 export const faq: FaqItem[] = [
   {
     q: "Quanto costa partecipare?",
-    a: "Niente: l'ingresso è libero a tutti gli appuntamenti, alla mostra e ai laboratori. La platea del Palco del Castello ha 200 posti: per gli incontri delle 19 conviene arrivare qualche minuto prima.",
+    a: "Niente: l'ingresso è libero a tutti gli appuntamenti e alla mostra. Per gli incontri delle 19 conviene arrivare qualche minuto prima.",
   },
   {
     q: "Bisogna prenotare?",
-    a: "No, basta venire. Per i laboratori i bambini si presentano all'accoglienza della Villa dei lettori, dove ricevono un braccialetto numerato per la consegna e il ritiro.",
+    a: "No, basta venire: tutti gli appuntamenti sono a ingresso libero, senza prenotazione.",
   },
   {
-    q: "Posso lasciare i bambini al laboratorio mentre seguo l'incontro?",
-    a: "Sì: sabato e domenica i laboratori alla Villa dei lettori si tengono mentre sul palco va in scena il programma. Venerdì il laboratorio è dentro «A colpi di mantice», alle 18 sul Palco del Castello. Le età consigliate sono indicate nel programma, accanto a ogni laboratorio.",
-  },
-  {
-    q: "E se piove?",
-    a: "Il palco è coperto e mostra e laboratori sono in gazebo chiusi. Se serve spostare gli incontri al chiuso, lo annunciamo qui sul sito e sui canali social del festival entro le 15 del giorno stesso.",
+    q: "C'è qualcosa per i bambini?",
+    a: "Sì: venerdì alle 18, sul Palco del Castello, «A colpi di mantice», letture musicate dal vivo con un laboratorio per bambini e ragazzi. Domenica alle 19:30 «Shuma», consigliato dagli 8 anni. E alla Villa dei lettori c'è l'Albero delle radici, dove appendere il nome di chi ti ha messo in mano il primo libro.",
   },
   {
     q: "Dove si comprano i libri degli ospiti?",
@@ -30,10 +26,10 @@ export const faq: FaqItem[] = [
   },
   {
     q: "Ci saranno foto e video?",
-    a: "Sì: gli appuntamenti vengono fotografati e ripresi per raccontare il festival. Per i bambini che partecipano ai laboratori chiediamo il consenso firmato di un genitore.",
+    a: "Sì: gli appuntamenti vengono fotografati e ripresi per raccontare il festival. Per i bambini che partecipano al laboratorio di «A colpi di mantice» chiediamo il consenso firmato di un genitore.",
   },
   {
     q: "Cosa conviene portare?",
-    a: "Dopo il tramonto, verso le 18:20, l'aria si fa fresca: una felpa è una buona idea. E un libro da lasciare a «Radici di carta», lo scambio libri lungo il sentiero di luci.",
+    a: "Il palco è all'aperto e dopo il tramonto, verso le 18:20, l'aria si fa fresca: una felpa è una buona idea.",
   },
 ];

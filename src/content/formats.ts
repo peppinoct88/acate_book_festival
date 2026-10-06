@@ -21,23 +21,6 @@ export const formats: Format[] = [
     href: "/lamiaradice",
   },
   {
-    slug: "radici-di-carta",
-    name: "Radici di carta",
-    when: "Sempre, lungo il sentiero di luci",
-    description:
-      "Scambio libri in cassette da frutta: prendi un libro, lasciane un altro. Dopo il festival le cassette restano alla villa come piccola biblioteca libera.",
-    icon: "books",
-  },
-  {
-    slug: "laboratori-in-parallelo",
-    name: "Laboratori in parallelo",
-    when: "Sabato e domenica",
-    description:
-      "Mentre sul palco c'è l'incontro, i bambini sono al laboratorio alla Villa dei lettori, con consegna e ritiro tramite braccialetto numerato. Così i genitori restano all'incontro.",
-    icon: "kids",
-    href: "/famiglie",
-  },
-  {
     slug: "buca-delle-lettere",
     name: "La buca delle lettere di coraggio",
     when: "Sabato dalle 17 alle 20",

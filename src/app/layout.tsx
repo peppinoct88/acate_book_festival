@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     "Giovanni Impastato",
     "Peppino Impastato",
     "libri",
-    "laboratori per bambini",
+    "teatro per bambini",
     "ottobre 2026",
   ],
   authors: [{ name: site.organizer.name, url: site.organizer.url }],

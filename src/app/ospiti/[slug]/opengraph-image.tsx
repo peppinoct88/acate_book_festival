@@ -26,5 +26,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     subtitle: guest.role,
     title: guest.type === "compagnia" ? "Santa Briganti" : guest.name,
     meta,
+    portrait: guest.photo ? `ospiti/${guest.slug}.jpg` : undefined,
   });
 }

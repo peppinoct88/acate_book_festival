@@ -39,7 +39,7 @@ export default function ProgramPage() {
         intro={
           <>
             <p>
-              Dalle 17 tra il <strong>Palco del Castello</strong>, in piazza Libertà, e la{" "}
+              Dalle 17 tra il <strong>Palco del Castello</strong>, in via Archimede, e la{" "}
               <strong>Villa dei lettori</strong>, con la mostra aperta fino alle 22. Ogni giornata ha il suo
               tema: venerdì la <strong>mafia</strong>, sabato le <strong>donne</strong>, domenica l&apos;
               <strong>immigrazione</strong>.
