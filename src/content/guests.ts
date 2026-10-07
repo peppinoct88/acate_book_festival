@@ -86,7 +86,12 @@ export const guests: Guest[] = [
         year: 2017,
         note: "illustrazioni di Giulia Rossi",
       },
-      { title: "Tomasi di Lampedusa e i luoghi del Gattopardo", publisher: "Pacini Editore", year: 2014 },
+      {
+        title: "Tomasi di Lampedusa e i luoghi del Gattopardo",
+        publisher: "Pacini Editore",
+        year: 2014,
+        note: "ora in seconda edizione",
+      },
       { title: "L'opera-orologio. Saggi sul Gattopardo", publisher: "Pacini Editore" },
     ],
     tone: "teal",

@@ -100,6 +100,24 @@ lo scaffale di Peppino — [La Voce di New York](https://lavocedinewyork.com/new
 - Le reliquie di San Vincenzo martire e il Corteo storico che ne rievoca l'arrivo —
   [Italreport](https://www.italreport.it/home/acate-prenderanno-il-via-venerdi-pomeriggio-19-aprile-i-festeggiamenti-in-onore-di-san-vincenzo-martire/).
 
+## Copertine dei libri
+
+Copertine originali (© degli editori) in `src/assets/copertine/`, riprodotte per presentare i libri al festival.
+Scaricate dal workflow «Importa copertine dei libri» (`scripts/copertine.json`), scelte e controllate a vista.
+
+- «Mio fratello. Tutta una vita con Peppino» — Libreria Pienogiorno, ISBN 9791280229052 (immagine IBS).
+- «Oltre i cento passi» — Piemme, 2017, ISBN 9788856658002 (immagine IBS).
+- «La seminatrice di coraggio» — Tre60, 2025, ISBN 9788867028818 (immagine IBS).
+- «Il Gattopardo raccontato alle ragazze e ai ragazzi» — Gallucci Bros., 2026: copertina dalla recensione di
+  [Liberi di scrivere](https://liberidiscrivere.com/2026/10/05/giuseppe-tomasi-di-lampedusa-il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi-maria-antonietta-ferraloro-gallucci-bros-2026-a-cura-di-viviana-filippini/) (ISBN non ancora in catalogo).
+- «Il Gattopardo raccontato a mia figlia» — La Nuova Frontiera Junior, 2017, ISBN 9788898519453 (immagine IBS).
+- «Tomasi di Lampedusa e i luoghi del Gattopardo» — Pacini Editore, 2014 (ISBN 9788863157338): la copertina del
+  2014 esiste solo a 200 px, sul sito c'è quella della seconda edizione, dalla
+  [pagina dell'editore](https://www.pacinieditore.it/prodotto/tomasi-lampedusa-luoghi-gattopardo-seconda-edizione/).
+- «L'opera-orologio. Saggi sul Gattopardo» — Pacini Editore, ISBN 9788869951480 (immagine IBS).
+- «Resistere a Mafiopoli» — Stampa Alternativa, 2009, ISBN 9788862220866: nessuna copertina nei cataloghi
+  (solo segnaposto); resta quella disegnata finché l'organizzazione non ne manda una foto.
+
 ## Foto
 
 Foto con licenza libera da Wikimedia Commons, importate con il workflow «Importa foto da Wikimedia Commons»

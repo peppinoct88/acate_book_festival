@@ -236,6 +236,11 @@ export default function FestivalPage() {
             stemma del Comune di Acate sono forniti dall&apos;organizzazione; i loghi dalle associazioni e dai
             partner.
           </li>
+          <li className="rounded-[1.25rem] bg-paper p-5">
+            <span className="block font-display font-bold">Copertine dei libri</span>Le copertine dei libri
+            degli ospiti sono © dei rispettivi editori (Libreria Pienogiorno, Piemme, Tre60, Gallucci Bros.,
+            La Nuova Frontiera Junior, Pacini Editore) e sono riprodotte per presentare i libri al festival.
+          </li>
           {Object.values(photos).map((photo) => (
             <li key={photo.source} className="rounded-[1.25rem] bg-paper p-5">
               <span className="block font-display font-bold">{photo.caption}</span>

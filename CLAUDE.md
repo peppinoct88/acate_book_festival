@@ -30,6 +30,8 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
     raggiungibile dalle sessioni cloud); scarica in `src/assets/foto/commons/`, poi si ritaglia e si sposta in `src/assets/foto/`.
   - `partners.ts`: loghi dei partner nei crediti del footer (`components/footer-credits.tsx`, file in
     `src/assets/partner/` preparati per fondo blu); stemmi di Regione e Comune a parte, senza sfondo.
+  - `covers.ts`: copertine originali dei libri (© editori) per titolo, in `src/assets/copertine/`; nuove con il
+    workflow GitHub «Importa copertine dei libri» (`scripts/copertine.json`). Senza copertina il libro resta disegnato.
   - `notices.ts`: avvisi in cima a tutte le pagine (maltempo, spostamenti) con scadenza automatica.
   - `site.ts`: URL, date, contatti, social, enti. I campi vuoti non vengono mostrati.
 - `src/app/` — pagine (server component). Client component solo dove serve interattività.

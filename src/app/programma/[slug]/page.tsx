@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { AudienceBadge, FreeBadge, KindBadge, StatusBadge, VenueTag } from "@/components/badges";
 import { BookCover } from "@/components/book-cover";
+import { coverOf } from "@/content/covers";
 import { CalendarActions } from "@/components/calendar-actions";
 import { ShareActions } from "@/components/share-actions";
 import { GuestCard } from "@/components/guest-card";
@@ -209,12 +210,15 @@ export default async function ActivityPage({ params }: PageProps<"/programma/[sl
                 aria-labelledby="il-libro"
                 className="mt-14 grid gap-8 rounded-[1.75rem] bg-paper p-6 sm:grid-cols-[10rem_1fr] sm:p-8"
               >
-                <div className="group w-36 sm:w-40">
+                <div className="group w-36 sm:w-40" data-reveal>
                   <BookCover
                     title={activity.book.title}
                     subtitle={activity.book.publisher}
                     footer={guests[0]?.name ?? ""}
                     tone={guests[0]?.tone ?? "coral"}
+                    image={coverOf(activity.book.title)}
+                    sizes="10rem"
+                    className="book-in"
                   />
                 </div>
                 <div>

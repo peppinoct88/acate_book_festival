@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookCover } from "@/components/book-cover";
+import { coverOf } from "@/content/covers";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ButtonLink } from "@/components/button";
 import { GuestCard } from "@/components/guest-card";
@@ -137,12 +138,15 @@ export default async function DayPage({ params }: PageProps<"/giornate/[slug]">)
               aria-labelledby="il-libro"
               className="grid grid-cols-[8rem_minmax(0,1fr)] items-center gap-4 rounded-[1.75rem] bg-paper p-5 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-6 sm:p-8"
             >
-              <div className="group">
+              <div className="group" data-reveal>
                 <BookCover
                   title={bookSession.activity.book.title}
                   subtitle={bookSession.activity.book.publisher}
                   footer={author?.name}
                   tone={day.tone}
+                  image={coverOf(bookSession.activity.book.title)}
+                  sizes="10rem"
+                  className="book-in"
                 />
               </div>
               <div>

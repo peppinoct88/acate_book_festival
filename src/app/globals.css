@@ -288,6 +288,42 @@
       rotate: 10deg;
     }
   }
+
+  /* I libri delle liste (className «book-in») entrano in scena alzandosi un po' storti */
+  [data-revealed] .book-in,
+  [data-revealed].book-in {
+    animation: book-in 1s var(--ease-spring) calc(var(--reveal-delay, 0ms) + 120ms) backwards;
+  }
+  @keyframes book-in {
+    from {
+      opacity: 0;
+      translate: 0 16%;
+      rotate: -7deg;
+    }
+  }
+
+  /* Tutti i libri girano un poco mentre la pagina scorre, anche sul telefono (nessun hover):
+     dritti a metà schermo, di tre quarti quando entrano ed escono. Solo nei browser che legano
+     un'animazione allo scorrimento (Chrome, Edge, Safari 26) e mai con «riduci movimento». */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .book-turn {
+        animation: book-turn linear both;
+        animation-timeline: view();
+      }
+    }
+  }
+  @keyframes book-turn {
+    from {
+      transform: perspective(1100px) rotateY(22deg) rotateX(4deg);
+    }
+    50% {
+      transform: perspective(1100px) rotateY(0deg) rotateX(0deg);
+    }
+    to {
+      transform: perspective(1100px) rotateY(-16deg) rotateX(-3deg);
+    }
+  }
 }
 
 @utility container-festival {
@@ -326,7 +362,9 @@
     opacity: 1;
     transform: none;
   }
-  [data-revealed] .book-pop {
+  [data-revealed] .book-pop,
+  [data-revealed] .book-in,
+  [data-revealed].book-in {
     animation: none;
   }
 }

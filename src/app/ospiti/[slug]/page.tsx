@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { BookCover } from "@/components/book-cover";
+import { coverOf } from "@/content/covers";
 import { GuestVisual } from "@/components/guest-visual";
 import { SessionCard } from "@/components/session-card";
 import { ShareActions } from "@/components/share-actions";
@@ -112,12 +113,20 @@ export default async function GuestPage({ params }: PageProps<"/ospiti/[slug]">)
               </h2>
               <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
                 {guest.books.map((book, i) => (
-                  <li key={book.title} className="group">
+                  <li
+                    key={book.title}
+                    className="group"
+                    data-reveal
+                    style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
+                  >
                     <BookCover
                       title={book.title}
                       subtitle={book.publisher}
                       footer={guest.name}
                       tone={(["coral", "ink", "teal", "paper"] as const)[(i + guest.slug.length) % 4]}
+                      image={coverOf(book.title)}
+                      sizes="(min-width: 1280px) 12rem, (min-width: 640px) 14rem, 45vw"
+                      className="book-in"
                     />
                     <p className="mt-4 font-display leading-snug font-bold">«{book.title}»</p>
                     <p className="text-sm text-ink-muted">

@@ -369,6 +369,20 @@ test("home: le tre schede degli autori hanno le stesse misure", async ({ page })
   expect(new Set(sizes.map((s) => `${s.width}x${s.height}`)).size, JSON.stringify(sizes)).toBe(1);
 });
 
+test("copertine originali: i libri degli ospiti, tutti alti uguali", async ({ page }) => {
+  await page.goto("/ospiti/giovanni-impastato");
+  const books = page.locator("#libri ~ ul [data-book-cover]");
+  await expect(books).toHaveCount(3);
+  // due copertine originali; «Resistere a Mafiopoli» non è nei cataloghi e resta disegnata
+  await expect(books.locator("img")).toHaveCount(2);
+  const heights = await books.evaluateAll((els) =>
+    els.map((el) => Math.round((el.firstElementChild as HTMLElement).offsetHeight)),
+  );
+  expect(new Set(heights).size, JSON.stringify(heights)).toBe(1);
+  await page.goto("/giornate/donne");
+  await expect(page.locator("[data-book-cover] img")).toHaveCount(1);
+});
+
 test("copertine dei libri: le scritte restano dentro il libro", async ({ page }) => {
   for (const path of [
     "/",
