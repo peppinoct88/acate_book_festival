@@ -13,7 +13,9 @@ import io
 import json
 import os
 import re
+import ssl
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -28,6 +30,15 @@ def fetch(url, binary=False):
         with urllib.request.urlopen(req, timeout=30) as res:
             data = res.read()
             return data if binary else data.decode("utf-8", "replace")
+    except urllib.error.URLError as error:
+        # alcuni server di copertine non mandano il certificato intermedio: solo per le immagini
+        # (che poi si guardano una per una prima di usarle) si riprova senza verificare la catena
+        if binary and isinstance(error.reason, ssl.SSLCertVerificationError):
+            print(f"    ~ {url}: certificato incompleto, scarico senza verifica (controllare a vista)")
+            with urllib.request.urlopen(req, timeout=30, context=ssl._create_unverified_context()) as res:
+                return res.read()
+        print(f"    ! {url}: {error}")
+        return None
     except Exception as error:  # noqa: BLE001 — un catalogo che non risponde non ferma gli altri
         print(f"    ! {url}: {error}")
         return None
