@@ -21,6 +21,8 @@ import { days, daysBySlug } from "@/content/venues";
 import { dayTones } from "@/lib/day-tone";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
+import { MysteryGuestCard, MysteryGuestVisual } from "@/components/mystery-guest";
+import { isHidden } from "@/content/reveal";
 
 export const dynamicParams = false;
 
@@ -54,6 +56,8 @@ export default async function DayPage({ params }: PageProps<"/giornate/[slug]">)
   const list = sessionsForDay(day.id);
   const index = days.indexOf(day);
   const author = getGuest(authorSlugs[index]);
+  // l'autore della giornata ancora segreto (reveal.ts): al suo posto le schede «Chi sarà?»
+  const secret = isHidden(authorSlugs[index]) ? authorSlugs[index] : undefined;
   const others = days.filter((d) => d.id !== day.id);
   // accanto al racconto: la foto (la casa di Peppino, per la mafia) o il libro dell'autore della giornata
   const photo = day.slug === "mafia" ? photos.casaMemoria : undefined;
@@ -115,6 +119,18 @@ export default async function DayPage({ params }: PageProps<"/giornate/[slug]">)
                 <div className="hidden lg:block">
                   <GuestCardCompact slug={author.slug} />
                 </div>
+              ) : secret ? (
+                <div className="hidden lg:block">
+                  <div className="rounded-[1.75rem] bg-cream p-4 text-ink shadow-[0_30px_60px_-30px_rgb(7_42_95/0.6)]">
+                    <MysteryGuestVisual day={day} />
+                    <span className="mt-4 block px-2 font-display text-xs font-semibold tracking-[0.18em] text-ink-muted uppercase">
+                      L&apos;ospite della giornata
+                    </span>
+                    <span className="mt-1 block px-2 pb-2 font-display text-xl leading-tight font-extrabold">
+                      Chi sarà? Lo sveliamo presto
+                    </span>
+                  </div>
+                </div>
               ) : null}
             </div>
           </div>
@@ -170,6 +186,31 @@ export default async function DayPage({ params }: PageProps<"/giornate/[slug]">)
                 ) : null}
               </div>
             </aside>
+          ) : secret ? (
+            <aside
+              aria-labelledby="il-libro"
+              className="grid grid-cols-[8rem_minmax(0,1fr)] items-center gap-4 rounded-[1.75rem] bg-paper p-5 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-6 sm:p-8"
+            >
+              <div className="group" data-reveal>
+                <BookCover
+                  title="Chi sarà?"
+                  subtitle="Lo sveliamo presto"
+                  tone={day.tone}
+                  className="book-in"
+                />
+              </div>
+              <div>
+                <h2 id="il-libro" className="eyebrow eyebrow--plain text-ink">
+                  Il libro della giornata
+                </h2>
+                <p className="mt-3 font-display text-xl leading-tight font-extrabold sm:text-2xl">
+                  Lo sveliamo presto
+                </p>
+                <p className="mt-1 font-display text-ink-muted">
+                  insieme all&apos;ospite della giornata, sui nostri social.
+                </p>
+              </div>
+            </aside>
           ) : null}
         </div>
 
@@ -184,11 +225,15 @@ export default async function DayPage({ params }: PageProps<"/giornate/[slug]">)
               </li>
             ))}
           </ol>
-          {author ? (
+          {author || secret ? (
             <div className="mt-12 lg:hidden">
               <p className="eyebrow text-ink">L&apos;ospite della giornata</p>
               <div className="mt-6">
-                <GuestCard guest={author} layout="row" />
+                {author ? (
+                  <GuestCard guest={author} layout="row" />
+                ) : (
+                  <MysteryGuestCard slug={secret!} day={day} layout="row" />
+                )}
               </div>
             </div>
           ) : null}

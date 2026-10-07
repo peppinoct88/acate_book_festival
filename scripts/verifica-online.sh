@@ -86,7 +86,7 @@ for pair in "/qr /adesso" "/mostra /mostra-peppino-impastato" "/mafia /giornate/
 done
 
 section "Pagine"
-for path in / /programma /programma/le-radici-che-si-scelgono /programma/shuma /ospiti /ospiti/giovanni-impastato \
+for path in / /programma /programma/a-colpi-di-mantice /programma/shuma /ospiti /ospiti/banda-citta-di-acate \
   /giornate/mafia /giornate/donne /giornate/immigrazione \
   /famiglie /mostra-peppino-impastato /lamiaradice /festival /info /adesso /privacy /accessibilita; do
   read -r code _ <<<"$(probe "$BASE$path")"

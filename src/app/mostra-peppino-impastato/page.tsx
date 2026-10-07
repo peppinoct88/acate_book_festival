@@ -11,6 +11,10 @@ import { venues } from "@/content/venues";
 import { breadcrumbJsonLd, exhibitionJsonLd } from "@/lib/jsonld";
 import { mapsUrl } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
+import { isHidden } from "@/content/reveal";
+
+/** Finché è segreto (reveal.ts) il fratello di Peppino non si nomina */
+const giovanni = !isHidden("giovanni-impastato");
 
 export const metadata: Metadata = pageMetadata({
   title: "Mostra su Peppino Impastato ad Acate: «Radici libere»",
@@ -92,7 +96,10 @@ export default function ExhibitionPage() {
             <p>
               La mostra racconta la sua vita per immagini, ed è il filo che tiene insieme le tre giornate: si
               inaugura venerdì 16 alle 17, nella giornata che il festival dedica alla mafia, poco prima
-              dell&apos;incontro con suo fratello Giovanni, e resta aperta ogni sera fino alle 22.
+              {giovanni
+                ? " dell'incontro con suo fratello Giovanni"
+                : " dell'incontro con l'ospite della giornata"}
+              , e resta aperta ogni sera fino alle 22.
             </p>
           </div>
           <Photo
@@ -155,13 +162,19 @@ export default function ExhibitionPage() {
               <MapPin size={18} /> Portami alla Villa dei lettori
               <span className="visually-hidden"> (Google Maps, nuova scheda)</span>
             </a>
-            <ButtonLink
-              href="/programma/le-radici-che-si-scelgono"
-              variant="secondary"
-              icon={<ArrowRight size={18} />}
-            >
-              L&apos;incontro con Giovanni Impastato
-            </ButtonLink>
+            {giovanni ? (
+              <ButtonLink
+                href="/programma/le-radici-che-si-scelgono"
+                variant="secondary"
+                icon={<ArrowRight size={18} />}
+              >
+                L&apos;incontro con Giovanni Impastato
+              </ButtonLink>
+            ) : (
+              <ButtonLink href="/giornate/mafia" variant="secondary" icon={<ArrowRight size={18} />}>
+                La giornata sulla mafia
+              </ButtonLink>
+            )}
           </div>
         </section>
 
@@ -186,10 +199,18 @@ export default function ExhibitionPage() {
           <p className="mt-10 rounded-[1.25rem] bg-paper p-5 text-[0.95rem] leading-relaxed text-ink/85">
             I crediti delle fotografie sono indicati su ciascun pannello della mostra. Per conoscere meglio la
             storia di Peppino:{" "}
-            <Link href="/ospiti/giovanni-impastato" className="text-coral-deep underline underline-offset-2">
-              Giovanni Impastato
-            </Link>{" "}
-            e Casa Memoria Felicia e Peppino Impastato, a Cinisi.
+            {giovanni ? (
+              <>
+                <Link
+                  href="/ospiti/giovanni-impastato"
+                  className="text-coral-deep underline underline-offset-2"
+                >
+                  Giovanni Impastato
+                </Link>{" "}
+                e{" "}
+              </>
+            ) : null}
+            Casa Memoria Felicia e Peppino Impastato, a Cinisi.
           </p>
         </section>
       </div>

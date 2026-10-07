@@ -50,6 +50,8 @@ export interface FestivalDay {
   body: string[];
   /** Colore della giornata, preso dal manifesto */
   tone: "ink" | "coral" | "teal";
+  /** Testi da usare finché gli ospiti in «for» sono segreti (src/content/reveal.ts) */
+  teaser?: { for: string[]; intro?: string; body?: string[] };
 }
 
 export interface Venue {
@@ -76,6 +78,21 @@ export interface SessionInput {
   guests?: string[];
   status?: SessionStatus;
   statusNote?: string;
+  /** Titolo finché un ospite della replica è segreto (src/content/reveal.ts) */
+  teaserTitle?: string;
+}
+
+/** Testi di un'attività finché gli ospiti in «for» sono segreti (src/content/reveal.ts) */
+export interface Teaser {
+  for: string[];
+  /** Slug neutro: il vero slug (titolo del libro) finirebbe in indirizzi e calendari */
+  slug?: string;
+  title?: string;
+  kicker?: string;
+  summary?: string;
+  body?: string[];
+  /** Senza pagina dedicata finché è segreto */
+  page?: boolean;
 }
 
 export interface Activity {
@@ -104,6 +121,7 @@ export interface Activity {
   href?: string;
   featured?: boolean;
   sessions: SessionInput[];
+  teaser?: Teaser;
 }
 
 export interface Session extends Required<Pick<SessionInput, "day" | "start" | "end" | "venue">> {

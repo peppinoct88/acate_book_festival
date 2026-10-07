@@ -1,4 +1,5 @@
 import { site } from "./site";
+import { isHidden } from "./reveal";
 import { daysById } from "./venues";
 import type { Activity, Audience, DayId, Kind, Session } from "./types";
 
@@ -16,7 +17,7 @@ export const programUpdatedAt = "2026-10-06";
 const forAll: Audience = { label: "Per tutti", kids: false };
 const families: Audience = { label: "Per tutti", kids: true };
 
-export const activities: Activity[] = [
+const allActivities: Activity[] = [
   // ───────────────────────── VENERDÌ 16 · Mafia · Radici della memoria
   {
     slug: "apertura-del-festival",
@@ -31,6 +32,14 @@ export const activities: Activity[] = [
       "Con il festival si inaugura «Radici libere. Peppino Impastato, una vita per immagini», la mostra fotografica alla Villa dei lettori che accompagna tutte e tre le giornate. Alle 17:20 parte la prima visita guidata; alle 17:40 si accende l'Albero delle radici e comincia #LaMiaRadice.",
       "È la giornata che il festival dedica alla mafia e alla memoria: alle 18 «A colpi di mantice» per bambini e ragazzi, alle 19 l'incontro con Giovanni Impastato.",
     ],
+    teaser: {
+      for: ["giovanni-impastato"],
+      body: [
+        "La prima edizione dell'Acate Book Festival si apre con la musica della città: la Banda Città di Acate e I Grifoni di Biscari – Tamburi di Acate sfilano e inaugurano il festival.",
+        "Con il festival si inaugura «Radici libere. Peppino Impastato, una vita per immagini», la mostra fotografica alla Villa dei lettori che accompagna tutte e tre le giornate. Alle 17:20 parte la prima visita guidata; alle 17:40 si accende l'Albero delle radici e comincia #LaMiaRadice.",
+        "È la giornata che il festival dedica alla mafia e alla memoria: alle 18 «A colpi di mantice» per bambini e ragazzi, alle 19 l'incontro con l'ospite della giornata, che sveliamo presto.",
+      ],
+    },
     guests: ["banda-citta-di-acate", "grifoni-di-biscari"],
     audience: forAll,
     page: true,
@@ -70,6 +79,14 @@ export const activities: Activity[] = [
       "È di e con Veronica Caggia e Peppe Macauda, dell'Associazione Culturale Santa Briganti di Vittoria, che da anni porta la lettura ad alta voce nelle scuole, nelle biblioteche e nelle piazze. Quest'anno c'è una sola replica: venerdì alle 18, sul Palco del Castello.",
       "Alle 19, sullo stesso palco, l'incontro con Giovanni Impastato.",
     ],
+    teaser: {
+      for: ["giovanni-impastato"],
+      body: [
+        "Una voce, una fisarmonica e una pila di libri: «A colpi di mantice» è una lettura ad alta voce musicata dal vivo, dedicata a bambini e ragazzi. Subito dopo la lettura, sul posto, comincia il laboratorio: in tutto, circa un'ora.",
+        "È di e con Veronica Caggia e Peppe Macauda, dell'Associazione Culturale Santa Briganti di Vittoria, che da anni porta la lettura ad alta voce nelle scuole, nelle biblioteche e nelle piazze. Quest'anno c'è una sola replica: venerdì alle 18, sul Palco del Castello.",
+        "Alle 19, sullo stesso palco, l'incontro con l'ospite della giornata.",
+      ],
+    },
     guests: ["santa-briganti"],
     credits: ["di e con Veronica Caggia e Peppe Macauda", "Associazione Culturale Santa Briganti"],
     duration: "circa un'ora, laboratorio compreso",
@@ -91,6 +108,15 @@ export const activities: Activity[] = [
       "Nella giornata che il festival dedica alla mafia, Giovanni Impastato sale sul Palco del Castello per raccontare cosa vuol dire scegliere da che parte stare: la famiglia, la casa di Cinisi diventata Casa Memoria, gli incontri con i ragazzi delle scuole di tutta Italia. Modera Giorgio Straquadanio.",
       "L'incontro chiude il percorso cominciato alle 17 con l'inaugurazione della mostra «Radici libere». Alle 20, firmacopie al bookshop della Villa dei lettori.",
     ],
+    teaser: {
+      for: ["giovanni-impastato"],
+      slug: "l-ospite-di-venerdi",
+      title: "L'ospite della giornata",
+      kicker: "Chi sarà? Lo sveliamo presto",
+      summary:
+        "Nella giornata dedicata alla mafia, sul Palco del Castello sale un ospite che sveliamo presto sui nostri social.",
+      page: false,
+    },
     guests: ["giovanni-impastato"],
     moderator: "Giorgio Straquadanio",
     audience: forAll,
@@ -112,6 +138,7 @@ export const activities: Activity[] = [
         end: "20:30",
         venue: "villa",
         title: "Firmacopie con Giovanni Impastato",
+        teaserTitle: "Firmacopie con l'ospite della serata",
         guests: ["giovanni-impastato"],
       },
       {
@@ -120,6 +147,7 @@ export const activities: Activity[] = [
         end: "20:30",
         venue: "villa",
         title: "Firmacopie con Antonella Desirée Giuffrè",
+        teaserTitle: "Firmacopie con l'ospite della serata",
         guests: ["antonella-desiree-giuffre"],
       },
       {
@@ -128,6 +156,7 @@ export const activities: Activity[] = [
         end: "19:00",
         venue: "villa",
         title: "Firmacopie con Maria Antonietta Ferraloro",
+        teaserTitle: "Firmacopie con l'ospite della serata",
         guests: ["maria-antonietta-ferraloro"],
       },
     ],
@@ -156,6 +185,13 @@ export const activities: Activity[] = [
       "C'è qualcuno lontano a cui vorresti scrivere? Alla Villa dei lettori trovi le cartoline del festival e una buca delle lettere: scrivi, imbuchi, e al resto pensiamo noi. Le cartoline partono lunedì 19 ottobre.",
       "L'idea nasce da «La seminatrice di coraggio» di Antonella Desirée Giuffrè, il romanzo protagonista della serata: durante la Grande Guerra le seminatrici di coraggio scrivevano ai soldati al fronte e portavano notizie alle famiglie. Una lettera, allora come oggi, può essere un gesto di coraggio.",
     ],
+    teaser: {
+      for: ["antonella-desiree-giuffre"],
+      body: [
+        "C'è qualcuno lontano a cui vorresti scrivere? Alla Villa dei lettori trovi le cartoline del festival e una buca delle lettere: scrivi, imbuchi, e al resto pensiamo noi. Le cartoline partono lunedì 19 ottobre.",
+        "L'idea nasce dal libro protagonista della serata, che sveliamo presto insieme al suo ospite. Una lettera, allora come oggi, può essere un gesto di coraggio.",
+      ],
+    },
     audience: families,
     page: true,
     sessions: [{ day: "sab", start: "17:00", end: "20:00", venue: "villa" }],
@@ -172,6 +208,13 @@ export const activities: Activity[] = [
       "La giornata che il festival dedica alle donne ha al centro il loro coraggio, quello che la Storia ha spesso lasciato ai margini.",
       "Alle 18 l'attrice Matilde Masaracchio sale sul Palco del Castello con un monologo sulle donne. Alle 19, sullo stesso palco, Antonella Desirée Giuffrè racconta «La seminatrice di coraggio».",
     ],
+    teaser: {
+      for: ["antonella-desiree-giuffre"],
+      body: [
+        "La giornata che il festival dedica alle donne ha al centro il loro coraggio, quello che la Storia ha spesso lasciato ai margini.",
+        "Alle 18 l'attrice Matilde Masaracchio sale sul Palco del Castello con un monologo sulle donne. Alle 19, sullo stesso palco, l'incontro con l'ospite della giornata.",
+      ],
+    },
     guests: ["matilde-masaracchio"],
     audience: forAll,
     page: true,
@@ -182,7 +225,7 @@ export const activities: Activity[] = [
     slug: "la-seminatrice-di-coraggio",
     title: "La seminatrice di coraggio",
     kicker: "Incontro con Antonella Desirée Giuffrè",
-    seoTitle: "Antonella Desirée Giuffrè: «La seminatrice di coraggio»",
+    seoTitle: "Desirée Giuffrè ad Acate: «La seminatrice di coraggio»",
     kind: "incontro",
     summary:
       "Sicilia, 1914: una giovane maestra, una guerra lontana e le donne che seminarono coraggio. L'autrice racconta il suo romanzo.",
@@ -191,6 +234,15 @@ export const activities: Activity[] = [
       "A Palermo incontra Sofia Bisi Albini e le «seminatrici di coraggio», le donne che portavano notizie dal fronte alle famiglie più povere: diventerà una di loro.",
       "Antonella Desirée Giuffrè racconta il suo romanzo e le donne che la Storia ha spesso lasciato ai margini, nella giornata che il festival dedica alle donne. Alle 20, firmacopie al bookshop della Villa dei lettori.",
     ],
+    teaser: {
+      for: ["antonella-desiree-giuffre"],
+      slug: "l-ospite-di-sabato",
+      title: "L'ospite della giornata",
+      kicker: "Chi sarà? Lo sveliamo presto",
+      summary:
+        "Nella giornata dedicata alle donne, sul Palco del Castello sale un ospite che sveliamo presto sui nostri social.",
+      page: false,
+    },
     guests: ["antonella-desiree-giuffre"],
     book: { title: "La seminatrice di coraggio", publisher: "Tre60", year: 2025 },
     audience: forAll,
@@ -224,6 +276,15 @@ export const activities: Activity[] = [
       "Maria Antonietta Ferraloro, docente e studiosa di Tomasi di Lampedusa, presenta «Il Gattopardo raccontato alle ragazze e ai ragazzi» (Gallucci Bros., 2026), il libro nato per raccontare il romanzo a sua figlia: la Sicilia che passa dai Borbone al Regno d'Italia, i personaggi, i luoghi, le parole che restano. Un incontro per ragazze e ragazzi, genitori e insegnanti, nella giornata che il festival dedica all'immigrazione.",
       "Alle 18:40, firmacopie al bookshop della Villa dei lettori. Alle 19:30, sullo stesso palco, «Shuma» chiude il festival.",
     ],
+    teaser: {
+      for: ["maria-antonietta-ferraloro"],
+      slug: "l-ospite-di-domenica",
+      title: "L'ospite della giornata",
+      kicker: "Chi sarà? Lo sveliamo presto",
+      summary:
+        "Un incontro per ragazze e ragazzi sulla Sicilia del «Gattopardo», il romanzo che comincia con uno sbarco. Chi lo racconta lo sveliamo presto sui nostri social.",
+      page: false,
+    },
     guests: ["maria-antonietta-ferraloro"],
     book: {
       title: "Il Gattopardo raccontato alle ragazze e ai ragazzi",
@@ -263,6 +324,42 @@ export const activities: Activity[] = [
   },
 ];
 
+/**
+ * Le attività pubblicate: finché un ospite è segreto (src/content/reveal.ts) valgono i testi «teaser»,
+ * senza il suo nome, il suo libro né la sua pagina. Un'attività con un ospite segreto senza teaser
+ * blocca la build: meglio un errore che uno spoiler.
+ */
+function publish(activity: Activity): Activity {
+  const { teaser, ...rest } = activity;
+  const visible = (list?: string[]) => list?.filter((g) => !isHidden(g));
+  const sessions = activity.sessions.map((s) => {
+    const secret = (s.guests ?? []).some(isHidden);
+    if (secret && !s.teaserTitle)
+      throw new Error(`Manca teaserTitle per ${activity.slug} ${s.day} ${s.start}`);
+    return { ...s, guests: visible(s.guests), title: secret ? s.teaserTitle : s.title };
+  });
+  const base: Activity = { ...rest, guests: visible(activity.guests), sessions };
+  if (!teaser || !teaser.for.some(isHidden)) {
+    if ((activity.guests ?? []).some(isHidden)) throw new Error(`Manca il teaser per ${activity.slug}`);
+    return base;
+  }
+  // l'incontro dell'ospite segreto: testi del teaser e basta (niente fallback ai testi veri)
+  const ownSecret = (activity.guests ?? []).some(isHidden);
+  return {
+    ...base,
+    slug: teaser.slug ?? activity.slug,
+    title: teaser.title ?? activity.title,
+    kicker: ownSecret ? teaser.kicker : (teaser.kicker ?? activity.kicker),
+    seoTitle: ownSecret ? undefined : activity.seoTitle,
+    summary: teaser.summary ?? activity.summary,
+    body: ownSecret ? teaser.body : (teaser.body ?? activity.body),
+    book: ownSecret ? undefined : activity.book,
+    page: teaser.page ?? activity.page,
+  };
+}
+
+export const activities: Activity[] = allActivities.map(publish);
+
 export const kindLabels: Record<Kind, string> = {
   incontro: "Incontro",
   spettacolo: "Teatro e letture",
@@ -282,16 +379,22 @@ export function isoFor(day: DayId, time: string): string {
 
 const dayOrder: Record<DayId, number> = { ven: 0, sab: 1, dom: 2 };
 
+/** Le repliche anche per chiave «vera» (slug dell'attività prima del teaser): solo per uso interno */
+const sessionsByKey = new Map<string, Session>();
+/** L'incontro di ogni autore segreto, per la scheda «Chi sarà?» */
+const secretTalks = new Map<string, Session>();
+
 function buildSessions(): Session[] {
   const list: Session[] = [];
-  for (const activity of activities) {
+  for (const [index, activity] of activities.entries()) {
     for (const s of activity.sessions) {
       const guests = s.guests ?? activity.guests ?? [];
       const href = activity.page
         ? `/programma/${activity.slug}`
         : (activity.href ?? (guests[0] ? `/ospiti/${guests[0]}` : undefined));
-      list.push({
-        id: `${activity.slug}-${s.day}-${s.start.replace(":", "")}`,
+      const time = s.start.replace(":", "");
+      const session: Session = {
+        id: `${activity.slug}-${s.day}-${time}`,
         activity,
         day: s.day,
         start: s.start,
@@ -306,7 +409,12 @@ function buildSessions(): Session[] {
         href,
         startISO: isoFor(s.day, s.start),
         endISO: isoFor(s.day, s.end),
-      });
+      };
+      sessionsByKey.set(`${allActivities[index].slug}-${s.day}-${time}`, session);
+      for (const guest of allActivities[index].guests ?? []) {
+        if (isHidden(guest) && !secretTalks.has(guest)) secretTalks.set(guest, session);
+      }
+      list.push(session);
     }
   }
   return list.sort(
@@ -332,11 +440,16 @@ export function sessionsForActivity(slug: string): Session[] {
   return sessions.filter((s) => s.activity.slug === slug);
 }
 
+/** L'incontro di un autore ancora segreto (reveal.ts), già con i testi teaser */
+export function secretTalkFor(slug: string): Session | undefined {
+  return secretTalks.get(slug);
+}
+
 export function sessionsForGuest(slug: string): Session[] {
   return sessions.filter((s) => s.guests.includes(slug));
 }
 
-/** Gli appuntamenti in evidenza per la home: tre per giorno */
+/** Gli appuntamenti in evidenza per la home: tre per giorno (id con lo slug vero, vale anche col teaser) */
 export const highlightIds: Record<DayId, string[]> = {
   ven: [
     "apertura-del-festival-ven-1700",
@@ -359,7 +472,7 @@ export const sessionsById = new Map(sessions.map((s) => [s.id, s]));
 
 export function highlightsForDay(day: DayId): Session[] {
   return highlightIds[day].map((id) => {
-    const s = sessionsById.get(id);
+    const s = sessionsByKey.get(id);
     if (!s) throw new Error(`Highlight non trovato: ${id}`);
     return s;
   });

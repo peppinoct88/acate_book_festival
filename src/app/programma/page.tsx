@@ -14,11 +14,13 @@ import { days } from "@/content/venues";
 import { dayTones } from "@/lib/day-tone";
 import { formatItalianDate } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
+import { anyHidden } from "@/content/reveal";
 
 export const metadata: Metadata = pageMetadata({
   title: "Programma",
-  description:
-    "Il programma dell'Acate Book Festival, 16-18 ottobre: mafia, donne, immigrazione. Giovanni Impastato, Desirée Giuffrè, Maria Antonietta Ferraloro, teatro e musica.",
+  description: anyHidden
+    ? "Il programma dell'Acate Book Festival, 16-18 ottobre: mafia, donne, immigrazione. Un autore per giornata, svelato sui nostri social, teatro e musica."
+    : "Il programma dell'Acate Book Festival, 16-18 ottobre: mafia, donne, immigrazione. Giovanni Impastato, Desirée Giuffrè, Maria Antonietta Ferraloro, teatro e musica.",
   path: "/programma",
   ownImage: true,
 });

@@ -12,6 +12,7 @@ import { site } from "@/content/site";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/jsonld";
 import { isProductionDeployment } from "@/lib/seo";
 import "./globals.css";
+import { isHidden } from "@/content/reveal";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     "Acate",
     "Ragusa",
     "Sicilia",
-    "Giovanni Impastato",
+    ...(isHidden("giovanni-impastato") ? [] : ["Giovanni Impastato"]),
     "Peppino Impastato",
     "libri",
     "teatro per bambini",

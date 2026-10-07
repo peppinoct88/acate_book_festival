@@ -15,7 +15,7 @@ import { Photo } from "@/components/photo";
 import { VenueMap } from "@/components/venue-map";
 import { KraftTag } from "@/components/kraft-tag";
 import { JsonLd } from "@/components/json-ld";
-import { authorSlugs, guests } from "@/content/guests";
+import { authorSlugs, getGuest, guests } from "@/content/guests";
 import { photos } from "@/content/photos";
 import { days } from "@/content/venues";
 import { sessions } from "@/content/program";
@@ -23,6 +23,8 @@ import { site } from "@/content/site";
 import { festivalJsonLd } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
+import { MysteryGuestCard } from "@/components/mystery-guest";
+import { anyHidden, isHidden } from "@/content/reveal";
 
 export const metadata: Metadata = {
   ...pageMetadata({
@@ -36,7 +38,8 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const kidsSessions = sessions.filter((s) => s.audience.kids && s.activity.kind !== "partecipazione");
-  const authors = authorSlugs.map((slug) => guests.find((g) => g.slug === slug)!);
+  // un autore per giornata: chi è ancora segreto (reveal.ts) ha la scheda «Chi sarà?»
+  const authors = authorSlugs.map((slug, index) => ({ slug, day: days[index], guest: getGuest(slug) }));
   const onStage = guests.filter((g) => !authorSlugs.includes(g.slug));
 
   return (
@@ -141,16 +144,20 @@ export default function HomePage() {
               eyebrow="Gli ospiti"
               title="Ogni ospite"
               light="è un libro."
-              intro="Un autore per ogni giornata: il fratello di Peppino Impastato, una scrittrice che racconta le donne dentro la Storia, una studiosa del Gattopardo. E sul palco il teatro, la musica e i tamburi di Acate."
+              intro={
+                anyHidden
+                  ? "Un autore per ogni giornata, svelato uno alla volta sui nostri social. E sul palco il teatro, la musica e i tamburi di Acate."
+                  : "Un autore per ogni giornata: il fratello di Peppino Impastato, una scrittrice che racconta le donne dentro la Storia, una studiosa del Gattopardo. E sul palco il teatro, la musica e i tamburi di Acate."
+              }
             />
             <ButtonLink href="/ospiti" variant="secondary" icon={<ArrowRight size={18} />}>
               Tutti gli ospiti
             </ButtonLink>
           </div>
           <div className="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-            {authors.map((guest, index) => (
-              <div key={guest.slug} data-reveal style={{ ["--reveal-delay" as string]: `${index * 80}ms` }}>
-                <GuestCard guest={guest} />
+            {authors.map(({ slug, day, guest }, index) => (
+              <div key={day.id} data-reveal style={{ ["--reveal-delay" as string]: `${index * 80}ms` }}>
+                {guest ? <GuestCard guest={guest} /> : <MysteryGuestCard slug={slug} day={day} />}
               </div>
             ))}
           </div>
@@ -196,8 +203,11 @@ export default function HomePage() {
               <div>
                 <p className="max-w-[46ch] font-serif text-lg leading-relaxed text-ink/85 sm:text-xl">
                   Venerdì «A colpi di mantice»: letture musicate dal vivo e un laboratorio per bambini e
-                  ragazzi, con Santa Briganti. Domenica il Gattopardo raccontato alle ragazze e ai ragazzi e,
-                  per chiudere, la favola in fondo al mare di «Shuma».
+                  ragazzi, con Santa Briganti. Domenica{" "}
+                  {isHidden("maria-antonietta-ferraloro")
+                    ? "un incontro sul Gattopardo per ragazze e ragazzi"
+                    : "il Gattopardo raccontato alle ragazze e ai ragazzi"}{" "}
+                  e, per chiudere, la favola in fondo al mare di «Shuma».
                 </p>
                 <div className="mt-8">
                   <ButtonLink href="/famiglie" variant="ink" icon={<ArrowRight size={18} />}>

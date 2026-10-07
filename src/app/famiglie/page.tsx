@@ -8,11 +8,14 @@ import { ArrowRight, Kids, Letter, Tree, Ticket } from "@/components/icons";
 import { sessionsForDay } from "@/content/program";
 import { days } from "@/content/venues";
 import { pageMetadata } from "@/lib/seo";
+import { isHidden } from "@/content/reveal";
+
+/** Finché l'autore è segreto (reveal.ts) il titolo del libro resta fuori */
+const gattopardo = isHidden("maria-antonietta-ferraloro");
 
 export const metadata: Metadata = pageMetadata({
   title: "Piccole radici: per le famiglie",
-  description:
-    "Teatro e letture musicate per bambini e ragazzi all'Acate Book Festival, 16-18 ottobre 2026: «A colpi di mantice», il Gattopardo raccontato ai ragazzi e «Shuma». Ingresso libero.",
+  description: `Teatro e letture musicate per bambini e ragazzi all'Acate Book Festival, 16-18 ottobre 2026: «A colpi di mantice», ${gattopardo ? "un incontro sul Gattopardo per ragazze e ragazzi" : "il Gattopardo raccontato ai ragazzi"} e «Shuma». Ingresso libero.`,
   path: "/famiglie",
   ownImage: true,
 });
@@ -49,7 +52,7 @@ export default function FamiliesPage() {
         title="Piccole radici:"
         light="teatro e letture."
         crumbs={[{ name: "Famiglie" }]}
-        intro="Venerdì letture musicate e laboratorio con «A colpi di mantice»; domenica il Gattopardo raccontato alle ragazze e ai ragazzi e, la sera, «Shuma». Tutto a ingresso libero, senza prenotazione."
+        intro={`Venerdì letture musicate e laboratorio con «A colpi di mantice»; domenica ${gattopardo ? "un incontro sul Gattopardo per ragazze e ragazzi" : "il Gattopardo raccontato alle ragazze e ai ragazzi"} e, la sera, «Shuma». Tutto a ingresso libero, senza prenotazione.`}
       />
 
       <section aria-labelledby="come-funziona" className="container-festival pt-16 sm:pt-20">

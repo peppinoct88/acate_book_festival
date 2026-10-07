@@ -24,6 +24,7 @@ import { days } from "@/content/venues";
 import { site } from "@/content/site";
 import type { Format } from "@/content/types";
 import { pageMetadata } from "@/lib/seo";
+import { anyHidden } from "@/content/reveal";
 
 export const metadata: Metadata = pageMetadata({
   title: "Il festival e il tema Radici",
@@ -238,8 +239,11 @@ export default function FestivalPage() {
           </li>
           <li className="rounded-[1.25rem] bg-paper p-5">
             <span className="block font-display font-bold">Copertine dei libri</span>Le copertine dei libri
-            degli ospiti sono © dei rispettivi editori (Libreria Pienogiorno, Piemme, Tre60, Gallucci Bros.,
-            La Nuova Frontiera Junior, Pacini Editore) e sono riprodotte per presentare i libri al festival.
+            degli ospiti sono © dei rispettivi editori
+            {anyHidden
+              ? ""
+              : " (Libreria Pienogiorno, Piemme, Tre60, Gallucci Bros., La Nuova Frontiera Junior, Pacini Editore)"}{" "}
+            e sono riprodotte per presentare i libri al festival.
           </li>
           {Object.values(photos).map((photo) => (
             <li key={photo.source} className="rounded-[1.25rem] bg-paper p-5">

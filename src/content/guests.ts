@@ -5,6 +5,7 @@ import bandaLogo from "@/assets/partner/banda-citta-di-acate.png";
 import grifoniLogo from "@/assets/partner/grifoni-di-biscari.png";
 import santaBrigantiLogo from "@/assets/partner/santa-briganti.png";
 import type { Guest } from "./types";
+import { isHidden } from "./reveal";
 
 /**
  * Ospiti della I edizione: autori, artisti e i gruppi musicali di Acate.
@@ -12,7 +13,7 @@ import type { Guest } from "./types";
  * Ritratti degli autori forniti dall'organizzazione (6 ottobre): src/assets/ospiti/<slug>.jpg + campo `photo`,
  * ritagliati in 3:4 con la stessa inquadratura (occhi a un terzo dall'alto, volti della stessa grandezza).
  */
-export const guests: Guest[] = [
+const allGuests: Guest[] = [
   {
     slug: "giovanni-impastato",
     name: "Giovanni Impastato",
@@ -163,6 +164,13 @@ export const guests: Guest[] = [
 ];
 
 /** Gli autori dei tre incontri, in ordine di giornata */
+/**
+ * Gli ospiti pubblicati: gli autori ancora segreti (src/content/reveal.ts) non compaiono da nessuna parte,
+ * né nelle liste né con una pagina; al loro posto le schede «l'ospite della giornata».
+ */
+export const guests: Guest[] = allGuests.filter((g) => !isHidden(g.slug));
+
+/** Un autore per giornata, nell'ordine delle giornate (segreti compresi: per sapere dove va la scheda) */
 export const authorSlugs = ["giovanni-impastato", "antonella-desiree-giuffre", "maria-antonietta-ferraloro"];
 
 /** Nome pubblico (la compagnia si presenta con il nome completo dell'associazione) */

@@ -32,6 +32,9 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
     `src/assets/partner/` preparati per fondo blu); stemmi di Regione e Comune a parte, senza sfondo.
   - `covers.ts`: copertine originali dei libri (© editori) per titolo, in `src/assets/copertine/`; nuove con il
     workflow GitHub «Importa copertine dei libri» (`scripts/copertine.json`). Senza copertina il libro resta disegnato.
+  - `reveal.ts` + `svelati.json`: autori segreti, svelati uno alla volta (workflow GitHub «Svela un autore»).
+    Finché sono segreti non compaiono da nessuna parte: valgono i `teaser` di `program.ts` e `venues.ts` e le
+    schede «Chi sarà?» (`components/mystery-guest.tsx`). Un test controlla che non trapeli nulla.
   - `notices.ts`: avvisi in cima a tutte le pagine (maltempo, spostamenti) con scadenza automatica.
   - `site.ts`: URL, date, contatti, social, enti. I campi vuoti non vengono mostrati.
 - `src/app/` — pagine (server component). Client component solo dove serve interattività.
@@ -90,6 +93,8 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
   `--sticky-h`, `--anchor-gap` in `globals.css`; su /programma conta anche la barra dei giorni). Le sezioni con
   un id hanno lo spazio sopra come margine, mai padding né `scroll-mt-*`. Se cambia l'altezza dell'header o
   della barra, vanno aggiornate quelle variabili: i test misurano l'allineamento al pixel.
+- Le `key` di React finiscono nei dati della pagina (payload RSC): mai usare come key qualcosa che deve restare
+  segreto, come lo slug di un autore non ancora svelato.
 - Niente `loading.tsx`: in un sito statico mette ogni pagina in un `<div hidden>` sostituito da uno script,
   quindi senza JavaScript si vede solo lo scheletro e i link con #ancora a volte non scorrono.
 - Dominio: `https://www.acatebookfestival.it` (`productionUrl` in `src/content/site.ts`), DNS su Cloudflare

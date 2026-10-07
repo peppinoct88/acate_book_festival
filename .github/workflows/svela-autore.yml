@@ -1,0 +1,56 @@
+name: Svela un autore
+
+# Quando un autore viene svelato sui social: Actions → «Svela un autore» → scegli il nome → Run workflow.
+# Aggiorna src/content/svelati.json e Vercel pubblica il sito aggiornato in un paio di minuti.
+# «nascondi» lo rimette segreto. Vedi src/content/reveal.ts.
+on:
+  workflow_dispatch:
+    inputs:
+      autore:
+        description: Chi svelare
+        type: choice
+        required: true
+        options:
+          - Giovanni Impastato
+          - Antonella Desirée Giuffrè
+          - Maria Antonietta Ferraloro
+          - Tutti e tre
+      azione:
+        description: svela oppure nascondi di nuovo
+        type: choice
+        default: svela
+        options:
+          - svela
+          - nascondi
+
+permissions:
+  contents: write
+
+jobs:
+  svela:
+    name: Aggiorna e pubblica
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Aggiorna l'elenco degli autori svelati
+        env:
+          AUTORE: ${{ inputs.autore }}
+          AZIONE: ${{ inputs.azione }}
+          MESSAGGIO: ${{ runner.temp }}/messaggio
+        run: python3 scripts/svela-autore.py
+
+      - name: Pubblica (Vercel parte da solo)
+        env:
+          MESSAGGIO: ${{ runner.temp }}/messaggio
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/svelati.json
+          if git diff --cached --quiet; then
+            echo "Niente da cambiare: era già così."
+            exit 0
+          fi
+          git commit -F "$MESSAGGIO"
+          git push

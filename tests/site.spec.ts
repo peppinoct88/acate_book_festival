@@ -1,20 +1,40 @@
+import { readFileSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
+
+/** Autori segreti (src/content/reveal.ts): i test seguono lo stato di src/content/svelati.json */
+const authors = [
+  { slug: "giovanni-impastato", name: "Giovanni Impastato", day: "mafia", talk: "le-radici-che-si-scelgono" },
+  {
+    slug: "antonella-desiree-giuffre",
+    name: "Antonella Desirée Giuffrè",
+    day: "donne",
+    talk: "la-seminatrice-di-coraggio",
+  },
+  {
+    slug: "maria-antonietta-ferraloro",
+    name: "Maria Antonietta Ferraloro",
+    day: "immigrazione",
+    talk: "il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi",
+  },
+];
+const revealed: string[] = JSON.parse(readFileSync("src/content/svelati.json", "utf8")).svelati;
+const isSecret = (slug: string) => !revealed.includes(slug);
+const visibleAuthors = authors.filter((a) => !isSecret(a.slug));
 
 const pages = [
   "/",
   "/programma",
-  "/programma/le-radici-che-si-scelgono",
   "/programma/a-colpi-di-mantice",
   "/programma/shuma",
   "/programma/monologo-sulle-donne",
-  "/programma/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi",
+  "/programma/la-buca-delle-lettere-di-coraggio",
+  ...visibleAuthors.flatMap((a) => [`/programma/${a.talk}`, `/ospiti/${a.slug}`]),
   "/giornate/mafia",
   "/giornate/donne",
   "/giornate/immigrazione",
   "/ospiti",
   "/ospiti/banda-citta-di-acate",
-  "/ospiti/antonella-desiree-giuffre",
   "/famiglie",
   "/mostra-peppino-impastato",
   "/lamiaradice",
@@ -253,12 +273,12 @@ test("programma: con ?ora= durante il festival segna gli appuntamenti in corso",
 });
 
 test("scheda evento: dati strutturati Event validi", async ({ page }) => {
-  await page.goto("/programma/le-radici-che-si-scelgono");
+  await page.goto("/programma/monologo-sulle-donne");
   const blocks = await page.locator('script[type="application/ld+json"]').allTextContents();
   const data = blocks.map((b) => JSON.parse(b));
-  const event = data.find((d) => d["@type"] === "LiteraryEvent");
+  const event = data.find((d) => d["@type"] === "TheaterEvent");
   expect(event).toBeTruthy();
-  expect(event.startDate).toBe("2026-10-16T19:00:00+02:00");
+  expect(event.startDate).toBe("2026-10-17T18:00:00+02:00");
   expect(event.location.address.addressLocality).toBe("Acate");
   expect(event.offers.price).toBe(0);
   expect(event.isAccessibleForFree).toBe(true);
@@ -271,7 +291,8 @@ test("home: dati strutturati Festival", async ({ page }) => {
   const festival = blocks.map((b) => JSON.parse(b)).find((d) => d["@type"] === "Festival");
   expect(festival.startDate).toBe("2026-10-16T17:00:00+02:00");
   expect(festival.endDate).toBe("2026-10-18T22:00:00+02:00");
-  expect(festival.subEvent.length).toBeGreaterThanOrEqual(8);
+  // gli incontri degli autori segreti non hanno pagina: arrivano quando sono svelati
+  expect(festival.subEvent.length).toBeGreaterThanOrEqual(5 + visibleAuthors.length);
 });
 
 test("calendari .ics", async ({ request }) => {
@@ -297,7 +318,7 @@ test("pagina inesistente: 404 con link al programma", async ({ page }) => {
 });
 
 test("anteprime social: le pagine con un'immagine propria la usano", async ({ page, request }) => {
-  for (const path of ["/programma", "/programma/shuma", "/ospiti/giovanni-impastato", "/famiglie"]) {
+  for (const path of ["/programma", "/programma/shuma", "/ospiti/banda-citta-di-acate", "/famiglie"]) {
     await page.goto(path);
     const og = await page.locator('meta[property="og:image"]').first().getAttribute("content");
     expect(og).toContain(`${path}/opengraph-image`);
@@ -346,30 +367,82 @@ test("contenuti corretti dall'organizzazione: niente palco coperto, piano pioggi
   expect(info).toContain("via Archimede");
 });
 
-test("ritratti degli autori dove se ne parla", async ({ page }) => {
+test("autori: il ritratto se sono svelati, «Chi sarà?» finché sono segreti", async ({ page }) => {
   await page.goto("/ospiti");
-  for (const name of ["Giovanni Impastato", "Antonella Desirée Giuffrè", "Maria Antonietta Ferraloro"]) {
-    await expect(page.getByRole("img", { name: `Ritratto di ${name}` })).toBeVisible();
+  for (const author of authors) {
+    const portrait = page.getByRole("img", { name: `Ritratto di ${author.name}` });
+    if (isSecret(author.slug)) await expect(portrait).toHaveCount(0);
+    else await expect(portrait).toBeVisible();
   }
-  await page.goto("/giornate/mafia");
-  await expect(page.getByRole("img", { name: "Ritratto di Giovanni Impastato" }).first()).toBeVisible();
+  await expect(page.locator("[data-mystery-guest]")).toHaveCount(authors.length - visibleAuthors.length);
+  for (const author of authors) {
+    await page.goto(`/giornate/${author.day}`);
+    if (isSecret(author.slug)) {
+      await expect(page.locator("[data-mystery-guest]")).toHaveCount(1);
+    } else {
+      await expect(page.getByRole("img", { name: `Ritratto di ${author.name}` }).first()).toBeVisible();
+    }
+  }
 });
 
-test("home: le tre schede degli autori hanno le stesse misure", async ({ page }) => {
+test("autori segreti: nessun nome, foto, libro o indirizzo prima che siano svelati", async ({ request }) => {
+  const leaks: Record<string, string[]> = {
+    "giovanni-impastato": [
+      "Giovanni Impastato",
+      "giovanni-impastato",
+      "fratello Giovanni",
+      "Mio fratello",
+      "Oltre i cento passi",
+      "Resistere a Mafiopoli",
+      "le-radici-che-si-scelgono",
+    ],
+    "antonella-desiree-giuffre": ["Giuffr", "giuffre", "Desirée", "seminatrice di coraggio", "Tre60"],
+    "maria-antonietta-ferraloro": [
+      "Ferraloro",
+      "ferraloro",
+      "raccontato alle ragazze",
+      "raccontato a mia figlia",
+      "Gallucci",
+      "opera-orologio",
+      "luoghi del Gattopardo",
+    ],
+  };
+  const secret = authors.filter((a) => isSecret(a.slug));
+  test.skip(secret.length === 0, "Tutti gli autori sono svelati");
+  const files = [
+    ...pages,
+    "/sitemap.xml",
+    "/calendario/programma-completo.ics",
+    "/calendario/acate-book-festival-2026.ics",
+  ];
+  for (const path of files) {
+    const body = await (await request.get(path)).text();
+    for (const author of secret) {
+      for (const word of leaks[author.slug]) expect(body, `${path}: «${word}»`).not.toContain(word);
+    }
+  }
+  for (const author of secret) {
+    expect((await request.get(`/ospiti/${author.slug}`)).status()).toBe(404);
+    expect((await request.get(`/programma/${author.talk}`)).status()).toBe(404);
+  }
+});
+
+test("home: le tre schede degli autori hanno le stesse misure, svelati o no", async ({ page }) => {
   await page.goto("/");
-  const portraits = page.locator('section[aria-labelledby="gli-ospiti"] img[alt^="Ritratto di"]');
-  await expect(portraits).toHaveCount(3);
-  const sizes = await portraits.evaluateAll((imgs) =>
-    imgs.map((img) => ({
-      width: Math.round(img.getBoundingClientRect().width),
-      height: Math.round(img.getBoundingClientRect().height),
-      column: Math.round(img.closest("article")!.getBoundingClientRect().width),
-    })),
+  const cards = page.locator('section[aria-labelledby="gli-ospiti"] article');
+  await expect(cards).toHaveCount(3);
+  // il riquadro in cima alla scheda: il ritratto o il «?» degli autori segreti
+  const sizes = await cards.evaluateAll((els) =>
+    els.map((el) => {
+      const box = el.firstElementChild!.getBoundingClientRect();
+      return `${Math.round(box.width)}x${Math.round(box.height)}`;
+    }),
   );
-  expect(new Set(sizes.map((s) => `${s.width}x${s.height}`)).size, JSON.stringify(sizes)).toBe(1);
+  expect(new Set(sizes).size, JSON.stringify(sizes)).toBe(1);
 });
 
 test("copertine originali: i libri degli ospiti, tutti alti uguali", async ({ page }) => {
+  test.skip(isSecret("giovanni-impastato"), "Giovanni Impastato non è ancora svelato");
   await page.goto("/ospiti/giovanni-impastato");
   const books = page.locator("#libri ~ ul [data-book-cover]");
   await expect(books).toHaveCount(3);
@@ -379,17 +452,27 @@ test("copertine originali: i libri degli ospiti, tutti alti uguali", async ({ pa
     els.map((el) => Math.round((el.firstElementChild as HTMLElement).offsetHeight)),
   );
   expect(new Set(heights).size, JSON.stringify(heights)).toBe(1);
+});
+
+test("il libro della giornata: la copertina se l'autore è svelato, altrimenti «Lo sveliamo presto»", async ({
+  page,
+}) => {
   await page.goto("/giornate/donne");
-  await expect(page.locator("[data-book-cover] img")).toHaveCount(1);
+  const aside = page.locator('aside[aria-labelledby="il-libro"]');
+  if (isSecret("antonella-desiree-giuffre")) {
+    await expect(aside.locator("img")).toHaveCount(0);
+    await expect(aside.getByRole("paragraph").filter({ hasText: /^Lo sveliamo presto$/ })).toBeVisible();
+  } else {
+    await expect(aside.locator("[data-book-cover] img")).toHaveCount(1);
+  }
 });
 
 test("copertine dei libri: le scritte restano dentro il libro", async ({ page }) => {
   for (const path of [
     "/",
     "/ospiti",
-    "/ospiti/maria-antonietta-ferraloro",
     "/giornate/immigrazione",
-    "/programma/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi",
+    ...visibleAuthors.flatMap((a) => [`/ospiti/${a.slug}`, `/programma/${a.talk}`]),
   ]) {
     await page.goto(path);
     const problems = await page.locator("[data-book-cover]").evaluateAll((covers) =>
@@ -410,7 +493,10 @@ test("copertine dei libri: le scritte restano dentro il libro", async ({ page })
 test("SEO tecnico: sitemap, robots, manifest", async ({ request }) => {
   const sitemap = await (await request.get("/sitemap.xml")).text();
   expect(sitemap).toContain("/programma/shuma");
-  expect(sitemap).toContain("/ospiti/giovanni-impastato");
+  for (const author of authors) {
+    if (isSecret(author.slug)) expect(sitemap).not.toContain(`/ospiti/${author.slug}`);
+    else expect(sitemap).toContain(`/ospiti/${author.slug}`);
+  }
   expect(sitemap).toContain("/giornate/immigrazione");
   const robots = await (await request.get("/robots.txt")).text();
   expect(robots).toMatch(/Sitemap: .*\/sitemap\.xml/);
