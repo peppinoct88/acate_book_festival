@@ -30,8 +30,8 @@ def main():
     ordine = list(AUTORI.values())
     data["svelati"] = sorted(set(svelati), key=ordine.index)
     with open(FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-        f.write("\n")
+        # come lo scrive Prettier (npm run check controlla anche questo file): l'elenco su una riga
+        f.write('{\n  "svelati": ' + json.dumps(data["svelati"], ensure_ascii=False) + "\n}\n")
     verbo = "Svelato" if azione == "svela" else "Di nuovo segreto"
     with open(os.environ.get("MESSAGGIO", "/tmp/messaggio"), "w", encoding="utf-8") as f:
         f.write(f"{verbo}: {', '.join(nomi)}\n\nAutori svelati sul sito: {', '.join(data['svelati']) or 'nessuno'}.\n")

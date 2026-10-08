@@ -395,6 +395,9 @@ test("autori segreti: nessun nome, foto, libro o indirizzo prima che siano svela
       "Oltre i cento passi",
       "Resistere a Mafiopoli",
       "le-radici-che-si-scelgono",
+      "Pienogiorno",
+      "Piemme",
+      "Stampa Alternativa",
     ],
     "antonella-desiree-giuffre": ["Giuffr", "giuffre", "Desirée", "seminatrice di coraggio", "Tre60"],
     "maria-antonietta-ferraloro": [
@@ -405,6 +408,8 @@ test("autori segreti: nessun nome, foto, libro o indirizzo prima che siano svela
       "Gallucci",
       "opera-orologio",
       "luoghi del Gattopardo",
+      "Pacini",
+      "Nuova Frontiera",
     ],
   };
   const secret = authors.filter((a) => isSecret(a.slug));
@@ -424,6 +429,23 @@ test("autori segreti: nessun nome, foto, libro o indirizzo prima che siano svela
   for (const author of secret) {
     expect((await request.get(`/ospiti/${author.slug}`)).status()).toBe(404);
     expect((await request.get(`/programma/${author.talk}`)).status()).toBe(404);
+  }
+});
+
+test("crediti: gli editori delle copertine, solo degli autori già svelati", async ({ page }) => {
+  const publishers: Record<string, string[]> = {
+    "giovanni-impastato": ["Libreria Pienogiorno", "Piemme"],
+    "antonella-desiree-giuffre": ["Tre60"],
+    "maria-antonietta-ferraloro": ["Gallucci Bros.", "La Nuova Frontiera Junior", "Pacini Editore"],
+  };
+  await page.goto("/festival");
+  const credit = page.getByRole("listitem").filter({ hasText: "Copertine dei libri" });
+  await expect(credit).toHaveCount(1);
+  for (const author of authors) {
+    for (const name of publishers[author.slug]) {
+      if (isSecret(author.slug)) await expect(credit).not.toContainText(name);
+      else await expect(credit).toContainText(name);
+    }
   }
 });
 
