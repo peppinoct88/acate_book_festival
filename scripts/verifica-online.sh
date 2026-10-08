@@ -95,6 +95,29 @@ done
 read -r code _ <<<"$(probe "$BASE/pagina-che-non-esiste")"
 if [[ "$code" == 404 ]]; then ok "404 sulle pagine inesistenti"; else ko "una pagina inesistente risponde $code"; fi
 
+section "Autori svelati e segreti (src/content/svelati.json)"
+svelati=$(python3 -c 'import json, sys; print(" ".join(json.load(open(sys.argv[1]))["svelati"]))' \
+  "$(dirname "$0")/../src/content/svelati.json")
+home=$(get "$BASE/")
+for author in "giovanni-impastato le-radici-che-si-scelgono Giovanni Impastato" \
+  "antonella-desiree-giuffre la-seminatrice-di-coraggio Antonella Desirée Giuffrè" \
+  "maria-antonietta-ferraloro il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi Maria Antonietta Ferraloro"; do
+  read -r slug talk name <<<"$author"
+  read -r guest _ <<<"$(probe "$BASE/ospiti/$slug")"
+  read -r event _ <<<"$(probe "$BASE/programma/$talk")"
+  if [[ " $svelati " == *" $slug "* ]]; then
+    if [[ "$guest $event" == "200 200" ]] && grep -q "$name" <<<"$home"; then
+      ok "$name: scheda, incontro e home online"
+    else
+      ko "$name: nome svelato, ma /ospiti/$slug $guest, /programma/$talk $event (il deploy è finito?)"
+    fi
+  elif [[ "$guest $event" == "404 404" ]] && ! grep -q "$name" <<<"$home"; then
+    ok "$name: nome ancora segreto"
+  else
+    ko "$name: il nome deve restare segreto, ma /ospiti/$slug $guest, /programma/$talk $event"
+  fi
+done
+
 section "SEO"
 program=$(get "$BASE/programma")
 canonical=$(grep -o '<link rel="canonical" href="[^"]*"' <<<"$program" | sed 's/.*href="//; s/"$//')

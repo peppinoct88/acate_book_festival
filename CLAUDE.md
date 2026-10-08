@@ -32,7 +32,8 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
     `src/assets/partner/` preparati per fondo blu); stemmi di Regione e Comune a parte, senza sfondo.
   - `covers.ts`: copertine originali dei libri (© editori) per titolo, in `src/assets/copertine/`; nuove con il
     workflow GitHub «Importa copertine dei libri» (`scripts/copertine.json`). Senza copertina il libro resta disegnato.
-  - `reveal.ts` + `svelati.json`: autori segreti, svelati uno alla volta (workflow GitHub «Svela un autore»).
+  - `reveal.ts` + `svelati.json`: autori segreti, svelati uno alla volta (workflow GitHub «Svela un autore»,
+    poi «Verifica sito online», che controlla svelati e segreti sul sito pubblicato).
     Finché sono segreti non compaiono da nessuna parte: valgono i `teaser` di `program.ts` e `venues.ts` e le
     schede «Chi sarà?» (`components/mystery-guest.tsx`). Un test controlla che non trapeli nulla.
   - `notices.ts`: avvisi in cima a tutte le pagine (maltempo, spostamenti) con scadenza automatica.

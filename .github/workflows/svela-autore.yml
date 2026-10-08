@@ -3,6 +3,7 @@ name: Svela un autore
 # Quando un autore viene svelato sui social: Actions → «Svela un autore» → scegli il nome → Run workflow.
 # Aggiorna src/content/svelati.json e Vercel pubblica il sito aggiornato in un paio di minuti.
 # «nascondi» lo rimette segreto. Vedi src/content/reveal.ts.
+# Dopo il deploy, «Verifica sito online» controlla che gli svelati siano online e gli altri ancora segreti.
 on:
   workflow_dispatch:
     inputs:
