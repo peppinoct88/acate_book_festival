@@ -15,7 +15,7 @@ const gattopardo = isHidden("maria-antonietta-ferraloro");
 
 export const metadata: Metadata = pageMetadata({
   title: "Piccole radici: per le famiglie",
-  description: `Teatro e letture musicate per bambini e ragazzi all'Acate Book Festival, 16-18 ottobre 2026: «A colpi di mantice», ${gattopardo ? "un incontro sul Gattopardo per ragazze e ragazzi" : "il Gattopardo raccontato ai ragazzi"} e «Shuma». Ingresso libero.`,
+  description: `Letture musicate, teatro e ${gattopardo ? "un incontro sul Gattopardo" : "il Gattopardo raccontato ai ragazzi"} all'Acate Book Festival, 16-18 ottobre: «A colpi di mantice» e «Shuma». Ingresso libero.`,
   path: "/famiglie",
   ownImage: true,
 });

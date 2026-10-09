@@ -432,6 +432,24 @@ test("autori segreti: nessun nome, foto, libro o indirizzo prima che siano svela
   }
 });
 
+test("description scritte a mano: entrano intere nei 158 caratteri, senza «…»", async ({ request }) => {
+  // le pagine di eventi e giornate la ricavano dai testi lunghi e la troncano apposta (truncate in lib/seo.ts)
+  for (const path of [
+    "/",
+    "/programma",
+    "/ospiti",
+    "/famiglie",
+    "/festival",
+    "/info",
+    "/lamiaradice",
+    "/adesso",
+  ]) {
+    const html = await (await request.get(path)).text();
+    const description = html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "";
+    expect(description, path).not.toMatch(/…$/);
+  }
+});
+
 test("crediti: gli editori delle copertine, solo degli autori già svelati", async ({ page }) => {
   const publishers: Record<string, string[]> = {
     "giovanni-impastato": ["Libreria Pienogiorno", "Piemme"],

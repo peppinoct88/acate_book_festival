@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMetadata({
     ...authorSlugs.flatMap((slug) => getGuest(slug)?.name ?? []),
     "Matilde Masaracchio",
     "Santa Briganti",
-  ].join(", ")}${anyHidden ? ", gli autori che sveliamo uno alla volta" : ""} e la musica di Acate.`,
+  ].join(", ")}${anyHidden ? " e gli autori svelati uno alla volta" : " e la musica di Acate"}.`,
   path: "/ospiti",
   ownImage: true,
 });
