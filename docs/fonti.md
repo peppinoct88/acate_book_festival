@@ -38,6 +38,8 @@ Ogni dato pubblicato sul sito viene da una di queste fonti. Prima di aggiungere 
   circa 50 minuti, poi firmacopie e «Shuma» alle 19:15; modera l'incontro di sabato Elisa Petrillo; l'Albero delle
   radici resta e ci si possono attaccare le immagini; la mostra «Radici libere» c'è solo venerdì 16. Foto di
   Matilde Masaracchio ed Elisa Petrillo fornite dall'organizzazione, ritagliate in 3:4 come gli altri ritratti.
+  La foto di Elisa Petrillo è stata sostituita lo stesso giorno con una più grande (800×800) inviata
+  dall'organizzazione: ritaglio 3:4 di 360×480 alla risoluzione originale, senza ingrandimenti.
   Sul sito: monologo 18:00–18:10, incontro 18:10–19:10 (la durata del programma definitivo), firmacopie
   19:10–19:40; domenica incontro 18:00–18:50, firmacopie 18:50–19:15, «Shuma» 19:15–20:05.
   Logo di CIVIKA S.R.L. fornito dall'organizzazione (vettoriale, bianco): sul sito solo su fondo scuro, nel footer
