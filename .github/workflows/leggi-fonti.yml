@@ -12,6 +12,9 @@ on:
       parole:
         description: Parole da cercare nel testo, separate da virgole
         required: false
+      codice:
+        description: Parole da cercare nel codice HTML (per esempio il nome di un'immagine), separate da virgole
+        required: false
 
 permissions:
   contents: read
@@ -28,4 +31,5 @@ jobs:
         env:
           URLS: ${{ inputs.urls }}
           PAROLE: ${{ inputs.parole }}
+          CODICE: ${{ inputs.codice }}
         run: python3 scripts/leggi-fonti.py

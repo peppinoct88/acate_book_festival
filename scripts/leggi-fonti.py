@@ -4,6 +4,8 @@
 Gira su GitHub Actions (workflow «Leggi le fonti»): dalle sessioni cloud i siti esterni non sono
 raggiungibili. Per ogni indirizzo in URLS stampa titolo, descrizione e anteprima social, poi i passaggi del
 testo che contengono le PAROLE cercate (senza distinguere maiuscole), con un po' di contesto intorno.
+Le parole in CODICE si cercano invece nell'HTML (attributi, indirizzi e misure delle immagini): servono per
+controllare sul sito pubblicato, per esempio, che una foto nuova sia online.
 Un indirizzo di ricerca (per esempio https://html.duckduckgo.com/html/?q=...) stampa i risultati.
 """
 
@@ -46,6 +48,7 @@ def testo(page):
 def main():
     urls = [u for u in os.environ.get("URLS", "").split() if u.startswith("http")]
     parole = [p.strip() for p in os.environ.get("PAROLE", "").split(",") if p.strip()]
+    codice = [p.strip() for p in os.environ.get("CODICE", "").split(",") if p.strip()]
     for url in urls:
         print("\n" + "=" * 100 + f"\n{url}")
         try:
@@ -63,6 +66,11 @@ def main():
             value = meta(page, name)
             if value:
                 print(f"  {name}: {value[:400]}")
+        for parola in codice:
+            posizioni = [m.start() for m in re.finditer(re.escape(parola), page)]
+            print(f"  nel codice «{parola}»: {len(posizioni)} volte")
+            for start in posizioni[:3]:
+                print(f"    … {re.sub(r'\s+', ' ', page[max(0, start - 150) : start + 250])} …")
         body = testo(page)
         print(f"  testo: {len(body)} caratteri")
         if "duckduckgo" in url:
