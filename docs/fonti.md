@@ -40,6 +40,8 @@ Ogni dato pubblicato sul sito viene da una di queste fonti. Prima di aggiungere 
   Matilde Masaracchio ed Elisa Petrillo fornite dall'organizzazione, ritagliate in 3:4 come gli altri ritratti.
   Sul sito: monologo 18:00–18:10, incontro 18:10–19:10 (la durata del programma definitivo), firmacopie
   19:10–19:40; domenica incontro 18:00–18:50, firmacopie 18:50–19:15, «Shuma» 19:15–20:05.
+  Logo di CIVIKA S.R.L. fornito dall'organizzazione (vettoriale, bianco): sul sito solo su fondo scuro, nel footer
+  di ogni pagina e nella pagina /festival; senza link, perché un sito di CIVIKA non è indicato.
 - **Manifesto definitivo e loghi** (6 ottobre 2026): palette e illustrazione del sito; loghi di Santa Briganti,
   Mondadori Bookstore Vittoria, Banda Città di Acate e I Grifoni di Biscari. Lo stemma del Comune è ritagliato
   dal manifesto.
@@ -169,8 +171,10 @@ Scaricate dal workflow «Importa copertine dei libri» (`scripts/copertine.json`
   2014 esiste solo a 200 px, sul sito c'è quella della seconda edizione, dalla
   [pagina dell'editore](https://www.pacinieditore.it/prodotto/tomasi-lampedusa-luoghi-gattopardo-seconda-edizione/).
 - «L'opera-orologio. Saggi sul Gattopardo» — Pacini Editore, ISBN 9788869951480 (immagine IBS).
-- «Resistere a Mafiopoli» — Stampa Alternativa, 2009, ISBN 9788862220866: nessuna copertina nei cataloghi
-  (solo segnaposto); resta quella disegnata finché l'organizzazione non ne manda una foto.
+- «Resistere a Mafiopoli» — Navarra Editore, 2023, ISBN 9788832055900 (immagine IBS): la nuova edizione, quella in
+  commercio; della prima (Stampa Alternativa, 2009, ISBN 9788862220866) nei cataloghi c'è solo un segnaposto.
+- «Il coraggio della memoria» — CMI, 2021, ISBN 9788894095746 (immagine IBS). Esiste anche una nuova edizione
+  Navarra Editore (ISBN 9791281655447), non usata.
 
 ## Foto
 

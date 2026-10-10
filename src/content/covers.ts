@@ -1,10 +1,12 @@
 import type { StaticImageData } from "next/image";
 import gattopardoMiaFiglia from "@/assets/copertine/il-gattopardo-raccontato-a-mia-figlia.jpg";
 import gattopardoRagazzi from "@/assets/copertine/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi.jpg";
+import coraggioMemoria from "@/assets/copertine/il-coraggio-della-memoria.jpg";
 import operaOrologio from "@/assets/copertine/l-opera-orologio.jpg";
 import seminatrice from "@/assets/copertine/la-seminatrice-di-coraggio.jpg";
 import mioFratello from "@/assets/copertine/mio-fratello-tutta-una-vita-con-peppino.jpg";
 import oltreCentoPassi from "@/assets/copertine/oltre-i-cento-passi.jpg";
+import resistereMafiopoli from "@/assets/copertine/resistere-a-mafiopoli.jpg";
 import tomasiLuoghi from "@/assets/copertine/tomasi-di-lampedusa-e-i-luoghi-del-gattopardo.jpg";
 
 /**
@@ -16,6 +18,8 @@ import tomasiLuoghi from "@/assets/copertine/tomasi-di-lampedusa-e-i-luoghi-del-
 const covers: Record<string, StaticImageData> = {
   "Mio fratello. Tutta una vita con Peppino": mioFratello,
   "Oltre i cento passi": oltreCentoPassi,
+  "Resistere a Mafiopoli": resistereMafiopoli,
+  "Il coraggio della memoria": coraggioMemoria,
   "La seminatrice di coraggio": seminatrice,
   "Il Gattopardo raccontato alle ragazze e ai ragazzi": gattopardoRagazzi,
   "Il Gattopardo raccontato a mia figlia": gattopardoMiaFiglia,

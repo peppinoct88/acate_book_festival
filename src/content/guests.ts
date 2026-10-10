@@ -36,9 +36,9 @@ const allGuests: Guest[] = [
       { title: "Oltre i cento passi", publisher: "Piemme", year: 2017 },
       {
         title: "Resistere a Mafiopoli",
-        publisher: "Stampa Alternativa",
-        year: 2009,
-        note: "con Franco Vassia; nuova edizione Navarra Editore, 2023",
+        publisher: "Navarra Editore",
+        year: 2023,
+        note: "con Franco Vassia; prima edizione Stampa Alternativa, 2009",
       },
       {
         title: "Il coraggio della memoria",

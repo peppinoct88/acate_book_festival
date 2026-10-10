@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import civikaLogo from "@/assets/partner/civika.svg";
 import comuneLogo from "@/assets/partner/comune-di-acate.png";
 import { partners } from "@/content/partners";
 import { photos } from "@/content/photos";
@@ -8,7 +9,7 @@ import { site } from "@/content/site";
 /**
  * I crediti in fondo a ogni pagina, in un blu più chiaro del footer: a sinistra le istituzioni,
  * con gli stemmi direttamente sul blu (senza sfondo) in una colonna della stessa larghezza, così i testi
- * sono allineati; a destra i partner, piccoli e su una riga.
+ * sono allineati, e il logo bianco di CIVIKA, che organizza; a destra i partner, piccoli e su una riga.
  * Stemma e dicitura della Regione sono un obbligo dell'avviso: i test li controllano.
  */
 export function FooterCredits() {
@@ -59,7 +60,14 @@ export function FooterCredits() {
                 </a>
               </p>
               <p className="eyebrow eyebrow--plain mt-4 text-teal-soft">Organizzazione</p>
-              <p className="mt-2 font-display font-bold text-cream">{site.production.name}</p>
+              {/* il logo è bianco: solo su fondo scuro */}
+              <Image
+                src={civikaLogo}
+                alt={site.production.name}
+                unoptimized
+                data-logo="civika"
+                className="mt-3 h-10 w-auto"
+              />
             </div>
           </div>
         </div>

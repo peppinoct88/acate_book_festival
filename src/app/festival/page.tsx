@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import civikaLogo from "@/assets/partner/civika.svg";
 import manifesto from "@/assets/manifesto.jpg";
 import { PageHero } from "@/components/page-hero";
 import { PhotoCredit } from "@/components/photo";
@@ -175,13 +176,24 @@ export default function FestivalPage() {
               l&apos;<strong>Associazione Culturale Santa Briganti</strong> di Vittoria, che firma «A colpi di
               mantice», letture musicate con laboratorio, e lo spettacolo di chiusura, con la{" "}
               <strong>Banda Città di Acate</strong> e <strong>I Grifoni di Biscari – Tamburi di Acate</strong>
-              , che aprono le giornate, e con <strong>Mondadori Bookstore Vittoria</strong>, la libreria
+              , che aprono il festival, e con <strong>Mondadori Bookstore Vittoria</strong>, la libreria
               partner.
             </p>
             <p>
               Ad accogliervi ci sono i volontari «Radici», con la maglietta del festival: come le «magliette
               blu» di Festivaletteratura, sono il volto del festival tra il palco e la villa.
             </p>
+          </div>
+          {/* il logo di CIVIKA è bianco: solo su fondo scuro */}
+          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4 rounded-[1.5rem] bg-ink px-6 py-5 sm:px-7">
+            <p className="eyebrow eyebrow--plain text-teal-soft">Organizzazione</p>
+            <Image
+              src={civikaLogo}
+              alt={site.production.name}
+              unoptimized
+              data-logo="civika"
+              className="h-11 w-auto"
+            />
           </div>
         </div>
         <div className="rounded-[1.75rem] bg-paper p-7 sm:p-9">

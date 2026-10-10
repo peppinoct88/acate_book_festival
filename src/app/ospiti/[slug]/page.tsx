@@ -67,10 +67,11 @@ export default async function GuestPage({ params }: PageProps<"/ospiti/[slug]">)
                 <ShareActions title={`${name} · Acate Book Festival`} url={absoluteUrl(`/ospiti/${slug}`)} />
               </div>
             </div>
-            <div className="group mx-auto w-56 sm:w-64 md:mx-0 md:w-full">
+            {/* su telefono il ritratto è largo quanto la colonna (al massimo 28rem) */}
+            <div className="group mx-auto w-full max-w-md md:mx-0 md:max-w-none">
               <GuestVisual
                 guest={guest}
-                sizes="(min-width: 1024px) 21rem, (min-width: 768px) 17rem, 16rem"
+                sizes="(min-width: 1024px) 21rem, (min-width: 768px) 17rem, (min-width: 480px) 28rem, 100vw"
                 priority
               />
             </div>

@@ -73,6 +73,8 @@ test.describe("ogni pagina", () => {
       await expect(funding).toContainText("Regione Siciliana");
       await expect(funding).toContainText("Assessorato delle Autonomie Locali e della Funzione Pubblica");
       await expect(funding.getByRole("img", { name: "Stemma della Regione Siciliana" })).toBeVisible();
+      // organizzazione: il logo di CIVIKA in ogni footer
+      await expect(page.locator("footer").getByRole("img", { name: "CIVIKA S.R.L." })).toBeVisible();
       // Vercel Analytics, piano Pro: al massimo 2 proprietà per evento (attributi data-track-*)
       const overLimit = await page
         .locator("[data-track]")
@@ -451,6 +453,7 @@ test("autori segreti: nessun nome, foto, libro o indirizzo prima che siano svela
       "Pienogiorno",
       "Piemme",
       "Stampa Alternativa",
+      "Navarra Editore",
     ],
     "antonella-desiree-giuffre": ["Giuffr", "giuffre", "Desirée", "seminatrice di coraggio", "Tre60"],
     "maria-antonietta-ferraloro": [
@@ -503,9 +506,42 @@ test("description scritte a mano: entrano intere nei 158 caratteri, senza «…�
   }
 });
 
+test("logo CIVIKA: bianco, quindi sempre su un fondo scuro (footer e /festival)", async ({ page }) => {
+  for (const [path, count] of [
+    ["/", 1],
+    ["/festival", 2],
+  ] as const) {
+    await page.goto(path);
+    const logos = page.locator('img[data-logo="civika"]');
+    await expect(logos).toHaveCount(count);
+    for (const logo of await logos.all()) {
+      await logo.scrollIntoViewIfNeeded();
+      await expect(logo).toBeVisible();
+      await expect(logo).toHaveAttribute("alt", "CIVIKA S.R.L.");
+      // il primo fondo pieno sotto il logo: luminanza relativa WCAG bassa (navy 0.035, ink 0.024)
+      const luminance = await logo.evaluate((img) => {
+        for (let el = img.parentElement; el; el = el.parentElement) {
+          const rgb =
+            getComputedStyle(el)
+              .backgroundColor.match(/[\d.]+/g)
+              ?.map(Number) ?? [];
+          if (rgb.length < 3 || rgb[3] === 0) continue;
+          const [r, g, b] = rgb.slice(0, 3).map((c) => {
+            const s = c / 255;
+            return s <= 0.04045 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+          });
+          return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        }
+        return 1;
+      });
+      expect(luminance, path).toBeLessThan(0.1);
+    }
+  }
+});
+
 test("crediti: gli editori delle copertine, solo degli autori già svelati", async ({ page }) => {
   const publishers: Record<string, string[]> = {
-    "giovanni-impastato": ["Libreria Pienogiorno", "Piemme"],
+    "giovanni-impastato": ["Libreria Pienogiorno", "Piemme", "Navarra Editore", "CMI"],
     "antonella-desiree-giuffre": ["Tre60"],
     "maria-antonietta-ferraloro": ["Gallucci Bros.", "La Nuova Frontiera Junior", "Pacini Editore"],
   };
@@ -534,13 +570,31 @@ test("home: le tre schede degli autori hanno le stesse misure, svelati o no", as
   expect(new Set(sizes).size, JSON.stringify(sizes)).toBe(1);
 });
 
+test("scheda ospite: su telefono il ritratto prende la larghezza della colonna", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(!isMobile, "su desktop il ritratto sta nella colonna a destra");
+  for (const author of authors.filter((a) => !isSecret(a.slug))) {
+    await page.goto(`/ospiti/${author.slug}`);
+    const sizes = await page.locator("article > header").evaluate((header) => {
+      const style = getComputedStyle(header);
+      const column = header.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      const portrait = header.querySelector('img[alt^="Ritratto di"]')!.getBoundingClientRect();
+      return { column: Math.round(column), portrait: Math.round(portrait.width) };
+    });
+    // tutta la colonna, fino a 28rem sui telefoni più larghi
+    expect(sizes.portrait, author.slug).toBe(Math.min(sizes.column, 448));
+  }
+});
+
 test("copertine originali: i libri degli ospiti, tutti alti uguali", async ({ page }) => {
   test.skip(isSecret("giovanni-impastato"), "Giovanni Impastato non è ancora svelato");
   await page.goto("/ospiti/giovanni-impastato");
   const books = page.locator("#libri ~ ul [data-book-cover]");
   await expect(books).toHaveCount(4);
-  // due copertine originali; «Resistere a Mafiopoli» e «Il coraggio della memoria» restano disegnati
-  await expect(books.locator("img")).toHaveCount(2);
+  // tutti e quattro con la copertina originale
+  await expect(books.locator("img")).toHaveCount(4);
   const heights = await books.evaluateAll((els) =>
     els.map((el) => Math.round((el.firstElementChild as HTMLElement).offsetHeight)),
   );
