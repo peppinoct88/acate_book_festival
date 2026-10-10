@@ -1,0 +1,31 @@
+name: Leggi le fonti
+
+# Strumento manuale per controllare le fonti di docs/fonti.md: apre le pagine indicate e stampa nel log
+# titolo, descrizione e i passaggi che contengono le parole cercate (dalle sessioni cloud i siti esterni
+# non sono raggiungibili). Non modifica il repository.
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: Indirizzi da aprire, separati da spazi
+        required: true
+      parole:
+        description: Parole da cercare nel testo, separate da virgole
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  leggi:
+    name: Pagine
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Apri le pagine
+        env:
+          URLS: ${{ inputs.urls }}
+          PAROLE: ${{ inputs.parole }}
+        run: python3 scripts/leggi-fonti.py
