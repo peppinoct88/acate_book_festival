@@ -1,8 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useSyncExternalStore } from "react";
-import { currentTime, festivalPhase, type FestivalPhase } from "@/lib/now";
+import { useCallback, useSyncExternalStore } from "react";
+import {
+  currentTime,
+  festivalPhase,
+  hourLabel,
+  romeDate,
+  type DayHours,
+  type FestivalPhase,
+} from "@/lib/now";
 
 function subscribe(callback: () => void) {
   const timer = window.setInterval(callback, 60_000);
@@ -12,8 +19,8 @@ function subscribe(callback: () => void) {
 let cachedKey = "";
 let cachedPhase: FestivalPhase | null = null;
 
-function getSnapshot(): FestivalPhase {
-  const phase = festivalPhase(currentTime());
+function snapshot(hours: readonly DayHours[]): FestivalPhase {
+  const phase = festivalPhase(currentTime(), hours);
   const key = JSON.stringify(phase);
   if (key !== cachedKey || !cachedPhase) {
     cachedKey = key;
@@ -22,8 +29,22 @@ function getSnapshot(): FestivalPhase {
   return cachedPhase;
 }
 
+/** Il prossimo pomeriggio di festival, «Oggi dalle 18» o «Domani dalle 17»: sabato si comincia più tardi */
+function nextOpening(hours: readonly DayHours[]): string {
+  const now = currentTime();
+  const day = hours.find((h) => Date.parse(h.close) > now) ?? hours[hours.length - 1];
+  return `${day.date === romeDate(now) ? "Oggi" : "Domani"} dalle ${hourLabel(day.open)}`;
+}
+
 /** Contatore «Mancano N giorni» / «In corso» / «Grazie». Prima dell'idratazione mostra le date. */
-export function FestivalStatus({ className = "" }: { className?: string }) {
+export function FestivalStatus({
+  hours,
+  className = "",
+}: {
+  hours: readonly DayHours[];
+  className?: string;
+}) {
+  const getSnapshot = useCallback(() => snapshot(hours), [hours]);
   const phase = useSyncExternalStore(subscribe, getSnapshot, () => null);
 
   let label = "Ingresso libero";
@@ -35,7 +56,7 @@ export function FestivalStatus({ className = "" }: { className?: string }) {
         label = phase.daysLeft === 1 ? "Domani si comincia" : `Mancano ${phase.daysLeft} giorni`;
         break;
       case "today-before":
-        label = "Oggi si comincia, alle 17";
+        label = `Oggi si comincia, alle ${hourLabel(hours[0].open)}`;
         href = "/adesso";
         break;
       case "live":
@@ -44,7 +65,7 @@ export function FestivalStatus({ className = "" }: { className?: string }) {
         live = true;
         break;
       case "between":
-        label = "Oggi dalle 17: guarda il programma";
+        label = `${nextOpening(hours)}: guarda il programma`;
         href = "/adesso";
         break;
       case "after":

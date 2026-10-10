@@ -36,10 +36,6 @@ export const site = {
     label: "16 / 17 / 18 ottobre 2026",
     short: "16–18 ottobre 2026",
   },
-  hours: {
-    program: "17:00–20:30",
-    exhibition: "17:00–22:00",
-  },
   place: {
     town: "Acate",
     province: "RG",

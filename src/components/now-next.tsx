@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSyncExternalStore } from "react";
-import { currentTime, festivalPhase, romeDate } from "@/lib/now";
+import { currentTime, festivalPhase, hourLabel, romeDate, type DayHours } from "@/lib/now";
 
 export interface NowNextSession {
   id: string;
@@ -59,7 +59,16 @@ function Row({ s, highlight }: { s: NowNextSession; highlight?: boolean }) {
   );
 }
 
-export function NowNext({ sessions }: { sessions: NowNextSession[] }) {
+export function NowNext({
+  sessions,
+  hours,
+  exhibitionDate,
+}: {
+  sessions: NowNextSession[];
+  hours: readonly DayHours[];
+  /** Il giorno della mostra «Radici libere» (solo venerdì 16) */
+  exhibitionDate: string;
+}) {
   const now = useSyncExternalStore(subscribe, getSnapshot, () => null);
 
   if (now === null) {
@@ -70,7 +79,7 @@ export function NowNext({ sessions }: { sessions: NowNextSession[] }) {
     );
   }
 
-  const phase = festivalPhase(now);
+  const phase = festivalPhase(now, hours);
   const today = romeDate(now);
   const current = sessions.filter((s) => Date.parse(s.startISO) <= now && now < Date.parse(s.endISO));
   const upcoming = sessions.filter((s) => Date.parse(s.startISO) > now);
@@ -111,8 +120,8 @@ export function NowNext({ sessions }: { sessions: NowNextSession[] }) {
             </ul>
           ) : (
             <p className="mt-6 rounded-2xl bg-paper p-5 font-serif text-lg">
-              Tra un appuntamento e l&apos;altro: alla Villa dei lettori la mostra, l&apos;Albero delle radici
-              e lo scambio libri sono sempre aperti.
+              Tra un appuntamento e l&apos;altro: alla Villa dei lettori ci sono l&apos;Albero delle radici e
+              il bookshop{today === exhibitionDate ? ", e oggi la mostra «Radici libere»" : ""}.
             </p>
           )}
         </section>
@@ -128,7 +137,11 @@ export function NowNext({ sessions }: { sessions: NowNextSession[] }) {
             </ul>
           ) : (
             <p className="mt-6 rounded-2xl bg-paper p-5 font-serif text-lg">
-              Per oggi gli appuntamenti sono finiti: la mostra resta aperta fino alle 22.
+              {today === exhibitionDate
+                ? "Per oggi gli appuntamenti sono finiti: la mostra «Radici libere» resta aperta fino alle 22."
+                : today === hours[hours.length - 1].date
+                  ? "È l'ultimo appuntamento del festival."
+                  : "Per oggi gli appuntamenti sono finiti: ci vediamo domani."}
             </p>
           )}
         </section>
@@ -144,7 +157,7 @@ export function NowNext({ sessions }: { sessions: NowNextSession[] }) {
       ? phase.daysLeft === 1
         ? "Domani si comincia"
         : `Mancano ${phase.daysLeft} giorni`
-      : "Oggi dalle 17";
+      : `Oggi dalle ${hourLabel(hours.find((h) => h.date === today)?.open ?? hours[0].open)}`;
   return (
     <section aria-labelledby="prossimi-titolo">
       <p className="eyebrow text-ink">{label}</p>

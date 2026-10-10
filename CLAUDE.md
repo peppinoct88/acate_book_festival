@@ -58,6 +58,9 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
 - Correzioni dell'organizzazione (6 ottobre, `docs/fonti.md`): il Palco del Castello è all'aperto in via Archimede,
   senza numero di posti; niente piano pioggia; l'unico laboratorio è dentro «A colpi di mantice»; non esistono
   sentiero di luci, «Radici di carta» né braccialetti. Un test blocca queste frasi.
+- Correzioni del 10 ottobre: firmacopie sempre sotto il Palco del Castello; sabato niente banda né tamburi;
+  niente «Indovina il classico», buca delle lettere né cartoline; la mostra «Radici libere» c'è solo venerdì 16
+  (orari delle giornate in `dayHours`/`festivalHours` di `program.ts`). Anche queste frasi le blocca un test.
 - La pagina della mostra su Peppino Impastato ha tono sobrio: niente giochi di parole.
 - Il logo/lettering del manifesto è ricomposto con Outfit (`components/logotype.tsx`): non sostituirlo con immagini.
 

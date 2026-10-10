@@ -20,7 +20,9 @@ import {
 import { faq } from "@/content/faq";
 import { photos } from "@/content/photos";
 import { Photo } from "@/components/photo";
+import { exhibition, sessionHours, sessions, spokenTime } from "@/content/program";
 import { site } from "@/content/site";
+import { days } from "@/content/venues";
 import { faqJsonLd } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
 
@@ -32,18 +34,28 @@ export const metadata: Metadata = pageMetadata({
   ownImage: true,
 });
 
+const shuma = sessions.find((s) => s.activity.slug === "shuma")!;
+
+/** «Venerdì 17:00–20:30, sabato 18:00–19:40, …»: gli orari degli appuntamenti, dal programma */
+const dayRanges = days
+  .map((d, i) => {
+    const h = sessionHours(d.id);
+    return `${i ? d.weekday.toLowerCase() : d.weekday} ${h.start}–${h.end}`;
+  })
+  .join(", ");
+
 const essentials = [
   { Icon: Calendar, title: "Quando", text: "Venerdì 16, sabato 17 e domenica 18 ottobre 2026." },
   {
     Icon: Clock,
     title: "Orari",
-    text: "Appuntamenti dalle 17 alle 20:30 circa. La mostra resta aperta fino alle 22.",
+    text: `Appuntamenti: ${dayRanges}. Venerdì la mostra resta aperta fino alle ${spokenTime(exhibition.end)}.`,
   },
   { Icon: Ticket, title: "Ingresso", text: "Libero a tutti gli appuntamenti, senza prenotazione." },
   {
     Icon: Kids,
     title: "Bambini",
-    text: "Venerdì alle 18 «A colpi di mantice», letture musicate e laboratorio. Domenica alle 19:30 «Shuma», dagli 8 anni.",
+    text: `Venerdì alle 18 «A colpi di mantice», letture musicate e laboratorio. Domenica alle ${spokenTime(shuma.start)} «Shuma», dagli 8 anni.`,
   },
 ];
 
@@ -124,12 +136,12 @@ export default function InfoPage() {
               <div className="prose-festival mt-6">
                 <p>
                   Il <strong>Palco del Castello</strong> è all&apos;aperto, in via Archimede, di fronte al
-                  Castello dei Principi di Biscari: qui si tengono gli incontri con gli autori e gli
-                  spettacoli.
+                  Castello dei Principi di Biscari: qui si tengono gli incontri con gli autori, gli spettacoli
+                  e, dopo ogni incontro, le firmacopie.
                 </p>
                 <p>
                   La <strong>Villa dei lettori</strong> è nella villa comunale: qui trovi l&apos;accoglienza,
-                  la mostra, il bookshop e l&apos;Albero delle radici.
+                  il bookshop, l&apos;Albero delle radici e, venerdì 16, la mostra «Radici libere».
                 </p>
                 <p>
                   Il <strong>Comune di Acate</strong> è in {site.organizer.address}.
@@ -223,7 +235,8 @@ export default function InfoPage() {
               </h2>
               <p className="mt-3 max-w-[60ch] font-serif text-lg leading-relaxed text-ink/85">
                 Alla Villa dei lettori trovi i libri degli ospiti del festival, con Mondadori Bookstore
-                Vittoria, la libreria partner. Dopo ogni incontro gli autori firmano le copie.
+                Vittoria, la libreria partner. Dopo ogni incontro gli autori firmano le copie sotto il Palco
+                del Castello.
               </p>
             </div>
             <Link
@@ -273,8 +286,8 @@ export default function InfoPage() {
                 </p>
               ) : null}
               <p>
-                Durante il festival trovi l&apos;accoglienza alla Villa dei lettori, dalle 17 alle 22. Il
-                festival è promosso dal{" "}
+                Durante il festival trovi l&apos;accoglienza alla Villa dei lettori. Il festival è promosso
+                dal{" "}
                 <a href={site.organizer.url} rel="noopener">
                   {site.organizer.name}
                 </a>{" "}

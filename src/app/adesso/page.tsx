@@ -4,7 +4,7 @@ import { PageHero } from "@/components/page-hero";
 import { NowNext, type NowNextSession } from "@/components/now-next";
 import { ArrowRight } from "@/components/icons";
 import { buttonClass } from "@/components/button";
-import { sessions } from "@/content/program";
+import { exhibition, festivalHours, sessions } from "@/content/program";
 import { daysById, venues } from "@/content/venues";
 import { pageMetadata } from "@/lib/seo";
 
@@ -43,7 +43,7 @@ export default function NowPage() {
         intro="Sei ad Acate? Questa pagina ti dice cosa sta succedendo e cosa comincia tra poco, tra il Palco del Castello e la Villa dei lettori."
       />
       <div className="container-festival">
-        <NowNext sessions={list} />
+        <NowNext sessions={list} hours={festivalHours} exhibitionDate={daysById.get(exhibition.day)!.date} />
         <div className="mt-14 flex flex-wrap gap-3 border-t border-ink/12 pt-10">
           <Link href="/programma" className={buttonClass("ink")}>
             Il programma completo <ArrowRight size={18} />

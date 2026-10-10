@@ -54,11 +54,7 @@ const nextConfig: NextConfig = {
       },
       { source: "/programma/rito-della-luce", destination: "/programma", permanent: true },
       // laboratori tolti il 6 ottobre: l'unico laboratorio è dentro «A colpi di mantice»
-      {
-        source: "/programma/lettere-di-coraggio",
-        destination: "/programma/la-buca-delle-lettere-di-coraggio",
-        permanent: true,
-      },
+      { source: "/programma/lettere-di-coraggio", destination: "/programma#sabato-17", permanent: true },
       { source: "/programma/la-pagella-dei-sogni", destination: "/programma/shuma", permanent: true },
       {
         source: "/programma/il-gattopardo-raccontato-ai-nostri-figli",
@@ -68,6 +64,42 @@ const nextConfig: NextConfig = {
       {
         source: "/calendario/il-gattopardo-raccontato-ai-nostri-figli-dom-1800.ics",
         destination: "/calendario/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi-dom-1800.ics",
+        permanent: true,
+      },
+      // 10 ottobre: sabato senza tamburi né buca delle lettere; nuovi orari di sabato e domenica
+      {
+        source: "/programma/la-buca-delle-lettere-di-coraggio",
+        destination: "/programma#sabato-17",
+        permanent: true,
+      },
+      {
+        source: "/calendario/la-buca-delle-lettere-di-coraggio-sab-1700.ics",
+        destination: "/programma#sabato-17",
+        permanent: true,
+      },
+      {
+        source: "/calendario/i-tamburi-di-biscari-sab-1700.ics",
+        destination: "/programma#sabato-17",
+        permanent: true,
+      },
+      {
+        source: "/calendario/la-seminatrice-di-coraggio-sab-1900.ics",
+        destination: "/calendario/la-seminatrice-di-coraggio-sab-1810.ics",
+        permanent: true,
+      },
+      {
+        source: "/calendario/firmacopie-sab-2000.ics",
+        destination: "/calendario/firmacopie-sab-1910.ics",
+        permanent: true,
+      },
+      {
+        source: "/calendario/firmacopie-dom-1840.ics",
+        destination: "/calendario/firmacopie-dom-1850.ics",
+        permanent: true,
+      },
+      {
+        source: "/calendario/shuma-dom-1930.ics",
+        destination: "/calendario/shuma-dom-1915.ics",
         permanent: true,
       },
     ];

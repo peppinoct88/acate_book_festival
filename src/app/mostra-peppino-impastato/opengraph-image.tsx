@@ -9,7 +9,7 @@ export default function Image() {
     eyebrow: "La mostra",
     subtitle: "Peppino Impastato, una vita per immagini",
     title: "Radici libere",
-    meta: "Villa dei lettori · 16–18 ottobre · 17–22",
+    meta: "Villa dei lettori · venerdì 16 ottobre · 17–22",
     tone: "ink",
   });
 }

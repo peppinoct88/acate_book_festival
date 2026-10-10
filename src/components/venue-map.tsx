@@ -42,9 +42,10 @@ export function VenueMap({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
           </a>
         </div>
         <p className="mt-2 font-serif text-ink/85">{palco.description}</p>
-        <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
+        <ul className="mt-5 grid gap-2.5 sm:grid-cols-3">
           {[
             ["All'aperto", "incontri, teatro e musica"],
+            ["Firmacopie", "dopo ogni incontro con gli autori"],
             ["Ledwall", "le foto #LaMiaRadice"],
           ].map(([t, d]) => (
             <li key={t} className="rounded-xl border border-ink/15 bg-cream px-4 py-3">
@@ -81,13 +82,12 @@ export function VenueMap({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
           </a>
         </div>
         <p className="mt-2 font-serif text-ink/85">{villa.description}</p>
-        <ul className="mt-5 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
           {[
             ["Accoglienza", "informazioni sul festival"],
-            ["Mostra «Radici libere»", "aperta fino alle 22"],
-            ["Bookshop", "i libri degli ospiti e le firmacopie"],
+            ["Mostra «Radici libere»", "solo venerdì 16, fino alle 22"],
+            ["Bookshop", "i libri degli ospiti"],
             ["Albero delle radici", "#LaMiaRadice"],
-            ["Indovina il classico", "e la buca delle lettere (sabato)"],
           ].map(([t, d]) => (
             <li key={t} className="rounded-xl border border-ink/15 bg-cream px-4 py-3">
               <span className="block font-display font-bold">{t}</span>

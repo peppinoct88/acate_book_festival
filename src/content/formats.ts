@@ -5,9 +5,9 @@ export const formats: Format[] = [
   {
     slug: "banda-e-tamburi",
     name: "Banda e tamburi",
-    when: "Ogni pomeriggio alle 17",
+    when: "Venerdì e domenica alle 17",
     description:
-      "Il pomeriggio si apre con la musica di Acate: venerdì la Banda Città di Acate e I Grifoni di Biscari sfilano insieme per l'inaugurazione, sabato suonano i tamburi, domenica la banda.",
+      "Il pomeriggio si apre con la musica di Acate: venerdì la Banda Città di Acate e I Grifoni di Biscari sfilano insieme per l'inaugurazione, domenica la banda apre l'ultima giornata.",
     icon: "drum",
     href: "/programma",
   },
@@ -16,26 +16,9 @@ export const formats: Format[] = [
     name: "L'Albero delle radici",
     when: "Sempre, alla Villa dei lettori",
     description:
-      "Scrivi su un cartellino il nome di chi ti ha messo in mano il primo libro, appendilo, fotografalo e tagga quella persona con #LaMiaRadice. Ricorda l'albero davanti alla casa di Peppino a Cinisi, dove i visitatori lasciano le loro dediche.",
+      "Scrivi su un cartellino il nome di chi ti ha messo in mano il primo libro, appendilo, fotografalo e tagga quella persona con #LaMiaRadice: sui rami si possono attaccare anche le immagini. Ricorda l'albero davanti alla casa di Peppino a Cinisi, dove i visitatori lasciano le loro dediche.",
     icon: "tree",
     href: "/lamiaradice",
-  },
-  {
-    slug: "buca-delle-lettere",
-    name: "La buca delle lettere di coraggio",
-    when: "Sabato dalle 17 alle 20",
-    description:
-      "Cartoline del festival da scrivere a chi è lontano: le imbuchi alla villa e il festival le spedisce lunedì 19 ottobre.",
-    icon: "letter",
-    href: "/programma/la-buca-delle-lettere-di-coraggio",
-  },
-  {
-    slug: "indovina-il-classico",
-    name: "Indovina il classico, dal vivo",
-    when: "Sempre, alla Villa dei lettori",
-    description:
-      "Un angolo con una luce e un telefono sul cavalletto: chi vuole legge in siciliano l'incipit di un classico, senza dire il titolo, e diventa un video del festival.",
-    icon: "phone",
   },
   {
     slug: "ledwall-dei-lettori",

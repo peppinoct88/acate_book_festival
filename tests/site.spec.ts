@@ -28,13 +28,14 @@ const pages = [
   "/programma/a-colpi-di-mantice",
   "/programma/shuma",
   "/programma/monologo-sulle-donne",
-  "/programma/la-buca-delle-lettere-di-coraggio",
   ...visibleAuthors.flatMap((a) => [`/programma/${a.talk}`, `/ospiti/${a.slug}`]),
   "/giornate/mafia",
   "/giornate/donne",
   "/giornate/immigrazione",
   "/ospiti",
   "/ospiti/banda-citta-di-acate",
+  "/ospiti/matilde-masaracchio",
+  "/ospiti/elisa-petrillo",
   "/famiglie",
   "/mostra-peppino-impastato",
   "/lamiaradice",
@@ -120,7 +121,7 @@ test("programma: il filtro «Bambini e ragazzi» mostra solo gli appuntamenti pe
   await page.goto("/programma");
   const rows = page.locator("#programma-lista li:has(> [data-session])");
   const total = await rows.count();
-  expect(total).toBeGreaterThanOrEqual(15);
+  expect(total).toBeGreaterThanOrEqual(12);
   await page.getByRole("button", { name: /Bambini e ragazzi/ }).click();
   await expect(page.getByRole("button", { name: /Bambini e ragazzi/ })).toHaveAttribute(
     "aria-pressed",
@@ -234,7 +235,7 @@ test("schede del programma: la freccia apre l'appuntamento, «Calendario» offre
   isMobile,
 }) => {
   await page.goto("/programma");
-  const card = page.locator("[data-session='shuma-dom-1930']");
+  const card = page.locator("[data-session='shuma-dom-1915']");
   await card.locator("summary").click();
   const google = card.getByRole("link", { name: /Google Calendar/ });
   await expect(google).toBeVisible();
@@ -244,7 +245,7 @@ test("schede del programma: la freccia apre l'appuntamento, «Calendario» offre
   );
   await expect(card.getByRole("link", { name: /iPhone, Mac, Outlook/ })).toHaveAttribute(
     "href",
-    "/calendario/shuma-dom-1930.ics",
+    "/calendario/shuma-dom-1915.ics",
   );
   await page.keyboard.press("Escape");
   await expect(google).toBeHidden();
@@ -267,9 +268,11 @@ test("«Aggiungi al calendario»: le tre date in Google Calendar e il file per i
 });
 
 test("programma: con ?ora= durante il festival segna gli appuntamenti in corso", async ({ page }) => {
-  // sabato 18:10: la buca delle lettere e il monologo sono in corso insieme
-  await page.goto("/programma?ora=2026-10-17T18:10");
-  await expect(page.locator("[data-live='now']")).toHaveCount(2);
+  // sabato 18:30: dopo i dieci minuti del monologo, è in corso l'incontro con l'autrice
+  await page.goto("/programma?ora=2026-10-17T18:30");
+  const live = page.locator("[data-live='now']");
+  await expect(live).toHaveCount(1);
+  await expect(live).toHaveAttribute("data-session", "la-seminatrice-di-coraggio-sab-1810");
 });
 
 test("scheda evento: dati strutturati Event validi", async ({ page }) => {
@@ -290,9 +293,10 @@ test("home: dati strutturati Festival", async ({ page }) => {
   const blocks = await page.locator('script[type="application/ld+json"]').allTextContents();
   const festival = blocks.map((b) => JSON.parse(b)).find((d) => d["@type"] === "Festival");
   expect(festival.startDate).toBe("2026-10-16T17:00:00+02:00");
-  expect(festival.endDate).toBe("2026-10-18T22:00:00+02:00");
+  // domenica si chiude con «Shuma», 19:15–20:05
+  expect(festival.endDate).toBe("2026-10-18T20:05:00+02:00");
   // gli incontri degli autori segreti non hanno pagina: arrivano quando sono svelati
-  expect(festival.subEvent.length).toBeGreaterThanOrEqual(5 + visibleAuthors.length);
+  expect(festival.subEvent.length).toBeGreaterThanOrEqual(4 + visibleAuthors.length);
 });
 
 test("calendari .ics", async ({ request }) => {
@@ -303,8 +307,11 @@ test("calendari .ics", async ({ request }) => {
   expect(body.startsWith("BEGIN:VCALENDAR")).toBe(true);
   expect(body.match(/BEGIN:VEVENT/g)).toHaveLength(3);
 
-  const one = await (await request.get("/calendario/shuma-dom-1930.ics")).text();
-  expect(one).toContain("DTSTART:20261018T173000Z");
+  const one = await (await request.get("/calendario/shuma-dom-1915.ics")).text();
+  expect(one).toContain("DTSTART:20261018T171500Z");
+  // i vecchi file degli orari cambiati il 10 ottobre portano ai nuovi
+  const moved = await request.get("/calendario/shuma-dom-1930.ics", { maxRedirects: 0 });
+  expect(moved.headers()["location"]).toBe("/calendario/shuma-dom-1915.ics");
   expect(one).toContain("SUMMARY:Shuma");
 
   const missing = await request.get("/calendario/inesistente.ics");
@@ -352,19 +359,65 @@ test("le tre giornate: tema, colori e indirizzi brevi", async ({ page, request }
     maxRedirects: 0,
   });
   expect(renamed.headers()["location"]).toBe("/programma/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi");
+  const cancelled = await request.get("/programma/la-buca-delle-lettere-di-coraggio", { maxRedirects: 0 });
+  expect(cancelled.headers()["location"]).toBe("/programma#sabato-17");
 });
 
 test("contenuti corretti dall'organizzazione: niente palco coperto, piano pioggia o laboratori inesistenti", async ({
   request,
 }) => {
-  for (const path of ["/", "/info", "/famiglie", "/programma", "/festival", "/lamiaradice"]) {
+  for (const path of [
+    "/",
+    "/info",
+    "/famiglie",
+    "/programma",
+    "/festival",
+    "/lamiaradice",
+    "/mostra-peppino-impastato",
+    "/giornate/donne",
+    "/adesso",
+  ]) {
     const html = await (await request.get(path)).text();
     expect(html, path).not.toMatch(
       /palco coperto|200 posti|sentiero di luci|braccialett|radici di carta|gazebo|entro le 15|pagella dei sogni/i,
     );
+    // correzioni del 10 ottobre: niente «Indovina il classico», cartoline, tamburi del sabato, mostra di tre giorni
+    expect(html, path).not.toMatch(
+      /indovina il classico|buca delle lettere|cartolin|scambio libri|tamburi aprono il pomeriggio|accompagna tutt[ei] e tre|aperta tutti e tre i giorni|ogni sera fino alle 22|firmacopie al bookshop/i,
+    );
   }
   const info = await (await request.get("/info")).text();
   expect(info).toContain("via Archimede");
+});
+
+test("programma del 10 ottobre: sabato monologo, autrice e firmacopie; domenica «Shuma» alle 19:15", async ({
+  page,
+}) => {
+  await page.goto("/programma");
+  const saturday = page.locator("#sabato-17 [data-session]");
+  await expect(saturday).toHaveCount(3);
+  expect(await saturday.evaluateAll((els) => els.map((el) => el.getAttribute("data-session")))).toEqual([
+    "monologo-sulle-donne-sab-1800",
+    "la-seminatrice-di-coraggio-sab-1810",
+    "firmacopie-sab-1910",
+  ]);
+  // le firmacopie sono sempre sotto il Palco del Castello
+  for (const id of ["firmacopie-ven-2000", "firmacopie-sab-1910", "firmacopie-dom-1850"]) {
+    await expect(page.locator(`[data-session='${id}']`)).toContainText("Palco del Castello");
+  }
+  await expect(page.locator("[data-session='shuma-dom-1915']")).toContainText("19:15");
+
+  // chi modera sabato ha la sua scheda, con il ritratto
+  await page.goto("/programma/la-seminatrice-di-coraggio");
+  const moderator = page.getByRole("link", { name: "Elisa Petrillo" });
+  await expect(moderator).toHaveAttribute("href", "/ospiti/elisa-petrillo");
+  await page.goto("/ospiti/elisa-petrillo");
+  await expect(page.locator("h1")).toHaveText("Elisa Petrillo");
+  await expect(page.locator("[data-session='la-seminatrice-di-coraggio-sab-1810']")).toBeVisible();
+
+  // la mostra è solo venerdì
+  await page.goto("/mostra-peppino-impastato");
+  await expect(page.locator("main")).toContainText("Solo venerdì 16");
 });
 
 test("autori: il ritratto se sono svelati, «Chi sarà?» finché sono segreti", async ({ page }) => {
@@ -485,8 +538,8 @@ test("copertine originali: i libri degli ospiti, tutti alti uguali", async ({ pa
   test.skip(isSecret("giovanni-impastato"), "Giovanni Impastato non è ancora svelato");
   await page.goto("/ospiti/giovanni-impastato");
   const books = page.locator("#libri ~ ul [data-book-cover]");
-  await expect(books).toHaveCount(3);
-  // due copertine originali; «Resistere a Mafiopoli» non è nei cataloghi e resta disegnata
+  await expect(books).toHaveCount(4);
+  // due copertine originali; «Resistere a Mafiopoli» e «Il coraggio della memoria» restano disegnati
   await expect(books.locator("img")).toHaveCount(2);
   const heights = await books.evaluateAll((els) =>
     els.map((el) => Math.round((el.firstElementChild as HTMLElement).offsetHeight)),

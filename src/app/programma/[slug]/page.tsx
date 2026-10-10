@@ -12,7 +12,8 @@ import { SessionCard } from "@/components/session-card";
 import { LiveStatus } from "@/components/live-status";
 import { JsonLd } from "@/components/json-ld";
 import { ArrowLeft, ArrowRight, Clock, Info, Users } from "@/components/icons";
-import { getGuest } from "@/content/guests";
+import { getGuest, guestByName } from "@/content/guests";
+import { GuestVisual } from "@/components/guest-visual";
 import {
   getActivity,
   kindLabels,
@@ -126,12 +127,7 @@ export default async function ActivityPage({ params }: PageProps<"/programma/[sl
               <p className="mt-6 max-w-[60ch] font-serif text-xl leading-relaxed text-ink/85">
                 {activity.summary}
               </p>
-              {activity.moderator ? (
-                <p className="mt-5 font-display text-lg text-ink">
-                  <span className="font-light">Modera</span>{" "}
-                  <strong className="font-bold">{activity.moderator}</strong>
-                </p>
-              ) : null}
+              {activity.moderator ? <ModeratorLine name={activity.moderator} /> : null}
             </div>
           </div>
         </header>
@@ -351,5 +347,31 @@ export default async function ActivityPage({ params }: PageProps<"/programma/[sl
       </article>
       <LiveStatus />
     </>
+  );
+}
+
+/** «Modera …»: con il ritratto e il link alla scheda quando chi modera ha una pagina tra gli ospiti */
+function ModeratorLine({ name }: { name: string }) {
+  const guest = guestByName(name);
+  if (!guest) {
+    return (
+      <p className="mt-5 font-display text-lg text-ink">
+        <span className="font-light">Modera</span> <strong className="font-bold">{name}</strong>
+      </p>
+    );
+  }
+  return (
+    <div className="mt-5 flex items-center gap-3 font-display text-lg text-ink">
+      {/* il ritratto è un <div>: per questo la riga non è un <p> */}
+      <div className="w-12 shrink-0">
+        <GuestVisual guest={guest} variant="avatar" sizes="3rem" />
+      </div>
+      <p>
+        <span className="font-light">Modera</span>{" "}
+        <Link href={`/ospiti/${guest.slug}`} className="font-bold underline-offset-4 hover:underline">
+          {name}
+        </Link>
+      </p>
+    </div>
   );
 }

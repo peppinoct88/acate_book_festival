@@ -9,7 +9,11 @@ export const venues: Record<VenueId, Venue> = {
     where: "Via Archimede, di fronte al Castello dei Principi di Biscari",
     description:
       "Il palco per ascoltare: incontri con gli autori, teatro e musica all'aperto, in via Archimede, di fronte al Castello dei Principi di Biscari.",
-    features: ["All'aperto, in via Archimede", "Ledwall con le foto #LaMiaRadice tra un evento e l'altro"],
+    features: [
+      "All'aperto, in via Archimede",
+      "Firmacopie dopo ogni incontro con gli autori",
+      "Ledwall con le foto #LaMiaRadice tra un evento e l'altro",
+    ],
     mapQuery: "Via Archimede, 97011 Acate RG",
   },
   villa: {
@@ -18,11 +22,11 @@ export const venues: Record<VenueId, Venue> = {
     short: "Villa",
     where: "Nella villa comunale",
     description:
-      "Il luogo della mostra «Radici libere», del bookshop e dell'Albero delle radici, nella villa comunale.",
+      "Il luogo del bookshop, dell'Albero delle radici e, venerdì 16, della mostra «Radici libere», nella villa comunale.",
     features: [
       "Accoglienza e punto informazioni",
-      "Mostra «Radici libere», aperta fino alle 22",
-      "Bookshop con i libri degli ospiti e firmacopie",
+      "Mostra «Radici libere», solo venerdì 16, fino alle 22",
+      "Bookshop con i libri degli ospiti",
       "Albero delle radici #LaMiaRadice",
     ],
     mapQuery: "Villa comunale, Acate RG",
@@ -51,7 +55,7 @@ const allDays: FestivalDay[] = [
       "Si apre con la Banda e i Tamburi di Acate e con la mostra su Peppino Impastato, si chiude con suo fratello Giovanni: la memoria come radice che si sceglie.",
     body: [
       "La prima giornata è dedicata alla mafia e a chi ha scelto di opporsi. Peppino Impastato era nato in una famiglia mafiosa di Cinisi: da ragazzo ruppe con il padre e dai microfoni di Radio Aut denunciò gli affari dei boss, fino all'assassinio, nella notte tra l'8 e il 9 maggio 1978.",
-      "Alle 17 la Banda Città di Acate e I Grifoni di Biscari – Tamburi di Acate sfilano e aprono il festival, che si inaugura insieme a «Radici libere», la mostra sulla vita di Peppino. Alle 18 Santa Briganti porta in scena «A colpi di mantice» per bambini e ragazzi. Alle 19 Giovanni Impastato sale sul Palco del Castello, con Giorgio Straquadanio.",
+      "Alle 17 la Banda Città di Acate e I Grifoni di Biscari – Tamburi di Acate sfilano e aprono il festival, che si inaugura insieme a «Radici libere», la mostra sulla vita di Peppino, aperta solo in questa giornata fino alle 22. Alle 18 Santa Briganti porta in scena «A colpi di mantice» per bambini e ragazzi. Alle 19 Giovanni Impastato sale sul Palco del Castello, con Giorgio Straquadanio.",
     ],
     teaser: {
       for: ["giovanni-impastato"],
@@ -59,7 +63,7 @@ const allDays: FestivalDay[] = [
         "Si apre con la Banda e i Tamburi di Acate e con la mostra su Peppino Impastato, si chiude con l'ospite della giornata, che sveliamo presto: la memoria come radice che si sceglie.",
       body: [
         "La prima giornata è dedicata alla mafia e a chi ha scelto di opporsi. Peppino Impastato era nato in una famiglia mafiosa di Cinisi: da ragazzo ruppe con il padre e dai microfoni di Radio Aut denunciò gli affari dei boss, fino all'assassinio, nella notte tra l'8 e il 9 maggio 1978.",
-        "Alle 17 la Banda Città di Acate e I Grifoni di Biscari – Tamburi di Acate sfilano e aprono il festival, che si inaugura insieme a «Radici libere», la mostra sulla vita di Peppino. Alle 18 Santa Briganti porta in scena «A colpi di mantice» per bambini e ragazzi. Alle 19 sale sul Palco del Castello l'ospite della giornata, con Giorgio Straquadanio: chi sarà lo sveliamo presto sui nostri social.",
+        "Alle 17 la Banda Città di Acate e I Grifoni di Biscari – Tamburi di Acate sfilano e aprono il festival, che si inaugura insieme a «Radici libere», la mostra sulla vita di Peppino, aperta solo in questa giornata fino alle 22. Alle 18 Santa Briganti porta in scena «A colpi di mantice» per bambini e ragazzi. Alle 19 sale sul Palco del Castello l'ospite della giornata, con Giorgio Straquadanio: chi sarà lo sveliamo presto sui nostri social.",
       ],
     },
     tone: "ink",
@@ -76,18 +80,18 @@ const allDays: FestivalDay[] = [
     theme: "Radici di coraggio",
     claim: "Il coraggio delle donne, ieri e oggi.",
     intro:
-      "I tamburi aprono il pomeriggio, poi un monologo sulle donne e il romanzo delle seminatrici di coraggio della Grande Guerra.",
+      "Un monologo sulle donne apre la serata, poi il romanzo delle seminatrici di coraggio della Grande Guerra.",
     body: [
       "La seconda giornata è dedicata alle donne e al loro coraggio, che la Storia ha spesso lasciato ai margini.",
-      "Alle 17 I Grifoni di Biscari – Tamburi di Acate aprono il pomeriggio. Alle 18 Matilde Masaracchio porta sul palco un monologo sulle donne. Alle 19 Antonella Desirée Giuffrè racconta «La seminatrice di coraggio», il romanzo delle donne che durante la Grande Guerra portavano notizie dal fronte alle famiglie. Alla Villa dei lettori, per tutto il pomeriggio, la buca delle lettere di coraggio.",
+      "Alle 18 Matilde Masaracchio apre la serata con un breve monologo sulle donne. Subito dopo Antonella Desirée Giuffrè racconta «La seminatrice di coraggio», il romanzo delle donne che durante la Grande Guerra portavano notizie dal fronte alle famiglie: modera Elisa Petrillo. Alla fine, firmacopie sotto il Palco del Castello.",
     ],
     teaser: {
       for: ["antonella-desiree-giuffre"],
       intro:
-        "I tamburi aprono il pomeriggio, poi un monologo sulle donne e l'incontro con l'ospite della giornata, che sveliamo presto.",
+        "Un monologo sulle donne apre la serata, poi l'incontro con l'ospite della giornata, che sveliamo presto.",
       body: [
         "La seconda giornata è dedicata alle donne e al loro coraggio, che la Storia ha spesso lasciato ai margini.",
-        "Alle 17 I Grifoni di Biscari – Tamburi di Acate aprono il pomeriggio. Alle 18 Matilde Masaracchio porta sul palco un monologo sulle donne. Alle 19 l'incontro con l'ospite della giornata: chi sarà lo sveliamo presto sui nostri social. Alla Villa dei lettori, per tutto il pomeriggio, la buca delle lettere di coraggio.",
+        "Alle 18 Matilde Masaracchio apre la serata con un breve monologo sulle donne. Subito dopo l'incontro con l'ospite della giornata: chi sarà lo sveliamo presto sui nostri social.",
       ],
     },
     tone: "coral",
@@ -107,15 +111,15 @@ const allDays: FestivalDay[] = [
       "La banda apre l'ultima giornata, poi la Sicilia del Gattopardo, che comincia con uno sbarco, e il mare di «Shuma», lo spettacolo che chiude il festival.",
     body: [
       "L'ultima giornata è dedicata all'immigrazione e ai viaggi: le radici che partono, attraversano il mare e arrivano. La Sicilia lo sa da sempre, terra di approdi e di partenze.",
-      "Lo sa anche «Il Gattopardo», che comincia con uno sbarco: è il maggio del 1860 e Garibaldi è appena arrivato a Marsala. Il suo autore porta nel nome Lampedusa, l'isola che oggi è il primo approdo in Europa per tante persone che attraversano il Mediterraneo, e il principe di Salina descrive la Sicilia come una terra di «magnifiche civiltà eterogenee, tutte venute da fuori». Alle 18 Maria Antonietta Ferraloro lo racconta alle ragazze e ai ragazzi.",
-      "Alle 17 la Banda Città di Acate apre il pomeriggio. Alle 19:30, quando è già buio, Peppe Macauda porta in scena «Shuma», ispirato alla storia vera di un ragazzo del Mali che nel naufragio del 18 aprile 2015 portava la pagella cucita nella giacca. È lo spettacolo che chiude la prima edizione.",
+      "Lo sa anche «Il Gattopardo», che comincia con uno sbarco: è il maggio del 1860 e Garibaldi è appena arrivato a Marsala. Il suo autore porta nel nome Lampedusa, l'isola che oggi è il primo approdo in Europa per tante persone che attraversano il Mediterraneo, e il principe di Salina descrive la Sicilia come una terra di «magnifiche civiltà eterogenee, tutte venute da fuori». Alle 18 Maria Antonietta Ferraloro lo racconta alle ragazze e ai ragazzi; poi il firmacopie, sotto il Palco del Castello.",
+      "Alle 17 la Banda Città di Acate apre il pomeriggio. Alle 19:15, quando è già buio, Peppe Macauda porta in scena «Shuma», ispirato alla storia vera di un ragazzo del Mali che nel naufragio del 18 aprile 2015 portava la pagella cucita nella giacca. È lo spettacolo che chiude la prima edizione.",
     ],
     teaser: {
       for: ["maria-antonietta-ferraloro"],
       body: [
         "L'ultima giornata è dedicata all'immigrazione e ai viaggi: le radici che partono, attraversano il mare e arrivano. La Sicilia lo sa da sempre, terra di approdi e di partenze.",
         "Lo sa anche «Il Gattopardo», che comincia con uno sbarco: è il maggio del 1860 e Garibaldi è appena arrivato a Marsala. Il suo autore porta nel nome Lampedusa, l'isola che oggi è il primo approdo in Europa per tante persone che attraversano il Mediterraneo, e il principe di Salina descrive la Sicilia come una terra di «magnifiche civiltà eterogenee, tutte venute da fuori». Alle 18 l'ospite della giornata lo racconta alle ragazze e ai ragazzi: chi sarà lo sveliamo presto.",
-        "Alle 17 la Banda Città di Acate apre il pomeriggio. Alle 19:30, quando è già buio, Peppe Macauda porta in scena «Shuma», ispirato alla storia vera di un ragazzo del Mali che nel naufragio del 18 aprile 2015 portava la pagella cucita nella giacca. È lo spettacolo che chiude la prima edizione.",
+        "Alle 17 la Banda Città di Acate apre il pomeriggio. Alle 19:15, quando è già buio, Peppe Macauda porta in scena «Shuma», ispirato alla storia vera di un ragazzo del Mali che nel naufragio del 18 aprile 2015 portava la pagella cucita nella giacca. È lo spettacolo che chiude la prima edizione.",
       ],
     },
     tone: "teal",

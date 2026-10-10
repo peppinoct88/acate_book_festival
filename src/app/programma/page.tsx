@@ -9,7 +9,15 @@ import { ArrowRight } from "@/components/icons";
 import { buttonClass } from "@/components/button";
 import { CalendarMenu } from "@/components/calendar-menu";
 import { programCalendarOptions } from "@/lib/calendar";
-import { alwaysOn, programUpdatedAt, sessions, sessionsForDay } from "@/content/program";
+import {
+  alwaysOn,
+  exhibition,
+  openingSummary,
+  programUpdatedAt,
+  sessions,
+  sessionsForDay,
+  spokenTime,
+} from "@/content/program";
 import { days } from "@/content/venues";
 import { dayTones } from "@/lib/day-tone";
 import { formatItalianDate } from "@/lib/format";
@@ -41,16 +49,17 @@ export default function ProgramPage() {
         intro={
           <>
             <p>
-              Dalle 17 tra il <strong>Palco del Castello</strong>, in via Archimede, e la{" "}
-              <strong>Villa dei lettori</strong>, con la mostra aperta fino alle 22. Ogni giornata ha il suo
-              tema: venerdì la <strong>mafia</strong>, sabato le <strong>donne</strong>, domenica l&apos;
+              {openingSummary()} tra il <strong>Palco del Castello</strong>, in via Archimede, e la{" "}
+              <strong>Villa dei lettori</strong>, dove venerdì la mostra su Peppino Impastato resta aperta
+              fino alle {spokenTime(exhibition.end)}. Ogni giornata ha il suo tema: venerdì la{" "}
+              <strong>mafia</strong>, sabato le <strong>donne</strong>, domenica l&apos;
               <strong>immigrazione</strong>.
             </p>
           </>
         }
       >
         <ul className="flex flex-wrap gap-2 font-display text-[0.95rem] font-semibold">
-          {["16 / 17 / 18 ottobre 2026", "Dalle 17:00", "Mostra fino alle 22", "Ingresso libero"].map((t) => (
+          {["16 / 17 / 18 ottobre 2026", openingSummary(), "Ingresso libero"].map((t) => (
             <li key={t} className="rounded-full border-2 border-ink/80 bg-cream px-4 py-1.5">
               {t}
             </li>
@@ -112,11 +121,12 @@ export default function ProgramPage() {
         </div>
 
         <section aria-labelledby="sempre-aperti" className="mt-16 rounded-[1.75rem] bg-paper p-6 sm:p-10">
-          <p className="eyebrow text-ink">Tutti i giorni alla Villa dei lettori</p>
+          <p className="eyebrow text-ink">Alla Villa dei lettori</p>
           <h2 id="sempre-aperti" className="mt-4 font-display text-title">
-            <span className="font-black">Sempre</span> <span className="font-light">aperti</span>
+            <span className="font-black">Tra un incontro</span>{" "}
+            <span className="font-light">e l&apos;altro</span>
           </h2>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {alwaysOn.map((item) => (
               <li key={item.title} className="relative rounded-2xl bg-cream p-5">
                 <p className="font-display text-xs font-semibold tracking-[0.16em] text-teal-deep uppercase">

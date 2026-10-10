@@ -18,7 +18,7 @@ import { JsonLd } from "@/components/json-ld";
 import { authorSlugs, getGuest, guests } from "@/content/guests";
 import { photos } from "@/content/photos";
 import { days } from "@/content/venues";
-import { sessions } from "@/content/program";
+import { exhibition, festivalHours, openingSummary, sessions, spokenTime } from "@/content/program";
 import { site } from "@/content/site";
 import { festivalJsonLd } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
@@ -41,6 +41,7 @@ export default function HomePage() {
   // un autore per giornata: chi è ancora segreto (reveal.ts) ha la scheda «Chi sarà?»
   const authors = authorSlugs.map((slug, index) => ({ slug, day: days[index], guest: getGuest(slug) }));
   const onStage = guests.filter((g) => !authorSlugs.includes(g.slug));
+  const shuma = sessions.find((s) => s.activity.slug === "shuma")!;
 
   return (
     <>
@@ -52,7 +53,7 @@ export default function HomePage() {
           <div className="relative z-10 pt-7 pb-2 sm:pt-12 lg:self-center lg:pt-4 lg:pb-12">
             <div className="flex animate-rise flex-wrap items-center gap-x-6 gap-y-3">
               <p className="eyebrow text-ink">I edizione</p>
-              <FestivalStatus />
+              <FestivalStatus hours={festivalHours} />
             </div>
             <h1 id="titolo-festival" className="mt-5 sm:mt-7 lg:mt-6">
               <Logotype className="text-[clamp(5.4rem,27.5vw,12.25rem)] lg:text-[min(10.2vw,14svh,11.5rem)] [&>span]:animate-rise [&>span:nth-child(2)]:[animation-delay:90ms] [&>span:nth-child(3)]:[animation-delay:180ms]" />
@@ -77,7 +78,7 @@ export default function HomePage() {
                 musica nel centro storico di Acate.
               </p>
               <p className="mt-3 font-display text-[0.95rem] font-semibold text-ink-muted">
-                Dalle 17 · mostra aperta fino alle 22 · ingresso libero
+                {openingSummary()} · ingresso libero
               </p>
               <div className="mt-7 flex flex-wrap gap-3 lg:mt-[min(3svh,1.75rem)]">
                 <ButtonLink
@@ -381,7 +382,7 @@ export default function HomePage() {
               eyebrow="Dove"
               title="Due luoghi,"
               light="nel centro storico."
-              intro="Il palco per ascoltare, all'aperto in via Archimede, di fronte al castello; la villa comunale per la mostra, i libri e l'Albero delle radici."
+              intro="Il palco per ascoltare, all'aperto in via Archimede, di fronte al castello; la villa comunale per i libri, l'Albero delle radici e, venerdì, la mostra su Peppino Impastato."
             />
             <ul className="mt-10 grid gap-4">
               {[
@@ -393,12 +394,12 @@ export default function HomePage() {
                 {
                   Icon: Kids,
                   t: "Con i bambini",
-                  d: "Venerdì alle 18 «A colpi di mantice», letture musicate e laboratorio. Domenica alle 19:30 «Shuma», dagli 8 anni.",
+                  d: `Venerdì alle 18 «A colpi di mantice», letture musicate e laboratorio. Domenica alle ${spokenTime(shuma.start)} «Shuma», dagli 8 anni.`,
                 },
                 {
                   Icon: Clock,
                   t: "La mostra",
-                  d: "«Radici libere», alla Villa dei lettori: aperta tutti e tre i giorni dalle 17 alle 22.",
+                  d: `«Radici libere», alla Villa dei lettori: solo venerdì 16 ottobre, dalle ${spokenTime(exhibition.start)} alle ${spokenTime(exhibition.end)}.`,
                 },
               ].map(({ Icon, t, d }) => (
                 <li key={t} className="flex gap-4 rounded-2xl bg-paper p-5">

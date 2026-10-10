@@ -1,7 +1,7 @@
 import { absoluteUrl, site } from "@/content/site";
 import { getGuest } from "@/content/guests";
-import { venues } from "@/content/venues";
-import { programUpdatedAt, sessions } from "@/content/program";
+import { days, daysById, venues } from "@/content/venues";
+import { dayHours, exhibition, programUpdatedAt, sessions } from "@/content/program";
 import type { Activity, Session } from "@/content/types";
 import type { FaqItem } from "@/content/faq";
 
@@ -174,8 +174,8 @@ export function festivalJsonLd(): Json {
     alternateName: `${site.name} – ${site.claim}`,
     description: site.description,
     url: absoluteUrl("/"),
-    startDate: `${site.dates.start}T17:00:00${site.utcOffset}`,
-    endDate: `${site.dates.end}T22:00:00${site.utcOffset}`,
+    startDate: `${site.dates.start}T${dayHours(days[0].id).start}:00${site.utcOffset}`,
+    endDate: `${site.dates.end}T${dayHours(days[days.length - 1].id).end}:00${site.utcOffset}`,
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: {
@@ -200,16 +200,17 @@ export function festivalJsonLd(): Json {
 
 export function exhibitionJsonLd(): Json {
   const url = absoluteUrl("/mostra-peppino-impastato");
+  const exhibitionDate = daysById.get(exhibition.day)!.date;
   return {
     "@context": "https://schema.org",
     "@type": "ExhibitionEvent",
     "@id": `${url}#mostra`,
     name: "Radici libere. Peppino Impastato, una vita per immagini",
     description:
-      "Mostra fotografica sulla vita di Peppino Impastato alla Villa dei lettori, aperta tutti e tre i giorni dell'Acate Book Festival dalle 17 alle 22.",
+      "Mostra fotografica sulla vita di Peppino Impastato alla Villa dei lettori, aperta venerdì 16 ottobre, nella giornata dell'Acate Book Festival dedicata alla mafia, dalle 17 alle 22.",
     url,
-    startDate: `${site.dates.start}T17:00:00${site.utcOffset}`,
-    endDate: `${site.dates.end}T22:00:00${site.utcOffset}`,
+    startDate: `${exhibitionDate}T${exhibition.start}:00${site.utcOffset}`,
+    endDate: `${exhibitionDate}T${exhibition.end}:00${site.utcOffset}`,
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: venuePlace({ venue: "villa" }),

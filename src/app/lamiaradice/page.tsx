@@ -4,7 +4,7 @@ import { PageHero } from "@/components/page-hero";
 import { RadiceCardGenerator } from "@/components/radice-card-generator";
 import { KraftTag } from "@/components/kraft-tag";
 import { ShareActions } from "@/components/share-actions";
-import { Camera, Phone, Sparkle, Tree } from "@/components/icons";
+import { Camera, Sparkle, Tree } from "@/components/icons";
 import { absoluteUrl, site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
@@ -16,15 +16,6 @@ export const metadata: Metadata = pageMetadata({
   socialTitle: "#LaMiaRadice · Chi ti ha messo in mano il primo libro?",
   ownImage: true,
 });
-
-const classics = [
-  "I promessi sposi",
-  "Pinocchio",
-  "I Malavoglia",
-  "Il fu Mattia Pascal",
-  "La Divina Commedia",
-  "Cuore",
-];
 
 export default function LaMiaRadicePage() {
   const handle = site.social.instagramHandle;
@@ -82,7 +73,7 @@ export default function LaMiaRadicePage() {
               <p>
                 Alla Villa dei lettori c&apos;è un albero che aspetta i vostri nomi. Prendi un cartellino
                 kraft, scrivi chi ti ha messo in mano il primo libro, appendilo ai rami, fotografalo e tagga
-                quella persona.
+                quella persona. Sui rami si possono attaccare anche le immagini.
               </p>
               <p>
                 Si accende venerdì 16 alle 17:40, quando i bambini appendono i primi nomi, e cresce per tre
@@ -112,48 +103,21 @@ export default function LaMiaRadicePage() {
         </div>
       </section>
 
-      <section aria-labelledby="indovina" className="container-festival pt-6">
-        <div className="grid gap-6 lg:grid-cols-3">
-          <div className="rounded-[1.75rem] bg-teal-soft p-7 lg:col-span-2">
-            <span className="inline-flex size-12 items-center justify-center rounded-full bg-cream">
-              <Phone size={24} />
-            </span>
-            <h2 id="indovina" className="mt-5 font-display text-title">
-              <span className="font-black">Indovina</span> <span className="font-light">il classico</span>
-            </h2>
-            <div className="prose-festival mt-5">
-              <p>
-                I nonni di Acate leggono in siciliano l&apos;incipit di un grande classico, senza dire il
-                titolo. Tu scrivi la risposta nei commenti dei video del festival. E alla Villa dei lettori
-                c&apos;è un angolo con luce e telefono: chi vuole legge il suo incipit e diventa un video del
-                festival.
-              </p>
-            </div>
-            <ul className="mt-6 flex flex-wrap gap-2">
-              {classics.map((c) => (
-                <li
-                  key={c}
-                  className="rounded-full bg-cream px-3.5 py-1.5 font-display text-sm font-semibold"
-                >
-                  «{c}»
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="rounded-[1.75rem] border-2 border-ink/85 p-7">
-            <span className="inline-flex size-12 items-center justify-center rounded-full bg-paper">
-              <Camera size={24} />
-            </span>
-            <h2 className="mt-5 font-display text-2xl font-black">Poche regole</h2>
-            <ul className="mt-4 space-y-3 text-[0.98rem] leading-snug text-ink/85">
-              <li>Usa {site.hashtag} e tagga la tua radice: è tutto quello che serve.</li>
-              <li>Se nella foto ci sono bambini, pubblicala solo con il consenso dei genitori.</li>
-              <li>
-                Tra un evento e l&apos;altro il ledwall del palco mostra le foto pubblicate con {site.hashtag}
-                .
-              </li>
-            </ul>
-          </div>
+      <section aria-labelledby="regole" className="container-festival pt-6">
+        <div className="rounded-[1.75rem] border-2 border-ink/85 p-7">
+          <span className="inline-flex size-12 items-center justify-center rounded-full bg-paper">
+            <Camera size={24} />
+          </span>
+          <h2 id="regole" className="mt-5 font-display text-2xl font-black">
+            Poche regole
+          </h2>
+          <ul className="mt-4 grid gap-3 text-[0.98rem] leading-snug text-ink/85 sm:grid-cols-3 sm:gap-6">
+            <li>Usa {site.hashtag} e tagga la tua radice: è tutto quello che serve.</li>
+            <li>Se nella foto ci sono bambini, pubblicala solo con il consenso dei genitori.</li>
+            <li>
+              Tra un evento e l&apos;altro il ledwall del palco mostra le foto pubblicate con {site.hashtag}.
+            </li>
+          </ul>
         </div>
       </section>
 

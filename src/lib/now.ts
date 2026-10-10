@@ -29,24 +29,31 @@ export type FestivalPhase =
   | { phase: "between" }
   | { phase: "after" };
 
-const START = Date.parse("2026-10-16T17:00:00+02:00");
-const END = Date.parse("2026-10-18T22:00:00+02:00");
-const FESTIVAL_DAYS = ["2026-10-16", "2026-10-17", "2026-10-18"];
+/** Inizio e fine di ogni giornata (ISO), ricavati dal programma: `festivalHours` in src/content/program.ts */
+export interface DayHours {
+  date: string;
+  open: string;
+  close: string;
+}
 
-export function festivalPhase(time: number): FestivalPhase {
-  if (time >= END) return { phase: "after" };
+export function festivalPhase(time: number, hours: readonly DayHours[]): FestivalPhase {
+  const first = hours[0];
+  if (time >= Date.parse(hours[hours.length - 1].close)) return { phase: "after" };
   const today = romeDate(time);
-  if (time < START) {
-    if (today === FESTIVAL_DAYS[0]) return { phase: "today-before" };
+  if (time < Date.parse(first.open)) {
+    if (today === first.date) return { phase: "today-before" };
     const diff = Math.round(
-      (Date.parse(`${FESTIVAL_DAYS[0]}T00:00:00Z`) - Date.parse(`${today}T00:00:00Z`)) / 86_400_000,
+      (Date.parse(`${first.date}T00:00:00Z`) - Date.parse(`${today}T00:00:00Z`)) / 86_400_000,
     );
     return { phase: "before", daysLeft: Math.max(diff, 1) };
   }
-  if (FESTIVAL_DAYS.includes(today)) {
-    const open = Date.parse(`${today}T17:00:00+02:00`);
-    const close = Date.parse(`${today}T22:00:00+02:00`);
-    if (time >= open && time < close) return { phase: "live" };
-  }
+  const day = hours.find((h) => h.date === today);
+  if (day && time >= Date.parse(day.open) && time < Date.parse(day.close)) return { phase: "live" };
   return { phase: "between" };
+}
+
+/** «alle 17», «alle 18:10»: l'orario di un ISO in italiano, senza i minuti quando è l'ora piena */
+export function hourLabel(iso: string): string {
+  const [h, m] = iso.slice(11, 16).split(":");
+  return m === "00" ? String(Number(h)) : `${Number(h)}:${m}`;
 }

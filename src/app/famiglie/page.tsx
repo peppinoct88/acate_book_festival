@@ -5,13 +5,14 @@ import { SessionCard } from "@/components/session-card";
 import { LiveStatus } from "@/components/live-status";
 import { ButtonLink } from "@/components/button";
 import { ArrowRight, Kids, Letter, Tree, Ticket } from "@/components/icons";
-import { sessionsForDay } from "@/content/program";
+import { sessions, sessionsForDay, spokenTime } from "@/content/program";
 import { days } from "@/content/venues";
 import { pageMetadata } from "@/lib/seo";
 import { isHidden } from "@/content/reveal";
 
 /** Finché l'autore è segreto (reveal.ts) il titolo del libro resta fuori */
 const gattopardo = isHidden("maria-antonietta-ferraloro");
+const shuma = sessions.find((s) => s.activity.slug === "shuma")!;
 
 export const metadata: Metadata = pageMetadata({
   title: "Piccole radici: per le famiglie",
@@ -34,12 +35,12 @@ const howItWorks = [
   {
     Icon: Tree,
     title: "L'Albero delle radici",
-    text: "Alla Villa dei lettori i bambini appendono il nome di chi ha messo loro in mano il primo libro.",
+    text: "Alla Villa dei lettori, tutti e tre i giorni, i bambini appendono il nome di chi ha messo loro in mano il primo libro: sui rami si possono attaccare anche le immagini.",
   },
   {
     Icon: Letter,
     title: "Ognuno alla sua età",
-    text: "Accanto a ogni appuntamento trovi l'età consigliata: «Shuma», domenica alle 19:30, è consigliato dagli 8 anni.",
+    text: `Accanto a ogni appuntamento trovi l'età consigliata: «Shuma», domenica alle ${spokenTime(shuma.start)}, è consigliato dagli 8 anni.`,
   },
 ];
 
@@ -75,6 +76,8 @@ export default function FamiliesPage() {
       <div className="container-festival">
         {days.map((day) => {
           const list = sessionsForDay(day.id).filter((s) => s.audience.kids);
+          // sabato non ci sono appuntamenti pensati per i bambini: la giornata non compare
+          if (!list.length) return null;
           return (
             <section key={day.id} aria-labelledby={`famiglie-${day.anchor}`} className="pt-16 sm:pt-20">
               <p className="eyebrow text-ink">{day.theme}</p>
@@ -100,8 +103,8 @@ export default function FamiliesPage() {
               <span className="font-light">una favola in fondo al mare</span>
             </h2>
             <p className="mt-4 max-w-[56ch] font-serif text-lg leading-relaxed text-cream/90">
-              Domenica alle 19:30 lo spettacolo di Peppe Macauda chiude il festival: un bambino caduto in mare
-              e un lungo viaggio verso il «SopraSopra». Consigliato dagli 8 anni.
+              Domenica alle {spokenTime(shuma.start)} lo spettacolo di Peppe Macauda chiude il festival: un
+              bambino caduto in mare e un lungo viaggio verso il «SopraSopra». Consigliato dagli 8 anni.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 lg:justify-end">

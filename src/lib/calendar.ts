@@ -1,4 +1,4 @@
-import { programUpdatedAt } from "@/content/program";
+import { dayHours, exhibition, programUpdatedAt, spokenTime } from "@/content/program";
 import { absoluteUrl, site } from "@/content/site";
 import { days, venues } from "@/content/venues";
 import type { Session } from "@/content/types";
@@ -117,16 +117,16 @@ export function sessionsCalendar(name: string, list: Session[]): string {
   return wrap(name, list.map(sessionToEvent));
 }
 
-/** «Salva le date»: un blocco per pomeriggio, dalle 17 alle 22 */
+/** «Salva le date»: un blocco per giornata, dal primo all'ultimo appuntamento (venerdì fino alla chiusura della mostra) */
 export function festivalCalendar(): string {
   return wrap(
     `${site.name} ${site.year}`,
     days.map((d) => ({
       uid: `giornata-${d.id}@acatebookfestival`,
-      start: `${d.date}T17:00:00${site.utcOffset}`,
-      end: `${d.date}T22:00:00${site.utcOffset}`,
+      start: `${d.date}T${dayHours(d.id).start}:00${site.utcOffset}`,
+      end: `${d.date}T${dayHours(d.id).end}:00${site.utcOffset}`,
       title: `${site.name} · ${d.theme}`,
-      description: `${d.label}: ${d.intro}\nIncontri, spettacoli e musica dalle 17, mostra aperta fino alle 22. Ingresso libero.\n${absoluteUrl(`/programma#${d.anchor}`)}`,
+      description: `${d.label}: ${d.intro}\n${dayNote(d.id)} Ingresso libero.\n${absoluteUrl(`/programma#${d.anchor}`)}`,
       location: `${site.place.label} · Palco del Castello e Villa dei lettori`,
       url: absoluteUrl(`/programma#${d.anchor}`),
     })),
@@ -145,12 +145,21 @@ export function googleCalendarUrl(session: Session): string {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
-/** Un pomeriggio del festival (17–22) in Google Calendar */
+/** «Dalle 17, con la mostra aperta fino alle 22.» / «Dalle 18.»: l'orario di una giornata in breve */
+function dayNote(day: (typeof days)[number]["id"]): string {
+  const h = dayHours(day);
+  return day === exhibition.day
+    ? `Dalle ${spokenTime(h.start)}, con la mostra «Radici libere» aperta fino alle ${spokenTime(exhibition.end)}.`
+    : `Dalle ${spokenTime(h.start)}.`;
+}
+
+/** Una giornata del festival in Google Calendar, dal primo all'ultimo appuntamento */
 export function googleDayUrl(day: (typeof days)[number]): string {
+  const h = dayHours(day.id);
   const params = new URLSearchParams({
     action: "TEMPLATE",
     text: `${site.name} · ${day.topic}`,
-    dates: `${toICSDate(`${day.date}T17:00:00${site.utcOffset}`)}/${toICSDate(`${day.date}T22:00:00${site.utcOffset}`)}`,
+    dates: `${toICSDate(`${day.date}T${h.start}:00${site.utcOffset}`)}/${toICSDate(`${day.date}T${h.end}:00${site.utcOffset}`)}`,
     details: `${day.label}: ${day.intro}\nIngresso libero.\n${absoluteUrl(`/giornate/${day.slug}`)}`,
     location: `${site.place.label} · Palco del Castello e Villa dei lettori`,
     ctz: site.timeZone,

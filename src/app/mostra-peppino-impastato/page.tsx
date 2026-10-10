@@ -20,7 +20,7 @@ export const metadata: Metadata = pageMetadata({
   title: "Mostra su Peppino Impastato ad Acate: «Radici libere»",
   absoluteTitle: true,
   description:
-    "«Radici libere. Peppino Impastato, una vita per immagini»: la mostra fotografica dell'Acate Book Festival, 16-18 ottobre 2026, dalle 17 alle 22.",
+    "«Radici libere. Peppino Impastato, una vita per immagini»: la mostra fotografica dell'Acate Book Festival, venerdì 16 ottobre 2026, dalle 17 alle 22.",
   path: "/mostra-peppino-impastato",
   ownImage: true,
 });
@@ -60,16 +60,16 @@ export default function ExhibitionPage() {
 
       <PageHero
         tone="ink"
-        eyebrow="La mostra · 16, 17 e 18 ottobre"
+        eyebrow="La mostra · venerdì 16 ottobre"
         title="Radici libere."
         light="Peppino Impastato, una vita per immagini"
         crumbs={[{ name: "La mostra" }]}
-        intro="La mostra fotografica che accompagna tutti e tre i giorni del festival, alla Villa dei lettori. Aperta dalle 17 alle 22, a ingresso libero."
+        intro="La mostra fotografica della prima giornata del festival, dedicata alla mafia, alla Villa dei lettori. Aperta solo venerdì 16 ottobre, dalle 17 alle 22, a ingresso libero."
       >
         <dl className="grid max-w-3xl gap-px overflow-hidden rounded-[1.25rem] bg-cream/20 sm:grid-cols-3">
           {[
             ["Dove", "Villa dei lettori"],
-            ["Orari", "17:00–22:00, tutti i giorni"],
+            ["Quando", "Solo venerdì 16, 17:00–22:00"],
             ["Inaugurazione", "Ven 16 alle 17 · visita guidata alle 17:20"],
           ].map(([dt, dd]) => (
             <div key={dt} className="bg-ink px-5 py-4">
@@ -94,12 +94,12 @@ export default function ExhibitionPage() {
               libertà della sua voce, quella di Radio Aut, la radio libera che fondò nel 1977.
             </p>
             <p>
-              La mostra racconta la sua vita per immagini, ed è il filo che tiene insieme le tre giornate: si
-              inaugura venerdì 16 alle 17, nella giornata che il festival dedica alla mafia, poco prima
+              La mostra racconta la sua vita per immagini. Si inaugura venerdì 16 alle 17, nella giornata che
+              il festival dedica alla mafia, poco prima
               {giovanni
                 ? " dell'incontro con suo fratello Giovanni"
                 : " dell'incontro con l'ospite della giornata"}
-              , e resta aperta ogni sera fino alle 22.
+              , e resta aperta fino alle 22. Si può visitare solo in questa giornata.
             </p>
           </div>
           <Photo
@@ -145,9 +145,7 @@ export default function ExhibitionPage() {
               All&apos;ingresso un pannello racconta Peppino in poche righe; ogni pannello riporta i crediti
               delle fotografie.
             </li>
-            <li>
-              Venerdì 16, subito dopo l&apos;inaugurazione, alle 17:20 c&apos;è la prima visita guidata.
-            </li>
+            <li>Subito dopo l&apos;inaugurazione, alle 17:20, c&apos;è la prima visita guidata.</li>
           </ul>
           <div className="mt-8 flex flex-wrap gap-3">
             <a

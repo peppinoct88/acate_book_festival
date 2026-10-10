@@ -45,7 +45,7 @@ const coverPublishers = [
   ),
 ];
 
-const formatCount: Record<number, string> = { 4: "Quattro", 5: "Cinque", 6: "Sei", 7: "Sette", 8: "Otto" };
+const formatCount: Record<number, string> = { 2: "Due", 3: "Tre", 4: "Quattro", 5: "Cinque", 6: "Sei" };
 
 const icons: Record<Format["icon"], typeof Light> = {
   light: Light,
@@ -116,13 +116,14 @@ export default function FestivalPage() {
           <p className="eyebrow text-teal-soft">Tra un incontro e l&apos;altro</p>
           <h2 id="i-format" className="mt-4 font-display text-headline">
             <span className="font-black">{formatCount[formats.length] ?? formats.length} format,</span>{" "}
-            <span className="font-light">nessun momento vuoto</span>
+            <span className="font-light">un filo comune</span>
           </h2>
           <p className="mt-6 max-w-[60ch] font-serif text-lg leading-relaxed text-cream/90">
-            Il palco del Castello e la Villa dei lettori lavorano sempre insieme: mentre da una parte si
-            ascolta, dall&apos;altra si fa. Ogni fascia del pomeriggio ha un appuntamento riconoscibile.
+            Il palco del Castello e la Villa dei lettori lavorano insieme: la musica di Acate apre il
+            pomeriggio, l&apos;Albero delle radici raccoglie i nomi dei primi libri e il ledwall li porta sul
+            palco.
           </p>
-          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {formats.map((f) => {
               const Icon = icons[f.icon];
               return (

@@ -6,7 +6,7 @@ export interface FaqItem {
 export const faq: FaqItem[] = [
   {
     q: "Quanto costa partecipare?",
-    a: "Niente: l'ingresso è libero a tutti gli appuntamenti e alla mostra. Per gli incontri delle 19 conviene arrivare qualche minuto prima.",
+    a: "Niente: l'ingresso è libero a tutti gli appuntamenti e alla mostra. Per gli incontri con gli autori conviene arrivare qualche minuto prima.",
   },
   {
     q: "Bisogna prenotare?",
@@ -14,15 +14,15 @@ export const faq: FaqItem[] = [
   },
   {
     q: "C'è qualcosa per i bambini?",
-    a: "Sì: venerdì alle 18, sul Palco del Castello, «A colpi di mantice», letture musicate dal vivo con un laboratorio per bambini e ragazzi. Domenica alle 19:30 «Shuma», consigliato dagli 8 anni. E alla Villa dei lettori c'è l'Albero delle radici, dove appendere il nome di chi ti ha messo in mano il primo libro.",
+    a: "Sì: venerdì alle 18, sul Palco del Castello, «A colpi di mantice», letture musicate dal vivo con un laboratorio per bambini e ragazzi. Domenica alle 19:15 «Shuma», consigliato dagli 8 anni. E alla Villa dei lettori c'è l'Albero delle radici, dove appendere il nome di chi ti ha messo in mano il primo libro.",
   },
   {
     q: "Dove si comprano i libri degli ospiti?",
-    a: "Al bookshop della Villa dei lettori. Dopo ogni incontro gli autori firmano le copie.",
+    a: "Al bookshop della Villa dei lettori. Dopo ogni incontro gli autori firmano le copie sotto il Palco del Castello.",
   },
   {
-    q: "Fino a che ora resta aperta la mostra?",
-    a: "La mostra «Radici libere. Peppino Impastato, una vita per immagini» è aperta tutti e tre i giorni dalle 17 alle 22, alla Villa dei lettori.",
+    q: "Quando si può vedere la mostra?",
+    a: "La mostra «Radici libere. Peppino Impastato, una vita per immagini» è aperta solo venerdì 16 ottobre, nella giornata dedicata alla mafia, dalle 17 alle 22, alla Villa dei lettori.",
   },
   {
     q: "Ci saranno foto e video?",
