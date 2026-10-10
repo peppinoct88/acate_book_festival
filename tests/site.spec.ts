@@ -556,6 +556,40 @@ test("footer: CIVIKA come gli enti, logo nella colonna degli stemmi e testi alli
   await expect(footer).toContainText("CIVIKA S.R.L.");
 });
 
+test("home: lo spot del festival, ospitato sul sito, parte solo con il tasto", async ({ page, request }) => {
+  await page.goto("/");
+  const section = page.locator('section[aria-labelledby="il-video"]');
+  const video = section.locator("video");
+  // niente download né audio finché non si preme play
+  await expect(video).toHaveAttribute("preload", "none");
+  await expect(video).toHaveAttribute("poster", "/video/acate-book-festival-2026-spot.jpg");
+  expect(await video.evaluate((v: HTMLVideoElement) => v.autoplay)).toBe(false);
+  for (const [file, type] of [
+    ["/video/acate-book-festival-2026-spot.mp4", "video/mp4"],
+    ["/video/acate-book-festival-2026-spot.webm", "video/webm"],
+    ["/video/acate-book-festival-2026-spot.jpg", "image/jpeg"],
+  ]) {
+    const response = await request.head(file);
+    expect(response.status(), file).toBe(200);
+    expect(response.headers()["content-type"], file).toContain(type);
+  }
+  // il tasto sulla copertina; dopo il clic restano i controlli del browser
+  const play = section.getByRole("button", { name: /Guarda il video/ });
+  await expect(play).toBeVisible();
+  await play.click();
+  await expect(play).toHaveCount(0);
+  await expect(video).toHaveAttribute("controls", "");
+  // e parte davvero (il Chromium dei test legge la versione WebM)
+  await expect
+    .poll(() => video.evaluate((v: HTMLVideoElement) => v.currentTime), { timeout: 10_000 })
+    .toBeGreaterThan(0.5);
+  // il testo completo, per chi non può ascoltare, e i dati strutturati del video
+  await section.getByText("Il testo del video").click();
+  await expect(section).toContainText("Si inaugura venerdì 16 ottobre con la Banda Città di Acate");
+  const jsonLd = await page.locator('script[type="application/ld+json"]').allTextContents();
+  expect(jsonLd.some((json) => json.includes('"VideoObject"') && json.includes("PT30S"))).toBe(true);
+});
+
 test("crediti: gli editori delle copertine, solo degli autori già svelati", async ({ page }) => {
   const publishers: Record<string, string[]> = {
     "giovanni-impastato": ["Libreria Pienogiorno", "Piemme", "Navarra Editore", "CMI"],

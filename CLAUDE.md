@@ -38,6 +38,9 @@ Tutto il sito è statico (prerender in build): nessun database, nessun form, nes
     Finché sono segreti non compaiono da nessuna parte: valgono i `teaser` di `program.ts` e `venues.ts` e le
     schede «Chi sarà?» (`components/mystery-guest.tsx`). Un test controlla che non trapeli nulla.
   - `notices.ts`: avvisi in cima a tutte le pagine (maltempo, spostamenti) con scadenza automatica.
+  - `videos.ts`: video promozionali (verticali 9:16) in `public/video/`, ospitati sul sito e non su YouTube (niente
+    cookie): ricompressi a 720×1280 in MP4 e WebM (comandi nel file), copertina .jpg, testo completo sotto il video
+    (`components/festival-video.tsx`, non parte da solo). Prima di pubblicarli si controlla che dicano il vero.
   - `site.ts`: URL, date, contatti, social, enti. I campi vuoti non vengono mostrati.
 - `src/app/` — pagine (server component). Client component solo dove serve interattività.
 - `src/components/` — UI. `src/lib/` — calendario .ics, JSON-LD, metadata, anteprime OG, tempo, colori delle giornate (`day-tone.ts`).

@@ -31,6 +31,12 @@ export const Drum = (p: IconProps) => (
   </Base>
 );
 
+export const Play = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M8 5.5v13a.6.6 0 0 0 .9.5l10.2-6.5a.6.6 0 0 0 0-1L8.9 5a.6.6 0 0 0-.9.5Z" fill="currentColor" />
+  </Base>
+);
+
 export const ArrowRight = (p: IconProps) => (
   <Base {...p}>
     <path d="M5 12h14M13 6l6 6-6 6" />

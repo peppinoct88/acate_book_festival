@@ -4,6 +4,7 @@ import { days, daysById, venues } from "@/content/venues";
 import { dayHours, exhibition, programUpdatedAt, sessions } from "@/content/program";
 import type { Activity, Session } from "@/content/types";
 import type { FaqItem } from "@/content/faq";
+import type { FestivalVideo } from "@/content/videos";
 
 /** Dati strutturati schema.org (JSON-LD). Un oggetto per tipo, coerente con ciò che la pagina mostra. */
 
@@ -195,6 +196,23 @@ export function festivalJsonLd(): Json {
     isAccessibleForFree: true,
     inLanguage: "it",
     subEvent,
+  };
+}
+
+/** Un video del festival (content/videos.ts), con il suo testo completo */
+export function videoJsonLd(video: FestivalVideo): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: video.title,
+    description: video.description,
+    thumbnailUrl: [absoluteUrl(video.poster)],
+    uploadDate: `${video.uploadDate}T12:00:00${site.utcOffset}`,
+    duration: video.duration,
+    contentUrl: absoluteUrl(video.sources[0].src),
+    inLanguage: "it",
+    transcript: video.transcript.join(" "),
+    about: { "@id": festivalId },
   };
 }
 

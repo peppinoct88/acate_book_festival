@@ -45,6 +45,10 @@ Ogni dato pubblicato sul sito viene da una di queste fonti. Prima di aggiungere 
   19:10–19:40; domenica incontro 18:00–18:50, firmacopie 18:50–19:15, «Shuma» 19:15–20:05.
   Logo di CIVIKA S.R.L. fornito dall'organizzazione (vettoriale, bianco): sul sito solo su fondo scuro, nel footer
   di ogni pagina e nella pagina /festival; senza link, perché un sito di CIVIKA non è indicato.
+- **Video promozionali** (10 ottobre 2026), realizzati dall'organizzazione: lo spot di 30 secondi è in home
+  (testo controllato con il programma del 10 ottobre). Il reel di 39 secondi «Chi ti ha dato il tuo primo libro?»
+  non è pubblicato: dice che tutti e tre i pomeriggi si aprono con la banda o con i tamburi (sabato no) e, nella
+  schermata finale, «Dalle 17» (sabato dalle 18).
 - **Manifesto definitivo e loghi** (6 ottobre 2026): palette e illustrazione del sito; loghi di Santa Briganti,
   Mondadori Bookstore Vittoria, Banda Città di Acate e I Grifoni di Biscari. Lo stemma del Comune è ritagliato
   dal manifesto.

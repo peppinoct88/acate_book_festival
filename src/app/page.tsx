@@ -15,12 +15,14 @@ import { Photo } from "@/components/photo";
 import { VenueMap } from "@/components/venue-map";
 import { KraftTag } from "@/components/kraft-tag";
 import { JsonLd } from "@/components/json-ld";
+import { FestivalVideo } from "@/components/festival-video";
+import { spotVideo } from "@/content/videos";
 import { authorSlugs, getGuest, guests } from "@/content/guests";
 import { photos } from "@/content/photos";
 import { days } from "@/content/venues";
 import { exhibition, festivalHours, openingSummary, sessions, spokenTime } from "@/content/program";
 import { site } from "@/content/site";
-import { festivalJsonLd } from "@/lib/jsonld";
+import { festivalJsonLd, videoJsonLd } from "@/lib/jsonld";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { MysteryGuestCard } from "@/components/mystery-guest";
@@ -46,6 +48,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={festivalJsonLd()} />
+      <JsonLd data={videoJsonLd(spotVideo)} />
 
       {/* ───────────────── HERO: il manifesto */}
       <section aria-labelledby="titolo-festival" className="relative overflow-hidden">
@@ -111,6 +114,45 @@ export default function HomePage() {
               sizes="(min-width: 1024px) 56vw, 100vw"
               className="h-auto w-full animate-settle select-none [animation-delay:120ms] lg:h-full lg:object-contain lg:object-right-bottom"
             />
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────── IL VIDEO: lo spot del festival. Su telefono il video sta tra il titolo e il testo */}
+      <section aria-labelledby="il-video" className="container-festival pt-20 sm:pt-28">
+        <div className="grid gap-x-12 gap-y-8 md:grid-cols-[minmax(0,1fr)_17rem] md:grid-rows-[auto_1fr] lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-x-20">
+          <SectionHeading
+            id="il-video"
+            eyebrow="Il video"
+            title="Il festival"
+            light="in 30 secondi."
+            intro="La banda e i tamburi che aprono la prima edizione, gli autori sul Palco del Castello, il teatro e le letture per i bambini."
+          />
+          <div className="mx-auto w-full max-w-[20rem] md:col-start-2 md:row-span-2 md:row-start-1 md:max-w-none">
+            <FestivalVideo video={spotVideo} trackLabel="spot" />
+          </div>
+          <div className="md:col-start-1">
+            <details className="group max-w-[60ch] rounded-[1.25rem] bg-paper px-5 py-4">
+              <summary className="cursor-pointer font-display font-bold text-ink marker:text-coral-deep">
+                Il testo del video
+              </summary>
+              <div className="mt-3 space-y-3 font-serif leading-relaxed text-ink/85">
+                {spotVideo.transcript.map((line) => (
+                  <p key={line.slice(0, 24)}>{line}</p>
+                ))}
+              </div>
+            </details>
+            <div className="mt-8">
+              <ButtonLink
+                href="/programma"
+                icon={<ArrowRight size={18} />}
+                data-track="cta_click"
+                data-track-location="video"
+                data-track-label="programma"
+              >
+                Vedi il programma
+              </ButtonLink>
+            </div>
           </div>
         </div>
       </section>

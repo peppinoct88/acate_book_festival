@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
         source: "/manifesto/:file*",
         headers: [{ key: "Cache-Control", value: "public, max-age=86400" }],
       },
+      {
+        source: "/video/:file*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400" }],
+      },
     ];
   },
   async redirects() {
