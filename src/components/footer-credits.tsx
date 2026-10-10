@@ -7,15 +7,15 @@ import { photos } from "@/content/photos";
 import { site } from "@/content/site";
 
 /**
- * I crediti in fondo a ogni pagina, in un blu più chiaro del footer: a sinistra le istituzioni,
- * con gli stemmi direttamente sul blu (senza sfondo) in una colonna della stessa larghezza, così i testi
- * sono allineati, e il logo bianco di CIVIKA, che organizza; a destra i partner, piccoli e su una riga.
+ * I crediti in fondo a ogni pagina, in un blu più chiaro del footer: a sinistra chi finanzia, promuove e
+ * organizza, ciascuno con il suo stemma o logo direttamente sul blu (senza sfondo) in una colonna della stessa
+ * larghezza, così i testi sono allineati; a destra i partner, piccoli e su una riga.
  * Stemma e dicitura della Regione sono un obbligo dell'avviso: i test li controllano.
  */
 export function FooterCredits() {
   return (
     <div className="border-t border-cream/15 bg-navy">
-      <div className="container-festival grid gap-10 py-10 text-sm leading-relaxed text-cream/85 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-16">
+      <div className="container-festival grid gap-10 py-10 text-sm leading-relaxed text-cream/85 xl:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] xl:gap-16">
         <div className="grid gap-8 sm:grid-cols-2">
           <div className="flex items-start gap-4" data-funding>
             <span className="flex w-24 shrink-0 justify-center">
@@ -39,35 +39,45 @@ export function FooterCredits() {
               </p>
             </div>
           </div>
-          <div className="flex items-start gap-4">
-            <span className="flex w-24 shrink-0 justify-center">
-              <Image
-                src={comuneLogo}
-                alt="Stemma del Comune di Acate"
-                sizes="6rem"
-                className="-mt-1 h-auto w-24"
-              />
-            </span>
-            <div>
-              <p className="eyebrow eyebrow--plain text-teal-soft">Promosso da</p>
-              <p className="mt-2">
-                <a
-                  href={site.organizer.url}
-                  rel="noopener"
-                  className="link-underline font-display font-bold text-cream"
-                >
-                  {site.organizer.name}
-                </a>
-              </p>
-              <p className="eyebrow eyebrow--plain mt-4 text-teal-soft">Organizzazione</p>
-              {/* il logo è bianco: solo su fondo scuro */}
-              <Image
-                src={civikaLogo}
-                alt={site.production.name}
-                unoptimized
-                data-logo="civika"
-                className="mt-3 h-10 w-auto"
-              />
+          <div className="grid content-start gap-8">
+            <div className="flex items-start gap-4">
+              <span className="flex w-24 shrink-0 justify-center">
+                <Image
+                  src={comuneLogo}
+                  alt="Stemma del Comune di Acate"
+                  sizes="6rem"
+                  className="-mt-1 h-auto w-24"
+                />
+              </span>
+              <div>
+                <p className="eyebrow eyebrow--plain text-teal-soft">Promosso da</p>
+                <p className="mt-2">
+                  <a
+                    href={site.organizer.url}
+                    rel="noopener"
+                    className="link-underline font-display font-bold text-cream"
+                  >
+                    {site.organizer.name}
+                  </a>
+                </p>
+              </div>
+            </div>
+            {/* chi organizza, come gli enti: il logo (bianco, solo su fondo scuro) nella colonna degli stemmi,
+                largo come lo stemma del Comune, e il nome accanto */}
+            <div className="flex items-center gap-4">
+              <span className="flex w-24 shrink-0 justify-center">
+                <Image
+                  src={civikaLogo}
+                  alt={`Logo di ${site.production.name}`}
+                  unoptimized
+                  data-logo="civika"
+                  className="h-auto w-24"
+                />
+              </span>
+              <div>
+                <p className="eyebrow eyebrow--plain text-teal-soft">Organizzazione</p>
+                <p className="mt-2 font-display font-bold text-cream">{site.production.name}</p>
+              </div>
             </div>
           </div>
         </div>

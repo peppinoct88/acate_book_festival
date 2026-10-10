@@ -74,7 +74,7 @@ test.describe("ogni pagina", () => {
       await expect(funding).toContainText("Assessorato delle Autonomie Locali e della Funzione Pubblica");
       await expect(funding.getByRole("img", { name: "Stemma della Regione Siciliana" })).toBeVisible();
       // organizzazione: il logo di CIVIKA in ogni footer
-      await expect(page.locator("footer").getByRole("img", { name: "CIVIKA S.R.L." })).toBeVisible();
+      await expect(page.locator("footer").getByRole("img", { name: "Logo di CIVIKA S.R.L." })).toBeVisible();
       // Vercel Analytics, piano Pro: al massimo 2 proprietà per evento (attributi data-track-*)
       const overLimit = await page
         .locator("[data-track]")
@@ -517,7 +517,7 @@ test("logo CIVIKA: bianco, quindi sempre su un fondo scuro (footer e /festival)"
     for (const logo of await logos.all()) {
       await logo.scrollIntoViewIfNeeded();
       await expect(logo).toBeVisible();
-      await expect(logo).toHaveAttribute("alt", "CIVIKA S.R.L.");
+      await expect(logo).toHaveAttribute("alt", "Logo di CIVIKA S.R.L.");
       // il primo fondo pieno sotto il logo: luminanza relativa WCAG bassa (navy 0.035, ink 0.024)
       const luminance = await logo.evaluate((img) => {
         for (let el = img.parentElement; el; el = el.parentElement) {
@@ -537,6 +537,23 @@ test("logo CIVIKA: bianco, quindi sempre su un fondo scuro (footer e /festival)"
       expect(luminance, path).toBeLessThan(0.1);
     }
   }
+});
+
+test("footer: CIVIKA come gli enti, logo nella colonna degli stemmi e testi allineati", async ({ page }) => {
+  await page.goto("/");
+  const footer = page.locator("footer");
+  const box = async (locator: ReturnType<typeof footer.locator>) => (await locator.boundingBox())!;
+  const stemma = await box(footer.getByRole("img", { name: "Stemma del Comune di Acate" }));
+  const logo = await box(footer.getByRole("img", { name: "Logo di CIVIKA S.R.L." }));
+  const promoter = await box(footer.getByText("Promosso da", { exact: true }));
+  const organizer = await box(footer.getByText("Organizzazione", { exact: true }));
+  // il logo sta nella colonna degli stemmi, al centro e non più largo dello stemma del Comune
+  expect(Math.abs(logo.x + logo.width / 2 - (stemma.x + stemma.width / 2))).toBeLessThan(1);
+  expect(logo.width).toBeLessThanOrEqual(stemma.width + 0.5);
+  // il suo blocco viene sotto quello del Comune, con l'etichetta allineata alle altre
+  expect(logo.y).toBeGreaterThan(stemma.y + stemma.height);
+  expect(Math.abs(organizer.x - promoter.x)).toBeLessThan(1);
+  await expect(footer).toContainText("CIVIKA S.R.L.");
 });
 
 test("crediti: gli editori delle copertine, solo degli autori già svelati", async ({ page }) => {

@@ -189,7 +189,7 @@ export default function FestivalPage() {
             <p className="eyebrow eyebrow--plain text-teal-soft">Organizzazione</p>
             <Image
               src={civikaLogo}
-              alt={site.production.name}
+              alt={`Logo di ${site.production.name}`}
               unoptimized
               data-logo="civika"
               className="h-11 w-auto"
