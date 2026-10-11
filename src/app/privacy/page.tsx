@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Privacy e cookie",
   description:
-    "Informativa sul trattamento dei dati personali e sui cookie del sito dell'Acate Book Festival: niente cookie di profilazione, statistiche anonime.",
+    "Informativa sul trattamento dei dati personali e sui cookie del sito dell'Acate Book Festival: nessun cookie, nessun banner, statistiche anonime.",
   path: "/privacy",
 });
 
@@ -19,7 +19,7 @@ export default function PrivacyPage() {
         title="Privacy"
         light="e cookie."
         crumbs={[{ name: "Privacy e cookie" }]}
-        intro="In breve: questo sito non usa cookie di profilazione né cookie di terze parti, non ti chiede dati personali e misura le visite solo in forma anonima e aggregata."
+        intro="In breve: questo sito non usa cookie, non salva nulla sul tuo dispositivo, non ti chiede dati personali e misura le visite solo in forma anonima e aggregata."
       />
       <div className="container-festival">
         <div className="prose-festival">
@@ -56,8 +56,24 @@ export default function PrivacyPage() {
 
           <h2>Cookie</h2>
           <p>
-            Il sito non installa cookie di profilazione né cookie di terze parti. Per questo non ti chiediamo
-            il consenso con un banner.
+            Il sito non installa cookie, né tecnici né di profilazione, e non salva altre informazioni sul tuo
+            dispositivo: anche le statistiche funzionano senza cookie. Non ci sono contenuti di terze parti
+            che ne installino, come video di YouTube, mappe o pulsanti dei social: i video del festival sono
+            caricati sul sito stesso.
+          </p>
+          <p>
+            Per questo non c&apos;è il banner dei cookie. Secondo le{" "}
+            <a
+              href="https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/9677876"
+              rel="noopener"
+              target="_blank"
+            >
+              linee guida del Garante per la protezione dei dati personali
+              <span className="visually-hidden"> (nuova scheda)</span>
+            </a>{" "}
+            del 10 giugno 2021, il banner serve a chiedere il consenso ai cookie e agli altri strumenti di
+            tracciamento diversi da quelli tecnici: qui non ce ne sono, quindi non c&apos;è nessun consenso da
+            chiederti.
           </p>
 
           <h2>Fornitori e trasferimenti</h2>
@@ -83,7 +99,7 @@ export default function PrivacyPage() {
             per la protezione dei dati personali (garanteprivacy.it).
           </p>
 
-          <p className="text-base text-ink-muted">Ultimo aggiornamento: 6 ottobre 2026.</p>
+          <p className="text-base text-ink-muted">Ultimo aggiornamento: 11 ottobre 2026.</p>
         </div>
       </div>
     </>

@@ -118,6 +118,21 @@ for author in "giovanni-impastato le-radici-che-si-scelgono Giovanni Impastato" 
   fi
 done
 
+section "Cookie (il sito non ne usa: per questo non ha il banner, vedi /privacy)"
+cookies=""
+for path in / /programma /ospiti/giovanni-impastato /lamiaradice /privacy \
+  /_vercel/insights/script.js /_vercel/speed-insights/script.js; do
+  # solo i nomi dei cookie, mai i valori
+  names=$(curl -sS -o /dev/null -D - --max-time 20 "$BASE$path" 2>/dev/null | tr -d '\r' |
+    awk 'tolower($0) ~ /^set-cookie:/ { sub(/^[^:]*: */, ""); sub(/=.*/, ""); print }' | sort -u | xargs)
+  [[ -n "$names" ]] && cookies+=" $path ($names)"
+done
+if [[ -z "$cookies" ]]; then
+  ok "nessun cookie, né dalle pagine né dalle statistiche"
+else
+  ko "cookie impostati:$cookies — servono il banner e il blocco preventivo"
+fi
+
 section "SEO"
 program=$(get "$BASE/programma")
 canonical=$(grep -o '<link rel="canonical" href="[^"]*"' <<<"$program" | sed 's/.*href="//; s/"$//')

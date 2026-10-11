@@ -6,6 +6,9 @@ Tre giornate, tre temi: venerdì 16 mafia (blu `ink`), sabato 17 donne (`coral`)
 
 Next.js 16 (App Router, Turbopack) · React 19 · Tailwind CSS 4 · TypeScript · deploy su Vercel.
 Tutto il sito è statico (prerender in build): nessun database, nessun form, nessun cookie.
+Per questo non c'è il banner dei cookie (linee guida del Garante, `/privacy`): un test blocca cookie, dati salvati
+sul dispositivo e richieste a siti terzi. Chi aggiunge YouTube, mappe, pixel o Google Analytics deve prima mettere
+banner e blocco preventivo.
 
 ## Comandi
 

@@ -110,6 +110,41 @@ test.describe("ogni pagina", () => {
   }
 });
 
+// Il motivo per cui il sito non ha il banner dei cookie (/privacy): non c'è niente a cui dare il consenso.
+// Se un giorno si aggiungono strumenti di terzi (YouTube, mappe, pixel, Google Analytics), questo test fallisce:
+// prima di toglierlo servono il banner e il blocco preventivo.
+test("privacy: niente cookie, niente dati salvati sul dispositivo, niente richieste a siti terzi", async ({
+  page,
+  context,
+  baseURL,
+}) => {
+  const origin = new URL(baseURL!).origin;
+  const thirdParties = new Set<string>();
+  page.on("request", (request) => {
+    const url = new URL(request.url());
+    if (url.protocol.startsWith("http") && url.origin !== origin) thirdParties.add(url.host);
+  });
+  for (const path of ["/", "/programma", "/ospiti/giovanni-impastato", "/festival", "/info", "/adesso"]) {
+    await page.goto(path);
+    await page.waitForLoadState("networkidle");
+  }
+  // anche usando il sito: il video in home e il cartellino #LaMiaRadice
+  await page.goto("/");
+  await page
+    .locator('section[aria-labelledby="il-video"]')
+    .getByRole("button", { name: /Guarda il video/ })
+    .click();
+  await page.goto("/lamiaradice");
+  await page.getByLabel("Chi ti ha messo in mano il primo libro?").fill("la maestra Lucia");
+  await expect(page.locator("canvas")).toHaveAttribute("aria-label", /la maestra Lucia/);
+  await page.waitForLoadState("networkidle");
+
+  expect(await context.cookies()).toEqual([]);
+  const stored = await page.evaluate(() => ({ local: localStorage.length, session: sessionStorage.length }));
+  expect(stored).toEqual({ local: 0, session: 0 });
+  expect([...thirdParties]).toEqual([]);
+});
+
 test("reflow a 320px senza scroll orizzontale", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   for (const path of ["/", "/programma", "/programma/shuma", "/info", "/lamiaradice"]) {

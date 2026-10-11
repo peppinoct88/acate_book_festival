@@ -45,6 +45,10 @@ Ogni dato pubblicato sul sito viene da una di queste fonti. Prima di aggiungere 
   19:10–19:40; domenica incontro 18:00–18:50, firmacopie 18:50–19:15, «Shuma» 19:15–20:05.
   Logo di CIVIKA S.R.L. fornito dall'organizzazione (vettoriale, bianco): sul sito solo su fondo scuro, nel footer
   di ogni pagina e nella pagina /festival; senza link, perché un sito di CIVIKA non è indicato.
+- **Privacy e cookie**: il sito non installa cookie né salva dati sul dispositivo (test e2e «privacy: niente
+  cookie…» e controllo «Cookie» di «Verifica sito online»), quindi niente banner — [Garante, Linee guida cookie e
+  altri strumenti di tracciamento, 10 giugno 2021](https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/9677876)
+  (doc. web n. 9677876): con i soli cookie tecnici basta l'informativa, «senza l'esigenza di apporre specifici banner».
 - **Video promozionali** (10 ottobre 2026), realizzati dall'organizzazione: lo spot di 30 secondi è in home
   (testo controllato con il programma del 10 ottobre). Il reel di 39 secondi «Chi ti ha dato il tuo primo libro?»
   non è pubblicato: dice che tutti e tre i pomeriggi si aprono con la banda o con i tamburi (sabato no) e, nella
