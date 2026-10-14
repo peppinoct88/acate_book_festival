@@ -45,6 +45,13 @@ Ogni dato pubblicato sul sito viene da una di queste fonti. Prima di aggiungere 
   19:10–19:40; domenica incontro 18:00–18:50, firmacopie 18:50–19:15, «Shuma» 19:15–20:05.
   Logo di CIVIKA S.R.L. fornito dall'organizzazione (vettoriale, bianco): sul sito solo su fondo scuro, nel footer
   di ogni pagina e nella pagina /festival; senza link, perché un sito di CIVIKA non è indicato.
+- **Indicazioni dell'organizzazione** (14 ottobre 2026): Federica Scuderi modera l'incontro di domenica con
+  Maria Antonietta Ferraloro. Presentazione e foto fornite dall'organizzazione: speaker radiofonica, presentatrice
+  e conduttrice di eventi, professionista del settore turistico; da anni conduce manifestazioni culturali,
+  spettacoli, concorsi di bellezza, eventi sportivi e iniziative dedicate al territorio. Sul sito la biografia è
+  riscritta in forma sobria, con i soli fatti di questa presentazione, e legata all'incontro di domenica. La foto è
+  uno scatto di scena con la firma del fotografo («Attimi & Momenti») in un angolo: ritagliata in 3:4 con la stessa
+  inquadratura degli altri ritratti (la firma resta fuori) e portata a 480×640, senza altri interventi.
 - **Privacy e cookie**: il sito non installa cookie né salva dati sul dispositivo (test e2e «privacy: niente
   cookie…» e controllo «Cookie» di «Verifica sito online»), quindi niente banner — [Garante, Linee guida cookie e
   altri strumenti di tracciamento, 10 giugno 2021](https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/9677876)
@@ -206,7 +213,7 @@ Non pubblicato finché non arriva una conferma:
 
 - nome e indirizzo della villa comunale (sul sito si usano il nome del luogo e il link alla mappa);
 - titolo del monologo di Matilde Masaracchio; biografia e ruolo di Giorgio Straquadanio;
-- moderatore dell'incontro di domenica; biografie di Peppe Macauda e Dario Muratore;
+- biografie di Peppe Macauda e Dario Muratore; nome del fotografo della foto di Federica Scuderi, per il credito;
 - che la moderatrice di sabato sia la giornalista Elisa Petrillo di cui sono riportate le fonti;
 - grafia del nome di Antonella Desirée Giuffrè («Desirée» o «Desirèe», come scrive l'editore);
 - profili social del festival.

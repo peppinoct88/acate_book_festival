@@ -1,5 +1,6 @@
 import giuffrePhoto from "@/assets/ospiti/antonella-desiree-giuffre.jpg";
 import petrilloPhoto from "@/assets/ospiti/elisa-petrillo.jpg";
+import scuderiPhoto from "@/assets/ospiti/federica-scuderi.jpg";
 import impastatoPhoto from "@/assets/ospiti/giovanni-impastato.jpg";
 import ferraloroPhoto from "@/assets/ospiti/maria-antonietta-ferraloro.jpg";
 import masaracchioPhoto from "@/assets/ospiti/matilde-masaracchio.jpg";
@@ -12,7 +13,8 @@ import { isHidden } from "./reveal";
 /**
  * Ospiti della I edizione: autori, artisti e i gruppi musicali di Acate.
  * Le biografie usano solo dati verificati su fonti pubbliche (vedi docs/fonti.md).
- * Ritratti degli autori forniti dall'organizzazione (6 ottobre; Matilde Masaracchio ed Elisa Petrillo il 10 ottobre):
+ * Ritratti degli autori forniti dall'organizzazione (6 ottobre; Matilde Masaracchio ed Elisa Petrillo il 10 ottobre,
+ * Federica Scuderi il 14):
  * src/assets/ospiti/<slug>.jpg + campo `photo`, ritagliati in 3:4 con la stessa inquadratura
  * (occhi a un terzo dall'alto, volti della stessa grandezza).
  */
@@ -159,6 +161,22 @@ const allGuests: Guest[] = [
     books: [],
     tone: "coral",
     photo: petrilloPhoto,
+    type: "persona",
+  },
+  {
+    slug: "federica-scuderi",
+    name: "Federica Scuderi",
+    role: "Speaker radiofonica",
+    initials: "FS",
+    short:
+      "Speaker radiofonica e conduttrice di eventi in Sicilia, modera l'incontro con Maria Antonietta Ferraloro.",
+    bio: [
+      "Federica Scuderi è speaker radiofonica e conduttrice di eventi, e lavora nel turismo. Da anni presenta in Sicilia manifestazioni culturali, spettacoli, eventi sportivi e iniziative dedicate al territorio.",
+      "All'Acate Book Festival modera l'incontro con Maria Antonietta Ferraloro su «Il Gattopardo raccontato alle ragazze e ai ragazzi», domenica 18 ottobre sul Palco del Castello. Il territorio, che racconta per lavoro, è anche il filo dell'incontro: la Sicilia del «Gattopardo» e i suoi luoghi, nella giornata che il festival dedica all'immigrazione.",
+    ],
+    books: [],
+    tone: "teal",
+    photo: scuderiPhoto,
     type: "persona",
   },
   {

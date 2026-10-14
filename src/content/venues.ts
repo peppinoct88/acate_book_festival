@@ -111,7 +111,7 @@ const allDays: FestivalDay[] = [
       "La banda apre l'ultima giornata, poi la Sicilia del Gattopardo, che comincia con uno sbarco, e il mare di «Shuma», lo spettacolo che chiude il festival.",
     body: [
       "L'ultima giornata è dedicata all'immigrazione e ai viaggi: le radici che partono, attraversano il mare e arrivano. La Sicilia lo sa da sempre, terra di approdi e di partenze.",
-      "Lo sa anche «Il Gattopardo», che comincia con uno sbarco: è il maggio del 1860 e Garibaldi è appena arrivato a Marsala. Il suo autore porta nel nome Lampedusa, l'isola che oggi è il primo approdo in Europa per tante persone che attraversano il Mediterraneo, e il principe di Salina descrive la Sicilia come una terra di «magnifiche civiltà eterogenee, tutte venute da fuori». Alle 18 Maria Antonietta Ferraloro lo racconta alle ragazze e ai ragazzi; poi il firmacopie, sotto il Palco del Castello.",
+      "Lo sa anche «Il Gattopardo», che comincia con uno sbarco: è il maggio del 1860 e Garibaldi è appena arrivato a Marsala. Il suo autore porta nel nome Lampedusa, l'isola che oggi è il primo approdo in Europa per tante persone che attraversano il Mediterraneo, e il principe di Salina descrive la Sicilia come una terra di «magnifiche civiltà eterogenee, tutte venute da fuori». Alle 18 Maria Antonietta Ferraloro lo racconta alle ragazze e ai ragazzi, con Federica Scuderi; poi il firmacopie, sotto il Palco del Castello.",
       "Alle 17 la Banda Città di Acate apre il pomeriggio. Alle 19:15, quando è già buio, Peppe Macauda porta in scena «Shuma», ispirato alla storia vera di un ragazzo del Mali che nel naufragio del 18 aprile 2015 portava la pagella cucita nella giacca. È lo spettacolo che chiude la prima edizione.",
     ],
     teaser: {

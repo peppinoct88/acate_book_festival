@@ -36,6 +36,7 @@ const pages = [
   "/ospiti/banda-citta-di-acate",
   "/ospiti/matilde-masaracchio",
   "/ospiti/elisa-petrillo",
+  "/ospiti/federica-scuderi",
   "/famiglie",
   "/mostra-peppino-impastato",
   "/lamiaradice",
@@ -451,6 +452,19 @@ test("programma del 10 ottobre: sabato monologo, autrice e firmacopie; domenica 
   await page.goto("/ospiti/elisa-petrillo");
   await expect(page.locator("h1")).toHaveText("Elisa Petrillo");
   await expect(page.locator("[data-session='la-seminatrice-di-coraggio-sab-1810']")).toBeVisible();
+
+  // e chi modera domenica (14 ottobre)
+  await page.goto("/programma/il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi");
+  await expect(page.getByRole("link", { name: "Federica Scuderi" })).toHaveAttribute(
+    "href",
+    "/ospiti/federica-scuderi",
+  );
+  await page.goto("/ospiti/federica-scuderi");
+  await expect(page.locator("h1")).toHaveText("Federica Scuderi");
+  await expect(page.getByRole("img", { name: "Ritratto di Federica Scuderi" }).first()).toBeVisible();
+  await expect(
+    page.locator("[data-session='il-gattopardo-raccontato-alle-ragazze-e-ai-ragazzi-dom-1800']"),
+  ).toBeVisible();
 
   // la mostra è solo venerdì
   await page.goto("/mostra-peppino-impastato");

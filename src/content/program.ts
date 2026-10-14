@@ -12,11 +12,12 @@ import type { Activity, Audience, DayId, Kind, Session } from "./types";
  * Correzioni del 10 ottobre: firmacopie sempre sotto il Palco del Castello; sabato niente banda né tamburi e
  * niente buca delle lettere; monologo di 10 minuti alle 18 e subito dopo l'autrice, moderata da Elisa Petrillo;
  * domenica l'autrice alle 18 per circa 50 minuti, poi firmacopie e «Shuma» alle 19:15; mostra solo venerdì 16.
+ * 14 ottobre: modera l'incontro di domenica Federica Scuderi.
  * Per modificare un orario o aggiungere un avviso su un singolo appuntamento
  * basta cambiare la sessione qui: pagine, calendari .ics, dati strutturati e anteprime si aggiornano da soli.
  * Per segnalare uno spostamento: status: "spostato", statusNote: "Si sposta in ...".
  */
-export const programUpdatedAt = "2026-10-10";
+export const programUpdatedAt = "2026-10-14";
 
 const forAll: Audience = { label: "Per tutti", kids: false };
 const families: Audience = { label: "Per tutti", kids: true };
@@ -246,7 +247,7 @@ const allActivities: Activity[] = [
       "Maria Antonietta Ferraloro presenta il suo nuovo libro: «Il Gattopardo», un romanzo che comincia con uno sbarco, raccontato ai più giovani.",
     body: [
       "«Il Gattopardo» comincia con uno sbarco: è il maggio del 1860 e Garibaldi è appena arrivato a Marsala con i Mille. Il suo autore, Giuseppe Tomasi di Lampedusa, porta nel nome un'isola che oggi è il primo approdo in Europa per tante persone che attraversano il Mediterraneo. E nel romanzo il principe di Salina descrive la Sicilia come una terra che porta sulle spalle «magnifiche civiltà eterogenee, tutte venute da fuori».",
-      "Maria Antonietta Ferraloro, docente e studiosa di Tomasi di Lampedusa, presenta «Il Gattopardo raccontato alle ragazze e ai ragazzi» (Gallucci Bros., 2026), il libro nato per raccontare il romanzo a sua figlia: la Sicilia che passa dai Borbone al Regno d'Italia, i personaggi, i luoghi, le parole che restano. Un incontro per ragazze e ragazzi, genitori e insegnanti, nella giornata che il festival dedica all'immigrazione.",
+      "Maria Antonietta Ferraloro, docente e studiosa di Tomasi di Lampedusa, presenta «Il Gattopardo raccontato alle ragazze e ai ragazzi» (Gallucci Bros., 2026), il libro nato per raccontare il romanzo a sua figlia: la Sicilia che passa dai Borbone al Regno d'Italia, i personaggi, i luoghi, le parole che restano. Un incontro per ragazze e ragazzi, genitori e insegnanti, nella giornata che il festival dedica all'immigrazione. Modera Federica Scuderi.",
       "Dopo l'incontro, firmacopie sotto il Palco del Castello. Alle 19:15, sullo stesso palco, «Shuma» chiude il festival.",
     ],
     teaser: {
@@ -259,6 +260,7 @@ const allActivities: Activity[] = [
       page: false,
     },
     guests: ["maria-antonietta-ferraloro"],
+    moderator: "Federica Scuderi",
     book: {
       title: "Il Gattopardo raccontato alle ragazze e ai ragazzi",
       publisher: "Gallucci Bros.",
